@@ -19,3 +19,17 @@
 
 ## 209.Minimum Size Subarray Sum
 1. Two pointer shrink&expand, for loop to move the right pointer, while loop to move the left one
+
+## 325. Maximum Size Subarray Sum Equals k
+1. keep hash of the smallest index r s.t. hash[ sum(nums[:r]) ] = r
+
+## 80. Remove Duplicates from Sorted Array II
+1. As you modify the list in place, you can't compare nums[i] with nums[i-2]. You can only compare current value with the modified value nums[j-2].
+
+## 228. Summary Ranges
+1. r[len(r):] = n,  means r.append(n)
+   but r[1:] = n,  means if not r, r=[n] elif len(r)>0: r[1] = n
+
+## 88. Merge Sorted Array
+1. In-place merge at the end of array, stop when run out of nums2  
+
