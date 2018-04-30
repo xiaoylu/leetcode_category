@@ -17,6 +17,6 @@ For example:
     return ret
 ```
 And
-* 745. Prefix and Suffix Search - latter word has larger weight
-* etc. 
+* Problem 745 Prefix and Suffix Search - latter word has larger weight
+* etc 
  
