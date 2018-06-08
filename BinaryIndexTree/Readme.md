@@ -1,10 +1,14 @@
 ## Binary Indexed Trees
+
+*
+*
+
 There are update and sum views. The sum view iterates through i -= (i & -i) which removes the last digit 1 in binary presentation of the index of the updated element. In contrast, the update view iterates through i += (i & -i) which adds the difference to corresponding nodes in the binary index tree.
 ```
-            0(root)
-    1, 	10, 	100,        1000          ...
-        11,   101, 110,   1001, 1010,   ...
-   		        111
+    0(root)
+    1, 	10, 	100*,        1000          ...
+             11,        101, 110*,   1001, 1010,   ...
+   		     111*
 ```
 So the update of element with index ‘101’ would be reflected at position 101, 110, 1000, …
 When you sum up from index such as ‘111’ through the red path, the update of ‘101’ would be considered at ‘110’.
