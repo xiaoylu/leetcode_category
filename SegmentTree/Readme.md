@@ -1,7 +1,8 @@
-Segment tree stores the interval/segment at each tree node. As for the array implementation, one important note is that the leaves, which are the array element, are located at i + N. (N is the length and i the index). Really concise C++ code:
+## Segment tree
+Segment tree stores the interval/segment at each tree node. As for the array implementation, one important note is that the leaves, which are the array element, are located at i + N. (N is the length and i the index). 
+Really concise C++ code <http://codeforces.com/blog/entry/18051>
 
- http://codeforces.com/blog/entry/18051
-
+```
 const int N = 1e5;  // limit for array size
 int n;  // array size
 int t[2 * N];
@@ -22,13 +23,14 @@ int query(int l, int r) {  // sum on interval [l, r)
   }
   return res;
 }
-The code above works for any size n. (not necessary powers of 2)
-
 // example: we have 10 elements, sum[5, 8), l = 5, r = 8
 // l = 15, r = 18
 // l = 8, r = 9   +t[15] (nums[5])
 // l = 4, r = 4    +t[8]  (nums[6-7])
 // terminate
+```
+The code above works for any size n. (not necessary powers of 2)
+
 Leetcode 307. Range Sum Query - Mutable
 ```
 class NumArray {
