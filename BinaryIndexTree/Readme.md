@@ -6,8 +6,8 @@ The idea to store the numbers in the way that
 * sum of '101', '110' is located at '110'
 
 There are update and sum views. 
-*The sum view iterates through i -= (i & -i) which removes the last digit 1 in binary presentation. 
-*The update view iterates through i += (i & -i) which adds the last digit 1 in binary presentation.
+* The sum view iterates through i -= (i & -i) which removes the last digit 1 in binary presentation. 
+* The update view iterates through i += (i & -i) which adds the last digit 1 in binary presentation.
 ```
     0(root)
     1, 	10, 	100*,        1000          ...
