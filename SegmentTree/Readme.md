@@ -1,5 +1,8 @@
 ## Segment tree
-Segment tree stores the interval/segment at each tree node. As for the array implementation, one important note is that the leaves, which are the array element, are located at i + N. (N is the length and i the index). 
+Segment tree stores the interval/segment at each tree node. As for the array implementation, one important note is that the leaves, which are the array element, are located at i + N. (N is the length and i the index). The index of tree node would be 1, 2~3, 4~7, 8~15 ...
+And 0 is a DUMMY node.
+
+
 Really concise C++ code <http://codeforces.com/blog/entry/18051>
 
 ```
