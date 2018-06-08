@@ -48,7 +48,7 @@ public:
     }
     
 private:
-    int sumk(int k) { // [0, k)
+    int sumk(int k) { // WARNING: sum is exclusive, i.e. [0, k)
         int ret = 0;
         while (k) {
             ret += bi[k];
