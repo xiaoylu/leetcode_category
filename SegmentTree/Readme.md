@@ -28,5 +28,8 @@ public:
 };
 ```
 
+But one note is that this code does NOT support binary search like classical segment trees (require extra codes). If you need binary search, then a better choice is to construct tree nodes!
+
 Segment Tree + MergeSort = MergeSort Tree
+
 Segment Tree + ..
