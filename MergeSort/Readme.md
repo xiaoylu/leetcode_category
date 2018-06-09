@@ -1,7 +1,7 @@
 ## Merge Sort
-C++ provide build-ins for merge sort including:
+C++ provides built-ins for merge sort including:
 * `merge(l1.begin(), l1.end(), l2.begin(), l2.end(), result.begin());`
-* `inplace_merge(l.begin(), l.middle, l.end())` [begin, middle) merges with [middle, end)
+* `inplace_merge(l.begin(), l.middle, l.end())` `[begin, middle)` merges with `[middle, end)`
 
 Merge Sort is suitable for problems which looks for some pairs 
 s.t. i < j, and nums[i], nums[j] satisfy some constraints.
