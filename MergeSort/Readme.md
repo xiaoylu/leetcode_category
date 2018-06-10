@@ -6,9 +6,9 @@ C++ provides built-ins for merge sort including:
 Merge Sort is suitable for problems which looks for some pairs 
 s.t. i < j, and nums[i], nums[j] satisfy some constraints.
 
-We can find such pairs when i is in the left subarray, and j is in the right subarray.
+We can find such pairs when `i` is in the left subarray, and `j` is in the right subarray.
 
-LeetCode 493. Reverse Pairs
+LeetCode 493. Reverse Pairs. Return the number of reverse pairs s.t. `i < j` and `nums[i] > 2*nums[j]`.
 ```
     int sort_count(vector<int>::iterator begin, vector<int>::iterator end) {
         if (end - begin <= 1) return 0;
@@ -17,7 +17,7 @@ LeetCode 493. Reverse Pairs
         if (begin < middle) count += sort_count(begin, middle);
         if (middle < end) count += sort_count(middle, end);
         vector<int>::iterator i, j;
-        for (i = begin, j = middle; i < middle; ++i) {
+        for (i = begin, j = middle; i < middle; ++i) { // double pointers trick
             while (j < end && *i > 2L * *j) {
                 j++;
             }
