@@ -31,4 +31,35 @@ LeetCode 493. Reverse Pairs. Return the number of reverse pairs s.t. `i < j` and
     }
 ```
 
-LeetCode 327. Count of Range Sum
+LeetCode 327. Count of Range Sum. Return the number of range sums that lie in `[lower, upper]` inclusive.
+```
+    int countRangeSum(vector<int>& nums, int lower, int upper) {
+        int n = nums.size();
+        vector<long> sums(n + 1, 0);
+        for (int i = 0; i < n; ++i) sums[i + 1] = sums[i] + nums[i];
+        return sort_count(sums, 0, n + 1, lower, upper);
+    }
+    
+    int sort_count(vector<long>& sums, int l, int r, int lower, int upper) {
+        if (r - l <= 1) return 0;
+        int m = (l + r) / 2, i, j1, j2;
+        int count = sort_count(sums, l, m, lower, upper) + sort_count(sums, m, r, lower, upper);
+        for (i = l, j1 = j2 = m; i < m; ++i) { // we have two j pointer and one i pointer
+            while (j1 < r && sums[j1] - sums[i] < lower) j1++; 
+            while (j2 < r && sums[j2] - sums[i] <= upper) j2++;
+            count += j2 - j1;
+        }
+        inplace_merge(sums.begin() + l, sums.begin() + m, sums.begin() + r);
+        return count;
+    }
+```
+
+LeetCode 315. Count of Smaller Numbers After Self
+```
+```
+
+Such problems does not care about the position of the pairs. The `i` could be possibly anywhere after `j`. This is the KEY feature, so we sort the arrays after 'j' and search for the valid `i`s. Of course, balanced BST would work for this purpose, but it requires extra code to return the total number of valid `i`s. Merge sort avoids extra data structure for this.
+
+For problems like these, Segment Tree and Binary Indexed Tree are also good choices. But for interviews, merge sort code is easier and you can mention ST, BIT to get more credits.
+
+
