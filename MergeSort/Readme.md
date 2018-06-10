@@ -44,7 +44,7 @@ LeetCode 327. Count of Range Sum. Return the number of range sums that lie in `[
         if (r - l <= 1) return 0;
         int m = (l + r) / 2, i, j1, j2;
         int count = sort_count(sums, l, m, lower, upper) + sort_count(sums, m, r, lower, upper);
-        for (i = l, j1 = j2 = m; i < m; ++i) { // we have two j pointer and one i pointer
+        for (i = l, j1 = j2 = m; i < m; ++i) { // we have two j pointers and one i pointer
             while (j1 < r && sums[j1] - sums[i] < lower) j1++; 
             while (j2 < r && sums[j2] - sums[i] <= upper) j2++;
             count += j2 - j1;
@@ -56,6 +56,26 @@ LeetCode 327. Count of Range Sum. Return the number of range sums that lie in `[
 
 LeetCode 315. Count of Smaller Numbers After Self
 ```
+    #define iterator vector<vector<int>>::iterator
+    void sort_count(iterator l, iterator r, vector<int>& count) {
+        if (r - l <= 1) return;
+        iterator m = l + (r - l) / 2;
+        sort_count(l, m, count);
+        sort_count(m, r, count);
+        for (iterator i = l, j = m; i < m; i++) {
+            while (j < r && (*i)[0] > (*j)[0]) j++;
+            count[(*i)[1]] += j - m;
+        }
+        inplace_merge(l, m, r);
+    }
+    vector<int> countSmaller(vector<int>& nums) {
+        vector<vector<int>> hold;
+        int n = nums.size();
+        for (int i = 0; i < n; ++i) hold.push_back(vector<int>({nums[i], i}));
+        vector<int> count(n, 0);
+        sort_count(hold.begin(), hold.end(), count);
+        return count;
+    }
 ```
 
 Such problems does not care about the position of the pairs. The `j > i` could be possibly anywhere after `i`. This is the KEY feature, so we insert the elements one-by-one, sort the arrays after 'i' and search for those valid `j`s. Of course, balanced BST would work for this purpose, but it requires extra code to store the size of each tree branch. 
