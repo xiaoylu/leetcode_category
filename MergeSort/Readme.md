@@ -58,8 +58,8 @@ LeetCode 315. Count of Smaller Numbers After Self
 ```
 ```
 
-Such problems does not care about the position of the pairs. The `i` could be possibly anywhere after `j`. This is the KEY feature, so we sort the arrays after 'j' and search for the valid `i`s. Of course, balanced BST would work for this purpose, but it requires extra code to return the total number of valid `i`s. Merge sort avoids extra data structure for this.
+Such problems does not care about the position of the pairs. The `j > i` could be possibly anywhere after `i`. This is the KEY feature, so we insert the elements one-by-one, sort the arrays after 'i' and search for those valid `j`s. Of course, balanced BST would work for this purpose, but it requires extra code to store the size of each tree branch. 
 
-For problems like these, Segment Tree and Binary Indexed Tree are also good choices. But for interviews, merge sort code is easier and you can mention ST, BIT to get more credits.
+Merge sort avoids extra data structure for this. For problems like these, Segment Tree and Binary Indexed Tree are also good choices. But for code interviews, merge sort code is easier and you can mention ST, BIT to get more credits.
 
 
