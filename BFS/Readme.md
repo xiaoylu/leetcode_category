@@ -1,6 +1,5 @@
-## Notes 
-1. Two styles: 
-Straightforward list
+## Breath First Search 
+There are two styles. Straightforward list:
 ```
     bfs = [(source1,0),...,(sourceN,0)]
     for node,distance in bfs:
@@ -10,7 +9,7 @@ Straightforward list
             if neighbor not in set(visisted):
                 bfs += (neighbor, distance+1), 
 ```
-Using deque (the implementation of dijkstra uses a heap instead)
+Using deque (Dijkstra uses a heap instead)
 ```
     Q = collections.deque(sources)
     explored = set()
@@ -28,5 +27,5 @@ Using deque (the implementation of dijkstra uses a heap instead)
 ```
 Both need to keep a visisted nodes set, both modify the list/deque inside the iterations, both check if visisted node is THE destination as the FIRST step inside the iterations. 
 
-2. Multiple sources & destinations 
-The code above can trivially consider the case of multiple sources and destinations. So don't run the algorithm for each source, simply add the all sources to the initial list/deque.
+**Multiple sources & destinations**
+The code above (both styles) can be trivially extended to multiple sources and multiple destinations case. So, don't run the algorithm for each source, you simply add the all sources to the initial list/deque.
