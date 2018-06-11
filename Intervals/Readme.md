@@ -1,5 +1,5 @@
 ## Intervals
-Many problems involve intervals. You can sort the `[x, y]` by `x` and deal with the `y`s.
+Many problems involve intervals.
 
 LC 253. Meeting Rooms II. 
 Given an array of meeting time intervals, find the minimum number of conference rooms required.
@@ -46,3 +46,7 @@ A simpler way is to sort all the starts and ends together, WITH a signal indicat
             ret = max(ret, count)
         return ret
 ```
+
+Let's try a more complicated problem.
+
+
