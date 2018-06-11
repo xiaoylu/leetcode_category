@@ -3,8 +3,11 @@ For complicated problems, you can call
 * Python `bisect.bisect_right(s, ele)` 
 * C++ `upper_bound(s.begin(), s.end(), ele)`
 to do binary search as a sub-procedure to solve a bigger problem. 
+
+
 **Note** the difference of Python `bisect_right` vs. `bisect_left` is the same as C++ `lower_bound` vs. `upper_bound`.
-***`bisect_right` and `upper_bound` return what comes after (to the right of) any existing entries.***
+
+`bisect_right` and `upper_bound` return what ***comes after (to the right of) any existing entries.***
 
 If needed, you can customize your own binary searching. Here, you need to identify the style suits your problem better
 ```
