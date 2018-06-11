@@ -35,7 +35,9 @@ LC 253. Meeting Rooms II.
 ```
 
 The solution above may take `O(n^2)` time. Can we skip the second loop visiting all slots inside an interval?
-A simplier way is to sort all the starts and ends together, WITH a signal indicating the distinction.
+Segment Tree with lazy propagation can operate on a "range" in `O(log n)` time. Yet, it is too complicated.
+
+A simpler way is to sort all the starts and ends together, WITH a signal indicating the distinction.
 ```
     def minMeetingRooms(self, intervals):
         ret, count = 0, 0
