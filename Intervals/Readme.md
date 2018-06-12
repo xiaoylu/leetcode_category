@@ -77,7 +77,28 @@ But you don't pop up the building whose height is not the greatest. As the case 
 # |   |    |    |   |      |
 # ^insert       ^pop
 ```  
-
-
+The code with explanation
+```
+        n = len(buildings)
+        i = 0
+        ret, HR = [], []
+        while i < n or HR:
+            # insert if the new left wall is before or "AT" the right wall of the highest
+            if not HR or i < n and buildings[i][0] <= -HR[0][1]: 
+                x = buildings[i][0]
+                while i < n and buildings[i][0] == x:
+                    heappush(HR, (-buildings[i][2], -buildings[i][1]))
+                    i += 1
+            # pop if the current left wall is strictly after the right wall of the highest
+            # i.e. it is time to remove all the buildings before the new left wall
+            else:
+                x = -HR[0][1]
+                while HR and x >= -HR[0][1]:
+                    heappop(HR)
+            height = len(HR) and -HR[0][0]
+            if not ret or height != ret[-1][1]:
+                ret.append([x, height])
+        return ret
+```
 
 
