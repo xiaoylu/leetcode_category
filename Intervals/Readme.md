@@ -1,5 +1,5 @@
 ## Intervals
-Many problems involve intervals.
+Many problems involve intervals. **Discretization** is usually a good choice dealing with intervals.
 
 LC 253. Meeting Rooms II. 
 Given an array of meeting time intervals, find the minimum number of conference rooms required.
@@ -48,6 +48,7 @@ A simpler way is to sort all the starts and ends together, WITH a signal indicat
 ```
 
 Let's try a more complicated problem.
+
 LC 218. The Skyline Problem. The skyline is the outer contour of building roofs.
 We discretize the left and right walls of buildings, so just 
 ```
@@ -105,5 +106,27 @@ The code with explanation
                 ret.append([x, height])
         return ret
 ```
+LC 850. Rectangle Area II. Return the total area covered by overlapping rectangles.
 
+Discretization along x-dimension and sort along y-dimension. And we iterate through the y-dimension.
+
+When you meet the lower boundary of a rectangle, you increment the count of its discretizied slots (within the lower boundary). When you meet the upper boundary of a rectangle, you decrease the count of its discretizied slots (within the upper boundary). The area between two adjacent `y`s be the height between two `y`s multiples the sum of the "active" slots' width. Using segment tree, we can reduce the time complexity from `O(n^2)` to `O(n log n)`.
+```
+    def rectangleArea(self, rectangles):
+        xs = sorted(set(x for r in rectangles for x in [r[0], r[2]]))
+        index = {x:i for i, x in enumerate(xs)}
+        count = [0] * len(xs)
+        L = []
+        for x1, y1, x2, y2 in rectangles:
+            L.append((y1, x1, x2, 1))
+            L.append((y2, x1, x2, -1))
+        ret = y = cur_y = length = 0
+        for y, x1, x2, sig in sorted(L):
+            ret += (y - cur_y) * length % (1000000007)
+            for i in range(index[x1], index[x2]):
+                count[i] += sig
+            length = sum([x2 - x1 for x1, x2, c in zip(xs, xs[1:], count) if c])
+            cur_y = y
+        return ret % (1000000007)
+```
 
