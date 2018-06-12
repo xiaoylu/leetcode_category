@@ -75,7 +75,12 @@ But you don't pop up the building whose height is not the greatest. As the case 
 #      ____          ______
 #  ___|    |____    |      |
 # |   |    |    |   |      |
-# ^insert       ^pop
+#1^insert       
+#2    ^insert
+#3         ^pop     ^found new left wall
+#4              ^pop
+#5                  ^insert
+#6                          ^pop
 ```  
 The code with explanation
 ```
