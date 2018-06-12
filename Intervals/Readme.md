@@ -48,5 +48,36 @@ A simpler way is to sort all the starts and ends together, WITH a signal indicat
 ```
 
 Let's try a more complicated problem.
+LC 218. The Skyline Problem. The skyline is the outer contour of building roofs.
+We discretize the left and right walls of buildings, so just 
+```
+        xs = sorted(set(v for b in buildings for v in b[:-1]))
+        index = {x:i for i, x in enumerate(xs)}
+        height = [0] * len(xs)
+        H = [(h, x, y) for x, y, h in buildings]
+        for h, x ,y in sorted(H):
+            // this loop can be replaced by range operation usig segment tree 
+            // thus, improves to O(log n) time via lazy propagation
+            for i in range(index[x], index[y]):
+                height[i] = max(height[i], h)
+        ret = []
+        for x in xs:
+            i = index[x]
+            if ret and height[i] == ret[-1][1]: continue
+            ret.append([x, height[i]])     
+        return ret
+```
+But the above `O(n^2)` solution got TLE without the implementation of segment tree with lazy propagation.
+
+A faster solution is to keep the alive HIGHEST building in a queue. Pop it up once you pass the right wall of it.
+But you don't pop up the building whose height is not the greatest. As the case below shows, the building "under the roof" should be kept in queue until it becomes the highest and the iteration goes beyond the right wall of it.
+```
+#      ____          ______
+#  ___|    |____    |      |
+# |   |    |    |   |      |
+# ^insert       ^pop
+```  
+
+
 
 
