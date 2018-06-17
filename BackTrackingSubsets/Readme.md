@@ -66,3 +66,35 @@ C++
         add([], nums, [False] * N)
         return ret
 ```
+
+**LC 39. Combination Sum** Find all unique combinations in candidates where the candidate numbers sums to target.
+```
+    def combinationSum(self, nums, target):
+        nums = sorted(nums)  
+        ret = []
+        def find(path, cur_sum, j):
+            if cur_sum == target:
+                ret.append(path.copy())
+            elif cur_sum > target:
+                return
+            for i in range(j, len(nums)):
+                path.append(nums[i])
+                find(path, cur_sum + nums[i], i) # allow access to the same candidate for multiple times
+                path.pop()
+        find([], 0, 0)
+        return ret
+```
+
+**LC 131. Palindrome Partitioning** Return every substring of the partition which is a palindrome
+```
+    def partition(self, s):
+        ret = []
+        def find(s, path):
+            if not s:
+                ret.append(path.copy())
+            for i in range(1, len(s) + 1):
+                if s[:i] == s[i-1::-1]:
+                    find(s[i:], path + [s[:i]])
+        find(s, [])
+        return ret
+```
