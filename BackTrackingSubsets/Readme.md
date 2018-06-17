@@ -20,3 +20,49 @@ Python:
         add([], nums, 0)
         return ret
 ```
+
+C++
+```
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> path;
+        vector<vector<int>> ret;
+        find(nums, path, ret, 0);
+        return ret;
+    }
+    
+    void find(vector<int>& nums, vector<int>& path, vector<vector<int>>& ret, int i) {
+        ret.push_back(vector<int>(path.begin(), path.end()));
+        for (int j = i; j < nums.size(); ++j) {
+            path.push_back(nums[j]);
+            find(nums, path, ret, j + 1);
+            path.pop_back();
+        }
+    }
+```
+
+**LC 47. Permutations II** Return all possible unique permutations of a list which might contain duplicates. 
+```
+    def permuteUnique(self, nums):
+        ret = []
+        N = len(nums)
+        nums = sorted(nums)
+        
+        def add(path, nums, vis):
+            if len(path) == N: ret.append(path.copy())
+            else:
+                for i in range(N):
+                    # If the number is a duplicate, it's left number must have been added.
+                    # So we avoid adding k out of n numbers (k < n) for comb(n, k) times.
+                    # Instead, only the leftmost k are added into the results.
+                    if vis[i] or i > 0 and nums[i] == nums[i-1] and not vis[i - 1]: continue
+                    
+                    path.append(nums[i])
+                    vis[i] = True
+                    
+                    add(path, nums, vis)
+                    
+                    vis[i] = False
+                    path.pop()
+        add([], nums, [False] * N)
+        return ret
+```
