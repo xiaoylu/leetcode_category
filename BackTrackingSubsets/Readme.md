@@ -85,7 +85,7 @@ C++
         return ret
 ```
 
-**LC 131. Palindrome Partitioning** Return every substring of the partition which is a palindrome
+**LC 131. Palindrome Partitioning** Return every partition a string such that each substring of the partition is a palindrome. Ex. "abb" => `['a', 'bb']` + `['a', 'b', 'b']`
 ```
     def partition(self, s):
         ret = []
