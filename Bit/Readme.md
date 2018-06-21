@@ -1,9 +1,10 @@
 ## Bit Operations
 Basic:
-1. Flip `~x`
-2. Last 1 `x & -x`
-3. First 1
-Fill all the postitions by `1`s
+* 1. Flip `~x`
+* 2. Last 1 `x & -x`
+* 3. First 1
+
+Fill all the postitions by `1`s first
 ```
 x |= x >> 16
 x |= x >> 8
@@ -13,7 +14,11 @@ x |= x >> 1
 ```
 then `x ^ (x >> 1)`
 
-4. Magic
+* 4. Test if an interger is `2**k - 1` (all Ones in binary form)
+`~x == 0`
+
+
+Problems:
 ```
  (x ^ y) ^ y = x
  (x ^ y) ^ x = y 
