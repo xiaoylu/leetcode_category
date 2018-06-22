@@ -83,6 +83,29 @@ First, it allows dynamic programming to know the states quickly. Secondly, the s
             d[mask] = max(d.get(mask, 0), len(w))
         return max([d[x] * d[y] for x in d for y in d if not x&y] or [0])
 ```
+**LC 187. Repeated DNA Sequences** Find all the 10-letter-long sequences (substrings) that occur more than once in a DNA.
+Given s = `"AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"`,
+Return: `["AAAAACCCCC", "CCCCCAAAAA"]`.
+
+So here we have a **shifting mask** to indicate the sub-sequences.
+```
+    vector<string> findRepeatedDnaSequences(string s) {
+        vector<string> ret;
+        map<int, int> d;
+        if (s.size() <= 10) return ret;
+        int v = 0;
+        for (int j = 0; j <= 8; ++j) {
+            v <<= 2;
+            v |= s[j] == 'A'? 0 : s[j] == 'T'? 1 : s[j] == 'C'? 2 : 3;
+        }
+        for (int i = 9; i < s.size(); ++i) {
+            v = v << 2 & 0xfffff;
+            v |= s[i] == 'A'? 0 : s[i] == 'T'? 1 : s[i] == 'C'? 2 : 3;
+            if (d[v]++==1) ret.push_back(s.substr(i - 9, 10));
+        }
+        return ret;
+    }
+```
 
 **847. Shortest Path Visiting All Nodes** Return shortest path that visits every node in a graph (NP-hard problem)
 The idea is to store all the visited nodes and the current node in a 2D matrix and solve by dynamic programming
