@@ -98,3 +98,22 @@ C++
         find(s, [])
         return ret
 ```
+
+**LC 784. Letter Case Permutation** Transform every letter individually to be lowercase or uppercase, return all combinations.
+Input: S = "a1b2"
+Output: `["a1b2", "a1B2", "A1b2", "A1B2"]`
+
+```
+    def letterCasePermutation(self, S):
+        ret = []
+        def change(ret, S, i):
+            while i < len(S) and S[i].isdigit(): i += 1
+            ret.append("".join(S))
+            for j in range(i, len(S)):
+                if S[j].isalpha():
+                    S[j] = S[j].upper()
+                    change(ret, S, j + 1)
+                    S[j] = S[j].lower()
+        change(ret, list(S.lower()), 0)
+        return ret
+```
