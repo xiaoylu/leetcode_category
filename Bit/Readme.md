@@ -2,7 +2,7 @@
 
 ## Basic operations:
 * 1. Flip `~x`
-* 2. Last 1 `x & -x`
+* 2. Get the rightmost **set bit** `x & -x`
 * 3. Fill all the postitions by `1`s first
 ```
 x |= x >> 16
