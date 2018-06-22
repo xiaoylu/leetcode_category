@@ -24,6 +24,8 @@ Note that we do not need to count ZEROs because the input array should has a siz
 
 Java Code for the case `k = 3, p = 1`. We need two 32-bits variable to store the occurrence of `1`s on each digit, which ranges from `0b00` to `0b10` (`00->01->10->00`). Note `11` is `00` here.
 
+***LC 137. Single Number II***
+
 ```
     x1 = 0
     x2 = 0
@@ -35,4 +37,20 @@ Java Code for the case `k = 3, p = 1`. We need two 32-bits variable to store the
         x1 &= mask;
     }
     return x1
+```
+
+If there are two numbers, we can divide the input array into two groups. If we know `x1^x2 > 0`, we know they must be different at one bit (ex. the rightmost set bit of `x1^x2`). Then we go ahead to XOR each group.
+
+***LC 260. Single Number III***
+
+```
+    diff = reduce(lambda x,y: x^y, nums)
+    diff &= -diff
+    x1, x2 = 0, 0
+    for n in nums:
+        if n & diff:
+            x1 ^= n
+        else:
+            x2 ^= n
+    return [x1, x2]
 ```
