@@ -56,3 +56,26 @@ If there are two numbers, we can divide the input array into two groups. If we k
             x2 ^= n
     return [x1, x2]
 ```
+
+### Bit Masks
+Mask allows you to have a small subset (no more than 32 elements for intergers) but could be larger using C++ bit_set or larger numbers in Python.
+
+First, it allows dynamic programming to know the states quickly. Secondly, the shift of bits usually can be treated as a `O(1)` operation.
+
+**LC 318. Maximum Product of Word Lengths** Find the maximum value of `length(word[i]) * length(word[j])` where the two words do NOT share common letters.
+```
+    def maxProduct(self, words):
+        d = {}
+        for w in words:
+            mask = 0
+            for c in set(w):
+                mask |= 1 << (ord(c) - 90)
+            d[mask] = max(d.get(mask, 0), len(w))
+        return max([d[x] * d[y] for x in d for y in d if not x&y] or [0])
+```
+
+**847. Shortest Path Visiting All Nodes** Return shortest path that visits every node in a graph (NP-hard problem)
+The idea is to store all the visited nodes and the current node in a 2D matrix and solve by dynamic programming
+```
+
+```
