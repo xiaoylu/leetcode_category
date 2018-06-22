@@ -3,7 +3,7 @@
 ## Basic operations:
 * 1. Flip `~x`
 * 2. Get the rightmost **set bit** `x & -x`
-* 3. Fill all the postitions by `1`s first
+* 3. Fill all the postitions by `1`s
 ```
 x |= x >> 16
 x |= x >> 8
@@ -11,9 +11,10 @@ x |= x >> 4
 x |= x >> 2
 x |= x >> 1
 ```
-* 4. get the first 1: fill all ones (step 3) and `x ^ (x >> 1)`
+* 4. Get the left-most set bit step3 + `x ^ (x >> 1)`
 * 5. Test if an interger `2**k - 1` (all ones in binary form) `~x == 0`
 * 6. Number of set bit `__builtin_popcount(int x)` (C++ CPU specific instruction)
+* 7. Test if `1000..00`, `x&(x-1)==0`
 
 ## Templates:
 
