@@ -117,3 +117,27 @@ Output: `["a1b2", "a1B2", "A1b2", "A1B2"]`
         change(ret, list(S.lower()), 0)
         return ret
 ```
+
+**LC 320. Generalized Abbreviation**
+Input: "word"
+Output:`["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]`
+```
+    def generateAbbreviations(self, word):
+        def dfs(ret, path, word, i):
+            if i == len(word):
+                ret.append("".join(path))
+            else:
+                # add a letter 
+                path += word[i], 
+                dfs(ret, path, word, i + 1)
+                path.pop()
+                # add a number only at the beginning or with a previous letter (no adjacent numbers)
+                if not path or path[-1].isalpha():
+                    for j in range(i, len(word)):
+                        path += str(j - i + 1),
+                        dfs(ret, path, word, j + 1)
+                        path.pop()
+        ret = []
+        dfs(ret, [], word, 0)
+        return ret
+```
