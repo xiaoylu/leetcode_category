@@ -12,7 +12,7 @@
             x |= x >> 1
 ```
 * 4. Get the left-most set bit step3 + `x ^ (x >> 1)`
-* 5. Test if an interger `2**k - 1` (all ones in binary form) `~x == 0`
+* 5. Check if all bit are set `~x == 0`
 * 6. Number of set bit `__builtin_popcount(int x)` (C++ CPU specific instruction)
 * 7. Remove the last set bit `x&(x-1)`
 * 8. Test if `1000..00`, `x&(x-1)==0`
