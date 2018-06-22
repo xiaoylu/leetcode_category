@@ -3,13 +3,13 @@
 ## Basic operations:
 * 1. Flip `~x`
 * 2. Get the rightmost **set bit** `x & -x`
-* 3. Fill all the postitions by `1`s
+* 3. Set a bit `x |= 1 << bits`, Fill all the postitions by `1`s
 ```
-x |= x >> 16
-x |= x >> 8
-x |= x >> 4
-x |= x >> 2
-x |= x >> 1
+            x |= x >> 16
+            x |= x >> 8
+            x |= x >> 4
+            x |= x >> 2
+            x |= x >> 1
 ```
 * 4. Get the left-most set bit step3 + `x ^ (x >> 1)`
 * 5. Test if an interger `2**k - 1` (all ones in binary form) `~x == 0`
