@@ -13,7 +13,7 @@ x |= x >> 1
 ```
 * 4. get the first 1: fill all ones (step 3) and `x ^ (x >> 1)`
 * 5. Test if an interger `2**k - 1` (all ones in binary form) `~x == 0`
-
+* 6. Number of set bit `__builtin_popcount(int x)` (C++ CPU specific instruction)
 
 ## Templates:
 
