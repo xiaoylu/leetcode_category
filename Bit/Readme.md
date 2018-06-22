@@ -15,6 +15,8 @@ x |= x >> 1
 * 5. Test if an interger `2**k - 1` (all ones in binary form) `~x == 0`
 * 6. Number of set bit `__builtin_popcount(int x)` (C++ CPU specific instruction)
 * 7. Test if `1000..00`, `x&(x-1)==0`
+* 8. Clear bit `A &= ~(1 << bit)`
+* 9. Get all 1-bits `~0`
 
 ## Templates:
 
@@ -61,6 +63,12 @@ If there are two numbers, we can divide the input array into two groups. If we k
 ### Bit Masks
 Mask allows you to have a small subset (no more than 32 elements for intergers) but could be larger using C++ bit_set or larger numbers in Python.
 
+Three convenient operations:
+```
+Set union A | B
+Set intersection A & B
+Set subtraction A & ~B
+```
 First, it allows dynamic programming to know the states quickly. Secondly, the shift of bits usually can be treated as a `O(1)` operation.
 
 **LC 318. Maximum Product of Word Lengths** Find the maximum value of `length(word[i]) * length(word[j])` where the two words do NOT share common letters.
