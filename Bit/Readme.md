@@ -107,8 +107,9 @@ So here we have a **shifting mask** to indicate the sub-sequences.
     }
 ```
 
-**847. Shortest Path Visiting All Nodes** Return shortest path that visits every node in a graph (NP-hard problem)
-The idea is to store all the visited nodes and the current node in a 2D matrix and solve by dynamic programming
+**847. Shortest Path Visiting All Nodes** Return shortest path that visits every node in a graph (NP-hard problem), but you can visit node, edges multiple times.
+My blog:
+<https://leetcode.com/problems/shortest-path-visiting-all-nodes/discuss/141666/10-lines-Python-Recursive-DP>
 ```
     def shortestPathLength(self, graph):
         df = {}
