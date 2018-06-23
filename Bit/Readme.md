@@ -110,5 +110,15 @@ So here we have a **shifting mask** to indicate the sub-sequences.
 **847. Shortest Path Visiting All Nodes** Return shortest path that visits every node in a graph (NP-hard problem)
 The idea is to store all the visited nodes and the current node in a 2D matrix and solve by dynamic programming
 ```
-
+    def shortestPathLength(self, graph):
+        df = {}
+        def find(state, i):
+            if (state, i) in df: return df[(state, i)]
+            if state & (state - 1) == 0: return 0
+            df[(state, i)] = sys.maxsize
+            for j in graph[i]:
+                if state & (1<<j):
+                    df[(state, i)] = min(df[(state, i)], 1 + min(find(state, j), find(state&~(1<<i), j)))
+            return df[(state, i)]
+        return min(find(2**len(graph)-1, i) for i in range(len(graph)))
 ```
