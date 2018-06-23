@@ -21,6 +21,8 @@
 
 ## Templates:
 
+### A really nice summary <https://leetcode.com/problems/sum-of-two-integers/discuss/84278/A-summary:-how-to-use-bit-manipulation-to-solve-problems-easily-and-efficiently>
+
 ### Single number problem by XOR
 Given an array of integers, every element appears `k (k > 1)` times except for one, which appears `p` times `(p >= 1, p % k != 0)`. Find that single one.
 
