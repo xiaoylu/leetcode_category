@@ -19,6 +19,10 @@
 * 9. Remove some bit `A &= ~(1 << bit)`
 * 10. Get all 1-bits `~0`
 
+WARNING: Python 3 integers aren't represented using the internal CPU representation, so you have to determine the sign yourself!
+
+**`signbit = int(n < 0)`**
+
 ## Templates:
 
 ### A really nice summary <https://leetcode.com/problems/sum-of-two-integers/discuss/84278/A-summary:-how-to-use-bit-manipulation-to-solve-problems-easily-and-efficiently>
