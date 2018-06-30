@@ -1,5 +1,6 @@
 # Topological Sort
-To find out the order in a DAG, remove the node with degree ZERO, and update the degree of other node pointing to the removed node.
+To find out the order of nodes in a DAG, remove the node with in-degree/out-degree ZERO (or degree ONE in undirected graph such as tree) iteratively,
+update the degree of other node pointing to the removed node.
 Keep doing this you will obtain a topological order
 
 **310. Minimum Height Trees**
