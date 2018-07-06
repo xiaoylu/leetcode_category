@@ -64,3 +64,34 @@ The longest proper prefix (LPP) of string above would be palindrome if it is als
         i = LPS(s + '|' + s[::-1])
         return s[i:][::-1] + s
 ```
+
+**LC 5. Longest Palindromic Substring** 
+Find the longest palindromic substring in `s`. 
+
+Test all the suffix of `s[:i]`, which is also a proper prefix of it. A total of  `O(N^2)` time.
+
+```
+    def longestPalindrome(self, s):
+        def LPS(s):
+            lps = [0] * len(s)
+            i, l = 1, 0
+            while i < len(s):
+                if s[i] == s[l]:
+                    l += 1
+                    lps[i] = l
+                    i += 1
+                else:
+                    if l > 0:
+                        l = lps[l - 1]
+                    else:
+                        lps[i] = 0
+                        i += 1
+            return l
+        ret = (1,1)
+        for i in range(1, len(s) + 1):
+            l = LPS(s[:i][::-1] + '|' + s[:i])
+            if l > ret[1]:
+                ret = (i, l)
+        i, l = ret
+        return s[i-l:i]
+```
