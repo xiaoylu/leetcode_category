@@ -31,7 +31,11 @@ The regular experssion matching problem can be abstracted as a DP problem.
         return dp[N][M]
 ```
 
-**LC 10. Regular Expression Matching**
+**LC 10. Regular Expression Matching** implement regular expression matching with support for '.' and '*'.
+
+* '.' Matches any single character.
+* '*' Matches zero or more of the preceding element.
+
 ```
     def isMatch(self, s, p):
         if not s and not p: return True
