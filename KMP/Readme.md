@@ -22,7 +22,10 @@ So, it depends on `lps[2]` which is the length of such suffix of **ABC**. The ab
             else:
                 if l > 0:
                     # The tricky part, ABCFABCG ==> (since ABCF != ABCG) ==> ABCG
+                    #                  0000123?       
+                    #                        ^the third letter is what we check
                     #                  ABCG ==> (since A != G) ==> lps[i] is 0  
+                    #                  000?
                     l = lps[l - 1]
                     # Do not increment i
                 else:
