@@ -68,7 +68,7 @@ The longest proper prefix (LPP) of string above would be palindrome if it is als
 **LC 5. Longest Palindromic Substring** 
 Find the longest palindromic substring in `s`. 
 
-Test all the suffix of `s[:i]`, which is also a proper prefix of it. A total of  `O(N^2)` time.
+Test all the suffix of `s[:i]`, which is also a proper prefix of it. KMP linear time for each suffix and a total of  `O(N^2)` time.
 
 ```
     def longestPalindrome(self, s):
@@ -95,3 +95,5 @@ Test all the suffix of `s[:i]`, which is also a proper prefix of it. A total of 
         i, l = ret
         return s[i-l:i]
 ```
+
+There exists a O(N) time algorithm called Manchester algorithm. And DP also solves the problem in `O(N^2)` time.
