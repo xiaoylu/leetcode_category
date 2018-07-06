@@ -15,7 +15,7 @@ The regular experssion matching problem can be abstracted as a DP problem.
         if not s: return len(p.replace("*", ""))==0
         N, M = len(s), len(p)
         dp = [[False] * (M + 1) for _ in range(N + 1)]
-        dp[0][0] = True
+        dp[0][0] = True # dp[i][j] is the match with length-i of s and length-j of p
         for j in range(1, M + 1):
             if p[j - 1] == '*':
                 dp[0][j] = dp[0][j-1]
@@ -35,6 +35,8 @@ The regular experssion matching problem can be abstracted as a DP problem.
 
 * '.' Matches any single character.
 * '*' Matches zero or more of the preceding element.
+
+The only difference is that we need to look back two steps.
 
 ```
     def isMatch(self, s, p):
