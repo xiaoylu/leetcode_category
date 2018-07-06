@@ -1,14 +1,13 @@
 # KMP algorithm
 The first step is to construct array `lps`. Here, `lps[i]` indicates the length of the longest proper prefix of a string which is also te suffix. Note that proper prefix can not be input string `s` itself, the length of it should be less than `len(s)`.
 
-Suppose we extend from `ABCFAB` to `ABCFABC`, the last `C` matches the `C` in the middle, namely,
-`s[lps[i-1]] == s[i]`, so we update `lps[6] = lps[6 - 1] + 1`.
+Suppose we extend from 'ABCFAB' to 'ABCFABC', now `i=6` and `lps[5]=2` which points to the `C` in the middle, the right-most `C` matches the `C` in the middle, so we update `lps[6] = lps[5] + 1 = 3`.
 
-However, when we extend from `ABCFABC` to `ABCFABCG`, the last `G` does not match `F` in the middle, namely,
-`s[lps[i-1]] != s[i]`, we have to narrow down the searching range. 
-In __ABC__F__ABC__G, we actually already know the matching `G` depending on **ABC** alone. 
+However, when we extend from 'ABCFABC' to 'ABCFABCG', the right-most `G` does not match `F` in the middle, namely,
+`s[lps[i - 1]] != s[i]` with `i=7`, we have to narrow down the searching range. 
+Because `lps[i-1]=lps[5]=3`, in **ABC** F **ABC** G, we actually already know the matching `G` depending on **ABC** alone. 
 The only possible match would be some suffix of **ABC** plus the `G`, which is equal to some proper prefix of **ABC**.
-Of course, it depends on `lps[2]` which is ZERO. Thus, there is no such match with `G` at the end.
+So, it depends on `lps[2]` which is the length of such suffix of **ABC**. The above case is only possible if `s[lps[2]] == 'G'`. As `lps[2]` turns out to be ZERO, and `s[0] != 'G'`. We realise that there is no such match involving `G`. So `lps[7] = 0`.
 
 ```
    def longest_proper_prefix_suffix(s):
@@ -22,7 +21,10 @@ Of course, it depends on `lps[2]` which is ZERO. Thus, there is no such match wi
                 i += 1
             else:
                 if l > 0:
+                    # The tricky part, ABCFABCG ==> (since ABCF != ABCG) ==> ABCG
+                    #                  ABCG ==> (since A != G) ==> lps[i] is 0  
                     l = lps[l - 1]
+                    # Do not increment i
                 else:
                     lps[i] = 0
                     i += 1
