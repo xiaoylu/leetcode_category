@@ -1,17 +1,12 @@
 # KMP algorithm
-The first step is to construct array `lps` where `lps[i]` which indicates the length of the longest proper prefix of `s[0..i]`
-such that,
-
-`s[0:l] == s[0..i][-l:]`
-
-Note that proper prefix can not be `s` itself, i.e. `l < len(s)`.
+The first step is to construct array `lps`. Here, `lps[i]` indicates the length of the longest proper prefix of a string which is also te suffix. Note that proper prefix can not be input string `s` itself, the length of it should be less than `len(s)`.
 
 Suppose we extend from `ABCFAB` to `ABCFABC`, the last `C` matches the `C` in the middle, namely,
 `s[lps[i-1]] == s[i]`, so we update `lps[6] = lps[6 - 1] + 1`.
 
 However, when we extend from `ABCFABC` to `ABCFABCG`, the last `G` does not match `F` in the middle, namely,
 `s[lps[i-1]] != s[i]`, we have to narrow down the searching range. 
-In **ABC**F**ABC**G, we actually already know the matching `G` depending on **ABC** alone. 
+In __ABC__F__ABC__G, we actually already know the matching `G` depending on **ABC** alone. 
 The only possible match would be some suffix of **ABC** plus the `G`, which is equal to some proper prefix of **ABC**.
 Of course, it depends on `lps[2]` which is ZERO. Thus, there is no such match with `G` at the end.
 
