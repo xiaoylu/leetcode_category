@@ -33,3 +33,34 @@ So, it depends on `lps[2]` which is the length of such suffix of **ABC**. The ab
                     i += 1
         return lps
  ```
+
+With the `lps` array, it is easy to find the palindrome prefix in a string:
+
+**LC 214. Shortest Palindrome** Append letter in the front of a string to make it a palindrome.
+
+This question essentially asks for the longest palindrome prefix of a string. You can create a string
+
+`s + '|' + reverse(s)`
+
+The longest proper prefix (LPP) of string above would be palindrome if it is also a suffix. Note `|` should not appear in `s` so the LPP would be inside `s` before `|`.
+```
+    def shortestPalindrome(self, s):
+        def LPS(s):
+            i = 1
+            lps = [0] * len(s)
+            l = 0
+            while i < len(s):
+                if s[i] == s[l]:
+                    l += 1
+                    lps[i] = l
+                    i += 1
+                else:
+                    if l > 0:
+                        l = lps[l - 1]
+                    else:
+                        lps[i] = 0
+                        i += 1
+            return lps[-1]
+        i = LPS(s + '|' + s[::-1])
+        return s[i:][::-1] + s
+```
