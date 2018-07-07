@@ -22,7 +22,7 @@ Note prefix gives the visited characters in the Trie, `prefix+word` is the origi
 
 3. I realized that complicated problems need a CLEAN implementation of the Trie. Otherwise, the convenient implementation may cause confusions. As a programmer gets old, he/she should really put emphasis on the design and readability of a program, instead of the quick implementations.
 
-**LC 336. Palindrome Pairs **
+**LC 336. Palindrome Pairs**
 
 Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, so that the concatenation of the two words, i.e. `words[i] + words[j]` is a palindrome.
 
