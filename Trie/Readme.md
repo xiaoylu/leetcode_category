@@ -26,6 +26,8 @@ Note prefix gives the visited characters in the Trie, `prefix+word` is the origi
 
 Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, so that the concatenation of the two words, i.e. `words[i] + words[j]` is a palindrome.
 
+The idea is to use a Trie storing all the prefixes, a pair of strings `ab???` and `ba` matches, so you can reverse `ba` into `ab`, and search Trie to end up with some suffix `???`. If `???` is palindrome, then `ab???` and `ba` make a pair.
+
 ```
 class TrieNode:
     def __init__(self):
