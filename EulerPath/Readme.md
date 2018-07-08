@@ -10,7 +10,7 @@ Given a **connected** graph,
 * Euler cycle exists if all vertices have even degree
 * Euler path exists if zero or two vertices have odd degree and all other vertices have even degree
 
-To find out the Euler path, we can do a post-order DFS and reconstruct the path by the reversed order.
+To find out the Euler path, we can do a **post-order DFS and reconstruct the path by the reversed order.**
 To find out the Euler cycle, the same post-order DFS applies, but we must **post-pone** visiting the starting vertex in the each DFS step.
 Otherwise, we may get stuck at the starting vertex before visiting all the edges in the graph.
 
