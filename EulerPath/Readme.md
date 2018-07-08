@@ -46,10 +46,10 @@ Given a list of airline tickets represented by pairs of departure and arrival ai
 ```
 
 **LC 753. Cracking the Safe**
-Output a string that contains all possible lenght-n substrings with k letters.
 
+Output a string formed by `n` letters, each letter is among `[0, 1, 2, .., k-1]`
+The length-n substrings should contains all possible strings `[000, 00..1, 00..2, ...]`.
 For example,
-
 Input: n = 2, k = 2
 Output: "00110" contains '00', '01', '11', '10', which are all the length-2 substrings formed by letters of '0' and '1'
 
