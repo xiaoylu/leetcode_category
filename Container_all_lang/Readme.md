@@ -1,8 +1,6 @@
-# Dictionary with ordered keys
+# Popular Containers
 
-Many tasks involving dictionary need to order the keys.
-
-Available containers:
+Available containers which sort the keys:
 
 C++: `set` (vs. `unsorted_set`), `multiset`, `map` (vs. `unordered_map`)
 
