@@ -4,6 +4,6 @@ Many tasks involving dictionary need to order the keys.
 
 Available containers:
 
-C++: `set`, `multiset`, `map`
+C++: `set` (vs. `unsorted_set`), `multiset`, `map` (vs. `unordered_map`)
 
-Java: `TreeMap`
+Java: `HashSet`, `TreeSet`, `TreeMap` (vs. `HashMap`)
