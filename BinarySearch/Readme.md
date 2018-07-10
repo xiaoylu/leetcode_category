@@ -1,4 +1,6 @@
-## Binary Search
+# Binary Search
+
+## Basics
 For complicated problems, you can call
 * Python `bisect.bisect_right(s, ele)` 
 * C++ `upper_bound(s.begin(), s.end(), ele)`
@@ -44,6 +46,34 @@ Useful for problem like "min element in rotated array".
   return l
 ```
 
+## Balanced BST
+To keep a binary search tree balanced, it should be implemented as Red-Black tree, AVL tree or even skipping lists (probablistics) to maintain the similar heights of the branches sharing the same parent.
+
+**LC 220. Contains Duplicate III**
+Given an array of integers, find out whether there are two distinct indices i and j in the array such that the absolute difference between `nums[i]` and `nums[j]` is at most t and the absolute difference between i and j is at most k.
+
+Due to the lack of equivalent container, Python code needs to use Buckets (using collections.OrderedDict). 
+C++ and Java are good for this problem thanks to `TreeSet<Integer>` (Java) and `set<long>` (C++).
+
+C++ solution:
+```
+    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
+        set<long> win;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (i > k) win.erase(nums[i - k - 1]);
+            auto lower = win.lower_bound((long)nums[i] - t);
+            
+            # If *lower == nums[i] - t, then almost duplicate due to the lower bound
+            # Since *lower >= nums[i] - t, so if *lower < nums[i] + t, 
+            # then almost duplicate due to the upper bound
+            if (lower != win.end() && abs(*lower - nums[i]) <= t) return true;
+            win.insert(nums[i]);
+        }
+        return false;
+    }
+```
+
+## More advanced
 Binary search is a universal treatment for problems with **monotonic solutions**. The KEY is to identify the monotonic natural of these problems. Usually, if the solution is among a ordered list, the answer would be `Yes` before a certain number and `N` after a certain number. And you job to find the last `Y` or the first `N`.
 ```
 1 2 3 4 5 6 7
@@ -62,3 +92,33 @@ Other problems:
 * LC378 Kth Smallest Element in a Sorted Matrix
 * LC668 Kth Smallest Number in Multiplication Table
 * LC719 Find K-th Smallest Pair Distance
+
+On the other hand, Priority Queue can be used for many of such problems. Details see this post <https://leetcode.com/problems/k-th-smallest-prime-fraction/discuss/115819/Summary-of-solutions-for-problems-%22reducible%22-to-LeetCode-378>.
+
+## Some details about `bisect_right` and `bisect_left`
+Source code <https://github.com/python/cpython/blob/master/Lib/bisect.py>
+```
+    # bisect_left()
+    while lo < hi:
+        mid = (lo+hi)//2
+        if a[mid] < x: lo = mid+1
+        # MOVE hi in the case of equality 
+        # 0 1 2 3 3 3 4 5
+        #       ^
+        #       hi would end up staying here when searching for 3.
+        else: hi = mid
+    return lo
+```
+`bisect_right()` is similar to `bisect_left()`, but returns an insertion point which comes after (to the right of) any existing entries of x in a.
+```
+    # bisect_right()
+    while lo < hi:
+        mid = (lo+hi)//2
+        # MOVE lo in the case of equality 
+        if a[mid] <= x: lo = mid+1
+        # 0 1 2 3 3 3 4 5
+        #             ^
+        #             hi would end up staying here when searching for 3.
+        else: hi = mid
+    return lo
+```
