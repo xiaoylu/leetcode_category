@@ -15,7 +15,7 @@ There are update and sum views.
                      111*
 ```
 So the update of element with index ‘101’ would be reflected at position 101, 110, 1000, …
-When you sum up from index such as ‘111’ through the `*` path, the update of ‘101’ would be considered at ‘110’.
+When you sum up from index such as ‘111’ through the `*` path, the update of ‘101’ would have been considered at ‘110’.
 
 C++ code: leetcode 307. Range Sum Query - Mutable
 
