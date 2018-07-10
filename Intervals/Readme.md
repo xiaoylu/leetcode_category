@@ -1,4 +1,6 @@
-## Intervals
+# Intervals
+
+## Discretization
 Many problems involve intervals. **Discretization** is usually a good choice dealing with intervals.
 
 LC 253. Meeting Rooms II. 
@@ -149,7 +151,94 @@ When you meet the lower boundary of a rectangle, you increment the count of its 
         return ret % (1000000007)
 ```
 
+## Merging Intervals
+A common operation is to merge one input interval `[l, r)` with the previous intervals.
+You can use a `map<int, int>` in C++ or `TreeMap<Integer, Integer>` in Java to maintain the intervals.
+Because the keys are in BST, it takes `O ( log N )` to locate the overlapping left and right interval.
+But you need to pay extra attention to the corner cases:
+* what if the `l` is the smallest?
+* what if the `r` is the largest?
+* what if there is no overlapping?
 
+**LC 715. Range Module**
+
+```
+class RangeModule {
+public:
+    // add elements in the input range
+    void addRange(int left, int right) {
+        auto l = invals.upper_bound(left), r = invals.upper_bound(right); 
+        if (l != invals.begin()) {
+            l--;
+            if (l->second < left) l++;
+        }
+        if (l != r) {
+            left = min(left, l->first);
+            right = max(right, (--r)->second);
+            invals.erase(l,++r);
+        }
+        invals[left] = right;
+    }
+    
+    // to check if all elements in the range exist
+    bool queryRange(int left, int right) {
+        auto it = invals.upper_bound(left);
+        if (it == invals.begin() || (--it)->second < right) return false;
+        return true;
+    }
+    
+    // remove elements in the range
+    void removeRange(int left, int right) {
+        auto l = invals.upper_bound(left), r = invals.upper_bound(right); 
+        if (l != invals.begin()) {
+            l--;
+            if (l->second < left) l++;
+        }
+        if (l == r) return;
+        int l1 = min(left, l->first), r1 = max(right, (--r)->second);
+        invals.erase(l, ++r);
+        if (l1 < left) invals[l1] = left;
+        if (r1 > right) invals[right] = r1;
+    }
+private:
+    map<int, int> invals;
+};
+```
+
+**LC 352. Data Stream as Disjoint Intervals**
+
+Same problem as above, just need to add intervals.
+
+```
+public class SummaryRanges {
+    TreeMap<Integer, Interval> tree;
+
+    public SummaryRanges() {
+        tree = new TreeMap<>();
+    }
+
+    public void addNum(int val) {
+        if(tree.containsKey(val)) return;
+        Integer l = tree.lowerKey(val);
+        Integer h = tree.higherKey(val);
+        if(l != null && h != null && tree.get(l).end + 1 == val && h == val + 1) {
+            tree.get(l).end = tree.get(h).end;
+            tree.remove(h);
+        } else if(l != null && tree.get(l).end + 1 >= val) {
+            tree.get(l).end = Math.max(tree.get(l).end, val);
+        } else if(h != null && h == val + 1) {
+            tree.put(val, new Interval(val, tree.get(h).end));
+            tree.remove(h);
+        } else {
+            tree.put(val, new Interval(val, val));
+        }
+    }
+
+    public List<Interval> getIntervals() {
+        return new ArrayList<>(tree.values());
+    }
+}
+```
 
 
 
