@@ -8,14 +8,24 @@ The idea to store the numbers in the way that
 There are update and sum views. 
 * The sum view iterates through i -= (i & -i) which removes the last digit 1 in binary presentation. 
 * The update view iterates through i += (i & -i) which adds the last digit 1 in binary presentation.
+For example,
 ```
+^ for update, * for sum
     0(root)
-    1, 	10, 	100*,        1000          ...
-        11,     101, 110*,   1001, 1010,   ...
-                     111*
+    1, 	10, 	100*,          1000^          ...
+        11,     101^, 110*^,   1001, 1010,   ...
+                      111*
 ```
-So the update of element with index ‘101’ would be reflected at position 101, 110, 1000, …
-When you sum up from index such as ‘111’ through the `*` path, the update of ‘101’ would have been considered at ‘110’.
+the update of element with index ‘101’ would be reflected at position 101, 110, 1000, …
+
+When you sum up from index such as ‘111’ through the `*` path, the update of ‘101’ would have been reflected at ‘110’.
+
+Essentially, At `100` stores the sum of the left triangle
+```
+1, 	10, 	
+    11,
+```
+At `1000` stores the sum of left triangle ... so on so forth.
 
 C++ code: leetcode 307. Range Sum Query - Mutable
 
