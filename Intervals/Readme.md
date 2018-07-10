@@ -151,7 +151,7 @@ When you meet the lower boundary of a rectangle, you increment the count of its 
         return ret % (1000000007)
 ```
 
-## Merging Intervals
+## Merging Intervals BST O(log N)
 A common operation is to merge one input interval `[l, r)` with the previous intervals.
 You can use a `map<int, int>` in C++ or `TreeMap<Integer, Integer>` in Java to maintain the intervals.
 Because the keys are in BST, it takes `O ( log N )` to locate the overlapping left and right interval.
