@@ -22,7 +22,7 @@ When you sum up from index such as ‘111’ through the `*` path, the update of
 
 Essentially, At `100` stores the sum of the left triangle
 ```
-1, 	10, 	
+1,  10, 	
     11,
 ```
 At `1000` stores the sum of left triangle ... so on so forth.
