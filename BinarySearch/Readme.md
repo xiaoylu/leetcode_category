@@ -166,32 +166,31 @@ int lengthOfLIS(vector<int>& nums) {
 
 At first glampse, we look for a pair of `B[i]`, `B[j]` where `sum(A[j]~A[i-1]) = B[i] - B[j] > K` and minimize `i - j`.
 
-Given `B[i]`, we find `B[j]` which is smaller than `B[i]-K`. And among all these `j`s, we want the max one. It is to find the max of the `******` part.
+Given `B[i1]`, we find `B[j]` which is smaller than `B[i1]-K`, i.e. the `******` part. 
+Among all these `j`s, we want the max `j` to make the subarray shortest.
 
 ```
-index j < i1 with an increasing order of B[j]
-|----------------|
-          B[i1]
-          V
-*****######.....     <--- B[i2] (the new input i2 > i1)
-  ^  ^
-  |  B[i1]-K
-  |
- B[i2] - K, skip as i2 - max(***) > i1 - max(*****)
+index j with an increasing order of B[j]
  
-* for B[j] < B[i1] - K
-. for B[j] > B[i1]
+          B[i1] 
+          V     
+*****######.....               <--- B[i2] (the new input with i2 > i1)
+  ^  ^          
+  |  B[i1]-K    
+  |             
+ B[i2] - K, if B[i2] < B[i1], we skip it because i2 - max(***) > i1 - max(*****)
+            otherwise, the chance is we find a better j in the ##### part
+ 
+****** part for B[j] < B[i1] - K
+...... part for B[j] > B[i1]
 ```
 
-The key is still to think about the solution space that we do NOT need to search. 
+Suppose we have found the max `j` in the `******` part for `B[i1]`, and `B[i2]` comes in now. 
 
-* For all `******` part, if there is some `i2>i1` s.t. `B[i2] < B[i1]`, then those `B[j] < B[i2] - K` is a subset part, but for these `j`s, `i1 - j` < `i2 - j`. It is not necessary to consider such `B[j]` for `i2`. On the other hand, If `B[i2] > B[i1]`, we just need to consider the `j`s in `####....` part for `i2`.
+The key is to skip the inferior solution space that we do NOT need to search.
 
-* The `j`s in `....` part are worse than `i1`, because `B[i1]` is smaller than `B[j]` and `i1` is closer to `i2`. Skip them too.
+* For all `******` part, if `B[i2] < B[i1]`, then `B[i2] - K` points to somewhere in the `******` part, say the prefix `***` are those `j`s such that `B[j] < B[i2] - K`. The max of `j` in `***` must be smaller than the max of j in `*****`, which means the distance from them to `i2` can only be longer; Otherwise, if `B[i2] >= B[i1]`, the target `j` would be somewhere in the `#####` part. So we do not need to search `******` part.
 
-So essentially, only the `#####` part is worth searching. All the other parts are irrelavent. A deque fits our purpose for poping the `****` and `....` part as `B[i2]` comes in.
+* The `j`s in `.....` part are worse than `i1`, because such `B[j]`s are larger than `B[i1]` and further away from index `i2`. Skip them too.
 
-
-
-
-
+So essentially, only the `#####` part is worth searching for `B[i2]`. All the other parts are irrelavent. A deque fits our purpose, it pops the `*****` and `.....` part as `B[i1]` comes in at the first place.
