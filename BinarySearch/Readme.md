@@ -162,6 +162,24 @@ int lengthOfLIS(vector<int>& nums) {
 }
 ```
 
+**354. Russian Doll Envelopes**
+Two-dimensional LIS: You have a number of envelopes with widths and heights given as a pair of integers (w, h). One envelope can fit into another if and only if both the width and height of one envelope is greater than the width and height of the other envelope.
+
+Sort by the first dimension, and LIS for the second dimension. But note that if first dimension is same like (3, 4), (3, 3), the second dimension should be sorted reversely.
+
+```
+    def maxEnvelopes(self, e):
+        q = []
+        for i, j in sorted([(i, -j) for i, j in e]):
+            j = -j
+            idx = bisect.bisect_left(q, j)
+            if idx == len(q):
+                q.append(j)
+            else:
+                q[idx] = j
+        return len(q)
+ ```
+
 **LC862. Shortest Subarray with Sum at Least K** Return the length of the shortest, non-empty, contiguous subarray of A with sum at least K.
 
 At first glampse, we look for a pair of `B[i]`, `B[j]` where `sum(A[j]~A[i-1]) = B[i] - B[j] > K` and minimize `i - j`.
