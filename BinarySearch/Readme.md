@@ -122,3 +122,76 @@ Source code <https://github.com/python/cpython/blob/master/Lib/bisect.py>
         else: hi = mid
     return lo
 ```
+
+## Some thinking about the binary search "space"
+
+**LC300. Longest Increasing Subsequence**
+Given an unsorted array of integers, find the length of longest increasing subsequence.
+
+Natually, we would keep a sorted list of the previous elements, and find a location to insert the new element. But indeed, it is not easy to see the binary search solution at the first glampse.
+
+The key is to think about the solution space that we do NOT need to search. Like in the two-pointer problems, a certain set of solutions are inferior than the solutions we have searched. So we just skip them to save time.
+
+```
+INPUT:  1 3 5 4 2
+              ^
+Before: 1 3 5 (replace 5 by 4)
+After:  1 3 4
+
+INPUT:  1 3 5 4 2
+                ^
+Before: 1 3 4
+After: ??
+```
+
+When 4 comes in, 5 can be replaced, because 134 has same length as 135, but with 4 at the end is better for future match. During the search time, 5 is skipped to save time.
+
+However, when 2 comes in, where should we put it? Replace 3 and 4?? No, we can not compare 134 or 12 now. So we should keep them both. It means we should keep 1, 12, 134. 
+
+We keep a list of ending points for longest increasing subsequences (LIS) of length 1, 2, .... When a new number comes in, we locate the number it can replace by binary search or just append it as the end of a new LIS.
+
+```
+int lengthOfLIS(vector<int>& nums) {
+    vector<int> res;
+    for(int i=0; i<nums.size(); i++) {
+        auto it = std::lower_bound(res.begin(), res.end(), nums[i]);
+        if(it==res.end()) res.push_back(nums[i]);
+        else *it = nums[i];
+    }
+    return res.size();
+}
+```
+
+**LC862. Shortest Subarray with Sum at Least K** Return the length of the shortest, non-empty, contiguous subarray of A with sum at least K.
+
+At first glampse, we look for a pair of `B[i]`, `B[j]` where `sum(A[j]~A[i-1]) = B[i] - B[j] > K` and minimize `i - j`.
+
+Given `B[i]`, we find `B[j]` which is smaller than `B[i]-K`. And among all these `j`s, we want the max one. It is to find the max of the `******` part.
+
+```
+index j < i1 with an increasing order of B[j]
+|----------------|
+          B[i1]
+          V
+*****######.....     <--- B[i2] (the new input i2 > i1)
+  ^  ^
+  |  B[i1]-K
+  |
+ B[i2] - K, skip as i2 - max(***) > i1 - max(*****)
+ 
+* for B[j] < B[i1] - K
+. for B[j] > B[i1]
+```
+
+The key is still to think about the solution space that we do NOT need to search. 
+
+* For all `******` part, if there is some `i2>i1` s.t. `B[i2] < B[i1]`, then those `B[j] < B[i2] - K` is a subset part, but for these `j`s, `i1 - j` < `i2 - j`. It is not necessary to consider such `B[j]` for `i2`. On the other hand, If `B[i2] > B[i1]`, we just need to consider the `j`s in `####....` part for `i2`.
+
+* The `j`s in `....` part are worse than `i1`, because `B[i1]` is smaller than `B[j]` and `i1` is closer to `i2`. Skip them too.
+
+So essentially, only the `#####` part is worth searching. All the other parts are irrelavent. A deque fits our purpose for poping the `****` and `....` part as `B[i2]` comes in.
+
+
+
+
+
