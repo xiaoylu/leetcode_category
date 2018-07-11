@@ -6,4 +6,4 @@ C++: `set` (vs. `unsorted_set`), `multiset`, `map` (vs. `unordered_map`)
 
 Java: `HashSet`, `TreeSet`, `TreeMap` (vs. `HashMap`)
 
-Java: `ArrayDeque` is better than `LinkedDeque` due to memory usage.
+Java: `ArrayDeque` is better than `LinkedDeque` due to memory usage and fault tolerance.
