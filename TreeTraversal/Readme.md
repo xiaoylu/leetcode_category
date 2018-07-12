@@ -1,4 +1,4 @@
-# Tree Traversal - Pre-order, In-order and Post-order
+# Iterative Tree Traversal - Pre-order, In-order and Post-order
 
 Tree problems are easier if we traverse recursively. How about iteratively?
 
