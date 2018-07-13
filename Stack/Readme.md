@@ -7,6 +7,10 @@
 For tree problems, stack can be used to convert recursons to iterations.
 On the other hand, you can also use deque for the same purpose.
 
+**LC 272. Closest Binary Search Tree Value II**
+Given a non-empty binary search tree and a target value, find k values in the BST that are closest to the target.
+
+The idea is to create two lists, storing the results by in-order traversal, and mergesort them. O(n) time.
 ```
     def closestKValues(self, root, target, k):
 #      *
