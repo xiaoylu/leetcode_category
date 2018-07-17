@@ -1,6 +1,22 @@
 ## Dynamic Programming
+
 1. Save the memory cost whenever possible
-**LC 64. Minimum Path Sum**
+
+**LC 64. Minimum Path Sum** Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+
+The basic DP reduction is 2D
+```
+dp[i,j] = min(dp[i-1,j], dp[i,j-1]) + grid[i][j]
+```
+But actually we just need 1D vector the store the states because
+```
+        # A  B  C    This is the old row memo
+        #    V  V
+        # a->b->c   This is the mew row memo
+        #           You update b using a and B
+```
+
+Python Code:
 ```
         if not grid: return 0
         m = len(grid[0])
@@ -11,9 +27,15 @@
                 memo[j+1] = min(memo[j:j+2]) + row[j+1]
         return memo[-1]
 ```
-and
+
+**LC 174. Dungeon Game**
+A knight gains/loses health entering a room. He dies if health <= 0. Return the knight's minimum initial health to get (N, M) from (0, 0).
+
+So reversively, we compute the min health to reach `(i,j)`.
+```dp[i, j] = max(1, min(dp[i-1,j],dp[i,j-1]) - dungeon[i, j] ```
+
+After the simplification, we get
 ```
-        # 174. Dungeon Game
         if not dungeon: return 0
         n, m = len(dungeon), len(dungeon[0])
         memo = [2**31] * (m-1) + [1]
@@ -23,13 +45,7 @@ and
         return memo[0]
 ```
 Yes, we can always use standard DP, but actually one row memo would satisfy the needs.
-Because
-```
-        # A B  C    This is the new row memo
-        #  /  /
-        # a b c     This is the previous row memo
-        #           You update A using a and B
-```
+
 **LC 714. Best Time to Buy and Sell Stock with Transaction Fee** (and the series of stock transaction problems.)
 
 Given the daily prices of a stock, you may buy and sell on each day (only sell after you buy, and buy after you sell).
