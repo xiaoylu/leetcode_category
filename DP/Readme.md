@@ -32,7 +32,10 @@ Python Code:
 A knight gains/loses health entering a room. He dies if health <= 0. Return the knight's minimum initial health to get (N, M) from (0, 0).
 
 So reversively, we compute the min health to reach `(i,j)`.
-```dp[i, j] = max(1, min(dp[i-1,j],dp[i,j-1]) - dungeon[i, j] ```
+
+```
+dp[i, j] = max(1, min(dp[i-1,j],dp[i,j-1]) - dungeon[i, j] 
+```
 
 After the simplification, we get
 ```
