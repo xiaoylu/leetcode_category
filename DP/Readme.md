@@ -1,7 +1,7 @@
-## NOTES
-1. Simplify your DP code in special cases
+## Dynamic Programming
+1. Save the memory cost whenever possible
+**LC 64. Minimum Path Sum**
 ```
-        # 64. Minimum Path Sum
         if not grid: return 0
         m = len(grid[0])
         memo = [0] + [2**31] * (m-1)
@@ -30,3 +30,30 @@ Because
         # a b c     This is the previous row memo
         #           You update A using a and B
 ```
+**LC 714. Best Time to Buy and Sell Stock with Transaction Fee** (and the series of stock transaction problems.)
+
+Given the daily prices of a stock, you may buy and sell on each day (only sell after you buy, and buy after you sell).
+You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction `fee`.
+
+The max profit at day `i` is
+```
+        dp[i] = max(dp[i-1], max(p[i] - p[j] - fee + dp[j-1], for all 0 <= j < i) ) 
+```
+which can be simpilified as
+```
+        dp[i] = max(dp[i-1], p[i] - fee + max( dp[j-1] - p[j] ) ) 
+```
+Let `sell = dp[i]` and `buy = max( dp[j-1] - p[j] )`, only two variables are enough for the DP.
+
+Python Code:
+```
+    def maxProfit(self, prices, fee):
+
+        sell, buy = 0, -float('inf')
+        for p in prices:
+            buy = max(buy, sell - p)
+            sell = max(sell, buy + p - fee)
+        return sell
+```
+
+2.
