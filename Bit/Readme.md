@@ -51,7 +51,7 @@ Java Code for the case `k = 3, p = 1`. We need two 32-bits variable to store the
     return x1
 ```
 
-If there are two numbers, we can divide the input array into two groups. If we know `x1^x2 > 0`, we know they must be different at one bit (ex. the rightmost set bit of `x1^x2`). Then we go ahead to XOR each group.
+IF there are two numbers, we can divide the input array into two groups. If we know `x1^x2 > 0`, we know they must be different at one bit (ex. the rightmost set bit of `x1^x2`). Then we go ahead to XOR each group.
 
 ***LC 260. Single Number III***
 
@@ -66,6 +66,15 @@ If there are two numbers, we can divide the input array into two groups. If we k
             x2 ^= n
     return [x1, x2]
 ```
+
+IF there are three unique numbers `a`, `b`, `c`, and other number appears twice, let `x` be the XOR of all elements, 
+The last set bit of the XOR of the last bit of `x^a` and `x^b` and `x^c` be the M-th bit.
+Then we can show only one of `x^a`, `x^b` and `x^c` has a set M-th bit, the other two have unset M-th bit. (Why?)
+Then we can identify a list of elements contain one target number, 
+and solve the sub-problem of finding the other two among the remaining elements.
+
+See:
+http://zhedahht.blog.163.com/blog/static/25411174201283084246412/
 
 ### Bit Masks
 Mask allows you to have a small subset (no more than 32 elements for intergers) but could be larger using C++ bit_set or larger numbers in Python.
