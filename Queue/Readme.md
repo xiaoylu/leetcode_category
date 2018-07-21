@@ -17,6 +17,11 @@ We compute the ratio of money/quality for every worker. Given a group, the maxim
 
 So the least amount of money would be `max(r1, r2, .. rk) * sum(r1, r2, .. rk)`. Note that if we already have `K` workers with the smallest sum of quality, the only way to save money is to replace the worker with highest pay. 
 
+Dynamic Programming view:
+* Sort the works by their qualities
+* The optimal `K` workers in the first `i-1` workers are known
+* If the `i`-th worker joins, then we must replace the worker with highest ratio in the first `i-1` workers; Otherwise, both the sum of quality and highest ratio would increase as `i`-th worker joins.
+
 ```
     def mincostToHireWorkers(self, quality, wage, K):
         # q 10 20  5
