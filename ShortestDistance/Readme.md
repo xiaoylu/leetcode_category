@@ -15,5 +15,7 @@ Elif you use a Fibonacci heap, `T2=O(1)` and `T1 = O(log V)`.
 See <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm> for algorithm pseudo code 
 and <https://en.wikipedia.org/wiki/Binary_heap> for compaison between heap implementations.
 
+But, how to quickly finish the code in interviews? One trick is to skip the decrease key operation and just insert the value directly.
+This step would increase the size of the queue from `V` to `E`, but simplify your code. But you should make sure the interviewee knows that you know the Fibonacci implement!!
 
 
