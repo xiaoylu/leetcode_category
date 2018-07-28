@@ -42,11 +42,12 @@ The queue size is `O(E)` in the worst case because every update might insert one
  \  /       \  / 
    1          4
 ```
-To get 2, 0-1-2 might be shorter, say distance(0-1-2)=100, but 0-2 takes less steps, distance(0-2)=200.
+To get to 2, 0-1-2 might be shorter, say distance(0-1-2)=100, but 0-2 takes less steps, distance(0-2)=200.
 However, we can go 0-2-3-4-5, but can not go 0-1-2-3-4-5, if K = 3. 
 So, we should insert 0-2 into the queue.
 
-In short, a node should be updated here if (i) shorter distance (ii) less number of steps
+In short, a node should be updated here if (i) shorter distance (ii) less number of steps.
+
 The heap solution checks (i) and consider all the possible number of steps. This is also what Dijkstra does because it assumes any steps is alright. 
 
 We can prune the search space using the second measure also. (Record the current least number of steps to reach a pop-up node, and update only if less No. of steps is found)
