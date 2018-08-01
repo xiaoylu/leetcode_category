@@ -35,9 +35,9 @@ The code above (both styles) can be trivially extended to multiple sources and m
 BFS starting from source and destination at the same time. The time complexity decreases from `O(k^d)` to `O(k^(d/2) + k^(d/2))`.
 
 Notes:
-* check intersection at boundry only (visited nodes can be discarded)
-* use set instead of list to store the nodes at each layer
-* always expand from the side with fewer nodes
+* Check intersection at **boundry** only (all the visited nodes can be discarded)
+* Use `set()` instead of `list` to store the nodes at each layer, for the convenience of checking intersection.
+* Always expand from the side with fewer nodes to save time
 
 **LC 127. Word Ladder**
 
