@@ -1,4 +1,5 @@
-## Breath First Search 
+# Breath First Search 
+## Basics
 There are two styles. Straightforward list:
 ```
     bfs = [(source1,0),...,(sourceN,0)]
@@ -29,3 +30,59 @@ Both need to keep a visisted nodes set, both modify the list/deque inside the it
 
 **Multiple sources & destinations**
 The code above (both styles) can be trivially extended to multiple sources and multiple destinations case. So, don't run the algorithm for each source, you simply add the all sources to the initial list/deque.
+
+## Bi-directional
+BFS starting from source and destination at the same time. The time complexity decreases from `O(k^d)` to `O(k^(d/2) + k^(d/2))`.
+
+Notes:
+* check intersection at boundry only (visited nodes can be discarded)
+* use set instead of list to store the nodes at each layer
+* always expand from the side with fewer nodes
+
+**LC 127. Word Ladder**
+
+Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
+
+Only one letter can be changed at a time.
+Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
+
+```
+    def ladderLength(self, beginWord, endWord, wordList):
+        def adj_word(w):
+            w2 = list(w)
+            for i in range(len(w)):
+                for j in range(26):
+                    w2[i] = chr(ord('a') + j)
+                    w2_str = "".join(w2)
+                    if w2_str != w:
+                        yield w2_str
+                w2[i] = w[i]
+        
+        vis = set([beginWord, endWord])
+        allword = set(wordList)
+        
+        if endWord not in allword: return 0
+        
+        # Use two sets to store the layers (instead of list)
+        Q1, Q2 = set([beginWord]), set([endWord])
+        
+        steps = 0
+        while Q1 and Q2:
+            tmp = set()
+            for w in Q1:
+                for W in adj_word(w):
+                    if W in allword:
+                        # Check intersection at the boundary only!!
+                        if W in Q2:
+                            return steps + 2
+                        if W not in vis:
+                            vis.add(W)
+                            tmp.add(W)
+            Q1 = tmp
+            steps += 1
+            
+            # Always expand the side with fewer nodes!!
+            if len(Q2) < len(Q1):
+                Q1, Q2 = Q2, Q1
+        return 0
+```
