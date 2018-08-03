@@ -56,7 +56,46 @@ Dynamic Programming view:
 
 ## Two queues for medium
 **LC 295. Find Median from Data Stream**
+
+Design a data structure that supports the following two operations:
+
+* `void addNum(int num)` - Add a integer number from the data stream to the data structure.
+* `double findMedian()` - Return the median of all elements so far.
+
+```
+    def addNum(self, num):
+        # the size of hi queue is equal to or one more than the size of lo queue
+        # len(self.hi) == len(self.lo)
+        # or len(self.hi) == len(self.lo) + 1
+        if not self.hi:
+            heappush(self.hi, num)
+        elif num >= self.hi[0]:
+            heappush(self.hi, num)
+            if len(self.hi) > len(self.lo) + 1:
+                heappush(self.lo, -heappop(self.hi))
+        else:
+            heappush(self.lo, -num)
+            if len(self.hi) < len(self.lo):
+                heappush(self.hi, -heappop(self.lo))
+```
+
 **LC 480. Sliding Window Median**
+
+See
+<https://leetcode.com/problems/sliding-window-median/discuss/96347/O(n*log(n))-Time-C++-Solution-Using-Two-Heaps-and-a-Hash-Table>
+
+Insert the i-th element (try self.hi first, if fails, then try self.lo)
+Remove the (i-k)-th element (try self.hi first, if fails, then try self.lo)
+
+Then the size of two queue can only differ by 0 or 2. 
+* If differ by 2, move one element from one queue to the other
+* If differ by 0, do nothing.
+
+```
+
+```
+
 **LC 716. Max Stack**
+
 
 
