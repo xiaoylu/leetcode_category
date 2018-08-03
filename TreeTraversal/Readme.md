@@ -78,6 +78,8 @@ The solution would be:
 The same idea works for tree with multiple kids: 
 * Pre-order: visit the left-most kid first, while pushing all its siblings into the stack from left to right, and append the current node to result
 * Post-order: visit the right-most kid first, while pushing all its siblings into the stack from right to left, and push the current node to the left side of result (deque)
+
+**LC 341. Flatten Nested List Iterator**
 ```
 class NestedIterator(object):
 
