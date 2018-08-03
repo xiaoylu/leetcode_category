@@ -154,12 +154,64 @@ class Solution:
 
 ## Lazy deletion
 
-Python heapq does not support removal, you can do lazy deletion which removes a element only when it's at the top. Specifically,
+Unlike Java, Python heapq does not support removal, you can do lazy deletion which removes a element only when it's at the top. Specifically,
 * Use a hash table to count the number of removals of each element
 * When such element emerges to the top of a queue, remove it, decrease the count of removal until zero
 
+It is illustrated in LC 480 above. To implement your own removal, for binary heap, you sift up the element (choose the min of parent and two kids, and make it the parent, then traverse upward...) and then sift down the element. Two many lines for interview, so just do lazy deletion.
+
 **LC 716. Max Stack**
+
+Design a max stack that supports push, pop, top, peekMax and popMax.
+
+1. push(x) -- Push element x onto stack.
+2. pop() -- Remove the element on top of the stack and return it.
+3. top() -- Get the element on the top.
+4. peekMax() -- Retrieve the maximum element in the stack.
+5. popMax() -- Retrieve the maximum element in the stack, and remove it. If you find more than one maximum elements, only remove the top-most one.
+
 ```
+class MaxStack:
+    def __init__(self):
+        self.stack = []
+        self.queue = []
+        self.t = 0 
+        # Use the hash of current time
+        # self.t = hash(time.time())
+        
+        self.remove_stack = set()
+        self.remove_queue = set()
+        
+    def push(self, x):
+        self.stack.append((x, self.t))
+        heappush(self.queue, (-x, -self.t))
+        self.t += 1
+        # Use the hash of current time
+        # self.t = hash(time.time())
+        
+    def pop(self):
+        self.top()
+        value, t = self.stack.pop()
+        self.remove_queue.add(t)
+        return value
+    
+    def top(self):
+        while self.stack and self.stack[-1][1] in self.remove_stack:
+            self.remove_stack.remove(self.stack[-1][1])
+            self.stack.pop()
+        return self.stack[-1][0]
+        
+    def peekMax(self):
+        while self.queue and -self.queue[0][1] in self.remove_queue:
+            self.remove_queue.remove(-self.queue[0][1])
+            heappop(self.queue)
+        return -self.queue[0][0]
+        
+    def popMax(self):
+        self.peekMax()
+        value, t = heappop(self.queue)
+        self.remove_stack.add(-t)
+        return -value
 ```
 
 
