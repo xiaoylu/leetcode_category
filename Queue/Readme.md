@@ -91,9 +91,65 @@ Then the size of **effective** elements in two queues can only differ by 0 or 2.
 * If differ by 2, move one element from one queue to the other
 * If differ by 0, do nothing.
 
+Before you re-balance two heaps, make sure at the top of a heap is an effective element.
+Before you compute the median, make sure both tops are effective elements.
 
 ```
-
+from heapq import heappush, heappop
+class Solution:
+    def medianSlidingWindow(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[float]
+        """
+        if not nums or k > len(nums) or k == 0: return []
+        
+        def clean(lo, hi, count):
+            while lo and count[-lo[0]] > 0:  count[-lo[0]] -= 1; heappop(lo)
+            while hi and count[hi[0]] > 0: count[hi[0]] -= 1; heappop(hi)
+                    
+        lo, hi = [], []
+        count = collections.defaultdict(int)
+        
+        for i in range(k): heappush(hi, nums[i])
+        for _ in range(k//2): heappush(lo, -heappop(hi))
+            
+        # now we have len(h) >= len(l)
+        res = []
+        for i in range(k, len(nums)):
+                
+            if k & 1: res.append(float(hi[0]))
+            else: res.append((hi[0] - lo[0]) / 2.)
+            
+            balance = 0
+            
+            # push the current element
+            if nums[i] >= hi[0]: balance += 1; heappush(hi, nums[i])
+            else: balance -= 1; heappush(lo, -nums[i])
+                
+            # pop the element k steps before
+            if nums[i-k] >= hi[0]:
+                balance -= 1
+                if nums[i-k] == hi[0]: heappop(hi)
+                else: count[nums[i-k]] += 1
+            else:
+                balance += 1
+                if nums[i-k] == -lo[0]: heappop(lo)
+                else: count[nums[i-k]] += 1
+                    
+            clean(lo, hi, count)
+            
+            # at the top of hi/lo must be an effective element??
+            if balance > 0: heappush(lo, -heappop(hi))
+            elif balance < 0: heappush(hi, -heappop(lo))
+            
+            clean(lo, hi, count)
+                
+        if k & 1: res.append(float(hi[0]))
+        else: res.append((hi[0] - lo[0]) / 2.0)
+                
+        return res
 ```
 
 ## Lazy deletion
