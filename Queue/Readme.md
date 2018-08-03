@@ -53,3 +53,10 @@ Dynamic Programming view:
             res = min(res, sumq * maxr)
         return res
 ```
+
+## Two queues for medium
+**LC 295. Find Median from Data Stream**
+**LC 480. Sliding Window Median**
+**LC 716. Max Stack**
+
+
