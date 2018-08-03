@@ -87,15 +87,23 @@ See
 Insert the i-th element (try self.hi first, if fails, then try self.lo)
 Remove the (i-k)-th element (try self.hi first, if fails, then try self.lo)
 
-Then the size of two queue can only differ by 0 or 2. 
+Then the size of **effective** elements in two queues can only differ by 0 or 2. 
 * If differ by 2, move one element from one queue to the other
 * If differ by 0, do nothing.
 
+
 ```
 
 ```
+
+## Lazy deletion
+
+Python heapq does not support removal, you can do lazy deletion which removes a element only when it's at the top. Specifically,
+* Use a hash table to count the number of removals of each element
+* When such element emerges to the top of a queue, remove it, decrease the count of removal until zero
 
 **LC 716. Max Stack**
-
+```
+```
 
 
