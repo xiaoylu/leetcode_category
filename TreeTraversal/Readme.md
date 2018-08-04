@@ -80,18 +80,31 @@ The same idea works for tree with multiple kids:
 * Post-order: visit the right-most kid first, while pushing all its siblings into the stack from right to left, and push the current node to the left side of result (deque)
 
 **LC 341. Flatten Nested List Iterator**
+
+Given a nested list of integers, implement an iterator to flatten it.
+
+Each element is either an integer, or a list -- whose elements may also be integers or other lists.
+
+Example 1:
+Given the list `[[1,1],2,[1,1]]`,
+
+By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: `[1,1,2,1,1]`.
+
 ```
 class NestedIterator(object):
 
     def __init__(self, nestedList):
+        # reverse the input list
         self.stack = nestedList[::-1]
 
     def next(self):
+        # pop the one at the top
         if self.hasNext():
             return self.stack.pop().getInteger()
         return -1
 
     def hasNext(self):
+        # keep going left, meanwhile, push the sibling into the stack, the right-most is inserted first.
         while len(self.stack) > 0 and not self.stack[-1].isInteger():
             x = self.stack.pop()
             self.stack.extend(x.getList()[::-1])
