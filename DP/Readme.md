@@ -112,7 +112,6 @@ def climb_stairs_iii(self, n):
     return xi
 ```
 
-More complicated case, see the [`O(n^2)` solution](https://leetcode.com/problems/guess-number-higher-or-lower-ii/discuss/84826/An-O(n2)-DP-Solution-Quite-Hard.) for [**LC 45. Jump Game II**](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)
-
+More complicated case, see the [`O(n^2)` solution](https://leetcode.com/problems/guess-number-higher-or-lower-ii/discuss/84826/An-O(n2)-DP-Solution-Quite-Hard.) for **LC 45. Jump Game II**
 
 
