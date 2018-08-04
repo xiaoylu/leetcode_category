@@ -83,7 +83,7 @@ Python Code:
 ## Reduce time complexity by "differentiating" the states
 
 In some cases, `dp[i]` can be related to `dp[i-1]`. So it's better to use `dp[i] - dp[i-1]` as the real dp state.
-Or, when we have derived the reduction rule, we should question that "Are the dp states related to each other"?
+After we have derived the reduction rule, we should question that **"How are the dp states related to each other"**?
 
 
 As an extension to **LC 45. Jump Game II**, see **Lintcode climbing-stairs-iii**
@@ -112,6 +112,7 @@ def climb_stairs_iii(self, n):
     return xi
 ```
 
+More complicated case, see the [`O(n^2)` solution]<https://leetcode.com/problems/guess-number-higher-or-lower-ii/discuss/84826/An-O(n2)-DP-Solution-Quite-Hard.> for [**LC 45. Jump Game II**]<https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/>
 
 
 
