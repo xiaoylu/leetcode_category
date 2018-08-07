@@ -51,3 +51,31 @@ In short, a node should be updated here if (i) shorter distance (ii) less number
 The heap solution checks (i) and consider all the possible number of steps. This is also what Dijkstra does because it assumes any steps is alright. 
 
 We can prune the search space using the second measure also. (Record the current least number of steps to reach a pop-up node, and update only if less No. of steps is found)
+
+## Searching states in a graph
+
+Many problems can be viewed as a shortest distance problem. It might need some attention to realize that the essence of problem. But these problems are common in the way that:
+* The process can be divided in primitive segments, which is a jump/edge in the states graph
+* The goal is to transit from a starting state to some desired states.
+
+Problems like this include:
+
+* **LC 753. Cracking the Safe** The sequence (3 digits for example) 000,001,010,011,100,101,110,111
+can be treated as the edges:
+```
+   10
+  /   \
+00     11
+  \   /
+    01
+```
+000 is a self-edge from 00 to 00, 001 is an edge from 00 to 01, so on so forth...
+The essence of this problem is to find out a shortest path visiting all edges of the graph. We might visit an edge multiple times in a graph, but for our graph, there exist a Eular path visiting every edge eaxctly once because every node has out-degree TWO.
+
+* **LC 864. Shortest Path to Get All Keys**
+We consider the lock, key, start point @ as interest points. Since we won't touch the walls, the problem is to find a sequence of interests point pairs which are combined to be the final route. The state is `(keys, i, j)` where `keys` is the set of obtained keys, `i, j` is a pair of interest points. The edge goes from `(keys, i, j)` to `(keys, j, k)` if `j` is not a key; otherwise to `(keys+{j}, j, k)` if `j` is a key. The corresponding weight of an edge is the shortest distance from `j` to `k`, which can be found by BFS. So, we start with no key, and end up with all keys, the problem asks for the shortest distance in the weighted states graph.
+
+
+
+
+
