@@ -21,6 +21,21 @@ To achieve the iterated `O(log* n)` time complexity, we need to
 The proof of time complexity is about showing there are at most `n/2^r` nodes with rank `r` 
 because the branch rooted by rank-r node has at most `2^r` nodes.
 
+To conduct `n` find operations:
+No optimization: `O(n^2)`
+Path compression alone: `O(n log n)`
+Path compression + union by rank: `O(n log*(n))~O(n)` (iterated log can be treated as a constant)
+
+See [wiki](https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Time_complexity):
+
+With neither path compression (or a variant), union by rank, nor union by size, the height of trees can grow unchecked as `O(n)`, which implies that Find and Union operations will take `O(n)` time.
+
+Using path compression alone gives a worst-case running time of `O(n log n)` for n find operations on n elements.
+
+Using union by rank alone gives a running-time of `O(n logn)` for n operations on n elements.
+
+Using both path compression, splitting, or halving and union by rank or size ensures that the amortized time per operation is only O(1), so the disjoint-set operations take place in essentially constant time.
+
 ## Redundant Connection
 
 **LC 685. Redundant Connection II**
