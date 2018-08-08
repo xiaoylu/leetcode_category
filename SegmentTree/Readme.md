@@ -1,7 +1,7 @@
 ## Segment tree
 Segment tree stores the interval/segment at each tree node. It supports query of sum/max/min value within a given range of elements.
 
-With segment tree, preprocessing time is `O(n)` and time to for range minimum query is `O(log n)`. The extra space required is `O(n)` to store the segment tree.
+With segment tree, preprocessing time is `O(n)` and the time to query the range max/min is `O(log n)`. The extra space required is `O(n)` to store the segment tree.
 
 As for the array implementation, one important note is that the leaves, which are the array element, are located at i + N. (N is the length and i the index). The index of tree node would be 1, 2\~3, 4\~7, 8\~15 ...
 And 0 is a DUMMY node.
@@ -34,9 +34,9 @@ public:
 
 But one note is that this code does NOT support binary search like classical segment trees (require extra codes). If you need binary search, then a better choice is to construct tree nodes!
 
-Segment Tree also supports range operations (add value to all the elements in a range). But if it's assignment, you need to implement the lazy propagation, otherwise the time complexity is not `O(log n)` anymore. As long as you can stop at some range which is completed covered by the query range, every level of the tree has only two ative nodes for recursion. The time complexity for range operation is `O(log n)`.
+Segment Tree also supports range operations (add value to all the elements in a range). But we shouldn't update all the nodes in this interval, just the maximal ones, then pass it to children when we need. This trick is called Lazy Propagation. We go from root to leaves, when one interval is completed covered by the query range, we can stop there and save the updates at the maximal ones. In this way, every level of the tree has only two active nodes for recursion. The time complexity for range operation is `O(log n)`.
 
-See how to construct tree dynamically <https://leetcode.com/problems/my-calendar-iii/discuss/109568/Java-Solution-O(n-log(len))-beats-100-Segment-Tree>
+See how to construct tree dynamically: [Java](https://leetcode.com/problems/my-calendar-iii/discuss/109568/Java-Solution-O(n-log(len))-beats-100-Segment-Tree), [C++ (DarthPrince)](http://codeforces.com/blog/entry/15729)
 
 **LC732. My Calendar III** 
 Return an integer K representing the largest integer such that there exists a K-booking in the calendar. (There are K books overlapping at the same period.)
