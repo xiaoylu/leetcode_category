@@ -45,14 +45,14 @@ Find a redundant edge in a directed tree. The directed edge of the tree points f
 [Good solution](https://leetcode.com/problems/redundant-connection-ii/discuss/108045/C++Java-Union-Find-with-explanation-O(n))
 
 Three types of the redudant edge: 
-* pointing from a node to the root (lead to a loop without double-parent node)
-* pointing from a node to its ancestor (lead to a loop with double-parent node)
-* pointing from a node to another branch (lead to double-parent node)
-* pointing from a node to its desendent (lead to double-parent node)
+* double-parent node, no loop (easy, remove one double-parent edge to this node)
+* double-parent node, loop (remove the double-parent edges inside the loop)
+* no double-parent node, loop (remove the current edges once a loop is detected)
 
-Just remove the second edge (if exist) causing the double parents, then check
-* if the tree is valid now, return the second edge
-* elif the first edge exist, return the first edge
-* else return the current edge causing loop
+Store the two edges pointing to the double-parent node, just remove the second edge (if exist) causing the double parents, then check
+* if the tree is valid now, return the second edge as result
+* elif we found a loop (by using union-find on a directed graph)
+1. the first edge exist, return the first edge
+2. else return the current edge causing the loop
 
 
