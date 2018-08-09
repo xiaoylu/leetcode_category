@@ -28,6 +28,8 @@ C++ provides built-ins for merge sort including:
 * `merge(l1.begin(), l1.end(), l2.begin(), l2.end(), result.begin());` which stores the merged array in `result`
 * `inplace_merge(l.begin(), l.middle, l.end())` where array `[begin, middle)`  is merged with array `[middle, end)`.
 
+**NOTE:** Python's `sorted()` use **Timesort**, which actually search for sorted subsequence first and then apply merge-sort. So, you can treated it as inplace_merge_sort. LoL.
+
 LeetCode 315. Count of Smaller Numbers After Self. Return the number of `j`s such that `i < j` and `nums[j] < nums[i]`.
 ```
     #define iterator vector<vector<int>>::iterator
