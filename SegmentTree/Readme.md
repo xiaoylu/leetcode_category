@@ -34,98 +34,103 @@ public:
 
 But one note is that this code does NOT support binary search like classical segment trees (require extra codes). If you need binary search, then a better choice is to construct tree nodes!
 
-Segment Tree also supports range operations (add value to all the elements in a range). But we shouldn't update all the nodes in this interval, just the maximal ones, then pass it to children when we need. This trick is called Lazy Propagation. We go from root to leaves, when one interval is completed covered by the query range, we can stop there and save the updates at the maximal ones. In this way, every level of the tree has only two active nodes for recursion. The time complexity for range operation is `O(log n)`.
+Segment Tree also supports range operations (add value to all the elements in a range). But we shouldn't update all the nodes in this interval, just the maximal ones, then pass it to children when we need. This trick is called Lazy Propagation. We go from root to leaves, when one interval is completed covered by the query range, we can stop there and save the updates at the maximal ones. In this way, every level of the tree has only two/four active nodes for recursion. The time complexity for range operation is `O(log n)`.
 
-See how to construct tree dynamically: [Java](https://leetcode.com/problems/my-calendar-iii/discuss/109568/Java-Solution-O(n-log(len))-beats-100-Segment-Tree), [C++ (DarthPrince)](http://codeforces.com/blog/entry/15729)
+See how to construct tree dynamically: [Java](https://leetcode.com/problems/my-calendar-iii/discuss/109568/Java-Solution-O(n-log(len))-beats-100-Segment-Tree)
+
+The best introduction in [C++ by (DarthPrince)](http://codeforces.com/blog/entry/15729)
+
+## Range max/min with lazy operation
+
+Storing the max/min element in an interval at each node. Note that `add(l,r,val)` would add `val` to the **ENTIRE** interval `[x,y)` within range `[l,r)`. The lazy operation accumulates the `val` in `interval.lazy` at such maximal intervals. When the recursive query returns from children, we just add current `interval.lazy` to the returned max value.
 
 **LC732. My Calendar III** 
 Return an integer K representing the largest integer such that there exists a K-booking in the calendar. (There are K books overlapping at the same period.)
 
 ```
-class MyCalendarThree {
-	SegmentTree segmentTree;
-    public MyCalendarThree() {
-    	segmentTree = new SegmentTree(0, 1000000000);
-    }
-    public int book(int start, int end) {
-        segmentTree.add(start, end, 1);
-        return segmentTree.getMax();
-    }
+class STNode:
+    def __init__(self, l, r):
+        self.l, self.r = l, r
+        self.val, self.lazy = 0, 0
+        self.left, self.right = None, None
+        
+class SegmentTree:
+    def __init__(self):
+        self.root = STNode(0, 10**9+1)
+    
+    def add(self, nd, x, y, val):
+        if nd.l >= y or x >= nd.r: return # no intersection
+        if x <= nd.l < nd.r <= y: # fully covered
+            nd.val += val
+            nd.lazy += val
+            return
+        
+        # construct sub-intervals
+        m = (nd.l + nd.r) // 2
+        if not nd.left: nd.left = STNode(nd.l, m)
+        self.add(nd.left, x, y, val)
+        if not nd.right: nd.right = STNode(m, nd.r)
+        self.add(nd.right, x, y, val)
+        
+        # np.lazy stores the increase hidden to nd.left and nd.right
+        # np.val stores the max val in interval [nd.l, nd.r)
+        nd.val = nd.lazy + max(nd.left.val, nd.right.val)
+            
+    def Max(self):
+        return self.root.val
+    
+    def Add(self, x, y):
+        self.add(self.root, x, y, 1)
+        
+class MyCalendarThree:
+
+    def __init__(self):
+        self.seg = SegmentTree()
+
+    def book(self, start, end):
+        self.seg.Add(start, end)
+        return self.seg.Max()
+
+# Your MyCalendarThree object will be instantiated and called as such:
+# obj = MyCalendarThree()
+# param_1 = obj.book(start,end)
+```
+
+## Range sum with lazy operation
+
+Unlike the range max/min which only pass `interval.lazy` to parent, the range sum segment tree passes the lazy variable to children.
+
+See C++ code from [C++ by (DarthPrince)](http://codeforces.com/blog/entry/15729)
+```
+// A function to update a node :
+void upd(int id,int l,int r,int x){//	increase all members in this interval by x
+	lazy[id] += x;
+	s[id] += (r - l) * x;
 }
 
-class SegmentTree {
-    TreeNode root;
-    public SegmentTree(int left, int right) {
-        root = new TreeNode(left, right);
-    }
-    public void add(int start, int end, int val) {
-        TreeNode event = new TreeNode(start, end);
-    	add(root, event, val);
-    }
-    private void add(TreeNode root, TreeNode event, int val) {
-        if(root == null) {
-            return ;
-        }
-        /**
-         * If current node's range lies completely in update query range.
-         */
-        if(root.inside(event)) {
-            root.booked += val;
-            root.savedres += val;
-        }
-        /**
-         * If current node's range overlaps with update range, follow the same approach as above simple update.
-         */
-        if(root.intersect(event)) {
-        	// Recur for left and right children.
-            int mid = (root.start + root.end) / 2;
-            if(root.left == null) {
-                root.left = new TreeNode(root.start, mid);
-            }
-            add(root.left, event, val);
-            if(root.right == null) {
-                root.right = new TreeNode(mid, root.end);
-            }
-            add(root.right, event, val);
-            // Update current node using results of left and right calls.
-            root.savedres = Math.max(root.left.savedres, root.right.savedres) + root.booked;
-        }
-    }
-    public int getMax() {
-        return root.savedres;
-    }
-    /**
-     * find maximum for nums[i] (start <= i <= end) is not required.
-     * so i did not implement it. 
-     */
-    public int get(int start, int right) {return 0;}
-	class TreeNode {
-	    int start, end;
-	    TreeNode left = null, right = null;
-	    /**
-	     * How much number is added to this interval(node)
-	     */
-	    int booked = 0;
-	    /**
-	     * The maximum number in this interval(node). 
-	     */
-	    int savedres = 0;
-	    public TreeNode(int s, int t) {
-	        this.start = s;
-	        this.end = t;
-	    }
-	    public boolean inside(TreeNode b) {
-	        if(b.start <= start && end <= b.end) {
-	            return true;
-	        }
-	        return false;
-	    }
-	    public boolean intersect(TreeNode b) {
-	    	if(inside(b) || end <= b.start || b.end <= start) {
-	            return false;
-	        }
-	        return true;
-	    }
+
+// A function to pass the update information to its children :
+void shift(int id,int l,int r){//pass update information to the children
+	int mid = (l+r)/2;
+	upd(id * 2, l, mid, lazy[id]);
+	upd(id * 2 + 1, mid, r, lazy[id]);
+	lazy[id] = 0;// passing is done
+}
+
+
+// A function to perform increase queries :
+void increase(int x,int y,int v,int id = 1,int l = 0,int r = n){
+	if(x >= r or l >= y)	return ;
+	if(x <= l && r <= y){
+		upd(id, l, r, v);
+		return ;
 	}
+	shift(id, l, r);
+	int mid = (l+r)/2;
+	increase(x, y, v, id * 2, l, mid);
+	increase(x, y, v, id*2+1, mid, r);
+	s[id] = s[id * 2] + s[id * 2 + 1];
 }
 ```
+Note that `shift` should be called at every level **before** the function `increase` traverses to the children!
+
