@@ -99,6 +99,8 @@ C++
         return ret
 ```
 
+This problem has another version: return the minimum number of cuts s.t. each cut is a palindrome. DP solution: keep extending the last cut, and update the dp[j] if last cut reaches index j.
+
 **LC 784. Letter Case Permutation** Transform every letter individually to be lowercase or uppercase, return all combinations.
 Input: S = "a1b2"
 Output: `["a1b2", "a1B2", "A1b2", "A1B2"]`
