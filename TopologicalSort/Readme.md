@@ -60,3 +60,6 @@ First, build a graph out of the matrix elements, then topological sort it. Recor
         return cnt
 ```
 
+Another way for topological sort is DPS. The post order visit would always put a root **after** its children. Starting from different root, we keep the maximum post-visiting time (MPT) of each node (if a node has been visited, then store the larger one). It ensures that the root's MPT would higher than the children's MPT. So you have one total order here.
+
+
