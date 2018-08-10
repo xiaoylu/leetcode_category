@@ -36,6 +36,16 @@ Using union by rank alone gives a running-time of `O(n logn)` for n operations o
 
 Using both path compression, splitting, or halving and union by rank or size ensures that the amortized time per operation is only O(1), so the disjoint-set operations take place in essentially constant time.
 
+# Directed vs Undirect graph
+
+For undirected graph, path compression + union-by-rank ==> O(1) time find/union operation.
+
+For directed graph, neither works because edge `(i,j)` can only have `parent[j] = i`.
+Path compression will make all nodes have the very root as `parent`. 
+If that's fine for the specific problem, then union-find still works.
+
+See this problem:
+
 ## Redundant Connection
 
 **LC 685. Redundant Connection II**
