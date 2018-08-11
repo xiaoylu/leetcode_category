@@ -1,9 +1,14 @@
 # Topological Sort
-To find out the order of nodes in a DAG, remove the node with in-degree/out-degree ZERO (or degree ONE in undirected graph such as tree) iteratively,
+To find out the order of nodes in a DAG, remove the node with in-degree/out-degree ZERO iteratively, (or degree ONE in undirected graph such as tree problem)
 update the degree of other node pointing to the removed node.
 Keep doing this you will obtain a topological order
 
-**310. Minimum Height Trees**
+The application of Topological sort:
+* Find cycles in a graph. The steps above will remove everything until only loops remain.
+* Rank prerequisites to find a total order.
+* Find the "most inner" nodes in graph, like **LC 310. Minimum Height Trees**.
+
+**LC 310. Minimum Height Trees**
 Find the leaves of the tree, and remove the deg 1 nodes iteratively until no more than two nodes remain. 
 The remaining node(s) would be the root of minimum height tree.
 ```
