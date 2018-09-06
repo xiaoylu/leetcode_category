@@ -3,7 +3,7 @@
 [Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
 
 
-
+![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand2.gif)
 
 
 The first step is to construct array `lps`. Here, `lps[i]` indicates the length of the longest proper prefix of a string which is also te suffix. Note that proper prefix can not be input string `s` itself, the length of it should be less than `len(s)`.
@@ -104,3 +104,28 @@ Test all the suffix of `s[:i]`, which is also a proper prefix of it. KMP linear 
 ```
 
 There exists a O(N) time algorithm called Manchester algorithm. And DP also solves the problem in `O(N^2)` time.
+
+
+**LINTCODE 1365. Minimum Cycle Section**
+JAVA
+
+Given an array of int, find the length of the minimum cycle section.
+
+```
+    public int minimumCycleSection(int[] array) {
+        // Write your code here
+        int [] next = new int[array.length + 1];
+        int i = 0, j = -1;
+        next[0] = -1;
+        while(i < array.length) {
+            if(j == -1 || array[i] == array[j]) {
+                i++;
+                j++;
+                next[i] = j;
+            } else {
+                j = next[j]
+            }
+        }
+        return i - next[i];
+    }
+```
