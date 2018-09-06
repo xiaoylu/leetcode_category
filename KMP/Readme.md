@@ -46,6 +46,23 @@ So, it depends on `lps[2]` which is the length of such suffix of **ABC**. The ab
         return lps
 ```
 
+A **shorter** implementation is here:
+
+Note that the `b[0]` here should be `-1` because `b[i]=0` when `array[i]` does not match any char.
+```
+void kmpPreprocess()
+{
+    int i=0, j=-1;
+    b[i]=j;
+    while (i<m)
+    {
+        while (j>=0 && array[i]!=array[j]) j=b[j];
+        i++; j++;
+        b[i]=j;
+    }
+}
+```
+
 With the `lps` array, it is easy to find the palindrome prefix in a string:
 
 **LC 214. Shortest Palindrome** Append letter in the front of a string to make it a palindrome.
