@@ -2,7 +2,7 @@
 
 [Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
 
-The border `r` is both suffix and prefix of `x`, then `r+b` is "border" of `x+a`.
+The border `r` is both suffix and prefix of `x`, then `r+a` is "border" of `x+a`.
 
 ![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand2.gif)
 
