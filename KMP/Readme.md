@@ -48,7 +48,7 @@ So, it depends on `lps[2]` which is the length of such suffix of **ABC**. The ab
 
 A **shorter** implementation is here:
 
-Note that the `b[0]` here should be `-1` because `b[i]=0` when `array[i]` does not match any char.
+Note that the `b[0]=-1` because for a char `array[i]` does not match any char, `b[i]=0`.
 ```
 void kmpPreprocess()
 {
