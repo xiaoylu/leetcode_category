@@ -1,11 +1,13 @@
 # KMP algorithm
 
-##[Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
+[Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
 
 The border `r` is both suffix and prefix of `x`, then we just `rb` is "border" of `xa`.
+
 ![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand2.gif)
 
 Hence, the key is find `b[i]` for `i` such that we can expand the matched string before them.
+
 ![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand4.gif)
 
 ## Example
