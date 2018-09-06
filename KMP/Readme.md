@@ -1,11 +1,14 @@
 # KMP algorithm
 
-[Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
+##[Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
 
-
+The border `r` is both suffix and prefix of `x`, then we just `rb` is "border" of `xa`.
 ![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand2.gif)
 
+Hence, the key is find `b[i]` for `i` such that we can expand the matched string before them.
+![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand4.gif)
 
+## Example
 The first step is to construct array `lps`. Here, `lps[i]` indicates the length of the longest proper prefix of a string which is also te suffix. Note that proper prefix can not be input string `s` itself, the length of it should be less than `len(s)`.
 
 Suppose we extend from 'ABCFAB' to 'ABCFABC', now `i=6` and `lps[5]=2` which points to the `C` in the middle, the right-most `C` matches the `C` in the middle, so we update `lps[6] = lps[5] + 1 = 3`.
