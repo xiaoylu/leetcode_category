@@ -1,7 +1,39 @@
-## Segment tree
+## Segment tree (supporting range operation)
 Segment tree stores the interval/segment at each tree node. It supports query of sum/max/min value within a given range of elements.
 
 With segment tree, preprocessing time is `O(n)` and the time to query the range max/min is `O(log n)`. The extra space required is `O(n)` to store the segment tree.
+
+The best implementation in Python:
+
+Without lazy propagation, just increase one number (instead of a range)
+```
+class SegTree(object):
+    def __init__(self, L, R):
+        self.v = collections.defaultdict(int) # dynamically allocation space
+        self.L, self.R = L, R                 # any range (pre-known), otherwise, just assign the lower/upper bound of int type
+        
+    def add(self, i):
+        self._add(i, self.L, self.R)
+    
+    def search(self, e):                      # use it as a Fenwick tree (NO lower query bound)
+        return self._search(self.L, e, self.L, self.R)
+    
+    def _add(self, i, l, r, id = 1):
+        if l <= i < r:
+            if r - l < 2:
+                self.v[id] += 1
+                return
+            m = (l + r) // 2
+            self._add(i, l, m, id * 2)
+            self._add(i, m, r, id*2+1)
+            self.v[id] = self.v[id*2] + self.v[id*2+1]
+            
+    def _search(self, s, e, l, r, id = 1):
+        if r <= s or l >= e: return 0
+        if s <= l < r <= e: return self.v[id]
+        m = (l + r) // 2
+        return self._search(s, e, l, m, id * 2) + self._search(s, e, m, r, id*2+1)
+```
 
 As for the array implementation, one important note is that the leaves, which are the array element, are located at i + N. (N is the length and i the index). The index of tree node would be 1, 2\~3, 4\~7, 8\~15 ...
 And 0 is a DUMMY node.
