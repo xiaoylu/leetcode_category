@@ -79,6 +79,39 @@ Storing the max/min element in an interval at each node. Note that `add(l,r,val)
 **LC732. My Calendar III** 
 Return an integer K representing the largest integer such that there exists a K-booking in the calendar. (There are K books overlapping at the same period.)
 
+20-lines Python version:
+        
+	
+```
+class SegTree(object):
+    def __init__(self):
+        self.v = collections.defaultdict(int)
+        self.lazy = collections.defaultdict(int)
+ 
+    def add(self, s, e, l = 0, r = 10**9+1, id = 1):
+        if s >= r or e <= l: return
+        if s <= l < r <= e:
+            self.lazy[id] += 1
+            self.v[id] += 1
+            return
+        m = (l + r) // 2
+        self.add(s, e, l, m, id * 2)
+        self.add(s, e, m, r, id*2+1)
+	
+	# lazy stores the increase hidden to it children
+        # val stores the LOCAL max val in interval (ignoring its parent's lazy)
+        self.v[id] = self.lazy[id] + max(self.v[id*2], self.v[id*2+1])
+            
+class MyCalendarThree(object):
+    def __init__(self):
+        self.st = SegTree()
+
+    def book(self, start, end):
+        self.st.add(start, end)
+        return self.st.v[1]
+```
+
+
 ```
 class STNode:
     def __init__(self, l, r):
