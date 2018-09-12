@@ -69,7 +69,7 @@ But if `b[i]==b[j]`, we have to consider all segments splitted by `b[i]`.
 ```
 >     i     w1    w2    j    
 > [1, 3, 2, 3, 2, 3, 4, 3, 1]
->      [*]   [*]   [*]           <== three segments for DP reduction
+>       [*]   [*]   [*]           <== three segments for DP reduction
 ```
 
 The last removal in this case could be the four 3s in [i,j]. Then DP reduces to 3 segments. Too complicated.
