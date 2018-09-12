@@ -22,12 +22,12 @@ After the burst, the left and right then becomes adjacent.
 Find the maximum coins you can collect by bursting the balloons wisely.
 
 > Input: [3,1,5,8]
->
 > Output: 167 
->
-> Explanation: nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
->
->              coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167
+
+```
+Explanation: nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
+              coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167
+```
 
 Suppose ballon `i` burst last. The left and right ballon at index `l` and `r` would impact it.
 ```
@@ -55,24 +55,22 @@ Given several boxes with different colors represented by different positive numb
 You may experience several rounds to remove boxes until there is no box left. Each time you can choose some continuous boxes with the same color (composed of k boxes, k >= 1), remove them and get k*k points.
 Find the maximum points you can get.
 
+```
 > [1, 3, 2, 2, 2, 3, 4, 3, 1] 
->
 > ----> [1, 3, 3, 4, 3, 1] (3*3=9 points) 
->
 > ----> [1, 3, 3, 3, 1] (1*1=1 points) 
->
 > ----> [1, 1] (3*3=9 points) 
->
 > ----> [] (2*2=4 points)
+```
 
 If the sequence `i,j` can be split into non-empty left and right parts, then reduction is easy.
 But if `b[i]==b[j]`, we have to consider all segments splitted by `b[i]`.
 
-> `    i     w1    w2    j    `
->
-> `[1, 3, 2, 3, 2, 3, 4, 3, 1]`
->
-> `     [*]   [*]   [*]       `    <== three segments for DP reduction
+```
+>     i     w1    w2    j    
+> [1, 3, 2, 3, 2, 3, 4, 3, 1]
+>      [*]   [*]   [*]           <== three segments for DP reduction
+```
 
 The last removal in this case could be the four 3s in [i,j]. Then DP reduces to 3 segments. Too complicated.
 
