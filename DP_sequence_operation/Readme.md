@@ -68,19 +68,19 @@ Find the maximum points you can get.
 If the sequence `i,j` can be split into non-empty left and right parts, then reduction is easy.
 But if `b[i]==b[j]`, we have to consider all segments splitted by `b[i]`.
 
->     i     w1    w2    j 
+> `    i     w1    w2    j    `
 >
-> [1, 3, 2, 3, 2, 3, 4, 3, 1]
+> `[1, 3, 2, 3, 2, 3, 4, 3, 1]`
 >
->       [*]   [*]   [*]            <== three segments for DP reduction
+> `     [*]   [*]   [*]       `    <== three segments for DP reduction
 
 The last removal in this case could be the four 3s in [i,j]. Then DP reduces to 3 segments. Too complicated.
 
 So, why not just consider the right most 3, and reduce one step at a time? 
 We need one extra value to store the number of following 3s.
 
-> dp[i][j][0] = max(dp[i][w2][1] + dp[w2+1][j-1][0]
->                   ,dp[i][w1][1] + dp[w1+1][j-1][0])
+> `dp[i][j][0] = max(dp[i][w2][1] + dp[w2+1][j-1][0]`
+>                   `,dp[i][w1][1] + dp[w1+1][j-1][0])`
 
 ```
     def removeBoxes(self, b):        
