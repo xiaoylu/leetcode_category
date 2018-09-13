@@ -22,9 +22,10 @@ The proof of time complexity is about showing there are at most `n/2^r` nodes wi
 because the branch rooted by rank-r node has at most `2^r` nodes.
 
 To conduct `n` find operations:
-No optimization: `O(n^2)`
-Path compression alone: `O(n log n)`
-Path compression + union by rank: `O(n log*(n))~O(n)` (iterated log can be treated as a constant)
+---
+1. No optimization: `O(n^2)`
+2. Path compression alone: `O(n log n)`
+3. Path compression + union by rank: `O(n log*(n))~O(n)` (iterated log can be treated as a constant)
 
 See [wiki](https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Time_complexity):
 
