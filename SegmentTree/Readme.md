@@ -199,3 +199,12 @@ void increase(int x,int y,int v,int id = 1,int l = 0,int r = n){
 ```
 Note that `shift` should be called at every level **before** the function `increase` traverses to the children!
 
+## Two-dimensional Segment Tree
+
+Easy, now you need to build a segment tree over `x` coordinates. Each node of the x-coordinate (outer) segment tree stores a segment tree on `y` coordinates that corresponds to strip `[xl, xr]`, meaning that it will store all the sums of rectangles `[xl,xr]×[yl,yr]` where `[yl,yr]` is a valid atomic segment tree segment.
+
+While answering queries you basically first traverse by outer tree until you find O(logn) segments that fits your x-part-of-a-query and then for each such segment you are traversing in corresponding segment tree until you find a set of segments that match your y-part-of-a-query.
+
+Before writing a 2D-segment tree you should consider using partial sums, 2D-Fenwick tree or O(1)-static-rmq for 2D since all of them are like 10× shorter and usually faster.
+
+I was thinking about spliting a 2D rectangle into 4 smaller rectangles. But this does not work because every level may contains more than 4 active interval of query. Unlike 1D case where you got at most 4 active interval on each level, this incorrect 2D extension may grow the active rectangles exponentially -- it is not efficient!
