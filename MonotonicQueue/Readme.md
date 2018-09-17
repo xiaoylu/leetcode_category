@@ -17,13 +17,26 @@ So we just maintain a monotonic array with index increasing, and value increasin
 
 > `[3, 1, 4, 3, 8] => [3], [1], [1, 4], [1, 3], [1, 3, 8]` 
 
+Codeforces 487B Strip
+===
+
 One extreme case is (Codeforces 487B Strip)[http://codeforces.com/contest/487/problem/B]
 
-(Multiset C++ solution)[https://www.cnblogs.com/zyue/p/4360175.html]
 题意：给你一个数组，现在让你分割这个数组，要求是数组每一块最少 L 个数  且 每一块中  极值 不超过 s
 
-Using three Monotonic Queue to maintain `# f[i] = min(f[k]) + 1 for j - 1 <= k <= i - L`, 
-where `[j, i]` is the longest segment with `max-min <= S` ending with right border `i` (included).
+(Multiset C++ solution)[https://www.cnblogs.com/zyue/p/4360175.html]
+
+
+487B - Strip
+We can use dynamic programming to solve this problem.
+
+Let f[i] denote the minimal number of pieces that the first i numbers can be split into. g[i] denote the maximal length of substrip whose right border is i(included) and it satisfy the condition.
+
+Then `f[i] = min(f[k]) + 1`, where `i - g[i] ≤ k ≤ i - l`.
+
+We can use monotonic queue to calculate g[i] and f[i]. And this can be implemented in O(n)
+
+We can also use sparse table or segment tree to solve the problem, the time complexity is  or (It should be well-implemented)
 
 ```
 from collections import deque
