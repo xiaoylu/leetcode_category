@@ -33,9 +33,9 @@ Let f[i] denote the minimal number of pieces that the first i numbers can be spl
 
 Then `f[i] = min(f[k]) + 1`, where `i - g[i] ≤ k ≤ i - l`.
 
-We can use monotonic queue to calculate g[i] and f[i]. And this can be implemented in O(n)
+We can use monotonic queue to calculate g[i] and f[i]. And this can be implemented in `O(n)` !!!
 
-We can also use sparse table or segment tree to solve the problem, the time complexity is  or (It should be well-implemented)
+We can also use sparse table to solve the problem, the time complexity is O(n logn).
 
 ```
 from collections import deque
