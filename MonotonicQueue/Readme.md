@@ -4,12 +4,11 @@ Monotonic Queue
 * **LC239. Sliding Window Maximum**
 * **LC907. Sum of Subarray Minimums**, which reduces to the problem of finding the "nearest" element smaller than `A[i]` 
 * [Frog Jump II](https://anthony-huang.github.io/competitiveprogramming/2016/06/06/monotonic-queue.html): K steps at most with cost `A[i]` if landing at position `i`
+* Any DP problem where `A[i] = min(A[i-d1:i-d2]) + C` where `d1 > d2 >= 1`
 
 
-Any DP problem where `A[i] = min(A[i-d1:i-d2]) + C` where `d1 > d2 >= 1`
+Sliding max/min window.
 ===
-
-This is a sliding min window.
 
 Key observation: if `A[l] > A[r]` and `l < r`, then `A[l]` should never be the min element in any sliding widow ending with index `i >= r`.
 
