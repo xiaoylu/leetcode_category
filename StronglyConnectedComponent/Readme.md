@@ -18,5 +18,5 @@ If we call `dfs(i)` in the order of `i = 1,2,..N`, any reachable node from the r
 
 2. Two DFS/BFS from the single node:
 ---
-It is a simplified version of the Kosaraju’s algorithm. Starting from the root, we check if every node can be reached by DFS/BFS. Then, reverse all the edges (take the opposite direction of every edge). We check if every node can be reached by DFS/BFS again. See [C++ code](http://codeforces.com/contest/475/submission/8140615).
+It is a simplified version of the Kosaraju’s algorithm. Starting from the root, we check if every node can be reached by DFS/BFS. Then, reverse the direction of every edge. We check if every node can be reached from the same root again. See [C++ code](http://codeforces.com/contest/475/submission/8140615).
 
