@@ -1,4 +1,4 @@
-Three Algorithms for detection of SCC
+Strongly Connected Component (SCC)
 ===
 
 To check if every node has both paths to and from every other node:
