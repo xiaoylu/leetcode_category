@@ -14,7 +14,7 @@ DFS/BFS from all nodes:
             if j is not visited then dfs(j)
             d[i] = min(d[i], d[j])
 
-If we call `dfs(root)` in the order of `root = 1,2,..N`, any reachable node `i` from the root would have a depth no less than that root's. In the SCC, a DFS starting from the root will reach itself, causing `d[root] <= d[i] <= d[root]` for any reachable node `i` from `root`. Therefore, all the nodes in SCC will have a depth of `d[root]`. To tell if a graph is a SCC, we check whether all nodes' `d[i]` are the same eventually.
+If there is a forwarding path from `u` to `v`, then `d[u] <= d[v]`. In the SCC, `d[v] <= d[u] <= d[v]`, thus, all the nodes in SCC will have the same depth. To tell if a graph is a SCC, we check whether all nodes have the same `d[i]`.
 
 Two DFS/BFS from the single node:
 ---
