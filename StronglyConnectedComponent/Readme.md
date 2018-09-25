@@ -24,11 +24,16 @@ It is a simplified version of the [Kosaraju’s algorithm](https://www.geeksforg
 
 The most useful and fast-coding algorithm for finding SCCs is Kosaraju.
 
-1. DFS on the graph and sort the vertices in decreasing of their finishing time (we can use a stack).
+1. DFS on the graph and sort the vertices in decreasing of their finishing time (we can use a stack `L`).
 2. Reverse the graph edges
 2. Start from the vertex with the greatest finishing time, and for each vertex v that is not yet in any SCC, do : 
 3. for each u that v is reachable by u and u is not yet in any SCC, put it in the SCC of vertex v.
 
 If `u->v` and not `v->u`, then it is only possible that `u` appears above `v` in the stack. (The nodes in a SCC, such as `v` and `w`, may appear in arbitrary order in the stack.)
+
+![Illustration](./kosaraju.png)
+
+So, among the nodes can reach `v`, we need to eliminate those who `v` can NOT reach. We just skip the nodes on the left of `v` in `L`. That is why we do DFS starting from the node from left to right.
+
 
 
