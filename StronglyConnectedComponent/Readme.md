@@ -25,10 +25,10 @@ It is a simplified version of the [Kosaraju’s algorithm](https://www.geeksforg
 The most useful and fast-coding algorithm for finding SCCs is Kosaraju.
 
 1. DFS on the graph and sort the vertices in decreasing of their finishing time (we can use a stack).
-2. Reverse the graph
+2. Reverse the graph edges
 2. Start from the vertex with the greatest finishing time, and for each vertex v that is not yet in any SCC, do : 
 3. for each u that v is reachable by u and u is not yet in any SCC, put it in the SCC of vertex v.
 
-If there is a forwarding path from `root` to `v`, then `root` ends up sitting above `v` in such stack. 
-If `root` ends up sitting above `v` in such stack, then either there is a forwarding path from `root` to `v`, or they are disconnected.
-In the transpose graph, if `root` still has a forwarding path to `v`, we eliminate the second case, thus, `root->v` and `v->root`. So we put `v` in the SCC of `root`.
+If `u->v` and not `v->u`, then it is only possible that `u` appears above `v` in the stack. (The nodes in a SCC, such as `v` and `w`, may appear in arbitrary order in the stack.)
+
+
