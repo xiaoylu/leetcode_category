@@ -33,7 +33,7 @@ If `u->v` and not `v->u`, then it is only possible that `u` appears above `v` in
 
 ![Illustration](https://github.com/xiaoylu/leetcode_category/blob/master/StronglyConnectedComponent/Kosaraju.png)
 
-So, among the nodes can reach `v`, we need to eliminate those who `v` can NOT reach. We just skip the nodes on the left of `v` in `L`. That is why we do DFS starting from the node from left to right.
+So, among the nodes can reach `v`, we need to eliminate those who `v` can NOT reach. We just skip the nodes on the left of `v` in `L`. That is why the second round DFS uses the nodes in `L` from left to right as the root.
 
 
 
