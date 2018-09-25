@@ -31,7 +31,7 @@ The most useful and fast-coding algorithm for finding SCCs is Kosaraju.
 
 If `u->v` and not `v->u`, then it is only possible that `u` appears above `v` in the stack. (The nodes in a SCC, such as `v` and `w`, may appear in arbitrary order in the stack.)
 
-![Illustration](./kosaraju.png)
+![Illustration](/kosaraju.png)
 
 So, among the nodes can reach `v`, we need to eliminate those who `v` can NOT reach. We just skip the nodes on the left of `v` in `L`. That is why we do DFS starting from the node from left to right.
 
