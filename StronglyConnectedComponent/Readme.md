@@ -29,11 +29,13 @@ The most useful and fast-coding algorithm for finding SCCs is Kosaraju.
 2. Start from the vertex with the greatest finishing time, and for each vertex v that is not yet in any SCC, do : 
 3. for each u that v is reachable by u and u is not yet in any SCC, put it in the SCC of vertex v.
 
-If `u->v` and not `v->u`, then it is only possible that `u` appears above `v` in the stack. (The nodes in a SCC, such as `v` and `w`, may appear in arbitrary order in the stack.)
+Suppose the nodes are arranged in `L` in post-order after the first round of DFS. `u->v` indicates that there exists a forwarding path from `u` to `v`.
+
+If `u->v` and not `v->u`, then `u` must appear at the left of `v` in `L`. The nodes in a SCC, such as `v` and `w`, however, may appear in arbitrary order in `L`.
 
 ![Illustration](https://github.com/xiaoylu/leetcode_category/blob/master/StronglyConnectedComponent/Kosaraju.png)
 
-So, among the nodes can reach `v`, we need to eliminate those who `v` can NOT reach. We just skip the nodes on the left of `v` in `L`. That is why the second round DFS uses the nodes in `L` from left to right as the root.
+Among the nodes which can reach `v`, we need to eliminate those `v` can NOT reach. We just skip the nodes on the left of `v` in `L`. That is why we use the nodes in `L` from left to right iteratively as root of the second round DFS.
 
 
 
