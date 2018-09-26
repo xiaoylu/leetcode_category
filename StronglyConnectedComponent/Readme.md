@@ -29,13 +29,21 @@ The most useful and fast-coding algorithm for finding SCCs is Kosaraju.
 2. Start from the vertex with the greatest finishing time, and for each vertex v that is not yet in any SCC, do : 
 3. for each u that v is reachable by u and u is not yet in any SCC, put it in the SCC of vertex v.
 
-Suppose the nodes are arranged in `L` in post-order after the first round of DFS. `u->v` indicates that there exists a forwarding path from `u` to `v`.
+Suppose the list `L` is the post-order DFS visit of nodes. `u->v` indicates that there exists a forwarding path from `u` to `v`.
 
-If `u->v` and not `v->u`, then `u` must appear at the left of `v` in `L`. The nodes in a SCC, such as `v` and `w`, however, may appear in arbitrary order in `L`.
+If `u->v` and not `v->u`, then `u` must appear at the **left** of `v` in `L`. The nodes in a SCC, such as `v` and `w`, however, may appear in any arbitrary order on the list `L`.
 
 ![Illustration](https://github.com/xiaoylu/leetcode_category/blob/master/StronglyConnectedComponent/Kosaraju.png)
 
-Among the nodes which can reach `v`, we need to eliminate those `v` can NOT reach. We just skip the nodes on the left of `v` in `L`. That is why we use the nodes in `L` from left to right iteratively as root of the second round DFS.
+So, if a node `x` appear strictly before `y` on the list `L`:
 
+* case1: `x->y` and `y->x`, like the case of `v` and `w`
+* case2: `x->y` and not `y->x`, like the case of `u` and `v`
+* case3: not `x->y` and not `y->x`
 
+Among the nodes which can reach `y`, we need to eliminate the nodes which `y` can NOT reach. To achieve this goal, we iterate through `L` from left to right and run DFS starting from each node on the transpose graph. If some node is reached by DFS and does not belong to any SCC, then we add this node to the SCC of current root.
+
+For case 1 & 2, `x` is already in some SCC, so when the second DFS from `y` reach `x`, nothing happens. Besides, `y` is already added to the SCC of `x` in case 1. For case 3, in the transpose graph, DFS from `y` would not reach `x`.
+
+In short, the first DFS arranges those nodes which **can** reach `v` but **can not** be reached from `v` on its **left**. So the second DFS is able to skip such nodes.
 
