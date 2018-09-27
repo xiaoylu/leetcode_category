@@ -47,3 +47,6 @@ For case 1 & 2, `x` is already in some SCC, so when the second DFS from `y` reac
 
 In short, the first DFS arranges those nodes which **can** reach `v` but **can not** be reached from `v` on its **left**. So the second DFS is able to skip such nodes.
 
+Implemtation tricks:
+
+The first and second DFS can share the same `visited` array. The dfs1 starts with all-false `visited` and set the visited nodes as `true`. And dfs2 starts with the all-true `visited` and set the visited nodes as `false`.
