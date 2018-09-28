@@ -1,4 +1,4 @@
-# UnionFind
+# Disjoint Sets Union ("UnionFind")
 ## `O(log* n)` time
 To achieve the iterated `O(log* n)` time complexity, we need to 
 * Path Compression which flatten the tree
@@ -36,6 +36,26 @@ Using path compression alone gives a worst-case running time of `O(n log n)` for
 Using union by rank alone gives a running-time of `O(n logn)` for n operations on n elements.
 
 Using both path compression, splitting, or halving and union by rank or size ensures that the amortized time per operation is only O(1), so the disjoint-set operations take place in essentially constant time.
+
+The best practice (C++):
+---
+
+For each root v, `par[v]` equals the negative of number of nodes in its rooted tree.
+
+For other nodes u, `par[u]` equals the parent.
+
+```
+int root(int v){return par[v] < 0 ? v : (par[v] = root(par[v]));}
+void merge(int x,int y){	//	x and y are some tools (vertices)
+        if((x = root(x)) == (y = root(y))     return ;
+	if(par[y] < par[x])	// balancing the height of the tree
+		swap(x, y);
+	par[x] += par[y];
+	par[y] = x;
+}
+```
+
+Or we can even use `vector` to store the elements in the same 'set'. We merge the `vector`s. Any node can be merged at most `O(log n)` times, so the total time complexity would be `O(n logn)`.
 
 # Directed vs Undirect graph
 
