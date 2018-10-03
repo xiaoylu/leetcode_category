@@ -25,14 +25,14 @@ void kmpPreprocess()
     b[i]=j;
     while (i<m)
     {
-        while (j>=0 && array[i]!=array[j]) j=b[j];
+        while (j>=0 && array[i]!=array[j]) j=b[j]; // retreat when no matching
         i++; j++;
         b[i]=j;
     }
 }
 ```
 
-With the `lps` array, it is easy to find the palindrome prefix in a string:
+With the `b` array, it is easy to find the palindrome prefix in a string:
 
 **LC 214. Shortest Palindrome** Append letter in the front of a string to make it a palindrome.
 
