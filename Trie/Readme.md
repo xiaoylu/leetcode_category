@@ -1,4 +1,4 @@
-## Notes
+## Trie
 1. Easy creation of Prefix Tree
 ```
     node = self.root
@@ -18,9 +18,22 @@
 	    # Do sth.
 	    visit(node[c], w, prefix+c)
 ```
-Note prefix gives the visited characters in the Trie, `prefix+word` is the original input string within any recursion.
+Note that within any recursion call, `prefix+word` is the complete input string.
 
-3. I realized that complicated problems need a CLEAN implementation of the Trie. Otherwise, the convenient implementation may cause confusions. As a programmer gets old, he/she should really put emphasis on the design and readability of a program, instead of the quick implementations.
+3. C++ short implementation, using a counter `next` to create new nodes.
+```
+    map<int, map<char, int> > x;
+    int next = 1;
+
+    void build(const string& w) {
+        int cur = 0;
+        for (const auto& ch : w) {
+            if (x[cur].find(ch) == x[cur].end()) cur = x[cur][ch] = next++;
+            else cur = x[cur][ch];
+        }
+        x[cur]['#'] = -1;
+    }
+```
 
 **LC 336. Palindrome Pairs**
 
@@ -70,4 +83,63 @@ class Solution(object):
         for i, w in enumerate(words):
             root.collect(i, w[::-1], ret)
         return ret
+```
+
+**LC 676. Implement Magic Dictionary**
+Find a string in the given dict which becomes the input string after modifying exact one character.
+We traverse the Trie recursively with a `flag` storing the state if a character has been modified.
+ 
+Pay attention to the two termination states: (i) run out of the input string (ii) reach the bottom of Trie
+
+```
+class MagicDictionary {
+public:
+    map<int, map<char, int> > x;
+    int next = 1;
+    
+    /** Initialize your data structure here. */
+    MagicDictionary() {
+        next = 1;
+        x.clear();
+    }
+    void build(const string& w) {
+        int cur = 0;
+        for (const auto& ch : w) {
+            if (x[cur].find(ch) == x[cur].end()) cur = x[cur][ch] = next++;
+            else cur = x[cur][ch];
+        }
+        x[cur]['#'] = -1;
+    }
+    /** Build a dictionary through a list of words */
+    void buildDict(vector<string> dict) {
+        for (const auto& w : dict) build(w);
+    }
+    
+    bool _search(string word, int cur, int i, bool flag) {
+        //cout << word << "," << word[i] << "," << flag << endl;
+        
+        if (i == word.size()) {
+            if (!flag && x[cur].find('#') != x[cur].end()) return true;
+            return false;
+        }
+        
+        if (flag) {
+            for (auto it : x[cur]) if (it.first != '#') {
+                if (_search(word, it.second, i + 1, (word[i] == it.first))) 
+                    return true;
+            }
+            return false;
+        }
+        else {
+            return x[cur].find(word[i]) == x[cur].end() ?
+                false : _search(word, x[cur][word[i]], i + 1, false);
+        }
+    }
+    
+    /** Returns if there is any word in the trie that equals to the given word after modifying exactly one character */
+    bool search(string word) {
+        if (word.empty()) return false;
+        return _search(word, 0, 0, true);
+    }
+};
 ```
