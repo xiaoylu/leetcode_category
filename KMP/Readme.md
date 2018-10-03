@@ -10,12 +10,14 @@ Hence, the key is find `b[i]` for `i` such that we can expand the matched string
 
 ![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand4.gif)
 
+Here `b[i]` indicates the index of next potential match of `array[i]`.
+
 ## Example
-The first step is to construct array `lps`. Here, `lps[i]` indicates the index of next potential match of `array[i]`.
+The first step is to construct array `b`.
 
 A **short** implementation is here:
 
-Note that the `b[0]=-1` because for a char `array[i]` does not match any char, `b[i]=0`.
+Note that the `b[0]=-1`. For a char `array[i]` does not match any char, we have `b[i]=0`.
 ```
 void kmpPreprocess()
 {
