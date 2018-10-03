@@ -26,31 +26,34 @@ void kmpPreprocess()
     while (i<m)
     {
         while (j>=0 && array[i]!=array[j]) j=b[j]; // retreat when no matching
-        i++; j++;
-        b[i]=j;
+        b[++i]=++j;
     }
 }
 ```
 
 With the `b` array, it is easy to find the palindrome prefix in a string:
 
-**LC 214. Shortest Palindrome** Append letter in the front of a string to make it a palindrome.
+**LC 214. Shortest Palindrome** 
 
-This question essentially asks for the longest palindrome prefix of a string. You can create a string
+Prepend letters at the front of a string to make a palindrome. 
+What's the smallest numer of letters you need to prepend?
+
+This question essentially asks for the longest palindrome prefix of a string. With a new string
 
 `s = g + '|' + reverse(g)`
 
-The longest proper prefix (LPP) of string above would be palindrome if it is also a suffix. Note `|` should not appear in `g` so the LPP would be inside `g` before `|`.
+If a proper prefix of the `s` is also a suffix, then it is the prefix palindrome of `g`. So we are looking for the longest proper prefix of `s` which is also a suffix. Notice that `|` should not appear in `g` so the LPP would be inside the `g` part before `|`.
+
 ```
     def shortestPalindrome(self, g):
         s = g + "|" + g[::-1]
-        lps = [-1] + [0] * len(s)
+        b = [-1] + [0] * len(s)
         l, r = -1, 0
         while r < len(s):
-            while l >= 0 and s[l] != s[r]: l = lps[l]
+            while l >= 0 and s[l] != s[r]: l = b[l]
             l, r = l + 1, r + 1
-            lps[r] = l
-        return g[lps[-1]:][::-1] + g
+            b[r] = l
+        return g[b[-1]:][::-1] + g
 ```
 
 **LC 5. Longest Palindromic Substring** 
