@@ -7,38 +7,38 @@ Topics:
 
 Basic:
 
-BFS
-Back Tracking
-Binary Index Tree	(BIT)
-Binary Search
-Bit Operation
-Dynamic Programming (DP)
-Knapsake Problems
-Intervals
-Parentheses	Problems
-Merge Sort
-Shortest Distance	
-Random Number Generation
-Regex Matching
-Tree Traversal
-Two Pointers Problems
-Heap
-Stack	
-Queue
-kSum Problems
-
+* BFS
+* Back Tracking
+* Binary Index Tree	(BIT)
+* Binary Search
+* Bit Operation
+* Dynamic Programming (DP)
+* Knapsake Problems
+* Intervals
+* Parentheses	Problems
+* Merge Sort
+* Shortest Distance	
+* Random Number Generation
+* Regex Matching
+* Tree Traversal
+* Two Pointers Problems
+* Heap
+* Stack	
+* Queue
+* kSum Problems
+ 
 Intermediate:
-
-Euler Path/Tour
-Geometry Problems
-DP of sequence operations
-Monotonic Queue	
-Sparse Table
-Strongly Connected Component
-Topological Sort
-Trie	
-Union Find
-
+ 
+* Euler Path/Tour
+* Geometry Problems
+* DP of sequence operations
+* Monotonic Queue	
+* Sparse Table
+* Strongly Connected Component
+* Topological Sort
+* Trie	
+* Union Find
+ 
 Advanced:
-KMP
-Segment Tree
+* KMP
+* Segment Tree
