@@ -1,9 +1,10 @@
-# leetcode_category
+leetcode_category
 ===
 
 In this repo, I maintain my notes about Leetcode problems. I also included some notes about Lintcode and CodeForce problems.
 
 Topics:
+---
 
 Basic:
 
