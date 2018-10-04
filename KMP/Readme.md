@@ -42,7 +42,7 @@ This question essentially asks for the longest palindrome prefix of a string. Wi
 
 `s = g + '|' + reverse(g)`
 
-If a proper prefix of the `s` is also a suffix, then it is the prefix palindrome of `g`. So we are looking for the longest proper prefix of `s` which is also a suffix. Notice that `|` should not appear in `g` so the LPP would be inside the `g` part before `|`.
+If a proper prefix of `s` is also a suffix, it is a prefix palindrome of `g`. So we look for the **longest** proper prefix (LPP) of `s` which is also a suffix. Notice that `|` should not appear in `g` so the LPP must be inside the `g` part before `|`.
 
 ```
     def shortestPalindrome(self, g):
