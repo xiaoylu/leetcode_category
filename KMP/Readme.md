@@ -91,25 +91,24 @@ There exists a O(N) time algorithm called Manchester algorithm. And DP also solv
 
 
 **LINTCODE 1365. Minimum Cycle Section**
-JAVA
 
-Given an array of int, find the length of the minimum cycle section.
+Given an array of int, find the length of the minimum cycle section. ex. `[1,2,3,1,2,3]` has the longest cycle section of `[1,2,3]`, so return 2 as the minimum number of cycle sections.
+
+Idea: input `abc abc abc` would have the longest proper prefix `abc abc` which is also a suffix. So the cycle section would be `N - b[N]` where `array[0:b[N]] == array[N-b[N]:N]`.
+
+**C++** solution:
 
 ```
-    public int minimumCycleSection(int[] array) {
-        // Write your code here
-        int [] next = new int[array.length + 1];
-        int i = 0, j = -1;
-        next[0] = -1;
-        while(i < array.length) {
-            if(j == -1 || array[i] == array[j]) {
-                i++;
-                j++;
-                next[i] = j;
-            } else {
-                j = next[j]
-            }
+    int minimumCycleSection(vector<int> &array) {
+        int i = 0, j = -1, N = array.size();
+        vector<int> b(N + 1, -1);
+        while (i < N) {
+            while (j >= 0 && array[i] != array[j]) j = b[j];    
+            b[++i] = ++j;
         }
-        return i - next[i];
+        return i - b[i];
     }
 ```
+
+Another idea is to have an array `dp[i]` storing the longest cycle length at index `i`.
+When `array[i]` does not match `array[j%dp[i]]`, reset the `dp[i] = i`; otherwise `dp[i] = dp[i-1]` because repeating pattern continues.
