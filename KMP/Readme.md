@@ -110,5 +110,5 @@ Idea: input `abc abc abc` would have the longest proper prefix `abc abc` which i
     }
 ```
 
-Another idea is to have an array `dp[i]` storing the longest cycle length at index `i`.
+[Another idea](https://code.dennyzhang.com/minimum-cycle-section) is to have an array `dp[i]` storing the longest cycle length at index `i`.
 When `array[i]` does not match `array[j%dp[i]]`, reset the `dp[i] = i`; otherwise `dp[i] = dp[i-1]` because repeating pattern continues.
