@@ -1,5 +1,5 @@
 # Two Pointers
-Given an array, if all the **sub-optimal solutions** are **continuous subarrays** bounded by indices `l` and `r`, then we can use two pointers to shift `l`, `r` to search for the solution.
+Given an array, if all the **sub-optimal solutions** are **continuous subarrays** bounded by indices `l` and `r`, then we can shift `l`, `r` to search for the solutions.
 
 C++ template:
 ```
