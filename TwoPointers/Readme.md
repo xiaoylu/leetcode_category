@@ -18,7 +18,7 @@ for (i = 0, j = 0; i < N; ++i) {
 }
 ```
 
-Note the order of there operations matter. You should add `A[i]` first, then increment `j` until certain conditions are satisfied.
+You should add `A[i]` first, then increment `j` until certain conditions are satisfied.
 
 **LC 567. Permutation in String**
 
