@@ -1,6 +1,24 @@
 # Two Pointers
-If the solution is among the sub-optimal solution defined by upper and lower bounds `l` and `r`,
-then we can use two pointers to shift `l`, `r` to search for the solution.
+Given an array, if all the **sub-optimal solutions** are **continuous subarrays** bounded by indices `l` and `r`, then we can use two pointers to shift `l`, `r` to search for the solution.
+
+C++ template:
+```
+int i, j;
+for (i = 0, j = 0; i < N; ++i) {
+    // add A[i] here
+    
+    while (j <= i && some condition is satisfied) {
+        // remove A[j] here
+        j++
+    }
+    
+    if (some condition is satisfied) {
+        return {j, i};
+    }
+}
+```
+
+Note the order of there operations matter. You should add `A[i]` first, then increment `j` until certain conditions are satisfied.
 
 **LC 567. Permutation in String**
 
