@@ -22,12 +22,9 @@ Tree problems are easier if we traverse recursively. How about iteratively?
         return res
 ```
 
-So in your mind, the rules are
-* go left whenever possible (node.left != null)
-* pop up from the stack, when the left is a deadend
-* (appending current node to the result), then go right 
+Note that you should push the visited node (while keep going left) into the stack. So the elements in the stack are the same when call DFS recursively.
 
-Whenever you pop up an element, its left branch has already been explored.
+Whenever you pop up an element, its left branch has already been explored. So go right then.
 
 **LC 144. Binary Tree Preorder Traversal**
 ```
@@ -38,10 +35,10 @@ Whenever you pop up an element, its left branch has already been explored.
             while node:
                 res += node.val, # the only difference is when to append!
                 
-                stack += cur,
-                node = cur.left
+                stack += node,
+                node = node.left
             node = stack.pop()
-            node = cur.right
+            node = node.right
         return res
   ```
   
