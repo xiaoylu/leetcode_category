@@ -65,7 +65,7 @@ while (fast && fast->next) {
 prev->next = NULL;
 ```
 
-So, when `prev->next == slow`. In the corner cases `slow->next == fast == NULL`, you can still split the linked list into two parts.
+So, when `prev->next == slow`. In the corner cases `slow->next == fast == NULL`, you can still split the linked list into two parts by setting `prev->next = NULL`. The two linked lists have heads `head` and `slow` respectively.
 ```
 head->prev->slow->fast
                    ^
