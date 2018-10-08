@@ -1,4 +1,8 @@
 # Two Pointers
+
+Array
+---
+
 Given an array, if all the **sub-optimal solutions** are **continuous subarrays** bounded by indices `l` and `r`, then we can shift `l`, `r` to search for the solutions.
 
 C++ template:
@@ -18,7 +22,7 @@ for (i = 0, j = 0; i < N; ++i) {
 }
 ```
 
-You should increase `i` first, then increment `j` until certain conditions are satisfied.
+You should increase `i` first, then adjust `j` until certain conditions are satisfied.
 
 **LC 567. Permutation in String**
 
@@ -44,3 +48,28 @@ we should increase `r` and insert `s2[r]`.
             if cnt == len(s1): return True          # only possilbe if tmp[c]==d[c] for all c
         return False
 ```
+
+Linked List
+---
+Pointers `slow` and `fast` move at the different speeds.
+
+There is one trick here, you have one extra pointer `prev` storing the previous value of `slow`.
+
+```
+ListNode *slow = head, *fast = head, *prev = NULL;
+while (fast && fast->next) {
+    prev = slow;
+    slow = slow->next;
+    fast = fast->next->next;
+}
+prev->next = NULL;
+```
+
+So, when `prev->next == slow`. In cases the corner case `slow->next == fast == NULL`, you can still split the linked list into two parts.
+```
+head->prev->slow->fast
+                   ^
+                  NULL
+```
+
+
