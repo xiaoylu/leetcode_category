@@ -53,7 +53,7 @@ Linked List
 ---
 Pointers `slow` and `fast` move at the different speeds.
 
-There is one trick here, you have one extra pointer `prev` storing the previous value of `slow`.
+There is one trick here, you can create one extra pointer `prev` storing the previous value of `slow`.
 
 ```
 ListNode *slow = head, *fast = head, *prev = NULL;
@@ -65,7 +65,7 @@ while (fast && fast->next) {
 prev->next = NULL;
 ```
 
-So, when `prev->next == slow`. In cases the corner case `slow->next == fast == NULL`, you can still split the linked list into two parts.
+So, when `prev->next == slow`. In the corner cases `slow->next == fast == NULL`, you can still split the linked list into two parts.
 ```
 head->prev->slow->fast
                    ^
