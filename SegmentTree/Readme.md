@@ -81,7 +81,6 @@ Return an integer K representing the largest integer such that there exists a K-
 
 20-lines Python version:
         
-	
 ```
 class SegTree(object):
     def __init__(self):
@@ -91,6 +90,7 @@ class SegTree(object):
     def add(self, s, e, l = 0, r = 10**9+1, id = 1):
         if s >= r or e <= l: return
         if s <= l < r <= e:
+	    // note that both lazy and v should be updated. (why?)
             self.lazy[id] += 1
             self.v[id] += 1
             return
@@ -111,55 +111,8 @@ class MyCalendarThree(object):
         return self.st.v[1]
 ```
 
-
-```
-class STNode:
-    def __init__(self, l, r):
-        self.l, self.r = l, r
-        self.val, self.lazy = 0, 0
-        self.left, self.right = None, None
-        
-class SegmentTree:
-    def __init__(self):
-        self.root = STNode(0, 10**9+1)
-    
-    def add(self, nd, x, y, val):
-        if nd.l >= y or x >= nd.r: return # no intersection
-        if x <= nd.l < nd.r <= y: # fully covered
-            nd.val += val
-            nd.lazy += val
-            return
-        
-        # construct sub-intervals
-        m = (nd.l + nd.r) // 2
-        if not nd.left: nd.left = STNode(nd.l, m)
-        self.add(nd.left, x, y, val)
-        if not nd.right: nd.right = STNode(m, nd.r)
-        self.add(nd.right, x, y, val)
-        
-        # np.lazy stores the increase hidden to nd.left and nd.right
-        # np.val stores the max val in interval [nd.l, nd.r)
-        nd.val = nd.lazy + max(nd.left.val, nd.right.val)
-            
-    def Max(self):
-        return self.root.val
-    
-    def Add(self, x, y):
-        self.add(self.root, x, y, 1)
-        
-class MyCalendarThree:
-
-    def __init__(self):
-        self.seg = SegmentTree()
-
-    def book(self, start, end):
-        self.seg.Add(start, end)
-        return self.seg.Max()
-
-# Your MyCalendarThree object will be instantiated and called as such:
-# obj = MyCalendarThree()
-# param_1 = obj.book(start,end)
-```
+WARNING: 
+This approach actually does not propagate the `lazy` variable at all. Thus, you can not query any range except the longest interval of the root node at `v[1]`. To achieve `lazy` propagation, see below.
 
 ## Range sum with lazy operation
 
