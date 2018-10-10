@@ -20,7 +20,7 @@ But here we choose the time line with the earliest ending time because it take O
 ```
 The sorting can also be done for the upper bound. It is more convenient for the intersection problems.
 
-** 452. Minimum Number of Arrows to Burst Balloons** 
+**452. Minimum Number of Arrows to Burst Balloons** 
 
 Find the min size of `S` such that each interval contains at least one element of `S`. Note you need to sort by upper bound, but not lower bound. Think about why?
 ```
@@ -33,7 +33,7 @@ Find the min size of `S` such that each interval contains at least one element o
         return ret
 ```
 
-** 757. Set Intersection Size At Least Two **
+**757. Set Intersection Size At Least Two**
 
 Extension of LC 452 that each interval contains at least two elements of `S`. Same idea, but sort by `(upper bound, -lower bound)`. e.g `[[1,5],[4,5],[5,9],[7,9],[9,10]] => [[4,5], [1,5], [7,9], [5,9] , [9,10]]`. [Idea]<https://leetcode.com/problems/set-intersection-size-at-least-two/discuss/113086/Hope-you-enjoy-this-problem.-:-)-O(NlogN)JavaGreedy-Easy-to-understand-solution>
 
@@ -43,7 +43,7 @@ We record the independent "time slots" formed by all the starts and ends. (Not n
 Get a `count` array for each slot, when an interval comes in, add `count[i]` for all slot `i` inside this interval.
 You will know the maximum number of one slot occupied by the intervals. This number is the result.
 
-LC 253. Meeting Rooms II. 
+**LC 253. Meeting Rooms II.** 
 ```
     def minMeetingRooms(self, intervals):
         ts = set(t for v in intervals for t in [v.start, v.end])
@@ -70,7 +70,8 @@ A simpler way is to sort all the starts and ends together, WITH a signal indicat
 
 Let's try a more complicated problem.
 
-LC 218. The Skyline Problem. The skyline is the outer contour of building roofs.
+**LC 218. The Skyline Problem.**
+The skyline is the outer contour of building roofs.
 We discretize the left and right walls of buildings, so just 
 ```
         xs = sorted(set(v for b in buildings for v in b[:-1]))
@@ -127,7 +128,9 @@ The code with explanation
                 ret.append([x, height])
         return ret
 ```
-LC 850. Rectangle Area II. Return the total area covered by overlapping rectangles.
+
+**LC 850. Rectangle Area II.**
+Return the total area covered by overlapping rectangles.
 
 Discretization along x-dimension and sort along y-dimension. And we iterate through the y-dimension.
 
@@ -151,14 +154,71 @@ When you meet the lower boundary of a rectangle, you increment the count of its 
         return ret % (1000000007)
 ```
 
-## Merging Intervals BST O(log N)
-A common operation is to merge one input interval `[l, r)` with the previous intervals.
-You can use a `map<int, int>` in C++ or `TreeMap<Integer, Integer>` in Java to maintain the intervals.
-Because the keys are in BST, it takes `O ( log N )` to locate the overlapping left and right interval.
+## Merging Intervals by BST
+
+How to merge a new interval `[l, r)` with the previous ones in `O(log N)` time?
+
+You can use a `map<int, int>` in C++ or `TreeMap<Integer, Integer>` in Java to maintain the intervals. (Key being `l` and value being `r`)
+
 But you need to pay extra attention to the corner cases:
 * what if the `l` is the smallest?
 * what if the `r` is the largest?
-* what if there is no overlapping?
+* what if there is no overlapping intervals with `[l, r]`?
+
+Python code: (embrassingly `O(n)` time insertion due to lack of default BST)
+```
+// S and E are the lists of the starts and ends. 
+i = bisect.bisect_left(S, start)
+
+// check if the previous interval overlaps with [start, end]
+if self.S and i > 0 and self.E[i-1] + 1 >= start: i -= 1
+
+// delete all the overlapping intervals
+j = i
+while j < len(self.S) and self.S[j] <= end + 1:
+    start = min(start, self.S[j])
+    end = max(end, self.E[j])
+    j += 1
+del self.S[i:j]
+del self.E[i:j]
+
+// insert new interval
+self.S.insert(i, start)
+self.E.insert(i, end)
+```
+
+C++ code for insertion: (`O(log n)` time with STL map)
+```
+auto it = m.lower_bound(val);
+if (m.size() && it != m.begin() && (--it)->second + 1 < val) ++it; // check left
+while (it != m.end() && end + 1 >= it->first) {
+    start = min(start, it->first);
+    end = max(end, it->second);
+    it = m.erase(it);
+}
+m.emplace_hint(it, start, end);
+```
+
+C++ code for removal (`O(log n)` time with STL map)
+```
+if (m.empty()) return;
+auto l = m.lower_bound(left);
+auto r = m.upper_bound(right);
+
+if (l != m.begin() && (--l)->second < left) ++l;
+
+if (l == r) return; // Important!!! check if the removal interval overlaps with any other intervals
+
+int ll = min(l->first, left), rr = max((--r)->second, right);
+
+m.erase(l, ++r);
+
+if (ll < left) m[ll] = left;
+if (rr > right) m[right] = rr;
+```
+
+
+**NOTE**: Both C++'s and Python's function `insert`/`emplace` use a hint position **follow** the new location of the inserted. That being said, the newly inserted element would be at this position after the insertion is done. Besides, for sorted structures like `map` and `set` in C++, this position is **merely a hint**.
 
 **LC 715. Range Module**
 
@@ -209,6 +269,7 @@ private:
 
 Same problem as above, just need to add intervals.
 
+Java:
 ```
 public class SummaryRanges {
     TreeMap<Integer, Interval> tree;
@@ -218,7 +279,7 @@ public class SummaryRanges {
     }
 
     public void addNum(int val) {
-        if(tree.containsKey(val)) return;
+        if (tree.containsKey(val)) return;
         Integer l = tree.lowerKey(val);
         Integer h = tree.higherKey(val);
         if(l != null && h != null && tree.get(l).end + 1 == val && h == val + 1) {
@@ -239,6 +300,34 @@ public class SummaryRanges {
     }
 }
 ```
+
+C++
+```
+class SummaryRanges {
+public:    
+    void addNum(int val) {
+        int start = val, end = val;
+        auto it = m.lower_bound(val);
+        if (m.size() && it != m.begin() && (--it)->second + 1 < val) ++it;
+        while (it != m.end() && end + 1 >= it->first) {
+            start = min(start, it->first);
+            end = max(end, it->second);
+            it = m.erase(it);
+        }
+        m.emplace_hint(it, start, end);
+    }
+    
+    vector<Interval> getIntervals() {
+        vector<Interval> R;
+        for (const auto& it : m) R.emplace_back(Interval(it.first, it.second));
+        return R;
+    }
+    
+private:
+    map<int, int> m;
+};
+```
+
 
 
 
