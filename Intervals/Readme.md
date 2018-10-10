@@ -218,7 +218,7 @@ if (rr > right) m[right] = rr;
 ```
 
 
-**NOTE**: Both C++'s and Python's function `insert`/`emplace` use a hint position **follow** the new location of the inserted. That being said, the newly inserted element would be at this position after the insertion is done. Besides, for sorted structures like `map` and `set` in C++, this position is **merely a hint**.
+**NOTE**: Both C++'s and Python's function `insert`/`emplace` use a hint position which **follows** the new location of the inserted. That being said, the newly inserted element would be at this position after the insertion is done. Besides, for sorted structures like `map` and `set` in C++, this position is **merely a hint**.
 
 **LC 715. Range Module**
 
