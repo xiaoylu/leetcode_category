@@ -10,9 +10,11 @@ The sum of these partial sums would be the results. Since there are at most `O(l
 
 There are update and sum views.
 
-For the sum view, we iteratively remove the last digit 1 of `i` by `i -= (i & -i)` until `i = 0`. (NOTE, the node `0` is a dummy node) 
+For the sum view, we iteratively remove the last digit 1 of `i` by `i -= (i & -i)` until `i = 0`. 
 
-For the update view, we iteratively adds the last digit 1 of `i` by `i += (i & -i)` until `i` becomes larger than the array size.
+For the update view, we iteratively adds the last digit 1 of `i` by `i += (i & -i)` until `i > N`.
+
+NOTE, the node `0` is a dummy node.
 
 ```
 root      0
