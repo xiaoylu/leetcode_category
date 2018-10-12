@@ -1,22 +1,33 @@
 ## Binary Indexed Trees (Fenwick Tree)
-The idea is that to sum up the numbers before '111', you just need:
-* sum of '1', '10', '11', '100', which is stored at '100'
-* sum of '101', '110', which is stored at '110'
+
+Fenwick tree supports the query of array prefix sums in `O(log N)` time.
+
+The idea is to sum up the elements with index less than '0b111' (index number in binary), you need to know:
+* sum of elements at '1', '10', '11', '100', which is stored at node '100'
+* sum of elements at '101', '110', which is stored at node '110'
+
+The sum of these partial sums would be the results. Since there are at most `O(log N)` such partial sums, each query takes `O(log N)` time.
 
 There are update and sum views.
-For the sum view, we iteratively remove the last digit 1 in binary presentation by i -= (i & -i). 
-For the update view, we iteratively adds the last digit 1 in binary presentation by i += (i & -i).
+
+For the sum view, we iteratively remove the last digit 1 of `i` by `i -= (i & -i)` until `i = 0`. (NOTE, the node `0` is a dummy node) 
+
+For the update view, we iteratively adds the last digit 1 of `i` by `i += (i & -i)` until `i` becomes larger than the array size.
+
 ```
 root      0
 level1    1, 	10, 	100*,       1000          ...
 level2        11,   101, 110*,  1001, 1010,   ...
    		                   111*
 ```
-So the update of element with index ‘101’ would be reflected at position 101, 110, 1000, …
-When you sum up from index such as ‘111’ through the '*' path, the update of ‘101’ would be included at ‘110’, 
-the update of '11' would be included at '100', so on so forth.
+At `111` stores the partial sum at `111`.
+At `110` stores the partial sum at `110`, `101`.
+At `100` stores the partial sum at `100`, `11`, `10`, `1`.
+When you sum up from index such as `111` through the `*` path, these partial sums are included.
 
-C++ code: leetcode 307. Range Sum Query - Mutable
+**LC 307. Range Sum Query - Mutable**
+
+C++ code: 
 ```
 class NumArray {
 public:
