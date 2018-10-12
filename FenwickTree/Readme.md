@@ -1,4 +1,4 @@
-## Binary Indexed Trees
+## Binary Indexed Trees (Fenwick Tree)
 The idea is that to sum up the numbers before '111', you just need:
 * sum of '1', '10', '11', '100', which is stored at '100'
 * sum of '101', '110', which is stored at '110'
