@@ -9,6 +9,6 @@
 
 The parameter c is `(v * s) / (s * s)` where `*` denotes the dot product. 
 
-You can check that `v - [(v * s) / (s * s)]  s  s = 0` because `v` is orthogonal to `c s`.
+You can check that `v - [(v * s) / (s * s)]  s ` is orthogonal to `s` because their dot product is ZERO.
 
 [Equations](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line)
