@@ -7,4 +7,8 @@
 
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Linalg_projection_4.png/254px-Linalg_projection_4.png)
 
+The parameter c is `(v * s) / (s * s)` where `*` denotes the dot product. 
+
+You can check that `v - [(v * s) / (s * s)]  s  s = 0` because `v` is orthogonal to `c s`.
+
 [Equations](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line)
