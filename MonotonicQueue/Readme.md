@@ -10,11 +10,14 @@ Monotonic Queue
 Sliding max/min window.
 ===
 
-Key observation: if `A[l] > A[r]` and `l < r`, then `A[l]` should never be the min element in any sliding widow ending with index `i >= r`.
+Key observation: when `A[l] < A[r]` for `l < r`, then `A[l]` should never be the sliding max once `A[r]` enters the sliding window.
 
-So we just maintain a monotonic array with index increasing, and value increasing.
+So we maintain a monotonic array with index increasing, and value **Decreasing**.
 
-> `[3, 1, 4, 3, 8] => [3], [1], [1, 4], [1, 3], [1, 3, 8]` 
+> `[3, 1, 4, 3, 8] => [3], [3, 1], [4], [4, 3], [8]` 
+
+The head of the increasing queue is the sliding max!
+
 
 Codeforces 487B Strip
 ===
