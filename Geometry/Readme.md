@@ -31,6 +31,6 @@ where `cross()` denotes the cross product, and the unit vector `n` can be found 
 
 ![Right hand rule](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Right_hand_rule_cross_product.svg/220px-Right_hand_rule_cross_product.svg.png) 
 
-Note that if `cross(a, b)` is positive then the `b` is at the anti-crosswise direction of `a`. (right-hand rule)
+Note that if `cross(a, b)` is positive then the `b` is at the anti-crosswise direction of `a` within 180 degree. (right-hand rule)
 
 
