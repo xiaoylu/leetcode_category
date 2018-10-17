@@ -34,3 +34,65 @@ where `cross()` denotes the cross product, and the unit vector `n` can be found 
 Note that if `cross(a, b)` is positive then the `b` is at the anti-crosswise direction of `a` within 180 degree. (right-hand rule)
 
 
+
+**LC 469. Convex Polygon**
+---
+Given a list of points that form a polygon when joined sequentially, find if this polygon is convex.
+
+Every boundary edge should turn towards the same direction, either all clockwise or all counter-clockwise.
+Use right-hand rule (cross product) to check that.
+
+```
+    def isConvex(self, points):
+        N = len(points)
+        clock, aclock = 0, 0
+        for i in range(N):
+            j = (i + 1) % N
+            k = (i + 2) % N
+            ax, ay = points[j][0] - points[i][0], points[j][1] - points[i][1]
+            bx, by = points[k][0] - points[j][0], points[k][1] - points[j][1]
+            if ax * by - bx * ay < 0:
+                aclock += 1
+            if ax * by - bx * ay > 0:
+                clock += 1
+                
+        if aclock > 0 and clock > 0: return False
+        return True
+```
+
+**LC 587. Erect the Fence**
+Find convex hull given a set of points. 
+
+Monotone Chain Algorithm (sort the points by `(x, -y)`).
+```
+    def outerTrees(self, points):
+        """
+        :type points: List[Point]
+        :rtype: List[Point]
+        """
+        if not points: return []
+        
+        p = sorted([(_.x, _.y) for _ in points], key=lambda x: (x[0], -x[1]))
+        n = len(points)
+        
+        def cross(a, b, x, y):
+            #print(a, b, x, y)
+            return a * y - b * x
+        
+        L = []
+        for i in range(n):
+            while len(L) > 1 and \
+                cross(L[-1][0] - L[-2][0], L[-1][1] - L[-2][1], p[i][0] - L[-2][0], p[i][1] - L[-2][1]) < 0:
+                    L.pop()
+            L.append(p[i])
+       
+        H = []
+        for i in range(n-1, -1, -1):
+            while len(H) > 1 and \
+                cross(H[-1][0] - H[-2][0], H[-1][1] - H[-2][1], p[i][0] - H[-2][0], p[i][1] - H[-2][1]) < 0:
+                    H.pop()
+            H.append(p[i])
+        
+        return [Point(x, y) for x, y in set(L + H)]
+ ```
+
