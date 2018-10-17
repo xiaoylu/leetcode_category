@@ -4,7 +4,7 @@ Monotonic Queue
 * **LC239. Sliding Window Maximum**
 * **LC907. Sum of Subarray Minimums**, which reduces to the problem of finding the "nearest" element smaller than `A[i]` 
 * [Frog Jump II](https://anthony-huang.github.io/competitiveprogramming/2016/06/06/monotonic-queue.html): K steps at most with cost `A[i]` if landing at position `i`
-* Any DP problem where `A[i] = min(A[j:k]) + C` where `j < k <= i`
+* And .. **Any DP problem where `A[i] = min(A[j:k]) + C` where `j < k <= i`** LOL!
 
 
 Sliding max/min window.
@@ -91,3 +91,25 @@ if __name__ == "__main__":
     A = [int(_) for _ in raw_input().split(' ')]
     print find(N, S, L, A)
 ```
+
+LC 375. Guess Number Higher or Lower II
+---
+I pick a number from 1 to n. You have to guess which number I picked.
+
+Every time you guess wrong, I'll tell you whether the number I picked is higher or lower.
+
+However, when you guess a particular number x, and you guess wrong, you pay $x. You win the game when you guess the number I picked.
+
+Given a particular n ≥ 1, find out how much money you need to have to guarantee a win.
+
+Say we select `k`, then `dp[l][k-1]` is the cost of the left remaining segment and `dp[k+1][r]` is the cost of the right.
+
+> `dp[l][r] = max(dp[l][k-1], dp[k+1][r]) + k` for `l < k < r`
+
+As `k` increase, `dp[l][k-1] + k` goes down, `dp[k+1][r] + k` grows up.
+When `dp[l][k0-1] >= dp[k0+1][r]` for the first `k = k0`, we just need to compare
+`dp[l][k0-1] + k0` with `dp[k+1][r] + k` for `k < k0`.
+
+As a sub-routine, we need to find `dp[k+1][r] + k` for `k < k0` here. This is what Monotonic Queue does in `O(1)` time.
+
+[O(1) time to find sliding minimum of the first `k0` elements!!](https://artofproblemsolving.com/community/c296841h1273742)
