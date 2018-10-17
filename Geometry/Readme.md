@@ -11,4 +11,22 @@ The parameter c is `(v * s) / (s * s)` where `*` denotes the dot product.
 
 You can check that `v - [(v * s) / (s * s)]  s ` is orthogonal to `s` because their dot product is ZERO.
 
-[Equations](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line)
+[A line defined by `ax+by+c = 0`](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line)
+
+> `|a x0 + b y0 + c |`
+> `------------------`
+> `sqrt(a * a + b * b)`
+
+6. Angle between two 2D vectors
+
+> `|a - b|^2 = |a|^2 + |b|^2 - 2 |a| |b| cos(theta) `
+where `||` denotes the L2 (Euclidean) norm `|(x ,y)| = sqrt(x*x + y*y)`
+
+so we can calculate the `theta` by this equation.
+
+> `cross(a, b) = | a | | b | sin(theta) n`
+where `cross()` denotes the cross product, and the unit vector `n` can be found by the right-hand rule.
+
+![Right hand rule](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Right_hand_rule_cross_product.svg/220px-Right_hand_rule_cross_product.svg.png) 
+
+
