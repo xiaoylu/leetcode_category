@@ -61,6 +61,7 @@ Use right-hand rule (cross product) to check that.
 ```
 
 **LC 587. Erect the Fence**
+---
 Find convex hull given a set of points. 
 
 Monotone Chain Algorithm (sort the points by `(x, -y)`).
