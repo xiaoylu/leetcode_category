@@ -3,7 +3,7 @@ C++
 
 The default constructors are called in the order of inheritance, while the default destructors are called in the opposite order.
 ---
-BUT you have to explicitly call the base class’s parameterised constructor in the derived class
+BUT you can only explicitly call the base class’s parameterised constructor in the derived class
 ```
 Child(int j): Parent(j) 
 { 
@@ -11,6 +11,9 @@ Child(int j): Parent(j)
 } 
 ```
 The parameterised constructor of base class can NOT be called in default constructor of the derived class.
+
+And objects are always destroyed in reverse order of their creation.
+
 
 Copy constructor
 ---
@@ -110,6 +113,8 @@ Because your "delete p" might be early binded to the base class's destructor at 
 "There’s rarely a reason NOT to make the destructor virtual if you already have a (public) virtual method in the base class." 
 The vptr is already there in the base class anyway.
 
+Pure virtual destructor is used when you want to make a class abstract but no other functions should be pure virtual.
+
 Pure Virtual Function (Abstract Class)
 ---
 A class is abstract if it has at least one pure virtual function. 
@@ -159,8 +164,11 @@ Modes of Inheritance
 * Public mode: If we derive a sub class from a public base class. Then the public member of the base class will become public in the derived class and protected members of the base class will become protected in derived class.
 * Protected mode: If we derive a sub class from a Protected base class. Then both public member and protected members of the base class will become protected in derived class.
 * Private mode: If we derive a sub class from a Private base class. Then both public member and protected members of the base class will become Private in derived class.
-* Virtual Mode: Check wiki
+* Virtual Mode: Check wiki, only one copy of grand-parent class's members.
+
 ![Modes](https://www.geeksforgeeks.org/wp-content/uploads/table-class.png)
+
+
 
 
 
