@@ -132,7 +132,28 @@ Friendship is not inherited.
 
 Static Variable
 ---
-The lifetime of function static variables begins the first time the program flow encounters the declaration and it ends at program termination.
+The lifetime of function static variables begins the first time the program flow encounters the declaration and it ends at program termination. So, you must "define" it after the class declaration.
+
+```
+class B 
+{ 
+    static A a; 
+public: 
+    B() { cout << "B's constructor called " << endl; } 
+    static A getA() { return a; } 
+}; 
+  
+A B::a;  // definition of a, without this line, your program will have "Compiler Error: undefined reference to `B::a'" 
+
+int main() 
+{ 
+    B b;
+    A a = b.getA(); 
+  
+    return 0; 
+} 
+```
+
 
 
 
