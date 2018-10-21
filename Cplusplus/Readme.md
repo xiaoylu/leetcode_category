@@ -164,9 +164,16 @@ Modes of Inheritance
 * Public mode: If we derive a sub class from a public base class. Then the public member of the base class will become public in the derived class and protected members of the base class will become protected in derived class.
 * Protected mode: If we derive a sub class from a Protected base class. Then both public member and protected members of the base class will become protected in derived class.
 * Private mode: If we derive a sub class from a Private base class. Then both public member and protected members of the base class will become Private in derived class.
-* Virtual Mode: Check wiki, only one copy of grand-parent class's members.
+* Virtual Mode: get only one copy of the grand-parent (superclasses)'s attributes.
 
 ![Modes](https://www.geeksforgeeks.org/wp-content/uploads/table-class.png)
+
+The Diamond Problem
+---
+The diamond problem occurs when two superclasses of a class have a common base class. So the derived-class at very bottom gets two copies of all attributes of superclass at the very top. So the virtual mode is needed here.
+
+
+
 
 
 
