@@ -2,15 +2,15 @@
 
 [Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
 
-The border `r` is both suffix and prefix of `x`, then `r+a` is "border" of `x+a`.
+The border `r` is both suffix and prefix of `x`, then `r+a` is a "border" of `x+a`.
 
 ![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand2.gif)
 
-Hence, the key is find `b[i]` for `i` such that we can expand the matched string before them.
+Hence, the key is to find index `b[i]` for index `i` such that we can expand the matched string before them.
 
 ![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand4.gif)
 
-Here `b[i]` indicates the index of next potential match of `array[i]`.
+where `b[i]` indicates the index of next potential match of char at `array[i]`.
 
 ## Example
 The first step is to construct array `b`.
