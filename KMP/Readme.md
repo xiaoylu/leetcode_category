@@ -19,11 +19,12 @@ A **short** implementation is here:
 
 Note that the `b[0]=-1`. For a char `array[i]` does not match any char, we have `b[i]=0`.
 ```
-void kmpPreprocess()
+void kmpPreprocess(vector<int>& array)
 {
+    vector<int> b(array.size());
     int i=0, j=-1;
     b[i]=j;
-    while (i<m)
+    while (i < array.size())
     {
         while (j>=0 && array[i]!=array[j]) j=b[j]; // retreat when no matching
         b[++i]=++j;
