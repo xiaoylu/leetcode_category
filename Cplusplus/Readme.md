@@ -32,8 +32,22 @@ ReturnReference() = 20.23; // we can do this
 Virtual Function
 ---
 They are always defined in base class and overridden in derived class with the EXACT same prototype, while the 'virtual' keyword is optional in the derived class. 
-The resolving of virtual function call is done at Run-time. (Runtime polymorphism, Late binding(Runtime) by the function pointed to by pointer), instead of an Early binding(Compile time))
+The resolving of virtual function call is done at Run-time. (Runtime polymorphism, or refered as Late Binding or Dynamic Binding by the vptr), instead of an Early binding (Compile time binding))
 In case of virtual function in base, the call is forwarded to the **most heavily derived** class.
+
+```
+    base *p; 
+    derived d; 
+    p = &d; 
+       
+    // virtual function, binded at runtime (Runtime polymorphism) 
+    // so we call derived's function
+    p->virtual_function();  
+       
+    // Non-virtual function, binded at compile time 
+    // so we call base's function
+    p->non_virtual_function();  
+```
 
 Virtual Destructor
 ---
@@ -43,6 +57,14 @@ Because your "delete p" might be early bind to the base class's destructor, so m
 
 "There’s rarely a reason NOT to make the destructor virtual if you already have a (public) virtual method in the base class." 
 The vptr is already there in the base class anyway.
+
+Pure Virtual Function (Abstract Class)
+---
+A class is abstract if it has at least one pure virtual function. 
+```
+virtual void func() = 0; 
+```
+We cannot create objects of abstract classes. But we can pointers to and references of abstract classes, also an abstract class can have constructors. If we do not override the pure virtual function in derived class, then derived class also becomes abstract class.
 
 
 
