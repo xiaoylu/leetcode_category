@@ -172,9 +172,10 @@ The Diamond Problem
 ---
 The diamond problem occurs when two superclasses of a class have a common base class. So the derived-class at very bottom gets two copies of all attributes of superclass at the very top. So the virtual mode is needed here.
 
-
-
-
+Further Reading
+---
+Test yourself: https://www.geeksforgeeks.org/c-plus-plus-gq/
+STL: https://www.geeksforgeeks.org/the-c-standard-template-library-stl/
 
 
 
