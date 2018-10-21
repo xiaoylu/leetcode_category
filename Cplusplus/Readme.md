@@ -53,7 +53,7 @@ Virtual Destructor
 ---
 If you do a "delete p" where p is a pointer to a base class, then that class needs have a virtual destructor.
 [Why?](https://blogs.msdn.microsoft.com/oldnewthing/20040507-00/?p=39443) 
-Because your "delete p" might be early bind to the base class's destructor, so memory leak for the derived class.
+Because your "delete p" might be early binded to the base class's destructor at compile time, so memory leak happens for the derived class.
 
 "There’s rarely a reason NOT to make the destructor virtual if you already have a (public) virtual method in the base class." 
 The vptr is already there in the base class anyway.
@@ -65,6 +65,7 @@ A class is abstract if it has at least one pure virtual function.
 virtual void func() = 0; 
 ```
 We cannot create objects of abstract classes. But we can pointers to and references of abstract classes, also an abstract class can have constructors. If we do not override the pure virtual function in derived class, then derived class also becomes abstract class.
+When all functions are pure virtual, an abstract class is similar to the "interface" in Java.
 
 
 
