@@ -73,7 +73,7 @@ int& ReturnReference()
     return global_var; 
 }
 
-ptr_to_var = &ReturnReference(); // Note the usage of & symbol
+int *ptr_to_var = &ReturnReference(); // Note the usage of & symbol
 
 ReturnReference() = 20.23; // we can do this
 ```
@@ -153,6 +153,16 @@ int main()
     return 0; 
 } 
 ```
+
+Modes of Inheritance
+---
+* Public mode: If we derive a sub class from a public base class. Then the public member of the base class will become public in the derived class and protected members of the base class will become protected in derived class.
+* Protected mode: If we derive a sub class from a Protected base class. Then both public member and protected members of the base class will become protected in derived class.
+* Private mode: If we derive a sub class from a Private base class. Then both public member and protected members of the base class will become Private in derived class.
+* Virtual Mode: Check wiki
+![Modes](https://www.geeksforgeeks.org/wp-content/uploads/table-class.png)
+
+
 
 
 
