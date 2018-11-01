@@ -1,9 +1,25 @@
 # Bit Operations
 
 ## Basic operations:
-* 1. Flip `~x`
+* 1. Flip `~x`. WARNING: Python returns negative numbers because of the proceding 1s.
+
 * 2. Get the rightmost **set bit** `x & -x`
-* 3. Set a bit `x |= 1 << bits`, Fill all the postitions by `1`s
+
+* 3. Check if all bit are set:
+DO NOT TRY `~x == 0` because you got extra proceding bits.
+Do x & (x + 1) INSTEAD!!!
+
+* 4. Test if `1000..00`, `x&(x-1)==0`
+
+* 5. Remove the last set bit `x&(x-1)`
+
+* 6. Number of set bit `__builtin_popcount(int x)` (C++ CPU specific instruction)
+
+* 7. Remove some bit `A &= ~(1 << bit)`
+
+* 8. Get all 1-bits `~0`
+
+* 9. Set a bit `x |= 1 << bits`, Fill all the postitions by `1`s
 ```
             x |= x >> 16
             x |= x >> 8
@@ -11,13 +27,7 @@
             x |= x >> 2
             x |= x >> 1
 ```
-* 4. Get the left-most set bit step3 + `x ^ (x >> 1)`
-* 5. Check if all bit are set `~x == 0`
-* 6. Number of set bit `__builtin_popcount(int x)` (C++ CPU specific instruction)
-* 7. Remove the last set bit `x&(x-1)`
-* 8. Test if `1000..00`, `x&(x-1)==0`
-* 9. Remove some bit `A &= ~(1 << bit)`
-* 10. Get all 1-bits `~0`
+* 10. Get the left-most set bit step3 + `x ^ (x >> 1)`
 
 WARNING: Python 3 integers aren't represented using the internal CPU representation, so you have to determine the sign yourself!
 
