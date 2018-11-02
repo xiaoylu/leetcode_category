@@ -152,6 +152,82 @@ void increase(int x,int y,int v,int id = 1,int l = 0,int r = n){
 ```
 Note that `shift` should be called at every level **before** the function `increase` traverses to the children!
 
+**LC 699. Falling Squares**
+
+俄罗斯方块堆箱子，求每一块放下后的最高高度
+输入格式为［［左边界，宽度］,......]
+
+Input: [[1, 2], [2, 3], [6, 1]]
+Output: [2, 5, 5]
+Explanation:
+
+After the first drop of positions[0] = [1, 2]:
+```
+_aa
+_aa
+-------
+The maximum height of any square is 2.
+```
+
+After the second drop of positions[1] = [2, 3]:
+```
+__aaa
+__aaa
+__aaa
+_aa__
+_aa__
+--------------
+```
+The maximum height of any square is 5.  
+
+```
+class Solution:
+    def fallingSquares(self, positions):
+        v = collections.defaultdict(int)
+        lazy = collections.defaultdict(int)
+        
+        def query(x, y, l = 0, r = 2046, ID = 1):
+            if y <= l or x >= r: return float('-inf')
+            if x <= l < r <= y: return v[ID]
+            # note the lazy propagation before quering kids
+            shift(l, r, ID)
+            m = (l + r) // 2
+            return max(query(x, y, l, m, 2 * ID), query(x, y, m, r, 2*ID+1))
+        
+        def upd(l, r, ID, val):
+            v[ID] = max(v[ID], val)
+            lazy[ID] = max(lazy[ID], val)
+            
+        def shift(l, r, ID):
+            m = (l + r) // 2
+            upd(l, m, 2*ID, lazy[ID])
+            upd(m, r, 2*ID+1, lazy[ID])
+            lazy[ID] = float('-inf')
+        
+        def add(x, y, val, l = 0, r = 2046, ID = 1):
+            if y <= l or x >= r: return
+            if x <= l < r <= y:
+                upd(l, r, ID, val)
+                return
+            
+            shift(l, r, ID)    
+            m = (l + r) // 2
+            add(x, y, val, l, m, 2 * ID)
+            add(x, y, val, m, r, 2*ID+1)
+            v[ID] = max(v[2*ID], v[2*ID+1])
+        
+        L = list(set([j for i, side in positions for j in [i, i+side]]))
+        L.sort()
+        indice = {x:i for i, x in enumerate(L)}
+        
+        R = []
+        for i, side in positions:
+            x, y = indice[i], indice[i+side]          
+            add(x, y, side + query(x, y))
+            R.append(v[1])
+        return R
+```
+
 ## Two-dimensional Segment Tree
 
 Easy, now you need to build a segment tree over `x` coordinates. Each node of the x-coordinate (outer) segment tree stores a segment tree on `y` coordinates that corresponds to strip `[xl, xr]`, meaning that it will store all the sums of rectangles `[xl,xr]×[yl,yr]` where `[yl,yr]` is a valid atomic segment tree segment.
