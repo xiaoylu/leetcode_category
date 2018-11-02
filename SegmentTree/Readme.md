@@ -155,10 +155,13 @@ Note that `shift` should be called at every level **before** the function `incre
 **LC 699. Falling Squares**
 
 俄罗斯方块堆箱子，求每一块放下后的最高高度
+
 输入格式为［［左边界，宽度］,......]
 
 Input: [[1, 2], [2, 3], [6, 1]]
+
 Output: [2, 5, 5]
+
 Explanation:
 
 After the first drop of positions[0] = [1, 2]:
