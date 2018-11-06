@@ -18,7 +18,36 @@ See <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm> for algorithm pseudo 
 and <https://en.wikipedia.org/wiki/Binary_heap> for compaison between heap implementations.
 
 But, how to quickly finish the code in interviews? One trick is to skip the decrease key operation and just insert the value directly.
-This step would increase the size of the queue from `V` to `E`, but it simplifies your code. But you should make sure the interviewee knows that you know the Fibonacci heap implementation afterwards!
+This step would increase the size of the queue from `V` to `E`, leading to `O(E log E)` time, but it simplifies your code. You should make sure the interviewee knows that you know the Fibonacci heap implementation later.
+
+Using C++ `std::priority_queue` [DarthPrince's blog](https://codeforces.com/blog/entry/16221):
+```
+bool mark[MAXN];
+void dijkstra(int v){
+	fill(d,d + n, inf);
+	fill(mark, mark + n, false);
+	d[v] = 0;
+	int u;
+	priority_queue<pair<int,int>,vector<pair<int,int> >, less<pair<int,int> > > pq;
+	pq.push({d[v], v});
+	while(!pq.empty()){
+		u = pq.top().second;
+		pq.pop();
+		if(mark[u])
+			continue;
+		mark[u] = true;
+		for(auto p : adj[u]) //adj[v][i] = pair(vertex, weight)
+			if(d[p.first] > d[u] + p.second){
+				d[p.first] = d[u] + p.second;
+				pq.push({d[p.first], p.first});
+			}
+	}
+}
+```
+
+Note that a node might be poped up from the queue multiple times... with further distance from the source node. We eliminate them by the `mark`s.
+
+It is quite interesting that this features is useful for the problem below so we can skip marks.
 
 **LC 787. Cheapest Flights Within K Stops**  Find the shortest path with at most `k+2` nodes
 
