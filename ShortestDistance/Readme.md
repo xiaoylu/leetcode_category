@@ -47,7 +47,7 @@ void dijkstra(int v){
 
 Note that a node might be poped up from the queue multiple times... with further distance from the source node. We eliminate them by the `mark`s.
 
-It is quite interesting that this features is useful for the problem below so we can skip marks.
+It is quite interesting that we can skip `mark`s in the problem below:
 
 **LC 787. Cheapest Flights Within K Stops**  Find the shortest path with at most `k+2` nodes
 
