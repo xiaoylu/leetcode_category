@@ -1,9 +1,26 @@
 # Intervals
 
-## Discretization
-Many problems involve intervals. **Discretization** is usually a good choice dealing with intervals.
+## Discretization and Sorting
+Many problems involve intervals. **Discretization** is usually a good choice dealing with intervals. These problems are commonly asociated with Greedy algorithm and sorting.
 
-LC 253. Meeting Rooms II. 
+The sorting can also be done for the upper bound. It is more convenient for the intersection problems.
+**452. Minimum Number of Arrows to Burst Balloons** 
+Find the min size of `S` such that each interval contains at least one element of `S`. Note you need to sort by upper bound, but not lower bound. Think about why?
+```
+    def findMinArrowShots(self, points):
+        ret, end = 0, -float('inf')
+        for l, r in sorted(points, key = lambda x: x[1]):
+            if l > end:
+                ret += 1
+                end = r
+        return ret
+```
+
+**757. Set Intersection Size At Least Two**
+Extension of LC 452 that each interval contains at least two elements of `S`. Same idea, but sort by `(upper bound, -lower bound)`. e.g `[[1,5],[4,5],[5,9],[7,9],[9,10]] => [[4,5], [1,5], [7,9], [5,9] , [9,10]]`. [Idea]<https://leetcode.com/problems/set-intersection-size-at-least-two/discuss/113086/Hope-you-enjoy-this-problem.-:-)-O(NlogN)JavaGreedy-Easy-to-understand-solution>
+
+
+**LC 253. Meeting Rooms II** 
 Given an array of meeting time intervals, find the minimum number of conference rooms required.
 The greedy solution which puts the next earliest meeting in ANY available time line (every room has a time line). 
 But here we choose the time line with the earliest ending time because it take O(log n) time to check by heap.
@@ -18,32 +35,10 @@ But here we choose the time line with the earliest ending time because it take O
             heapq.heappush(hp, e)
         return count
 ```
-The sorting can also be done for the upper bound. It is more convenient for the intersection problems.
 
-**452. Minimum Number of Arrows to Burst Balloons** 
-
-Find the min size of `S` such that each interval contains at least one element of `S`. Note you need to sort by upper bound, but not lower bound. Think about why?
-```
-    def findMinArrowShots(self, points):
-        ret, end = 0, -float('inf')
-        for l, r in sorted(points, key = lambda x: x[1]):
-            if l > end:
-                ret += 1
-                end = r
-        return ret
-```
-
-**757. Set Intersection Size At Least Two**
-
-Extension of LC 452 that each interval contains at least two elements of `S`. Same idea, but sort by `(upper bound, -lower bound)`. e.g `[[1,5],[4,5],[5,9],[7,9],[9,10]] => [[4,5], [1,5], [7,9], [5,9] , [9,10]]`. [Idea]<https://leetcode.com/problems/set-intersection-size-at-least-two/discuss/113086/Hope-you-enjoy-this-problem.-:-)-O(NlogN)JavaGreedy-Easy-to-understand-solution>
-
-
-While the first operation is very common, another important skill is "Discretization". 
 We record the independent "time slots" formed by all the starts and ends. (Not necessarily the ends are after starts)
 Get a `count` array for each slot, when an interval comes in, add `count[i]` for all slot `i` inside this interval.
 You will know the maximum number of one slot occupied by the intervals. This number is the result.
-
-**LC 253. Meeting Rooms II.** 
 ```
     def minMeetingRooms(self, intervals):
         ts = set(t for v in intervals for t in [v.start, v.end])
