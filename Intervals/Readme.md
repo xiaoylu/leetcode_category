@@ -4,6 +4,7 @@
 Many problems involve intervals. **Discretization** is usually a good choice dealing with intervals. These problems are commonly asociated with Greedy algorithm and sorting.
 
 The sorting can also be done for the upper bound. It is more convenient for the intersection problems.
+
 **452. Minimum Number of Arrows to Burst Balloons** 
 Find the min size of `S` such that each interval contains at least one element of `S`. Note you need to sort by upper bound, but not lower bound. Think about why?
 ```
