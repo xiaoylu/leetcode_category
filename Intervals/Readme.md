@@ -1,7 +1,7 @@
 # Intervals
 
 ## Discretization and Sorting
-Many problems involve intervals. **Discretization** is usually a good choice dealing with intervals. These problems are commonly asociated with Greedy algorithm and sorting.
+Many problems involve intervals. **Discretization** is usually a good choice dealing with intervals. These problems are commonly asociated with **Greedy** algorithm and **Sorting**.
 
 The sorting can also be done for the upper bound. It is more convenient for the intersection problems.
 
