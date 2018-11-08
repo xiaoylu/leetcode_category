@@ -195,11 +195,13 @@ while (it != m.end() && end + 1 >= it->first) {
 m.emplace_hint(it, start, end);
 ```
 
-C++ code for removal (`O(log n)` time with STL map)
+C++ code for removal an interval `[left, right]` from STL map `m` efficiently
+
 ```
 if (m.empty()) return;
+
 auto l = m.lower_bound(left);
-auto r = m.upper_bound(right);
+auto r = m.upper_bound(right); // no overlap on the right boundry
 
 if (l != m.begin() && (--l)->second < left) ++l;
 
@@ -209,6 +211,7 @@ int ll = min(l->first, left), rr = max((--r)->second, right);
 
 m.erase(l, ++r);
 
+// the leftovers
 if (ll < left) m[ll] = left;
 if (rr > right) m[right] = rr;
 ```
