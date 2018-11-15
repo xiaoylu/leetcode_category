@@ -26,3 +26,10 @@ class C(A, B):
     def __init__(self, val):
         super(C, self).__init__(val)
 ```
+
+`__init__.py`
+---
+`__init__.py` prevents directories with a common name from unintentionally hiding valid modules that occur later (deeper) on the module search path. It marks a package from module so you can import modules (i.e. the .py files) by their path in the directory.
+
+
+
