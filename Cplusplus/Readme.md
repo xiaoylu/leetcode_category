@@ -135,6 +135,12 @@ Friend Class & Functions
 Friendship is not mutual. If a class A is friend of B, then B doesn’t become friend of A automatically.
 Friendship is not inherited.
 
+Lifetime of a data member (object)
+---
+Association: Foo has a pointer to Bar object as a data member, without managing the Bar object => Foo knows about Bar
+Composition: Foo has a Bar object as data member => Foo contains a Bar. It can't exist without it.
+Aggregation: Foo has a pointer to Bar object and manages the lifetime of that object => Foo contains a Bar, but can also exist without it.
+
 Static Variable
 ---
 The lifetime of function static variables begins the first time the program flow encounters the declaration and it ends at program termination. So, you must "define" it after the class declaration.
