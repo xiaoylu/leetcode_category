@@ -46,8 +46,8 @@ Useful for problem like "min element in rotated array".
   return l
 ```
 
-## Balanced BST
-To keep a binary search tree balanced, it should be implemented as Red-Black tree, AVL tree or even skipping lists (probablistics) to maintain the similar heights of the branches sharing the same parent.
+## Balanced Binary Search Tree
+To keep a binary search tree balanced, it should be implemented as Red-Black tree, AVL tree or even skipping lists (probablistics data structure) to maintain the same heights of the branches.
 
 **LC 220. Contains Duplicate III**
 Given an array of integers, find out whether there are two distinct indices i and j in the array such that the absolute difference between `nums[i]` and `nums[j]` is at most t and the absolute difference between i and j is at most k.
@@ -71,6 +71,19 @@ C++ solution:
         }
         return false;
     }
+```
+
+Another important note about balanced BST is that the predecessor and successor can be reached in `O(log n)` time. You just start from the root to find the target node, going left or right down to the leaves. The **last** left turn would be associated with the successor and **last** right turn is associated with the predecessor.
+
+**LC 285. Inorder Successor in BST**
+
+Given a binary search tree and a node in it, find the in-order successor of that node in the BST.
+```
+def find(root, target, lastleft = None):
+  if not root: return lastleft
+  if root.val < target.val:
+    return find(root.right, target, lastleft)
+  return find(root.left, target, root)
 ```
 
 ## More advanced
