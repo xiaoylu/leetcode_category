@@ -81,7 +81,7 @@ Given a binary search tree and a node in it, find the in-order successor of that
 ```
 def find(root, target, lastleft = None):
   if not root: return lastleft
-  if root.val < target.val:
+  if root.val <= target.val:    # the equality here skips the target node itself
     return find(root.right, target, lastleft)
   return find(root.left, target, root)
 ```
