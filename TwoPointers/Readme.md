@@ -26,7 +26,35 @@ for (i = 0, j = 0; i < N; ++i) {
 }
 ```
 
-You should increase `i` first, then adjust `j` until certain conditions are satisfied.
+**LC 76. Minimum Window Substring**
+Given a string `S` and a string `T`, find the minimum window in `S` which will contain all the characters in `T` in complexity `O(n)`.
+
+Input: S = "ADOBECODEBANC", T = "ABC"
+
+Output: "BANC"
+
+```
+        i = j = 0
+        start = end = -1
+        missing = len(t)
+        need = collections.defaultdict(int)
+        for ch in t: need[ch] += 1
+        
+        while i < len(s):
+            if s[i] in need:
+                need[s[i]] -= 1
+                if need[s[i]] >= 0: missing -= 1
+            while missing == 0:
+                if end < 0 or i - j < end - start:
+                    start, end = j, i
+                if s[j] in need:
+                    need[s[j]] += 1
+                    if need[s[j]] >= 1: missing += 1
+                j += 1
+            i += 1
+        if end < 0: return ""
+        return s[start:end + 1]
+ ```
 
 **LC 567. Permutation in String**
 
