@@ -12,12 +12,16 @@ for (i = 0, j = 0; i < N; ++i) {
     // add A[i] here
     
     while (j <= i && some condition is satisfied) {
+        // update result 
+        res = {j, i};
         // remove A[j] here
-        j++
+        // note that you should update result before removal!
+        //           and the update must be done WITHIN the while loop
+        j++;
     }
     
     if (some condition is satisfied) {
-        return {j, i};
+        return res;
     }
 }
 ```
