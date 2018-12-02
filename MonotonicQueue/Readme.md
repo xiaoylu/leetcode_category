@@ -11,7 +11,7 @@ Sliding max/min window.
 ===
 Problem: return all the max elements in the sliding window.
 
-Key observation: when `A[l] < A[r]` for `l < r`, then `A[l]` should never be retuned as the sliding max, if `A[r]` has entered the sliding window.
+Key observation: Given input array `A`, when `A[l] < A[r]` for `l < r`, then `A[l]` should never be retuned as the sliding max, if `A[r]` has entered the sliding window.
 
 So we maintain a monotonic array with index increasing, and value **Decreasing**.
 
