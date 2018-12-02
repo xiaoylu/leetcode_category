@@ -9,6 +9,7 @@ Monotonic Queue
 
 Sliding max/min window.
 ===
+Problem: return all the max/min elements in the sliding window.
 
 Key observation: when `A[l] < A[r]` for `l < r`, then `A[l]` should never be the sliding max once `A[r]` enters the sliding window.
 
