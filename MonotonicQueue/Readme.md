@@ -13,9 +13,10 @@ Problem: return all the max elements in the sliding window.
 
 Key observation: Given input array `A`, when `A[l] < A[r]` for `l < r`, then `A[l]` should never be retuned as the sliding max, if `A[r]` has entered the sliding window.
 
-So we maintain a monotonic array with index increasing, and value **Decreasing**.
+So we maintain a monotonic array with index increasing, and value **decreasing**.
 
 > `[3, 1, 4, 3, 8] => [3], [3, 1], [4], [4, 3], [8]` 
+> When element `4` enters, we remove `[3, 1]`
 
 The head of the increasing queue is the sliding max!
 
