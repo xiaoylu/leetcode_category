@@ -41,11 +41,9 @@ Return the min cost to get to `N-1` from `0`
 #     0  3
 #     0     2
 #     -     2  9
-#           2  -  3
+#           2  -  3        # remove 9 because 3 < 9 and it's on the right
 #                 3  7
 #
-# keep low cost on the right
-# remove hight cost on the left
 ```
 
 Pay attention to the two `while` loop.
