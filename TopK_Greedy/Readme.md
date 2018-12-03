@@ -69,7 +69,7 @@ Solution:
 * arrange courses that `d` increases
 * when a new course comes in, push it into the heap
 * pop up courses with longest duration until `sum(t_i)` smaller than current d
-* record size of heap
+* return final heap size
 
 
 
