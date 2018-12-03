@@ -27,6 +27,46 @@ It brings great benefits because it takes O(1) to obtain the min/max etc. of its
 
 That's why any DP problem where `A[i] = min(A[j:k]) + C` for `j < k <= i` can be solved by Monotonic Queue.
 
+Frog Jump II
+---
+
+A Frog jumps K steps at most. It costs `A[i]` to stays at `i`.
+Return the min cost to get to `N-1` from `0`
+
+```
+#K = 2
+#A = [0, 3, 2, 7, 1, 4]
+#cost 0  3  2  9  3
+#     0
+#     0  3
+#     0     2
+#     -     2  9
+#           2  -  3
+#                 3  7
+#
+# keep low cost on the right
+# remove hight cost on the left
+```
+
+Pay attention to the two `while` loop.
+```
+from collections import deque
+def min_cost(A, K):
+    Q = deque([(0, A[0])])
+    for i in range(1, len(A)):
+        
+        # keep sliding width == K steps
+        while Q and Q[0][0] < i - K:
+            Q.popleft()
+            
+        # remove inferior elements at the tail
+        while Q and Q[-1][1] > A[i] + Q[0][1]:
+            Q.pop()
+
+        Q.append((i, A[i] + Q[0][1]))
+    return Q[-1][1]
+```
+
 Codeforces 487B Strip
 ===
 
