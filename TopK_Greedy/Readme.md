@@ -74,7 +74,7 @@ Solution:
 
 
 
-Relationship to Longest-Increasing-SubSequence
+Comparison with Longest-Increasing-SubSequence (LIS)
 ---
 
 In the Top-K problems, the top-(K-1) elements are always a subset of the top-K set.
