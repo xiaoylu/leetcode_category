@@ -60,11 +60,11 @@ Each course has length `t` and closed on `d`-th day. One must take courses one-b
 
 Given `n` online courses represented by pairs `(t,d)`, return the maximal number of courses that can be taken.
 
-Key observation: From the view of DP: For the current new course, **the sequence of previous top-(K-1) courses does not matter**. They should have the min `sum(t_i)` so that the current course can be finished before closing date.
+Key observation: 
 
 There are two goals to achieve:
-* The ``top-K'' courses have min `sum(t_i)`.
-* A course with larger `d`, smaller `t` can replace a course with smaller `d` and larger `t`.
+* The current ``top-K'' courses have min `sum(t_i)`.
+* A course with larger `d`, smaller `t` can replace a course with smaller `d` and larger `t` without violating the closing dates.
 
 Solution:
 * arrange courses that `d` increases
@@ -74,6 +74,23 @@ Solution:
 
 
 
+Relationship to Longest-Increasing-SubSequence
+---
+
+In the Top-K problems, the top-(K-1) elements are always a subset of the top-K set.
+For example,
+```
+   [3, 7, 9, 2, 5]
+K=1 .     9
+  2    7  9
+  3    7  9     5
+```
+So replacement works.
+
+
+In **LC 300. Longest Increasing Subsequence**, the length-`l-1` subsequence with earlies ending time is NOT a sub-sequence of length-`l` subsequence with earlies ending time.
+
+So replacement does NOT work, you have to store all states in DP (ending time of subsequence length `l=1,2,3,...`)
 
 
 
