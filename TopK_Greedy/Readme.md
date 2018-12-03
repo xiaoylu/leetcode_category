@@ -60,7 +60,8 @@ Each course has length `t` and closed on `d`-th day. One must take courses one-b
 
 Given `n` online courses represented by pairs `(t,d)`, return the maximal number of courses that can be taken.
 
-Key observation: 
+Key observation: From the view of DP: For the current new course, **the sequence of previous top-(K-1) courses does not matter**. They should have the min `sum(t_i)` so that the current course can be finished before closing date.
+
 There are two goals to achieve:
 * The ``top-K'' courses have min `sum(t_i)`.
 * A course with larger `d`, smaller `t` can replace a course with smaller `d` and larger `t`.
