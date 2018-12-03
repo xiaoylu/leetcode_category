@@ -16,10 +16,16 @@ Key observation: Given input array `A`, when `A[l] < A[r]` for `l < r`, then `A[
 So we maintain a monotonic array with index increasing, and value **decreasing**.
 
 > `[3, 1, 4, 3, 8] => [3], [3, 1], [4], [4, 3], [8]` 
-> When element `4` enters, we remove `[3, 1]`
+> when element `4` enters, we remove `[3, 1]`
 
 The head of the increasing queue is the sliding max!
 
+As simple as it is, we have a sliding window of elements, 
+the only unique thing here is that we can keep it sorted. 
+
+It brings great benefits because it takes O(1) to obtain the min/max etc. of its elements inside.
+
+That's why any DP problem where `A[i] = min(A[j:k]) + C` for `j < k <= i` can be solved by Monotonic Queue.
 
 Codeforces 487B Strip
 ===
