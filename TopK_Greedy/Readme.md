@@ -80,10 +80,10 @@ Relationship to Longest-Increasing-SubSequence
 In the Top-K problems, the top-(K-1) elements are always a subset of the top-K set.
 For example,
 ```
-   [3, 7, 9, 2, 5]
-K=1 .     9
-  2    7  9
-  3    7  9     5
+    [3, 7, 9, 2, 5]
+K=1        9
+  2     7 +9
+  3     7 +9    +5
 ```
 So replacement works.
 
