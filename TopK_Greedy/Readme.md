@@ -60,10 +60,6 @@ Each course has length `t` and closed on `d`-th day. One must take courses one-b
 
 Given `n` online courses represented by pairs `(t,d)`, return the maximal number of courses that can be taken.
 
-# .  99 12 13 17 
-# 2  3  7  1  4
-# 2  4  7  1  3
-
 Key observation: 
 There are two goals to achieve:
 * The ``top-K'' courses have min `sum(t_i)`.
