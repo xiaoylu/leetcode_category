@@ -12,6 +12,8 @@ Hence, the key is to find index `b[i]` for index `i` such that we can expand the
 
 where `b[i]` indicates the index of next potential match of char at `array[i]`.
 
+The searching phase of the Knuth-Morris-Pratt algorithm is in `O(n)`. A preprocessing of the pattern is necessary in order to analyze its structure. The preprocessing phase has a complexity of O(m). Since `m <= n`, the overall complexity of the Knuth-Morris-Pratt algorithm is in `O(n)`.
+
 ## Example
 The first step is to construct array `b`.
 
