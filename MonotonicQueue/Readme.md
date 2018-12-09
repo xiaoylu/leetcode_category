@@ -2,30 +2,43 @@ Monotonic Queue
 ===
 * **LC84. Largest Rectangle in Histogram**
 * **LC239. Sliding Window Maximum**
+* **LC739. Daily Temperatures**
+* **LC901. Online Stock Span**
 * **LC907. Sum of Subarray Minimums**, which reduces to the problem of finding the "nearest" element smaller than `A[i]` 
 * [Frog Jump II](https://anthony-huang.github.io/competitiveprogramming/2016/06/06/monotonic-queue.html): K steps at most with cost `A[i]` if landing at position `i`
-* And .. **Any DP problem where `A[i] = min(A[j:k]) + C` where `j < k <= i`** LOL!
 
+In general:
+Any DP problem where `A[i] = min(A[j:k]) + C` where `j < k <= i`
+---
+This is a sliding max/min window problem.
 
-Sliding max/min window.
-===
-Problem: return all the max elements in the sliding window.
+Problem statement: return the max elements in a sliding window.
 
 Key observation: Given input array `A`, when `A[l] < A[r]` for `l < r`, then `A[l]` should never be retuned as the sliding max, if `A[r]` has entered the sliding window.
 
-So we maintain a monotonic array with index increasing, and value **decreasing**.
+So we maintain a monotonic array with index **increasing** and value **decreasing**.
 
-> `[3, 1, 4, 3, 8] => [3], [3, 1], [4], [4, 3], [8]` 
-> when element `4` enters, we remove `[3, 1]`
+For example, with sliding window of fixed length 3,
+> `A = [3, 1, 4, 3, 8] => [3], [3, 1], [4], [4, 3], [8]` 
+> when element `4` enters, we remove `[3, 1]` because they are on the left and smaller than `4`, no chance being chosen as the max element.
 
 The head of the increasing queue is the sliding max!
 
 As simple as it is, we have a sliding window of elements, 
-the only unique thing here is that we can keep it sorted. 
-
-It brings great benefits because it takes O(1) to obtain the min/max etc. of its elements inside.
+the only unique thing here is that we can keep the elements in the window sorted. It brings great benefits because it takes O(1) to obtain the min/max element in the window.
 
 That's why any DP problem where `A[i] = min(A[j:k]) + C` for `j < k <= i` can be solved by Monotonic Queue.
+
+Given a element `A[i]`, find the nearest element on its left larger than `A[i]`, i.e. return the maximum `j < i` such that `A[j] > A[i]`
+---
+
+Given `A[k] < A[j]` and `k < j < i`, if `A[j] > A[i]`, then `A[k]` never become the nearest element larger than `A[i]`.
+
+So we have a decreasing monotonic queue here.
+
+![alt text](https://imgur.com/ZfQSOag)
+The arrow indicates that the mapping from element on the right to the nearest element on the left larger than it.
+The elements in the valley are ignored.
 
 Frog Jump II
 ---
