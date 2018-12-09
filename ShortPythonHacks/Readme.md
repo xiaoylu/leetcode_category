@@ -10,6 +10,6 @@ Find replacing segment in a string `abcabc => abc * 2`
 Get columns of mattrix represented as a list of lists
 > `for col in zip(*A): print(col)`
 
-Append a list of characters to a list of strings:
+Append a list of characters to the end of a list of strings:
 > `zip([['abc','efg'], ['d', 'h']])`
             
