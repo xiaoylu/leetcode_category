@@ -36,7 +36,7 @@ Given `A[k] < A[j]` and `k < j < i`, if `A[j] > A[i]`, then `A[k]` never become 
 
 So we have a decreasing monotonic queue here.
 
-![alt text](https://imgur.com/ZfQSOag)
+![alt text](https://imgur.com/ZfQSOag.png)
 The arrow indicates that the mapping from element on the right to the nearest element on the left larger than it.
 The elements in the valley are ignored.
 
