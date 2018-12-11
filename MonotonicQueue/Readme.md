@@ -40,6 +40,39 @@ So we have a decreasing monotonic queue here.
 The arrow indicates that the mapping from element on the right to the nearest element on the left larger than it.
 The elements in the valley are ignored.
 
+**LC 85. Maximal Rectangle**
+
+Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+
+Idea: convert 2D matrix to 1D height array. The task becomes **LC84. Largest Rectangle in Histogram**.
+
+```
+        if not matrix: return 0
+        N, M = len(matrix), len(matrix[0])
+        dp = [0] * (M + 1)
+        area = 0
+            
+        for i in range(N):
+            for j in range(M):
+                # obtain the height
+                if matrix[i][j] == '1':
+                    dp[j] += 1
+                else:
+                    dp[j] = 0
+            
+            s = []
+            for j in range(M + 1): # IMPORTANT: note that the last ZERO pop out all remaining heights
+                if not s: s.append(j)
+                else:
+                    while s and dp[s[-1]] >= dp[j]:
+                        x = s.pop()
+                        if s: area = max(area, dp[x]*(j - s[-1] - 1))
+                        else: area = max(area, dp[x]*j)
+                    s.append(j)
+            
+        return area
+  ```
+
 Frog Jump II
 ---
 
