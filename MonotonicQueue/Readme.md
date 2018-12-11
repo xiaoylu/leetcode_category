@@ -44,7 +44,7 @@ The elements in the valley are ignored.
 
 Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
 
-Idea: convert 2D matrix to 1D height array. The task becomes **LC84. Largest Rectangle in Histogram**.
+Idea: convert 2D matrix to 1D height array. The task becomes **LC84. Largest Rectangle in Histogram** which is essentially "finding the index of the nearest previous value smaller than itself".
 
 ```
         if not matrix: return 0
