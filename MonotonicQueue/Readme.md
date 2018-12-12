@@ -1,13 +1,16 @@
 Monotonic Queue
 ===
+The following question can be solved by monotonic queue:
 * **LC84. Largest Rectangle in Histogram**
 * **LC239. Sliding Window Maximum**
 * **LC739. Daily Temperatures**
+* **LC862. Shortest Subarray with Sum at Least K**
 * **LC901. Online Stock Span**
-* **LC907. Sum of Subarray Minimums**, which reduces to the problem of finding the "nearest" element smaller than `A[i]` 
+* **LC907. Sum of Subarray Minimums** 
 * [Frog Jump II](https://anthony-huang.github.io/competitiveprogramming/2016/06/06/monotonic-queue.html): K steps at most with cost `A[i]` if landing at position `i`
 
-In general:
+In general, the following "prototype" problems can be solved by monotonic queue:
+
 Any DP problem where `A[i] = min(A[j:k]) + C` where `j < k <= i`
 ---
 This is a sliding max/min window problem.
@@ -29,16 +32,15 @@ the only unique thing here is that we can keep the elements in the window sorted
 
 That's why any DP problem where `A[i] = min(A[j:k]) + C` for `j < k <= i` can be solved by Monotonic Queue.
 
-Given a element `A[i]`, find the nearest element on its left larger than `A[i]`, i.e. return the maximum `j < i` such that `A[j] > A[i]`
+Given a element `A[i]`, find the nearest previous element larger than it
 ---
+Given element `A[i]`, the task is to find the maximum index `j < i` such that `A[j] > A[i]`. Namely, `A[j]` is the nearest larger element on the left of `A[i]`.
 
-Given `A[k] < A[j]` and `k < j < i`, if `A[j] > A[i]`, then `A[k]` never become the nearest element larger than `A[i]`.
+Key observation: given `A[k] < A[j] > A[i]` for `k < j < i`, `A[k]` never become the **nearest** element larger than `A[i]` because of `A[j]`.
 
-So we have a decreasing monotonic queue here.
+So we should have a decreasing monotonic queue here. The arrow indicates that the mapping from element on the right to the nearest element on the left larger than it. The elements in the valley are ignored.
 
 ![alt text](https://imgur.com/ZfQSOag.png)
-The arrow indicates that the mapping from element on the right to the nearest element on the left larger than it.
-The elements in the valley are ignored.
 
 **LC 85. Maximal Rectangle**
 
@@ -54,14 +56,14 @@ Idea: convert 2D matrix to 1D height array. The task becomes **LC84. Largest Rec
             
         for i in range(N):
             for j in range(M):
-                # obtain the height
+                # obtain the height based on each row
                 if matrix[i][j] == '1':
                     dp[j] += 1
                 else:
                     dp[j] = 0
             
             s = []
-            for j in range(M + 1): # IMPORTANT: note that the last ZERO pop out all remaining heights
+            for j in range(M + 1): # IMPORTANT: note that the last ZERO should pop out all remaining heights
                 if not s: s.append(j)
                 else:
                     while s and dp[s[-1]] >= dp[j]:
@@ -73,6 +75,34 @@ Idea: convert 2D matrix to 1D height array. The task becomes **LC84. Largest Rec
         return area
   ```
 
+**LC862. Shortest Subarray with Sum at Least K**
+
+Return the length of the shortest, non-empty, contiguous subarray of A with sum at least K.
+
+Key observation: If we accumulate array A to obtain B, then `B[l] <= B[r] - K` indicates `sum(A[l:r]) >= K`. Given `B[r]`, the problem is equivalent to finding the **nearest** previous element `B[l]` such that `B[l] <= B[r] - K`. 
+
+We maintain a **increasing queue** here because, given a new `B[i]`, the larger element on the left are inferior than `B[i]` as a candidate to make some future element `B[j] >= B[i] + K` (`j > i`).
+
+One extra optimization learnt from [@lee215](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/143726/C%2B%2BJavaPython-O(N)-Using-Deque) is that we can also pop up the element on the left side `<= B[i] - K` of the **increasing** queue because, given current element `B[i]`, if a future element `B[j] > B[i]`, then `B[j] - K` would be within the queue after the removal of such elements `<= B[i] - K`; Otherwise, if a future element `B[j] > B[i]` then it never appears in the final results.
+
+```
+        Q = collections.deque([])
+        
+        B = [0]
+        for a in A: B.append(B[-1] + a)
+            
+        res = float('inf')
+        for i, b in enumerate(B):
+            if not Q: Q.append(i)
+            else:
+                while Q and B[Q[-1]] > b: Q.pop()
+                while Q and B[Q[0]] <= b - K:
+                    res = min(res, i - Q[0])
+                    Q.popleft()
+                Q.append(i)
+        return res if res < float('inf') else -1
+```
+ 
 Frog Jump II
 ---
 
