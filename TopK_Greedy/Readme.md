@@ -79,7 +79,7 @@ Solution:
 
 A car go from location 0 to `target` with initial fuel `s`. The car can refuel at every station located at `stations[i][0]` with `stations[i][1]` gas. Return the min number of refuels.
 
-Observation: in the top-K problem, the goal is to find K elements with largest sum. We iterate through input, keep replacing the lowest number among the top K elements. Here the idea is the same but no constraint on K and every station added to the result must be reachable. So we maintain the longest distance the car can reach, i.e. `sofar`. 
+Observation: in the top-K problem, the goal is to find K elements with largest sum. Here the idea is the same but no constraint on K and every station added to the result must be reachable. So we maintain the longest distance the car can reach, i.e. `sofar`, and replace the gas station with min gas to refuel iteratively.
 
 ```
     def minRefuelStops(self, t, s, stations):
