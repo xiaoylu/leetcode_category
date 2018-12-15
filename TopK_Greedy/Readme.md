@@ -32,9 +32,9 @@ Understanding this problem from the view of Dynamic Programming (DP):
         * we just need top-`K-1` elements within `[0, i-1]`
             * note that the top-`K-1` within `[0, i-1]` must be a set of top-K within `[0, i-1]`
             * i.e. `top-K == top-(K-1) + the k-th largest element`
-            * so, replace the ``the k-th largest element'' of top-K within `[0, i-1]` by `A[i]`
+            * so, replace the smallest element of the top-K in `[0, i-1]` by the new element `A[i]`
 
-Follow-up: Non-overlapping Top-K
+Follow-up 1: Non-overlapping Top-K
 ---
 
 Given an array `A`, return the `K` elements with max sum, which are at least `w` elements away from each other.
@@ -50,7 +50,6 @@ when `A[i+w]` comes in, replace min element in the **first heap corresponding to
 then make this heap the last heap.
 
 Deal with `A[i+w+1]` and the next heap corresponding to `A[:i+2]`, so on so forth.
-
 
 
 LC 630. Course Schedule III
@@ -72,6 +71,27 @@ Solution:
 * pop up courses with longest duration until `sum(t_i)` smaller than current d
 * return final heap size
 
+Follow-up II: reachable Top-K
+---
+**871. Minimum Number of Refueling Stops**
+
+A car go from location 0 to `target` with initial fuel `s`. The car can refuel at every station located at `stations[i][0]` with `stations[i][1]` gas. Return the min number of refuels.
+
+Observation: in the top-K problem, the goal is to find K elements with largest sum. We iterate through input, keep replacing the lowest number among the top K elements. Here the idea is the same but no constraint on K and every station added to the result must be reachable. So we maintain the longest distance the car can reach, i.e. `sofar`. 
+
+```
+    def minRefuelStops(self, t, s, stations):
+        Q, i, sofar, res = [], 0, s, 0
+        while sofar < t:
+            while i < len(stations) and stations[i][0] <= sofar:
+                heapq.heappush(Q, -stations[i][1])
+                i += 1
+            if not Q: return -1
+            gas = -heapq.heappop(Q)
+            sofar += gas
+            res += 1
+        return res
+```
 
 
 Comparison with Longest-Increasing-SubSequence (LIS)
@@ -85,7 +105,7 @@ K=1        9
   2     7 +9
   3     7 +9    +5
 ```
-So replacement works.
+So **replacement works**.
 
 
 In **LC 300. Longest Increasing Subsequence**, the length-`l-1` subsequence with earlies ending time is NOT a sub-sequence of length-`l` subsequence with earlies ending time.
