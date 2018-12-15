@@ -34,7 +34,7 @@ Understanding this problem from the view of Dynamic Programming (DP):
             * i.e. `top-K == top-(K-1) + the k-th largest element`
             * so, replace the smallest element of the top-K in `[0, i-1]` by the new element `A[i]`
 
-Follow-up 1: Non-overlapping Top-K
+Follow-up I: Non-overlapping Top-K
 ---
 
 Given an array `A`, return the `K` elements with max sum, which are at least `w` elements away from each other.
@@ -51,6 +51,9 @@ then make this heap the last heap.
 
 Deal with `A[i+w+1]` and the next heap corresponding to `A[:i+2]`, so on so forth.
 
+Follow-up II: constrainted Top-K with sequence
+---
+In such problems, the **sequence matters**, but replacement works fine as long as we **sort the input** properly.
 
 LC 630. Course Schedule III
 ---
@@ -63,16 +66,15 @@ Key observation:
 
 There are two goals to achieve:
 * The current ``top-K'' courses have min `sum(t_i)`.
-* A course with larger `d`, smaller `t` can replace a course with smaller `d` and larger `t` without violating the closing dates.
+* A course with later closing date `d`, shorter duration `t` can replace a course with earlier closing date `d` and longer durtion `t` without violating the closing dates. ==> A top-K problem with replacement.
 
 Solution:
-* arrange courses that `d` increases
+* arrange courses that `d` increases, so that later courses can replace earlier courses.
 * when a new course comes in, push it into the heap
 * pop up courses with longest duration until `sum(t_i)` smaller than current d
 * return final heap size
 
-Follow-up II: reachable Top-K
----
+
 **871. Minimum Number of Refueling Stops**
 
 A car go from location 0 to `target` with initial fuel `s`. The car can refuel at every station located at `stations[i][0]` with `stations[i][1]` gas. Return the min number of refuels.
