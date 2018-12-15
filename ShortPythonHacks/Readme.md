@@ -13,3 +13,5 @@ Get columns of mattrix represented as a list of lists
 Append a list of characters to the end of a list of strings:
 > `zip([['abc','efg'], ['d', 'h']])`
             
+Get alphabetics from a list of words:
+> `chars = set(''.join(words))`
