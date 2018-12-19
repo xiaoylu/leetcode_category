@@ -33,8 +33,7 @@ Whenever you pop up an element, its left branch has already been explored. So go
         stack, res = [], []
         while node or stack:
             while node:
-                res += node.val, # the only difference is when to append!
-                
+                res += node.val, 
                 stack += node,
                 node = node.left
             node = stack.pop()
@@ -52,8 +51,7 @@ The pre-order traversal can be simplified by pushing the right kid, instead of t
         stack, res = [], []
         while node or stack:
             while node:
-                res += node.val, # the only difference is when to append!
-                
+                res += node.val, 
                 stack += node.right, # push the right kid
                 node = node.left
             node = stack.pop()
