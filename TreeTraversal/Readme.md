@@ -42,6 +42,25 @@ Whenever you pop up an element, its left branch has already been explored. So go
         return res
   ```
   
+**Simplification**:
+Actually, we have a "context" every time a node gets poped up from the stack. At that moment, the variables have the same values when the recursion has returned from its children in post-order dfs.
+
+The pre-order traversal can be simplified by pushing the right kid, instead of the root, into the stack.
+```
+    def preorderTraversal(self, root):
+        node = root
+        stack, res = [], []
+        while node or stack:
+            while node:
+                res += node.val, # the only difference is when to append!
+                
+                stack += node.right, # push the right kid
+                node = node.left
+            node = stack.pop()
+            #node = node.right # this line can be removed now
+        return res
+ ```
+  
 The most difficult one might be post-order traversal. My first thought is to
 * visit the left and right branches first
 * visit the root
@@ -70,6 +89,7 @@ The solution would be:
             node = node.left
         return list(res)
 ```
+
 
 ## N-ary Tree
 The same idea works for tree with multiple kids: 
