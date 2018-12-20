@@ -88,7 +88,30 @@ The solution would be:
         return list(res)
 ```
 
-
+Of course, we can mark a node by the times you visited it. Since every node is visited three times in DFS, `vis[node]` is set as -1 initially for the pre-order visit. Change it to 0 in the in-order visit. Finally, the post-order makes `vis[node]` 1.
+```
+        node, stack = root, []
+        vis = collections.defaultdict(lambda: -1)
+        
+        while node or stack:
+            while node and vis[node] < 0:
+                # do sth. in pre-order 
+                vis[node] += 1
+                stack.append(node)
+                node = node.left
+            
+            if not stack: break
+            
+            node = stack[-1]
+            if vis[node] == 0: 
+                # do sth. in in-order
+                vis[node] += 1
+                node = node.right
+            else:               
+                # do sth. in post-order
+                stack.pop()
+```        
+        
 ## N-ary Tree
 The same idea works for tree with multiple kids: 
 * Pre-order: visit the left-most kid first, while pushing all its siblings into the stack from left to right, and append the current node to result
