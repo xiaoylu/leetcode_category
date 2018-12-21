@@ -10,7 +10,7 @@ The optimization problem is `max(ratio) * sum(quality)`
 where `ratio` is the wage/quality ratio of workers and `quality` is their quality.
 
 We start with the  K lowest-quality workers first. 
-Each time, we use the new lowest-quality to replace the previous one with highest ratio.
+Each time, we use the new lowest-quality worker to replace the previous highest-ratio worker.
 
 **LC787. Cheapest Flights Within K Stops**
 
