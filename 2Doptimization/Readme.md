@@ -1,7 +1,7 @@
-2-D optimization
+optimization problem with multiple goals (2-D optimization)
 ===
 
-Some problems require optimization in two dimensions.
+Some problems require optimization using multi-dimensional input.
 
 **LC857. Minimum Cost to Hire K Workers**
 
@@ -34,7 +34,7 @@ A trick is to sorted by `(x,-y)` in case the some successive `x`s are the same.
 
 Summary
 ---
-For optimization problem with multiple tasks, we usually apply a greedy-style search:
+For optimization problem with multiple goal, we usually apply a greedy-style search:
 
 * Sort the input by one dimension.
 * Cut-and-paste (greedy algorithm) on the second dimension with help of a heap or other tricks.
