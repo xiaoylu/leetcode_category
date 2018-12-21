@@ -30,7 +30,7 @@ The task wants a longest sequence with both `x` and `y` dimension **strictly** i
 
 We sort the input list of tuples by its first dimension. The problem becomes the `Longest Increasing Sequence` of finding longest increasing sequence in the second dimension.
 
-A trick to sorted by `(x,-y)` in case the first dimension is same.
+A trick is to sorted by `(x,-y)` in case the some successive `x`s are the same.
 
 Summary
 ---
