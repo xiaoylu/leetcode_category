@@ -3,7 +3,7 @@
 
 Some problems require optimization in two dimensions.
 
-**LC Hiring-K workers**
+**LC857. Minimum Cost to Hire K Workers**
 
 The optimization problem is `max(ratio) * sum(quality)` 
 
@@ -12,7 +12,7 @@ where `ratio` is the wage/quality ratio of workers and `quality` is their qualit
 We start with the  K lowest-quality workers first. 
 Each time, we use the new lowest-quality to replace the previous one with highest ratio.
 
-**Minimum distance with K-stops**
+**LC787. Cheapest Flights Within K Stops**
 
 This is Dijisktra with a K-stop constraint. It is not that straight because the optimization requires two tasks:
 
