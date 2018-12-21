@@ -26,12 +26,18 @@ We create a `mark` set to identify the nodes `(steps, node)`, and push `(distanc
 
 **LC354. Russian Doll Envelopes**
 
+The task wants a longest sequence with both `x` and `y` dimension **strictly** increasing.
+
+We sort the input list of tuples by its first dimension. The problem becomes the `Longest Increasing Sequence` of finding longest increasing sequence in the second dimension.
+
+A trick to sorted by `(x,-y)` in case the first dimension is same.
+
 Summary
 ---
 For optimization problem with multiple tasks, we usually apply a greedy-style search:
 
 * Sort the input by one dimension.
-* Cut-and-paste (greedy algorithm) on the second dimension with help of a heap.
+* Cut-and-paste (greedy algorithm) on the second dimension with help of a heap or other tricks.
 
 which make sures we skip searching all the sub-optimal states.
 
