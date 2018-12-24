@@ -141,9 +141,9 @@ Friendship is not inherited.
 
 Lifetime of a data member (object)
 ---
-Association: Foo has a pointer to Bar object as a data member, without managing the Bar object => Foo knows about Bar
-Composition: Foo has a Bar object as data member => Foo contains a Bar. It can't exist without it.
-Aggregation: Foo has a pointer to Bar object and manages the lifetime of that object => Foo contains a Bar, but can also exist without it.
+* Association: Foo has a pointer to Bar object as a data member, without managing the Bar object => Foo knows about Bar
+* Composition: Foo has a Bar object as data member => Foo contains a Bar. It can't exist without it.
+* Aggregation: Foo has a pointer to Bar object and manages the lifetime of that object => Foo contains a Bar, but can also exist without it.
 
 Static Variable
 ---
