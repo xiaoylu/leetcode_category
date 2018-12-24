@@ -283,7 +283,9 @@ int* ptr = array;
 std::cout << "array size " << sizeof(array) << std::endl;
 std::cout << "ptr size " << sizeof(ptr) << str::endl;
 ```
-array size will be 5 \* sizeof(int) = 20 ptr size will be sizeof(int \*) which will be either 4 or 8 bytes.
+array size will be 5 \* sizeof(int) = 20 
+
+ptr size will be sizeof(int \*) which will be either 4 or 8 bytes.
 
 Exception Handling
 ---
@@ -296,6 +298,13 @@ Polymorphism
 ---
 * Compile time polymorphism : template, override
 * Run time polymorphism: virtual function (late/dynamic binding)
+
+Template
+---
+* **Compiler** creates a **new instance** of a template function for **every data type**.
+    * so every instance has its own copy of static variable.
+* 
+
 
 Further Reading
 ---
