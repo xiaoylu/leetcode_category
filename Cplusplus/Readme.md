@@ -290,8 +290,12 @@ Exception Handling
 * If both base and derived classes are caught as exceptions then **catch block of derived class must appear before the base class**. If we put base class first then the derived class catch block will never be reached.
 * The catch(...) must be the last catch block.
 * Re-throw: `throw` in the catch section - a catch block **cleans up resources** of its function, and then rethrows the **same** exception **with same parameters**  for handling elsewhere. **The destructors are called in reverse order of constructors.**
-* 
 
+
+Polymorphism
+---
+* Compile time polymorphism : template, override
+* Run time polymorphism: virtual function (late/dynamic binding)
 
 Further Reading
 ---
