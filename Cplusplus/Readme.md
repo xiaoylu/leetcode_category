@@ -272,7 +272,7 @@ int main()
     return 0; 
 } 
 ```
-A more advanced implementation: assignment to a smart pointers would triger the destruction of its previous value.
+A more advanced implementation: assignment to a smart pointers would triger the destruction of its previous value. This type of smart pointer is called `Holder`. One of the such smart-pointer type is `std::auto_ptr` (chapter 20.4.5 of C++ standard), which allows to deallocate memory automatically when it out of scope and which is more robust than simple pointer usage when exceptions are thrown, although less flexible. Another convenient type is `boost::shared_ptr` which implements reference counting and automatically deallocates memory when no references to object remains. This helps avoiding memory leaks and is easy to use to implement RAII.
 
 sizeof()
 ---
