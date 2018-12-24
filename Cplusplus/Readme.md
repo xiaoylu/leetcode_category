@@ -160,7 +160,7 @@ VTable & Vpointer
 ---
 In the heap, at the top of an object's memory, a virtual pointer points to the code stack of a class. Every class has a vtable. The vtable maps the child's overrided function to its own implementation, instead of its derived class's virtual function. However, if a class does not provide customized implementation, the vtable still maps this function to its derived class's virtual function. 
 
-![alt text](https://imgur.com/VdeRgz2)
+![Imgur](https://i.imgur.com/VdeRgz2.png)
 
 [简书](https://www.jianshu.com/p/91227e99dfd7)
 
