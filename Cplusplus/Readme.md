@@ -66,7 +66,11 @@ class S
 
 Rule of Three
 ---
+If one of these had to be defined by the programmer, it means that the compiler-generated version does not fit the needs of the class in one case and it will probably not fit in the other cases either. So if a class defines one (or more) of the following it should probably explicitly define all three:
 
+* Destructor – Call the destructors of all the object's class-type members
+* Copy constructor – Construct all the object's members from the corresponding members of the copy constructor's argument, calling the copy constructors of the object's class-type members, and doing a plain assignment of all non-class type (e.g., int or pointer) data members
+* Copy assignment operator – Assign all the object's members from the corresponding members of the assignment operator's argument, calling the copy assignment operators of the object's class-type members, and doing a plain assignment of all non-class type (e.g. int or pointer) data members.
 
 Virtual Constructor == Factory Pattern
 ---
