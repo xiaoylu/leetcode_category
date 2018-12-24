@@ -285,6 +285,14 @@ std::cout << "ptr size " << sizeof(ptr) << str::endl;
 ```
 array size will be 5 \* sizeof(int) = 20 ptr size will be sizeof(int \*) which will be either 4 or 8 bytes.
 
+Exception Handling
+---
+* If both base and derived classes are caught as exceptions then **catch block of derived class must appear before the base class**. If we put base class first then the derived class catch block will never be reached.
+* The catch(...) must be the last catch block.
+* Re-throw: `throw` in the catch section - a catch block **cleans up resources** of its function, and then rethrows the **same** exception **with same parameters**  for handling elsewhere. **The destructors are called in reverse order of constructors.**
+* 
+
+
 Further Reading
 ---
 Test yourself: https://www.geeksforgeeks.org/c-plus-plus-gq/
