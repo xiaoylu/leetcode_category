@@ -303,8 +303,16 @@ Template
 ---
 * **Compiler** creates a **new instance** of a template function for **every data type**.
     * so every instance has its own copy of static variable.
-* 
-
+* Non-type parameters like `N` in `template <class T, int N> ...` must be const, so compiler can fill in the number at compile time
+* template specialization: 
+```
+template <>
+int max <int> (int &a, int &b)
+{
+    cout << "Called ";
+    return (a > b)? a : b;
+}
+```
 
 Further Reading
 ---
