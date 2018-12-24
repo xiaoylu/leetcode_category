@@ -296,7 +296,7 @@ Exception Handling
 
 Polymorphism
 ---
-* Compile time polymorphism : template, override
+* Compile time polymorphism : template, overload
 * Run time polymorphism: virtual function (late/dynamic binding)
 
 Template
