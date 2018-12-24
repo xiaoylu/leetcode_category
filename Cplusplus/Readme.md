@@ -64,6 +64,55 @@ class S
 };
 ```
 
+Rule of Three
+---
+
+
+Virtual Constructor == Factory Pattern
+---
+The virtual keyword can not be put before constructor. But what if we need dynamic creation of Derived classes at Runtime? The Derived class delegates that responsibility to Base, and provides an input in the form of ID. Consumers of User need not recompile their code due to extension of Base.
+
+```
+//// LIBRARY START 
+class Base 
+{ 
+public: 
+  
+    // The "Virtual Constructor" 
+    static Base *Create(int id); 
+  
+    Base() { } 
+  
+    virtual // Ensures to invoke actual object destructor 
+    ~Base() { } 
+  
+    // An interface 
+    virtual void DisplayAction() = 0; 
+}; 
+
+// We can also declare "Create" outside Base. 
+// But is more relevant to limit it's scope to Base 
+Base *Base::Create(int id) 
+{ 
+    // Just expand the if-else ladder, if new Derived class is created 
+    // User need not be recompiled to create newly added class objects 
+  
+    if( id == 1 ) 
+    { 
+        return new Derived1; 
+    } 
+    else if( id == 2 ) 
+    { 
+        return new Derived2; 
+    } 
+    else
+    { 
+        return new Derived3; 
+    } 
+} 
+//// LIBRARY END 
+```
+Note that the function Create used to return different types of Base class objects at runtime. It acts like virtual constructor, also referred as Factory Method in pattern terminology.
 
 Return by reference
 ---
