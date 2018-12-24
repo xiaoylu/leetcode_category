@@ -221,6 +221,16 @@ int main()
 ```
 A more advanced implementation: assignment to a smart pointers would triger the destruction of its previous value.
 
+sizeof()
+---
+```
+int array[5];
+int* ptr = array;
+
+std::cout << "array size " << sizeof(array) << std::endl;
+std::cout << "ptr size " << sizeof(ptr) << str::endl;
+```
+array size will be 5 \* sizeof(int) = 20 ptr size will be sizeof(int \*) which will be either 4 or 8 bytes.
 
 Further Reading
 ---
