@@ -103,6 +103,10 @@ In case of virtual function in base, the call is forwarded to the **most heavily
     p->non_virtual_function();  
 ```
 
+VTable & Vpointer
+---
+In the heap, at the top of an object's memory, a virtual pointer points to the code stack of a class. Every class has a vtable. The vtable maps the child's overrided function to its own implementation, instead of its derived class's virtual function. However, if a class does not provide customized implementation, the vtable still maps this function to its derived class's virtual function. [简书](https://www.jianshu.com/p/91227e99dfd7)
+
 Virtual Destructor
 ---
 If you do a "delete p" where p is a pointer to a base class, then that class needs have a virtual destructor.
@@ -177,6 +181,11 @@ Modes of Inheritance
 The Diamond Problem
 ---
 The diamond problem occurs when two superclasses of a class have a common base class. So the derived-class at very bottom gets two copies of all attributes of superclass at the very top. So the virtual mode is needed here.
+
+Smart Pointer
+---
+Assignment to a smart pointers would triger the destruction of its previous value.
+
 
 Further Reading
 ---
