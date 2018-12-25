@@ -12,6 +12,23 @@ Child(int j): Parent(j)
 } 
 ```
 The parameterised constructor of base class can NOT be called in default constructor of the derived class.
+The following code gets "compiler error"
+```
+class Base
+{
+public :
+    int x, y;
+public:
+    Base(int i, int j){ x = i; y = j; }
+};
+ 
+class Derived : public Base
+{
+public:
+    Derived(int i, int j):x(i), y(j) {}  // The base class members cannot be directly assigned
+    void print() {cout << x <<" "<< y; }
+};
+```
 
 And objects are always destroyed in reverse order of their creation.
 
