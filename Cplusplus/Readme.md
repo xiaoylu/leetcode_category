@@ -185,6 +185,11 @@ In case of virtual function in base, the call is forwarded to the **most heavily
     p->non_virtual_function();  
 ```
 
+A base class pointer can point to a derived class object. But we can only access 
+* base class member 
+* virtual functions in base class
+using the base class pointer
+
 VTable & Vpointer
 ---
 In the heap, at the top of an object's memory, a virtual pointer points to the code stack of a class. Every class has a vtable. The vtable maps the child's overrided function to its own implementation, instead of its derived class's virtual function. However, if a class does not provide customized implementation, the vtable still maps this function to its derived class's virtual function. 
