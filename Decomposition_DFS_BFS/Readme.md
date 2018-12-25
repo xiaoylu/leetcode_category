@@ -44,7 +44,8 @@ DFS solution
 ```
 Note that this DFS solution works but got TLE in Leetcode. Why? This problem asks for min number of squares, instead of a specific destination. Some paths are too long (say 471 = 1 + 1 + 1 + .. + 1, a total of 471 ones sum up) to search. So BFS is better than DFS.
 
-**LC691. Stickers to Spell Word**
+LC691. Stickers to Spell Word
+---
 
 You would like to spell out the given target string by cutting individual letters from your collection of stickers and rearranging them.
 
