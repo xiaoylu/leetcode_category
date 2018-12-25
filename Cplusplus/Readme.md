@@ -15,7 +15,7 @@ The parameterised constructor of base class can NOT be called in default constru
 
 And objects are always destroyed in reverse order of their creation.
 
-We can not make constructor virtual, but we can make destructor virtual. In this way, the call of Derived's destructor will be called first, and then the Bases's destructor. Otherwise, without virtual keyword, only destructor's destructor gets called.
+We can not make constructor virtual, but we can make destructor virtual. In this way, the call of Derived's destructor will be called first, and then the Bases's destructor. Otherwise, without virtual keyword, only Derived's destructor gets called.
 
 ```
 #include<iostream>
@@ -31,7 +31,7 @@ public:
     ~Derived()  { cout<<"Destructor : Derived"<<endl; }
 };
 int main()  {
-    Base *Var = new Derived();
+    Base *Var = new Derived();    // Note: if you declare "Derived Var;", then both destructors always get called, w/o virtual keyword.
     delete Var;
     return 0;
 }
