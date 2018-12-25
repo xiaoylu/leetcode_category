@@ -182,9 +182,9 @@ A class is abstract if it has at least one pure virtual function.
 ```
 virtual void func() = 0; 
 ```
-We cannot create objects of abstract classes. But we can pointers to and references of abstract classes, also an abstract class can have constructors. 
+We cannot create objects of abstract classes. But we can **pointers to** and **references of** abstract classes, also an abstract class can have constructors. Note a pure virtual function can be actually be called as a static member. But no instance of the abstract class is allowed.
 
-If we do not override the pure virtual function in derived class, then derived class also becomes abstract class.
+If we do not override the pure virtual function in derived class, then derived class also becomes abstract class. Also no instance allowed.
 
 When all functions are pure virtual, an abstract class is similar to the "interface" in Java.
 
