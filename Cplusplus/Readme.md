@@ -284,9 +284,14 @@ Modes of Inheritance
 * Public mode: If we derive a sub class from a public base class. Then the public member of the base class will become public in the derived class and protected members of the base class will become protected in derived class.
 * Protected mode: If we derive a sub class from a Protected base class. Then both public member and protected members of the base class will become protected in derived class.
 * Private mode: If we derive a sub class from a Private base class. Then both public member and protected members of the base class will become Private in derived class.
-* Virtual Mode: get only one copy of the grand-parent (superclasses)'s attributes.
+* Virtual Mode: get only one copy of the grand-parent (superclasses)'s attributes. 
+    * `class A`
+    * `class B: virtual public A`, `class C: virtual public A`
+    * `class C: public B, public C`
 
 ![Modes](https://www.geeksforgeeks.org/wp-content/uploads/table-class.png)
+
+When a class inherits another one, the members of the derived class can access the **protected** members inherited from the base class, **but not its PRIVATE members**. So, regardless of the inhertitance mode, private members are not accessable outside a base class, even for derived class, except declaring `friend` methods/class.
 
 The Diamond Problem
 ---
