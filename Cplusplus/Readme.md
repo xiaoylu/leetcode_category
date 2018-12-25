@@ -1,8 +1,9 @@
 C++
 ===
 
-The default constructors are called in the order of inheritance, while the default destructors are called in the opposite order.
+Order of Construction and Destruction
 ---
+The default constructors are called in the order of inheritance, while the default destructors are called in the opposite order.
 BUT you can only explicitly call the base class’s parameterised constructor in the derived class
 ```
 Child(int j): Parent(j) 
@@ -14,6 +15,34 @@ The parameterised constructor of base class can NOT be called in default constru
 
 And objects are always destroyed in reverse order of their creation.
 
+We can not make constructor virtual, but we can make destructor virtual. In this way, the call of Derived's destructor will be called first, and then the Bases's destructor. Otherwise, without virtual keyword, only destructor's destructor gets called.
+
+```
+#include<iostream>
+using namespace std;
+class Base  {
+public:
+    Base()    { cout<<"Constructor: Base"<<endl; }
+    virtual ~Base()   { cout<<"Destructor : Base"<<endl; }
+};
+class Derived: public Base {
+public:
+    Derived()   { cout<<"Constructor: Derived"<<endl; }
+    ~Derived()  { cout<<"Destructor : Derived"<<endl; }
+};
+int main()  {
+    Base *Var = new Derived();
+    delete Var;
+    return 0;
+}
+```
+Output
+```
+Constructor: Base
+Constructor: Derived
+Destructor : Derived
+Destructor : Base
+```
 
 Copy constructor
 ---
