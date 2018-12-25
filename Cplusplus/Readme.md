@@ -374,6 +374,23 @@ int max <int> (int &a, int &b)
 }
 ```
 
+When do we use Initializer List in C++?
+---
+* The data members must be initialized at creation time
+    * data member is const
+    * data member does not have default constructor (if you implemented its parameterized constructor)
+    * data member is a reference (sth. like `int &x`);
+* **Parameterized constructor** of base class, because the base class must be instantied before calling the derived class's constructor. If we want to call default constructor of base class, we do not need initialier list.
+
+```
+// Class B is derived from A 
+class B: A { 
+public: 
+    //Initializer list must be used 
+    B(int x): A(x) { cout << "B's Constructor called"; }; 
+}; 
+```
+
 Further Reading
 ---
 Test yourself: https://www.geeksforgeeks.org/c-plus-plus-gq/
