@@ -1,5 +1,5 @@
 Max Flow
----
+===
 
 Problem:
 
@@ -21,6 +21,8 @@ Problem:
     * Remove the bottleneck flow in the forward edges
     * Add the bottleneck flow in the reverse edges
 
+Max Matching
+---
 Maximum flow can be used for max matching in bi-parite graph if we create a fake source S and fake destination T, 
 each connecting to the nodes of one layer in the bi-parite graph. For example, 
 
@@ -122,3 +124,18 @@ def max_matching(G):
             dfs(i, mark)
     return match
 ```
+
+Minimum-cost maximum flow (MCMF)
+---
+The max flow problem is a special case of MCMF where the cost of unit flow in every edge is ONE. The goal is to 
+
+* max the flow
+* while the flow is maximized, minimize cost = `sum(cost_e * f_e for all edge e)`
+
+We just replace the BFS in max flow by **weighted graph shortest-distance algorithm** like Bellman-Ford to find the path with min sum of cost.
+
+Mathematically, it works because the bottleneck flow through a path brings cost = `sum(cost_e * bf)` where `bf` is the bottleneck flow. So given the `bf`, min cost = `min( sum(cost_e) ) * bf`.
+
+
+
+
