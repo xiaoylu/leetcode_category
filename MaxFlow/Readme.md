@@ -22,21 +22,24 @@ Edmonds-Karp implementation of the Ford-Fulkerson algorithm:
     * Add the bottleneck flow in the reverse edges
 
 Maximum flow can be used for max matching in bi-parite graph if we create a fake source S and fake destination T, 
-each connecting to the nodes of one layer in the bi-parite graph.
+each connecting to the nodes of one layer in the bi-parite graph. For example, 
+
+> Given the preference of 4 nodes `x0~x3`: `[[y0,y1,y2,y3],[y0,y1,y2],[y0,y1],[y1,y2]]`
+> max matching would be `x0->y3, x1->y1, x2->y0, x3->y2`
 
 ```
 from collections import defaultdict
 from collections import deque
 
-def maxflow(G, s, t, N):
-    # Given graph G with N nodes
-    # return the max flow from source s to destination t
-    rG = collections.defaultdict(dict)
+def maxflow(G, s, t):
+    # Given graph G, return the max flow from source s to destination t
+    rG = defaultdict(dict)
     for u in G:
         for v in G[u]:
             rG[u][v] = G[u][v]
             rG[v][u] = 0
-            
+    N = len(rG)
+
     max_flow = 0
     while True:
         # bfs to find shortest path with postive flow
@@ -51,18 +54,21 @@ def maxflow(G, s, t, N):
                 if v not in vis and rG[u][v] > 0:
                     vis.add(v)
                     parent[v] = u
-                    
+                    bfs.append(v)
+        
         # terminate when no augment path found
-        if parent[t] == -1: break
+        if t not in vis: break
             
         # find bottleneck
         v = t
         bottleneck = float('inf')
         while v != s:
             u = parent[v]
+            print(v, end = "->")
             bottleneck = min(bottleneck, rG[u][v])
             v = u
-            
+        print(s, ":", bottleneck)
+        
         # remove bottleneck flow
         v = t
         while v != s:
@@ -87,5 +93,5 @@ for i in range(N):
 for i, row in enumerate(preference):
     for r in row:
         G[2 + i][2 + N + r] = 1 
-print(maxflow(G, s, t, N))
+print(maxflow(G, s, t))
 ```
