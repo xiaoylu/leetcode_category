@@ -6,9 +6,6 @@ Problem:
 * Input: a graph with edge capacity, source `s` and destination `t`
 * Output: max flow from s to t  (the flow over every edge is no more than its capacity)
 
-Maximum flow can be used for max matching in bi-parite graph if we create a fake source S and fake destination T, 
-each connecting to the nodes of one layer in the bi-parite graph.
-
 Edmonds-Karp implementation of the Ford-Fulkerson algorithm:
 
 * repeat forever
@@ -24,15 +21,10 @@ Edmonds-Karp implementation of the Ford-Fulkerson algorithm:
     * Remove the bottleneck flow in the forward edges
     * Add the bottleneck flow in the reverse edges
 
+Maximum flow can be used for max matching in bi-parite graph if we create a fake source S and fake destination T, 
+each connecting to the nodes of one layer in the bi-parite graph.
+
 ```
-'''
-
-                            Online Python Compiler.
-                Code, Compile, Run and Debug python program online.
-Write your code in this editor and press "Run" button to execute it.
-
-'''
-
 from collections import defaultdict
 from collections import deque
 
