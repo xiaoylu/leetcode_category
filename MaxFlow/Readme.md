@@ -95,3 +95,30 @@ for i, row in enumerate(preference):
         G[2 + i][2 + N + r] = 1 
 print(maxflow(G, s, t))
 ```
+
+According to [DarthPrince's blog](https://codeforces.com/blog/entry/16221), there is a shortcut.
+When `v` is matched with `u` by edge `(u->v)`, then in the residual graph, there is actually a path from `v` to `u`.
+Hence, we can obtain an augment path along `(v->u)`.
+
+Keep finding augment path by DFS. Each DFS only visits each node once.
+```
+def max_matching(G):
+    N = len(G)
+    
+    match = [-1] * N
+    
+    def dfs(u, mark):
+        if mark[u]: return False
+        mark[u] = True
+        for v in G[u]:
+            if match[v] == -1 or dfs(match[v]):
+                match[v], match[u] = u, v
+                return True
+        return False
+    
+    for i in G:
+        if match[i] == -1:
+            mark = [False] * N
+            dfs(i, mark)
+    return match
+```
