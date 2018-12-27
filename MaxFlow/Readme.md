@@ -6,7 +6,7 @@ Problem:
 * Input: a graph with edge capacity, source `s` and destination `t`
 * Output: max flow from s to t  (the flow over every edge is no more than its capacity)
 
-Edmonds-Karp implementation of the Ford-Fulkerson algorithm:
+[Edmonds-Karp implementation](http://theory.stanford.edu/~tim/w16/l/l1.pdf) of the Ford-Fulkerson algorithm:
 
 * repeat forever
   * Create a residual graph `rG`, for an edge `u -> v` in original graph `G`
