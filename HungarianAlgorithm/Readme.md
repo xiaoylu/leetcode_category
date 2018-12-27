@@ -27,6 +27,7 @@ function: HungarianAlgorithm(Matrix C):
 ```
 FindMinCost does an optimal selection of s in matrix  such that  cells are selected and non of them lie in same row or column
 
+[Slides](http://www.math.harvard.edu/archive/20_spring_05/handouts/assignment_overheads.pdf)
 
 minimum weight perfect bipartite matching
 ---
