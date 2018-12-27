@@ -33,5 +33,9 @@ minimum weight perfect bipartite matching
 The minimum weight perfect bipartite matching is the minimum cost max flow problem
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Minimum_weight_bipartite_matching.pdf/page1-330px-Minimum_weight_bipartite_matching.pdf.jpg)
 
+Further readings
+---
+[Google OR tools](https://developers.google.com/optimization/assignment/simple_assignment)
+
 
 
