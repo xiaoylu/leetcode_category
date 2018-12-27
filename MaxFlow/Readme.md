@@ -125,6 +125,9 @@ def max_matching(G):
     return match
 ```
 
+See this example for the same problem:
+[https://www.geeksforgeeks.org/channel-assignment-problem/](https://www.geeksforgeeks.org/channel-assignment-problem/)
+
 Minimum-cost maximum flow (MCMF)
 ---
 The max flow problem is a special case of MCMF where the cost of unit flow in every edge is ONE. The goal is to 
@@ -135,6 +138,12 @@ The max flow problem is a special case of MCMF where the cost of unit flow in ev
 We just replace the BFS in max flow by **weighted graph shortest-distance algorithm** like Bellman-Ford to find the path with min sum of cost.
 
 Mathematically, it works because the bottleneck flow through a path brings cost = `sum(cost_e * bf)` where `bf` is the bottleneck flow. So given the `bf`, min cost = `min( sum(cost_e) ) * bf`.
+
+**Application for min-cost matching**
+The MCMF algorithm can solve the problem for Hungarian Algorithm: given N workers and M tasks, the i-th worker costs `W[i,j]` to finish the j-th tasks - return the min cost to finish all M tasks.
+
+Create fake source and destination nodes, source connects to all worker nodes, and all task nodes connect to the destination. The capacities for the edges connecting fake nodes to original nodes are all Ones. `W[i,j]` is the cost of edges between worker and task nodes. So the maximum flow with minimum cost is the result.
+
 
 
 
