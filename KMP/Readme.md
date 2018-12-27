@@ -1,5 +1,13 @@
 # KMP algorithm
 
+KMP matches a short string `T` in a long string `S` in **linear** time.
+
+The idea is that, when `T[i]` fails to match `S[j]`, we do not need to start from matching `T[0]` and `S[j-i+1]` - `T` string already told us where to start.
+
+* Preprocessing: Obtain the next matching point `b[i]` s.t. `T[:i]` is the longest "border" of T.
+
+* Searching: When `T[i]` mis-matches, we roll back to `T[b[i]]` to restart.
+
 [Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
 
 The border `r` is both suffix and prefix of `x`, then `r+a` is a "border" of `x+a`.
@@ -17,9 +25,10 @@ The searching phase of the Knuth-Morris-Pratt algorithm is in `O(n)`. A preproce
 ## Example
 The first step is to construct array `b`.
 
-A **short** implementation is here:
+A **C++** implementation of preprocessing:
 
 Note that the `b[0]=-1`. For a char `array[i]` does not match any char, we have `b[i]=0`.
+
 ```
 void kmpPreprocess(vector<int>& array)
 {
@@ -33,6 +42,29 @@ void kmpPreprocess(vector<int>& array)
     }
 }
 ```
+
+Given the preprocessed `b`, do searching:
+```
+void kmpSearch()
+{
+    int i=0, j=0;
+    while (i<n)
+    {
+        // roll back first
+        while (j>=0 && t[i]!=p[j]) j=b[j];
+        i++; j++;
+        
+        // succeess
+        if (j==m)
+        {
+            report(i-j);
+            // roll back
+            j=b[j];
+        }
+    }
+}
+```
+
 
 With the `b` array, it is easy to find the palindrome prefix in a string:
 
@@ -50,8 +82,9 @@ If a proper prefix of `s` is also a suffix, it is a prefix palindrome of `g`. So
 ```
     def shortestPalindrome(self, g):
         s = g + "|" + g[::-1]
-        b = [-1] + [0] * len(s)
+        b = [0] * (len(s) + 1)
         l, r = -1, 0
+        b[r] = l
         while r < len(s):
             while l >= 0 and s[l] != s[r]: l = b[l]
             l, r = l + 1, r + 1
