@@ -22,12 +22,9 @@ where `b[i]` indicates the index of next potential match of char at `array[i]`.
 
 The searching phase of the Knuth-Morris-Pratt algorithm is in `O(n)`. A preprocessing of the pattern is necessary in order to analyze its structure. The preprocessing phase has a complexity of O(m). Since `m <= n`, the overall complexity of the Knuth-Morris-Pratt algorithm is in `O(n)`.
 
-## Example
-The first step is to construct array `b`.
-
 A **C++** implementation of preprocessing:
 
-Note that the `b[0]=-1`. For a char `array[i]` does not match any char, we have `b[i]=0`.
+Note that the `b[0]=-1`. In the worst case, we starting matching from index `b[i]=0` - matching the first char.
 
 ```
 void kmpPreprocess(vector<int>& array)
@@ -37,7 +34,7 @@ void kmpPreprocess(vector<int>& array)
     b[i]=j;
     while (i < array.size())
     {
-        while (j>=0 && array[i]!=array[j]) j=b[j]; // retreat when no matching
+        while (j>=0 && t[i]!=t[j]) j=b[j]; // retreat when no matching
         b[++i]=++j;
     }
 }
@@ -51,7 +48,7 @@ void kmpSearch()
     while (i<n)
     {
         // roll back first
-        while (j>=0 && t[i]!=p[j]) j=b[j];
+        while (j>=0 && t[i]!=s[j]) j=b[j];
         i++; j++;
         
         // succeess
@@ -66,9 +63,8 @@ void kmpSearch()
 ```
 
 
-With the `b` array, it is easy to find the palindrome prefix in a string:
-
 **LC 214. Shortest Palindrome** 
+---
 
 Prepend letters at the front of a string to make a palindrome. 
 What's the smallest numer of letters you need to prepend?
@@ -93,6 +89,7 @@ If a proper prefix of `s` is also a suffix, it is a prefix palindrome of `g`. So
 ```
 
 **LC 5. Longest Palindromic Substring** 
+---
 Find the longest palindromic substring in `s`. 
 
 Test all the suffix of `s[:i]`, which is also a proper prefix of it. KMP linear time for each suffix and a total of  `O(N^2)` time.
@@ -127,7 +124,7 @@ There exists a O(N) time algorithm called Manchester algorithm. And DP also solv
 
 
 **LINTCODE 1365. Minimum Cycle Section**
-
+---
 Given an array of int, find the length of the minimum cycle section. ex. `[1,2,3,1,2,3]` has the longest cycle section of `[1,2,3]`, so return 2 as the minimum number of cycle sections.
 
 Idea: input `abc abc abc` would have the longest proper prefix `abc abc` which is also a suffix. So the cycle section would be `N - b[N]` where `array[0:b[N]] == array[N-b[N]:N]`.
