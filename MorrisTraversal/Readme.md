@@ -57,3 +57,6 @@ while current:
       prev.right = current
       current = current.left
 ```
+
+The post-order visit can be done in a similar fashion as in this post (https://github.com/xiaoylu/leetcode_category/edit/master/TreeTraversal/Readme.md).
+
