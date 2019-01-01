@@ -5,8 +5,8 @@ O(N) time O(1) space tree traversal. Works for pre-, post-, in-order traversal o
 
 ```
 # We start from the input tree and end up with the input tree
-# Go Down: the clock-wise shift happens at the first visit of each node (pre-order)
-# Go Up: the anito-clockwise shift happens at the second visito of each node (in-order)
+# Go Down: the clock-wise shift at the first visit of each node (pre-order)
+# Go Up: the anti-clockwise shift at the second visit of each node (in-order)
 #
 #        |    ^
 #        V    |
@@ -24,8 +24,8 @@ O(N) time O(1) space tree traversal. Works for pre-, post-, in-order traversal o
 #      /  \           |
 #   ltree rtreeB      |
 #           \         |
-#           current----        # note that current's left kid is still lkid, so we can recover the tree after Morris traversal
-#             \
+#           current----        # note that current's left kid is still lkid, 
+#             \                # so we can recover the original tree after Morris traversal
 #            rtreeA
 #
 #        |    ^
