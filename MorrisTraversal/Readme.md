@@ -11,6 +11,8 @@ O(N) time O(1) space tree traversal. Works for pre-, post-, in-order traversal o
 #        |    ^
 #        V    |
 #
+#   parent
+#       \
 #        current
 #        /    \
 #      lkid   rtreeA
@@ -20,11 +22,13 @@ O(N) time O(1) space tree traversal. Works for pre-, post-, in-order traversal o
 #        |    ^
 #        V    |                # After clock-wise shift, current becomes the right kid of the right-most node rooted by lkid
 #
-#      lkid  <---------
-#      /  \           |
-#   ltree rtreeB      |
-#           \         |
-#           current----        # note that current's left kid is still lkid, 
+# parent
+# |
+# |    lkid  <---------
+# |    /  \           |
+# | ltree rtreeB      |
+# |         \         |
+# |-------> current----        # note that current's left kid is still lkid, 
 #             \                # so we can recover the original tree after Morris traversal
 #            rtreeA
 #
@@ -37,7 +41,7 @@ O(N) time O(1) space tree traversal. Works for pre-, post-, in-order traversal o
 current = root
 while current:
   if current.left is None:
-    # the left-most node in the original tree
+    # visit left-most node in every branch
     current = current.right
   else:
     prev = current.left
