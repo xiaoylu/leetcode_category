@@ -1,8 +1,9 @@
 # Iterative Tree Traversal - Pre-order, In-order and Post-order
 
-Tree problems are easier if we traverse recursively. How about iteratively?
 
+**LC 144. Binary Tree Preorder Traversal**
 **LC 94. Binary Tree Inorder Traversal**
+Solution:
 ```
     def inorderTraversal(self, root):
         res, stack = [], []
@@ -10,39 +11,18 @@ Tree problems are easier if we traverse recursively. How about iteratively?
         while node or stack:
             # go all the way to the left, exactly what recursion inorder does
             while node:
-                stack.append(node)
+                stack.append(node) # pre-order here
                 node = node.left
             
-            
             node = stack.pop()
-            res.append(node.val)   # in-order part here !!
+            res.append(node.val)   # in-order here
             
             # then go right, exactly what recursion inorder does
             node = node.right
         return res
 ```
 
-Note that you should push the visited node (while keep going left) into the stack. So the elements in the stack are the same when call DFS recursively.
-
-Whenever you pop up an element, its left branch has already been explored. So go right then.
-
-**LC 144. Binary Tree Preorder Traversal**
-```
-    def preorderTraversal(self, root):
-        node = root
-        stack, res = [], []
-        while node or stack:
-            while node:
-                res += node.val, 
-                stack += node,
-                node = node.left
-            node = stack.pop()
-            node = node.right
-        return res
-  ```
-  
-**Simplification**:
-Actually, we have a "context" every time a node gets poped up from the stack. At that moment, the variables have the same values when the recursion has returned from its children in post-order dfs.
+**Simplification for pre-order**
 
 The pre-order traversal can be simplified by pushing the right kid, instead of the root, into the stack.
 ```
@@ -58,14 +38,8 @@ The pre-order traversal can be simplified by pushing the right kid, instead of t
             #node = node.right # this line can be removed now
         return res
  ```
-  
-The most difficult one might be post-order traversal. My first thought is to
-* visit the left and right branches first
-* visit the root
-
-we do know when we finish exploring the left branch, (at the moment, we pop up an element), but obviously, we do NOT know when we finish visiting all the nodes in the right branch, that being said, it's unknown when the first step is done and we met the root.
-
-The idea is that post-order is reversed pre-order (not to simply reverse the result, but we should reverse the order at every level.) So, we should put the root into the right-most position in the result, hence, we push the node to a deque from its left, and keep visiting the right branch in prior to the left branch.
+ 
+**Post-order** is reversed pre-order (not to simply reverse the result, but we should reverse the order at every level.) We keep visiting the right branch in prior to the left branch.
 
 The solution would be:
 * push current node into deque from its left
@@ -88,6 +62,7 @@ The solution would be:
         return list(res)
 ```
 
+**A more general solution**
 Of course, we can mark a node by the times you visited it. Since every node is visited three times in DFS, `vis[node]` is set as -1 initially for the pre-order visit. Change it to 0 in the in-order visit. Finally, the post-order makes `vis[node]` 1.
 
 Dynamically release memory of `vis` so that max memory usage is height of tree.
@@ -112,7 +87,7 @@ Dynamically release memory of `vis` so that max memory usage is height of tree.
                 # do sth. in post-order
                 vis[node] += 1
                 if node.left: del vis[node.left]      #IMPORTANT: release node's kids memory here
-                if node.right: del vis[node.right]    #           but not node itself
+                if node.right: del vis[node.right]    #           but not the node itself, let its parent release its memory
                 stack.pop()
 ```        
         
