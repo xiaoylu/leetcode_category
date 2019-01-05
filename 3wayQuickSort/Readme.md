@@ -14,6 +14,12 @@ Dutch National Flag Algorithm:
 between `low` and `mid` are the redundant elements equal to the pivot
 
 ```
+    # pivot = 4
+    #
+    # 1 2 3 4 4 4 1 2 12 3 7 8 9
+    #       ^     ^      ^
+    #       low   mid    high
+    #
     int mid = low; 
     int pivot = a[high]; 
     while (mid <= high) 
