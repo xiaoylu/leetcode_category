@@ -32,3 +32,56 @@ between `low` and `mid` are the redundant elements equal to the pivot
             swap(&a[mid], &a[high--]); 
     }
 ```
+
+**LC 324. Wiggle Sort II**
+Given an unsorted array nums, reorder it such that `nums[0] < nums[1] > nums[2] < nums[3]....`
+
+Solution with [virtual indexing](https://leetcode.com/problems/wiggle-sort-ii/discuss/77677/O(n)%2BO(1)-after-median-Virtual-Indexing)
+
+```
+    def wiggleSort(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        N = len(nums)
+        if not nums: return []
+        
+        def w(i):
+            return (1+2*i) % (N|1)
+        
+        def swap(i, j):
+            nums[w(i)], nums[w(j)] = nums[w(j)], nums[w(i)]
+            
+        def partition(nums, l, r, x):
+            i, j, k = 0, 0, r
+            while j <= k:
+                if x < nums[w(j)]: 
+                    swap(i, j)
+                    i += 1
+                    j += 1
+                elif nums[w(j)] < x:
+                    swap(j, k)
+                    k -= 1
+                else:
+                    j += 1
+            return i, j
+            
+        # find the k-th "smallest" element
+        def find(nums, l, r, k): 
+            if l == r: return nums[w(l)]
+            if k <= r - l + 1:
+                x = random.randint(l, r)
+                i, j = partition(nums, l, r, nums[w(x)])
+                if k <= i - l:
+                    return find(nums, l, i - 1, k)
+                elif k > j - l:
+                    return find(nums, j, r, k - (j - l))
+                else:
+                    return nums[w(i)]
+            return float('inf')
+        
+        median = find(nums, 0, N - 1, (N + 1)//2)
+        
+        partition(nums, 0, N - 1, median)
+ ```
