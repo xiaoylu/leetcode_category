@@ -7,12 +7,25 @@ DFS/BFS from all nodes:
 ---
 [Tarjan's algorithm](https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm) supposes every node has a depth `d[i]`. Initially, the root has the smallest depth. And we do the post-order DFS updates `d[i] = min(d[j])` for any neighbor `j` of `i`. Actually BFS also works fine with the reduction rule `d[i] = min(d[j])` here.
 
-    function dfs(i)
-        d[i] = i
-        mark i as visited
-        for each neighbor j of i: 
-            if j is not visited then dfs(j)
-            d[i] = min(d[i], d[j])
+```
+def tarjan(graph):
+    d = {i:i for i in range(N)}
+    vis = set()
+    stack = set()
+    def dfs(i):
+        vis.add(i)
+        stack.add(i)
+        for j in graph[i]:
+            if j not in vis:
+                dfs(j)
+                d[i] = min(d[i], d[j])
+            elif j in stack:
+                d[i] = min(d[i], d[j])
+        stack.remove(i)
+    for i in range(N):
+        if i not in vis:
+            dfs(i)
+```
 
 If there is a forwarding path from `u` to `v`, then `d[u] <= d[v]`. In the SCC, `d[v] <= d[u] <= d[v]`, thus, all the nodes in SCC will have the same depth. To tell if a graph is a SCC, we check whether all nodes have the same `d[i]`.
 
