@@ -37,17 +37,15 @@ It is a simplified version of the [Kosaraju’s algorithm](https://www.geeksforg
 
 The most useful and fast-coding algorithm for finding SCCs is Kosaraju.
 
-1. post-order DFS and push vertices to a stack at finishing time
-2. Reverse the graph edges
-3. Keep poping up nodes from stack, add all reachable nodes to the SCC of the popped node
+1. The first DFS pushes every node to a stack in post-order
+2. Reverse the graph edges!!
+3. Keep poping up source node from stack, the second DFS adds all reachable nodes to the SCC of the source node
 
-Say `u` is at the top of stack, if there exists a path from `v -> u`, then `u->v`.
+Why it works? Say `u` is at the top of stack, if there exists a path from `v -> u`, then `u -> v`.
 
-Proof by contradiction: otherwise, `u` should not be at the top.
+Proof by contradiction: otherwise, `v` should be above `u` in the stack, then `u` should not be at the top.
 
-![Illustration](https://github.com/xiaoylu/leetcode_category/blob/master/StronglyConnectedComponent/Kosaraju.png)
-
-Implemtation tricks:
+Implementation trick:
 
 The first and second DFS can share the same `visited` array. The dfs1 starts with all-false `visited` and set the visited nodes as `true`. And dfs2 starts with the all-true `visited` and set the visited nodes as `false`.
 
