@@ -42,7 +42,7 @@ The most useful and fast-coding algorithm for finding SCCs is Kosaraju.
 
 Why it works? Say `u` is at the top of stack, if there exists a path from `v -> u`, then `u -> v`.
 
-Proof by contradiction: otherwise, `v` should be above `u` in the stack, then `u` should not be at the top.
+Proof by contradiction: otherwise, assume no path `u -> v`, then `v` should be above `u` in the stack as `v -> u`, but `v` is below `u` actually.
 
 Implementation trick:
 
