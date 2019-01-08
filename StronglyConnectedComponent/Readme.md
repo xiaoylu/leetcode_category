@@ -37,29 +37,50 @@ It is a simplified version of the [Kosaraju’s algorithm](https://www.geeksforg
 
 The most useful and fast-coding algorithm for finding SCCs is Kosaraju.
 
-1. DFS on the graph and sort the vertices in decreasing of their finishing time (we can use a stack `L`).
+1. post-order DFS and push vertices to a stack at finishing time
 2. Reverse the graph edges
-2. Start from the vertex with the greatest finishing time, and for each vertex v that is not yet in any SCC, do : 
-3. for each u that v is reachable by u and u is not yet in any SCC, put it in the SCC of vertex v.
+3. Keep poping up nodes from stack, add all reachable nodes to the SCC of the popped node
 
-Suppose the list `L` is the post-order DFS visit of nodes. `u->v` indicates that there exists a forwarding path from `u` to `v`.
+Say `u` is at the top of stack, if there exists a path from `v -> u`, then `u->v`.
 
-If `u->v` and not `v->u`, then `u` must appear at the **left** of `v` in `L`. The nodes in a SCC, such as `v` and `w`, however, may appear in any arbitrary order on the list `L`.
+Proof by contradiction: otherwise, `u` should not be at the top.
 
 ![Illustration](https://github.com/xiaoylu/leetcode_category/blob/master/StronglyConnectedComponent/Kosaraju.png)
-
-So, if a node `x` appear strictly before `y` on the list `L`:
-
-* case1: `x->y` and `y->x`, like the case of `v` and `w`
-* case2: `x->y` and not `y->x`, like the case of `u` and `v`
-* case3: not `x->y` and not `y->x`
-
-Among the nodes which can reach `y`, we need to eliminate the nodes which `y` can NOT reach. To achieve this goal, we iterate through `L` from left to right and run DFS starting from each node on the transpose graph. If some node is reached by DFS and does not belong to any SCC, then we add this node to the SCC of current root.
-
-For case 1 & 2, `x` is already in some SCC, so when the second DFS from `y` reach `x`, nothing happens. Besides, `y` is already added to the SCC of `x` in case 1. For case 3, in the transpose graph, DFS from `y` would not reach `x`.
-
-In short, the first DFS arranges those nodes which **can** reach `v` but **can not** be reached from `v` on its **left**. So the second DFS is able to skip such nodes.
 
 Implemtation tricks:
 
 The first and second DFS can share the same `visited` array. The dfs1 starts with all-false `visited` and set the visited nodes as `true`. And dfs2 starts with the all-true `visited` and set the visited nodes as `false`.
+
+```
+        N = len(graph)
+        stack = []
+        vis = set()
+        SCC = {}
+        
+        rgraph = [[] for _ in range(N)]
+        for i in range(N):
+            for j in graph[i]:
+                rgraph[j].append(i)
+        
+        def dfs1(i):
+            if i not in vis:
+                vis.add(i)
+                for j in graph[i]:
+                    dfs1(j)
+                stack.append(i)
+                
+        for i in range(N): dfs1(i)
+        
+        def dfs2(i, scc):
+            if i in vis:
+                vis.remove(i)
+                SCC[i] = scc
+                for j in rG[i]:
+                    dfs2(j, scc)
+     
+        while stack:
+            i = stack.pop()
+            dfs2(i, i)
+        
+        print(SCC)
+```
