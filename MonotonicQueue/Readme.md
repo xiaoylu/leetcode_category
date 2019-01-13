@@ -141,6 +141,16 @@ def min_cost(A, K):
     return Q[-1][1]
 ```
 
+**LC975. Odd Even Jump**
+---
+Find a `j` of each `i` such that `j > i` and `A[j] = min(A[x] > A[i])` for all `x > i`.
+
+This problem may not sound that straight-forward. But, if we sort `A` and arrange the indices by the increasing order of `A[i]` as `B`.
+For example, `A=[5,2,1,3,4]`, then the indices would be `B=[2,1,3,4,0]`.
+
+The corresponding `j` of `i` would be the **next indice in B larger than i**, which gets projected to the monotonic queue problem.
+
+
 Codeforces 487B Strip
 ===
 
