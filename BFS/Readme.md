@@ -13,17 +13,21 @@ There are two styles. Straightforward list:
 Using deque (Dijkstra uses a heap instead)
 ```
     Q = collections.deque(sources)
-    explored = set()
+    vis = set()
     distance = 1
     while Q: 
-        for _ in range(len(Q)):
+        n = len(Q)
+        
+        for _ in range(n):
             node = Q.popleft()
+            
             if node in destinations: 
                 return
-            explored.add(node)
+                
             for neighbour in neighborhood(node):
-                if neighbour not in explored:
-                    Q.append(neighbour)
+                if neighbour not in vis:
+                    vis.add(neighbor)
+                    Q.append(neighbor)
         distance += 1
 ```
 Both need to keep a visisted nodes set, both modify the list/deque inside the iterations, both check if visisted node is THE destination as the FIRST step inside the iterations. 
