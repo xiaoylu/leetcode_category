@@ -1,8 +1,7 @@
 ## A general approach to backtracking questions (Subsets, Permutations, Combination Sum, Palindrome Partitioning etc.)
 
 Many problems ask for generating all subsets of a set, all permutations or all combinations of candidates etc.
-The idea is to use backtracking. But you need a template to do this quickly.
-So here is your template.
+The idea is to use backtracking. Here is a template to do this quickly.
 
 **LC 78.** Subsets. return all possible subsets (the power set).
 
