@@ -144,6 +144,9 @@ The MCMF algorithm can solve the problem for Hungarian Algorithm: given N worker
 
 Create fake source and destination nodes, source connects to all worker nodes, and all task nodes connect to the destination. The capacities for the edges connecting fake nodes to original nodes are all Ones. `W[i,j]` is the cost of edges between worker and task nodes. So the maximum flow with minimum cost is the result.
 
+**Futher Readings**
+http://acm.pku.edu.cn/summerschool/acm-icpc%E6%9A%91%E6%9C%9F%E8%AF%BE_%E7%BD%91%E7%BB%9C%E6%B5%81.pdf
+
 
 
 
