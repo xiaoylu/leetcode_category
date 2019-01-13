@@ -68,3 +68,7 @@ private:
     }
 };
 ```
+
+Range update of BIT tree
+---
+https://www.geeksforgeeks.org/binary-indexed-tree-range-update-range-queries/
