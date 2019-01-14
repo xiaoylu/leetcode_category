@@ -11,9 +11,12 @@ The following question can be solved by monotonic queue:
 
 In general, the following "prototype" problems can be solved by monotonic queue:
 
-Any DP problem where `A[i] = min(A[j:k]) + C` where `j < k <= i`
+Sliding Max
 ---
-This is a sliding max/min window problem.
+
+Any DP problem where `A[i] = max(A[j:k]) + C` where `j < k <= i`
+
+The sliding max/min window problem belongs to this type.
 
 Problem statement: return the max elements in a sliding window.
 
@@ -30,9 +33,9 @@ The head of the increasing queue is the sliding max!
 As simple as it is, we have a sliding window of elements, 
 the only unique thing here is that we can keep the elements in the window sorted. It brings great benefits because it takes O(1) to obtain the min/max element in the window.
 
-That's why any DP problem where `A[i] = min(A[j:k]) + C` for `j < k <= i` can be solved by Monotonic Queue.
+That's why any DP problem where `A[i] = max(A[j:k]) + C` for `j < k <= i` can be solved by Monotonic Queue.
 
-Given a element `A[i]`, find the nearest previous element larger than it
+Given a element `A[i]`, find the nearest element larger/smaller than it
 ---
 Given element `A[i]`, the task is to find the maximum index `j < i` such that `A[j] > A[i]`. Namely, `A[j]` is the nearest larger element on the left of `A[i]`.
 
