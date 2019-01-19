@@ -7,10 +7,9 @@ Topics:
 ---
 
 Basic:
-
+* DFS
 * BFS
 * Back Tracking
-* Binary Index Tree	(BIT)
 * Binary Search
 * Bit Operation
 * Dynamic Programming (DP)
@@ -43,3 +42,5 @@ Intermediate:
 Advanced:
 * KMP
 * Segment Tree
+* Binary Index Tree	(BIT)
+* Max-flow (and min-cost max-flow)
