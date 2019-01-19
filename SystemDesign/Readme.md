@@ -4,9 +4,16 @@ System Design Notes
 Sharding
 ---
 Pros:
-* 
+* Split the burden of data storage
 Cons:
-* Requests to all data resources to get all the responses
+* send requests to all data resources to get the responses
+
+ACID
+---
+* Atomicity: either succeeds completely, or fails completely
+* Consistentcy: valid transactions
+* Isolation: concurrency control
+* Durability: power outage
 
 Choices of NoSQL
 ---
