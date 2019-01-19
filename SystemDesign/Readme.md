@@ -5,6 +5,7 @@ Sharding
 ---
 Pros:
 * Split the burden of data storage
+
 Cons:
 * send requests to all data resources to get the responses
 
@@ -14,6 +15,10 @@ ACID
 * Consistentcy: valid transactions
 * Isolation: concurrency control
 * Durability: power outage
+
+Consistency:
+---
+* Eventual consistency: eventually the system converges to the same state
 
 Choices of NoSQL
 ---
