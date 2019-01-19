@@ -41,6 +41,7 @@ Intermediate:
  
 Advanced:
 * KMP
+* Morris Traversal
 * Segment Tree
 * Binary Index Tree	(BIT)
 * Max-flow (and min-cost max-flow)
