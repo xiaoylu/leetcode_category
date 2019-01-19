@@ -37,9 +37,16 @@ http://blog.nahurst.com/visual-guide-to-nosql-systems
 * CA: RDBMS
 * CP: BigTable, HBase, Redis, MongoDB
 * AP: Dynamo, Cassendra
+  * Dynamo is a key value store where cassandra is a column wide store
 
 Cassendra
 ---
 A must read for developers 
 http://abiasforaction.net/cassandra-architecture/
+
+Distributed Hash Table
+---
+Virtual Server Replicas and Keys are distributed on a Ring.
+
+
 
