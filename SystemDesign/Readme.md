@@ -5,9 +5,13 @@ Sharding
 ---
 Pros:
 * Split the burden of data storage
+* ID generation is simplistic
 
 Cons:
 * send requests to all data resources to get the responses
+* since the tables could be loaded into separate partitions sql joins would not work
+* 
+
 
 ACID
 ---
@@ -33,3 +37,9 @@ http://blog.nahurst.com/visual-guide-to-nosql-systems
 * CA: RDBMS
 * CP: BigTable, HBase, Redis, MongoDB
 * AP: Dynamo, Cassendra
+
+Cassendra
+---
+A must read for developers 
+http://abiasforaction.net/cassandra-architecture/
+
