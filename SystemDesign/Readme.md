@@ -27,3 +27,9 @@ HBase:
 
 Cassendra:
 * Wide-column data
+
+CAP:
+http://blog.nahurst.com/visual-guide-to-nosql-systems
+* CA: RDBMS
+* CP: BigTable, HBase, Redis, MongoDB
+* AP: Dynamo, Cassendra
