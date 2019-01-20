@@ -1,5 +1,8 @@
 System Design Notes
 ===
+http://www.mitbbs.com/article_t/JobHunting/32777529.html
+
+
 
 Sharding
 ---
@@ -10,8 +13,6 @@ Pros:
 Cons:
 * send requests to all data resources to get the responses
 * since the tables could be loaded into separate partitions sql joins would not work
-* 
-
 
 ACID
 ---
