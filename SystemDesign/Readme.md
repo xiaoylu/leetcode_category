@@ -44,9 +44,11 @@ Cassendra
 A must read for developers 
 http://abiasforaction.net/cassandra-architecture/
 
-Distributed Hash Table
----
-Virtual Server Replicas and Keys are distributed on a Ring.
+* Consistent Hashing (both virtual server replicas and keys are mapped to a ring.)
+    * determining a node on which a specific piece of data should reside on
+    * minimising data movement when adding or removing nodes.
+
+* Gossip Protocol – exchanging state information about themselves and a maximum of 3 other nodes they know about. Over a period of time state information about every node propagates throughout the cluster. The gossip protocol facilitates failure detection.
 
 Google Project
 ---
