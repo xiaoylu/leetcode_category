@@ -31,9 +31,16 @@ Template
             * **consistent hashing** to balance the load between servers!!
     * Draw Diagram:
         * seperate web server and application server
+        * try Aggregation servers and Cache server (be creative with the names)
     * Cache
         * Memcached
+        * Least Recently Used (LRU)
+        * Least Frequent Used (LFU)
     * Load Balancer
+        * Round Robin (may have overloading problem)
+        * Detect dead servers
+        * more intelligent ways
+    
 
     
 
@@ -51,7 +58,9 @@ Pros:
 
 Cons:
 * send requests to all data resources to get the responses
-* since the tables could be loaded into separate partitions sql joins would not work
+* unbalanced splitting (hot items)
+   * solution 1: consistent hashing (rind model)
+   * solution 2: find a better sharding ID (ex. Twitter use tweet ID instead of user ID)
 
 ACID
 ---
