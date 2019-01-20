@@ -54,20 +54,17 @@ https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-c
 * Eventual consistency: eventually the system converges to the same state
 * Strong consistency: data **viewed after an update** will be consistent for all observers of the entity
 
-Choices of NoSQL
+Choices of NoSQL via CAP
 ---
-HBase: 
-* Frequent writes get cached and write once buffer is full (out-performs SQL DB like MySQL and document-based NoSQL DB like MongoDB)
 
-Cassendra:
-* Wide-column data
-
-CAP:
 http://blog.nahurst.com/visual-guide-to-nosql-systems
 * CA: RDBMS
 * CP: BigTable, HBase, Redis, MongoDB
-* AP: Dynamo, Cassendra (used in most web applications and video/image/music distribution platforms because consistency is not important)
-  * Dynamo is a key value store where cassandra is a column wide store; Cassendra > Redis
+   * HBase gets frequent writes get cached and write only once when buffer is full (out-performs MongoDB)
+
+* AP: Dynamo, Cassendra 
+   * good for most content distribution platforms because consistency is not important here
+   * Dynamo is a key value store where cassandra is a column wide store; Cassendra > Redis
 
 Cassendra
 ---
@@ -82,10 +79,9 @@ http://abiasforaction.net/cassandra-architecture/
 
 Google Project
 ---
-
 * Hadoop <--> Mapreduce
 * Hadoop Distributed File System (HDFS) <--> Google File System
-* Hbase <--> Bigtable
+* HBase <--> Bigtable
 
 Long Term Storage: Hive
 
