@@ -20,9 +20,11 @@ ACID
 * Isolation: concurrency control
 * Durability: power outage
 
-Consistency:
+Eventual vs Strong Consistency:
 ---
+https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/
 * Eventual consistency: eventually the system converges to the same state
+* Strong consistency: data **viewed after an update** will be consistent for all observers of the entity
 
 Choices of NoSQL
 ---
@@ -37,7 +39,7 @@ http://blog.nahurst.com/visual-guide-to-nosql-systems
 * CA: RDBMS
 * CP: BigTable, HBase, Redis, MongoDB
 * AP: Dynamo, Cassendra
-  * Dynamo is a key value store where cassandra is a column wide store
+  * Dynamo is a key value store where cassandra is a column wide store; Cassendra > Redis
 
 Cassendra
 ---
