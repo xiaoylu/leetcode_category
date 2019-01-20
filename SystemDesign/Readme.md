@@ -11,17 +11,31 @@ Template
     * max requests/day, QPS (query per second)
     * storage size, latency, availability
 * High Level
-    * System APIs and Data Model
+    * System APIs
         * who call it?
+    * Data Model
         * what will be saved?
+        * seperate meta-data and hosting data!
     * Workflow/User Case
         * go through the steps
 * Details
     * Choice of database
-        * distributed file storage system (HDFS)
+        * Image/Video hosting: distributed file storage system (HDFS)
         * CA: RDBMS
-        * AP: 
-        * CP: Cassendra, Dynamno
+        * CP: HBase, Redis, MongoDB 
+        * AP: Cassendra(wide-column), Dynamno(key-value store)
+    * Data Partition
+        * How many shards we need?
+        * Shard by which ID
+        * when user/post/ become popular?
+            * consistent hashing to balance the load between servers!!
+        * 
+    * Diagram:
+        * seperate web server and application server
+        
+    * Cache
+        * Memcached
+    * Load Balancer
 
     
 
