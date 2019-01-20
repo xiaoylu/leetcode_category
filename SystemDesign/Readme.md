@@ -28,11 +28,9 @@ Template
         * How many shards we need?
         * Shard by which ID
         * when user/post/ become popular?
-            * consistent hashing to balance the load between servers!!
-        * 
-    * Diagram:
+            * **consistent hashing** to balance the load between servers!!
+    * Draw Diagram:
         * seperate web server and application server
-        
     * Cache
         * Memcached
     * Load Balancer
