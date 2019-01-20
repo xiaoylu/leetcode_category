@@ -68,5 +68,20 @@ http://massivetechinterview.blogspot.com/2015/06/itint5.html
 
 Twitter has apparently seen great performance improvements by disabling fanout for high profile users and instead loading their tweets during reads (pull).
 
+Redis Vs Cassandra
+---
+http://highscalability.com/blog/2013/10/28/design-decisions-for-scaling-your-high-traffic-feeds.html
+
+Instagram started out with Redis but eventually switched to Cassandra.
+
+Redis however has a few limitations:
+* all of your data needs to be stored in RAM which eventually becomes expensive. 
+* no support for sharding built into Redis. Sharding across nodes is quite easy, but moving data when you add or remove nodes is a pain.
+
+CDN
+---
+Store data physcially close to its consumers
+
+
 
 
