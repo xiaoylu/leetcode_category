@@ -1,8 +1,35 @@
 System Design Notes
 ===
+
+Template
+===
+* Requirements and Goals of the System
+    * Write Heavy or Read Heavy?
+    * Please prioritize functionality
+    * What is NOT in scope?
+* Capacity Estimation and Constraints:
+    * max requests/day, QPS (query per second)
+    * storage size, latency, availability
+* High Level
+    * System APIs and Data Model
+        * who call it?
+        * what will be saved?
+    * Workflow/User Case
+        * go through the steps
+* Details
+    * Choice of database
+        * distributed file storage system (HDFS)
+        * CA: RDBMS
+        * AP: 
+        * CP: Cassendra, Dynamno
+
+    
+
+
+
+Domain Knowledge
+===
 http://www.mitbbs.com/article_t/JobHunting/32777529.html
-
-
 
 Sharding
 ---
@@ -30,7 +57,7 @@ https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-c
 Choices of NoSQL
 ---
 HBase: 
-* Frequent writes get cached and write once buffer is full (out-performs SQL and document-based NoSQL like MongoDB)
+* Frequent writes get cached and write once buffer is full (out-performs SQL DB like MySQL and document-based NoSQL DB like MongoDB)
 
 Cassendra:
 * Wide-column data
@@ -39,7 +66,7 @@ CAP:
 http://blog.nahurst.com/visual-guide-to-nosql-systems
 * CA: RDBMS
 * CP: BigTable, HBase, Redis, MongoDB
-* AP: Dynamo, Cassendra
+* AP: Dynamo, Cassendra (used in most web applications and video/image/music distribution platforms because consistency is not important)
   * Dynamo is a key value store where cassandra is a column wide store; Cassendra > Redis
 
 Cassendra
