@@ -82,6 +82,12 @@ CDN
 ---
 Store data physcially close to its consumers
 
+Read Heavy or Write Heavy
+---
+read heavy那么用cache会提升performance之类的 同时知道应该避免什
+么东西 比如避免single point of failure 再比如时间和空间的tradeoff在read 
+heavy的时候应该倾向于时间 Write heavy的时候倾向于空间等等
+
 
 
 
