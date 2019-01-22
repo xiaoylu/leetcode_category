@@ -37,6 +37,8 @@ https://medium.com/@Pinterest_Engineering/introducing-pixie-an-advanced-graph-ba
 
 Graph Convolutional Neural Networks for Web-Scale Recommender Systems (KDD 2018)
 ---
+https://arxiv.org/pdf/1806.01973.pdf
+
 * PinSage algorithm performs efficient, localized convolutions by sampling the neighborhood around a node and dynamically constructing a computation graph from this sampled neighborhood.
 * Basic idea: transform the representations of u’s neighbors through a dense neural network and then apply a aggregator/pooling fuction
 * We then concatenate the aggregated neighborhood vector nu with u’s current representation and transform the **concatenated** vector through another dense
