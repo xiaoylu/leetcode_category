@@ -15,3 +15,6 @@ Append a list of characters to the end of a list of strings:
             
 Get alphabetics from a list of words:
 > `chars = set(''.join(words))`
+
+Transpose a matrix:
+> `z = list(map(list, zip(*A)))`
