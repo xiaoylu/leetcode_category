@@ -136,5 +136,15 @@ read heavy那么用cache会提升performance之类的 同时知道应该避免�
 heavy的时候应该倾向于时间 Write heavy的时候倾向于空间等等
 
 
+Further Reading
+---
+http://www.mitbbs.com/article_t/JobHunting/32777529.html
 
+https://blog.csdn.net/sigh1988/article/details/9790337
+
+http://blog.bittiger.io/%E9%9D%A2%E8%AF%95%E5%BF%85%E8%80%83%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%89%BF%E8%BD%BD%E5%8D%83%E4%B8%87%E7%94%A8%E6%88%B7%E7%9A%84uber%E5%AE%9E%E6%97%B6%E6%9E%B6%E6%9E%84/
+
+https://github.com/Vonng/ddia
+
+https://github.com/donnemartin/system-design-primer
 
