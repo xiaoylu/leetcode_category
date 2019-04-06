@@ -36,7 +36,7 @@ Both Dijkstra and BFS need to keep a visisted nodes set, both modify the list/de
 The code above (both styles) can be trivially extended to multiple sources and multiple destinations case. So, don't run the algorithm for each source, you simply add the all sources to the initial list/deque.
 
 ## Bi-directional
-BFS starting from source and destination at the same time. The time complexity decreases from `O(k^d)` to `O(k^(d/2) + k^(d/2))`.
+BFS starting from source and destination at the same time. The time complexity decreases from `O(k^d)` to `O(k^(d/2) + k^(d/2))` where `k` is the average node degree and `d` is the depth of the one-directional BFS search.
 
 Notes:
 * Check intersection at **boundry** only (all the visited nodes can be discarded)
