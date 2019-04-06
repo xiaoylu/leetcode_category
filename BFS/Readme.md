@@ -10,7 +10,7 @@ There are two styles. Straightforward list:
             if neighbor not in set(visisted):
                 bfs += (neighbor, distance+1), 
 ```
-Using deque (Dijkstra uses a heap instead)
+Using deque (Note that Dijkstra uses a heap instead of a deque)
 ```
     Q = collections.deque(sources)
     vis = set()
@@ -30,7 +30,7 @@ Using deque (Dijkstra uses a heap instead)
                     Q.append(neighbor)
         distance += 1
 ```
-Both need to keep a visisted nodes set, both modify the list/deque inside the iterations, both check if visisted node is THE destination as the FIRST step inside the iterations. 
+Both Dijkstra and BFS need to keep a visisted nodes set, both modify the list/deque inside the iterations, both check if visisted node is THE destination as the FIRST step inside the iterations. 
 
 **Multiple sources & destinations**
 The code above (both styles) can be trivially extended to multiple sources and multiple destinations case. So, don't run the algorithm for each source, you simply add the all sources to the initial list/deque.
