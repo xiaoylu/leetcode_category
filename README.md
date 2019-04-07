@@ -1,4 +1,4 @@
-leetcode_category
+Leetcode by Category
 ===
 
 In this repo, I maintain my notes about Leetcode problems. I also included some notes about Lintcode and CodeForce problems.
@@ -45,3 +45,7 @@ Advanced:
 * Segment Tree
 * Binary Index Tree	(BIT)
 * Max-flow (and min-cost max-flow)
+
+Others:
+* System Design
+* C++ basics
