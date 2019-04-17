@@ -1,4 +1,7 @@
 ## Trie
+
+Trie a tree structure which faciliates searching and storing prefixes. Given a set of strings, we can store the i-th letter as a node on the i-th layers of the tree.
+
 1. Easy creation of Prefix Tree
 ```
     node = self.root
