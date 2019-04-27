@@ -9,11 +9,11 @@ Trie a tree structure which faciliates searching and storing prefixes. Given a s
     for c in word+"$":
         node = node.setdefault(c, {})
 ```
-or equivalently
+where the `$` symbol indicates the end of a string `word`. Or equivalently
 ```
 	T = lambda: collections.defaultdict(T)
         self.root = T()
-        reduce(dict.__getitem__, word, self.root)['#'] = True
+        reduce(dict.__getitem__, word, self.root)['$'] = True
 ```
 
 2. Easy travesal of Prefix Tree
