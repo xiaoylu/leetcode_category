@@ -45,6 +45,7 @@ Advanced:
 * Segment Tree
 * Binary Index Tree	(BIT)
 * Max-flow (and min-cost max-flow)
+* Wavelet Tree
 
 Others:
 * System Design
