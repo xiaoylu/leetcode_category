@@ -23,7 +23,7 @@ After the split, the elements in each sub-sequence keep their original relative 
 
 Each tree node stores `b[i]` which indicates the number of elements in A[:i] assigned to the left kid.
 
-So `i - b[i]` is the number of elements assigned to the right kid.
+So `i - b[i]` is the number of elements in `A[:i]` which gets assigned to the right kid.
 
 > For example, root is associated with `A=[1,3,2,5,2]`. If `mid = 2`, then
 > `leftkid = [1,2,2]`
