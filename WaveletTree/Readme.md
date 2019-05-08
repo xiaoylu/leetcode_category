@@ -5,9 +5,9 @@ What Wavelet Tree can do?
 ---
 
 * Return the number of elements in subarray A[L:R] that
-  ** Smaller than x
-  ** equal to x
-  ** being the k-th smallest
+  * Smaller than x
+  * equal to x
+  * being the k-th smallest
 
 Binary Tree
 ---
@@ -36,8 +36,8 @@ Query
 
 Find the K-th element in A[L:R]
 * `b[R] - b[L]` is the number of elements in A[L:R] assigned to the left kid of the root
-   ** if `K > b[R] - b[L]`, go to left kid
-   ** else, go to right kid
+   * if `K > b[R] - b[L]`, go to left kid
+   * else, go to right kid
 
 number of occurence of x in A[L:R]
 * if `x <= mid`, go left; else go right.
