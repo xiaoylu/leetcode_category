@@ -4,7 +4,7 @@ Wavelet Tree
 What Wavelet Tree can do?
 ---
 
-Return the number of elements in subarray A[L:R] that
+For any given L and R, return the number of elements in subarray A[L:R] that
   * Smaller than x
   * or equal to x
   * or being the k-th smallest
