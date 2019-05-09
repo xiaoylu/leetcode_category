@@ -69,10 +69,23 @@ First, build a graph out of the matrix elements, then topological sort it. Recor
 
 Another way for topological sort is DFS. 
 
-The post order visit would always put a root **after** its children. 
+The post order visit would always put a root **after** its children. So a post-order visit of DFS should give us a order. 
 
-Starting from different roots, we keep the maximum post-visiting time (MPT) of each node (if a node has been visited, then store the larger one). 
+Starting from every possible roots (whose in-degrees are zeros), we keep the maximum post-visiting time (MPT) of each node (if a node has been visited before with smaller MPT, then store the larger MPT). 
 
+```
+# construct graph here
+
+def dfs(root):
+    for kid in graph[root]:
+        if not kid in vis:
+            vis.add(kid)
+            dfs(kid)
+        MPT[root] = max(MPT[kid] + 1, MPT[root])
+
+# for each node x with zero in-degree
+#     dfs(x)
+```
 It ensures that the root's MPT would higher than the children's MPT. So you have one total order here.
 
 
