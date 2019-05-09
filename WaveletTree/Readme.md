@@ -6,8 +6,8 @@ What Wavelet Tree can do?
 
 Return the number of elements in subarray A[L:R] that
   * Smaller than x
-  * equal to x
-  * being the k-th smallest
+  * or equal to x
+  * or being the k-th smallest
 
 in log(N) time
 
