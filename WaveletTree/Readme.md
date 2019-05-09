@@ -42,8 +42,8 @@ Find the K-th element in A[L:R]
    * else, go to right kid
 
 number of occurence of x in A[L:R]
-* if `x <= mid`, go left; else go right
-* utill we hit x, return the number of x stored at current tree node
+* if `x <= mid`, go left; else go right util we hit x
+* return the number of x stored at current tree node
 
 
 
