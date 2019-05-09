@@ -1,6 +1,6 @@
 # Topological Sort
 To find out the order of nodes in a [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
-* remove the node with out-degree ZERO iteratively
+* remove the node with ZERO in-degree/out-degree, record this node
 * update the degree of other node pointing to this removed node
 
 Keep doing this you will obtain a topological order of the nodes
@@ -75,6 +75,7 @@ Starting from every possible roots (whose in-degrees are zeros), we keep the max
 
 ```
 # construct graph here
+# initialize MPT = {node:0 for node in graph}
 
 def dfs(root):
     for kid in graph[root]:
@@ -86,6 +87,7 @@ def dfs(root):
 # for each node x with zero in-degree
 #     dfs(x)
 ```
-It ensures that the root's MPT would higher than the children's MPT. So you have one total order here.
+
+It ensures that the root's MPT would higher than the children's MPT. So you have one total order of nodes (ranked by MPT) here.
 
 
