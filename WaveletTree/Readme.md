@@ -14,7 +14,8 @@ in log(N) time
 Binary Tree
 ---
 [Post by Rachit Jain](http://rachitiitr.blogspot.com/2017/06/wavelet-trees-wavelet-trees-editorial.html)
-[Paper](https://users.dcc.uchile.cl/~jperez/papers/ioiconf16.pdf)
+    [Paper](https://users.dcc.uchile.cl/~jperez/papers/ioiconf16.pdf)
+    [Slides](https://users.dcc.uchile.cl/~jperez/talks/ioi16.pdf)
 
 Wavelet tree is a binary tree in which every node is associated with a sub-sequence of the input array.
 
