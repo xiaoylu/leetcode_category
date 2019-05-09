@@ -1,10 +1,11 @@
 # Topological Sort
-To find out the order of nodes in a DAG, remove the node with in-degree/out-degree ZERO iteratively, (or degree ONE in undirected graph such as tree problem)
-update the degree of other node pointing to the removed node.
-Keep doing this you will obtain a topological order
+To find out the order of nodes in a [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
+* remove the node with out-degree ZERO iteratively
+* update the degree of other node pointing to this removed node
+Keep doing this you will obtain a topological order of the nodes
 
-The application of Topological sort:
-* Find cycles in a graph. The steps above will remove everything until only loops remain.
+The application of topological sort:
+* Find cycles in a graph. The steps above will remove every node until only some loop of nodes remain.
 * Rank prerequisites to find a total order.
 * Find the "most inner" nodes in graph, like **LC 310. Minimum Height Trees**.
 
@@ -65,6 +66,12 @@ First, build a graph out of the matrix elements, then topological sort it. Recor
         return cnt
 ```
 
-Another way for topological sort is DPS. The post order visit would always put a root **after** its children. Starting from different root, we keep the maximum post-visiting time (MPT) of each node (if a node has been visited, then store the larger one). It ensures that the root's MPT would higher than the children's MPT. So you have one total order here.
+Another way for topological sort is DFS. 
+
+The post order visit would always put a root **after** its children. 
+
+Starting from different roots, we keep the maximum post-visiting time (MPT) of each node (if a node has been visited, then store the larger one). 
+
+It ensures that the root's MPT would higher than the children's MPT. So you have one total order here.
 
 
