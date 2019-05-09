@@ -2,6 +2,7 @@
 To find out the order of nodes in a [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
 * remove the node with out-degree ZERO iteratively
 * update the degree of other node pointing to this removed node
+
 Keep doing this you will obtain a topological order of the nodes
 
 The application of topological sort:
