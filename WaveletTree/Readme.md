@@ -8,6 +8,7 @@ What Wavelet Tree can do?
   * Smaller than x
   * equal to x
   * being the k-th smallest
+* in log(N) time
 
 Binary Tree
 ---
