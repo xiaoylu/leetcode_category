@@ -1,5 +1,26 @@
-## Notes
-1. Top-K algorithm: pop the extra element AFTER you insert one
+Heap
+===
+
+Top-K algorithm
+---
+
+While iterating through the input array, a heap maintains the current largest K elements. 
+When a new element is larger the smallest of the current top-K, insert new element into the heap, then pop up the smallest element in the heap.
+
+**LC215  Kth Largest Element in an Array**
+```
+from heapq import heapreplace, heappush
+class Solution:
+    def findKthLargest(self, nums, k):
+        h = []
+        for n in nums:
+            if len(h)<k:
+                heappush(h,n)
+            elif n>h[0]:
+                heapreplace(h,n)
+        return h[0]
+```
+
 2. Define custom comparator
 ```
 @functools.total_ordering
