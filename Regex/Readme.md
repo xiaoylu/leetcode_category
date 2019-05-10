@@ -1,10 +1,12 @@
 # Regular Expression Match
 
-The regular experssion matching problem can be abstracted as a DP problem.
+The regular experssion matching problem can be abstracted as a DP problem. `dp[i][j]` indicates the match between string `s[:i+1]` and regex expression `p[:j+1]`:
+
 * Given the wildcard `p[j] == "*"`, we can reduce the current match between `s[:i]` and `p[:j]` to sub-states:
-  * We match `s[i]` with the `*` at `p[j]`, so `dp[i][j] => dp[i-1][j-1]`
-  * We match `s[i]` with the `*` at `p[j]`, but remain `*`, so `dp[i][j] => dp[i-1][j]`
+  * Match `s[i]` with the `*` at `p[j]`, remove this `*`, so `dp[i][j] => dp[i-1][j-1]`
+  * Match `s[i]` with the `*` at `p[j]`, but `*` remains, so `dp[i][j] => dp[i-1][j]`
   * We do not match the `*`, so `dp[i][j] => dp[i][j-1]`
+  
 * Given the wildcard `p[j] == "."`, we must match it with a char at `s[i]`
 
 **LC 44. Wildcard Matching**, implement wildcard pattern matching with support for '?' and '*'.
