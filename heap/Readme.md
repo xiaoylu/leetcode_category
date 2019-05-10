@@ -23,7 +23,10 @@ class Solution:
 
 The heapq is a min-heap (smallest element at `h[0]`). `heapreplace(heap, item)` pop and return the smallest item, and also push the new item. The heap size doesn’t change.
 
-2. Define custom comparator for Python heap
+
+
+Define custom comparator for Python heap
+---
 ```
 @functools.total_ordering
 class Element:
