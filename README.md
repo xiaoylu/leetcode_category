@@ -46,6 +46,7 @@ Advanced:
 * Binary Index Tree	(BIT)
 * Max-flow (and min-cost max-flow)
 * Wavelet Tree
+* Suffix Tree (Ukkonen's algorithm)
 
 Others:
 * System Design
