@@ -16,7 +16,7 @@ Split
 ---
 Example, `abcabx`
 
-Inserting `abcab`: the second `ab` matches the first `ab`. So we just record the active point right after the first`b` as `ab|c`.
+Inserting `abcab`: the second `ab` matches the first `ab`. So we just record the active point right after the first`b` as `ab|cab`.
 
 ![Imgur](https://i.imgur.com/n7c2xx8.png)
 
