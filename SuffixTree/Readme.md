@@ -23,17 +23,17 @@ Inserting `abcab`: the second `ab` matches the first `ab`. So we just record the
 When we insert `x`, there is not matching letter, so we need to split
 ![Imgur](https://i.imgur.com/BGIgKA5.png)
 
-Suffix link
----
-
 We deal with `abx` already, it is the turn of `bx` and `x`.
 
-The suffix link of the first split at `b` points to second split at the other `b`.
+Suffix link
+---
+To insert `bx`, a split at `b` is needed. After the insertion, the suffix link of the first split at `b` points to second split at the other `b`.
 
 ![Imgur](https://i.imgur.com/EmRp5Rf.png)
 
 
-* Why suffix link?
+**Why suffix link?**
+
 Imagine buliding suffix tree for `abcabxaby`. The `aby` part can actually **share** the prefix `ab` (which is a route in the suffix tree) from the `abx`, and the `by` and **borrow** the `b` from `bx`.
 
 Insert `aby`
