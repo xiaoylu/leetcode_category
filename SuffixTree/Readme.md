@@ -8,9 +8,12 @@ Suffix tree is a "trie" which stores all the suffices of a string.
 
 The Ukkonen's construction algorithm insert one character at a time.
 
-* Implicit Tree: each leaf edge of the tree represents `A[i:#]`, where `#` indicates the last char; when we insert a new char, the leaf edges **implicitly** extend, no operation is needed.
+Implicit Tree
+---
+Each leaf edge of the tree represents `A[i:#]`, where `#` indicates the last char; when we insert a new char, the leaf edges **implicitly** extend, no operation is needed.
 
-* Split:
+Split
+---
 Example, `abcabx`
 
 Inserting `abcab`: the second `ab` matches the first `ab`. So we just record the active point right after the first`b` as `ab|c`.
@@ -20,7 +23,8 @@ Inserting `abcab`: the second `ab` matches the first `ab`. So we just record the
 When we insert `x`, there is not matching letter, so we need to split
 ![Imgur](https://i.imgur.com/BGIgKA5.png)
 
-* Suffix link:
+Suffix link
+---
 
 We deal with `abx` already, it is the turn of `bx` and `x`.
 
