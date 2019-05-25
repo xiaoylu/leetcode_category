@@ -70,4 +70,4 @@ class Element:
     def __eq__(self, other):
         return self.n==other.n and self.word==other.word
 ```
-and `heapq.heappush(hp, (Element(word1, n1), Element(word2, n2), ...))` would do the job.
+and `heapq.heappush(hp, Element(word, n))` would do the job.
