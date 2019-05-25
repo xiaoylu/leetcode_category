@@ -11,5 +11,6 @@ The Ukkonen's construction algorithm insert one character at a time.
 * Implicit Tree: each leaf edge of the tree represents `A[i:#]`, where `#` indicates the last char; when we insert a new char, the leaf edges **implicitly** extend, no operation is needed.
 
 * Split:
+[! alt](https://imgur.com/BGIgKA5)
 
 * Suffix link:
