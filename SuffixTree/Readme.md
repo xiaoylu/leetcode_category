@@ -10,11 +10,11 @@ The Ukkonen's construction algorithm insert one character at a time.
 
 Implicit Tree
 ---
-Each leaf edge of the tree represents `A[i:#]`, where `#` indicates the last char; when we insert a new char, the leaf edges **implicitly** extend, no operation is needed.
+Given a string `A`, each leaf edge of the implicit tree represents `A[i:#]`, where `#` indicates the current last char; when we insert a new char, the leaf edges **implicitly** extend, no operation is needed.
 
 Split
 ---
-Example, `abcabx`
+Example: `A=abcabx`
 
 Inserting `abcab`: the second `ab` matches the first `ab`. So we just record the active point right after the first`b` as `ab|cab`.
 
