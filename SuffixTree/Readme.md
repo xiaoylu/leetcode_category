@@ -36,15 +36,17 @@ To insert `bx`, we restart from the root, then a split at the `b` is needed. Aft
 
 Imagine building suffix tree for `abcabxaby`. The substring `aby` actually **shares** the prefix `ab` with `abx`; and the substring `by` **shares** the `b` with `bx`. 
 
-So, we can follow the suffix link from `aby` to `by` directly. We do not need to restart from the root to match `by`. Because any suffix `ab..` would indicate that a suffix `b..` exist.
+So, we can follow the suffix link from `aby` to `by` directly. We do not need to restart from the root to match `by`. Because any suffix `ab..` would indicate that a suffix `b..` already exist in the tree.
 
 Insert `aby`
+
 ![Imgur](https://i.imgur.com/3OtL7xK.png)
 
 then follow the suffix link to insert `by`
+
 ![Imgur](https://i.imgur.com/nr6LGOa.png)
 
-(Many thanks to the [visualization](http://brenden.github.io/ukkonen-animation/) tool by Brendon)
+(Many thanks to the [visualization](http://brenden.github.io/ukkonen-animation/) tool by Brenden)
 
 C++ code can be found here.
 https://github.com/ADJA/algos/blob/master/Strings/UkkonenSuffixTree.cpp
