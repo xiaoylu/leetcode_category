@@ -16,25 +16,27 @@ Split
 ---
 Example: `A=abcabx`
 
-Inserting `abcab`: the second `ab` matches the first `ab`. So we just record the active point right after the first`b` as `ab|cab`.
+Inserting `abcab`: we insert letter one-by-one; the second `ab` matches the first `ab`. So we just move the active point to `ab|cab`.
 
 ![Imgur](https://i.imgur.com/n7c2xx8.png)
 
-When we insert `x`, there is no matching letter, so we need to split
+Now, when we insert `x`, there is no matching letter, so we need to split
 ![Imgur](https://i.imgur.com/BGIgKA5.png)
 
 We deal with `abx` already, it is the turn of `bx` and `x`.
 
 Suffix link
 ---
-To insert `bx`, a split at `b` is needed. After the insertion, the suffix link of the first split at `b` points to second split at the other `b`.
+To insert `bx`, we restart from the root, then a split at the `b` is needed. After the insertion, the first split at `b` points to second split point at the second `b`. This link is called suffix link.
 
 ![Imgur](https://i.imgur.com/EmRp5Rf.png)
 
 
 **Why suffix link?**
 
-Imagine buliding suffix tree for `abcabxaby`. The `aby` part can actually **share** the prefix `ab` (which is a route in the suffix tree) from the `abx`, and the `by` and **borrow** the `b` from `bx`.
+Imagine building suffix tree for `abcabxaby`. The substring `aby` actually **shares** the prefix `ab` with `abx`; and the substring `by` **shares** the `b` with `bx`. 
+
+So, we can follow the suffix link from `aby` to `by` directly. We do not need to restart from the root to match `by`. Because any suffix `ab..` would indicate that a suffix `b..` exist.
 
 Insert `aby`
 ![Imgur](https://i.imgur.com/3OtL7xK.png)
