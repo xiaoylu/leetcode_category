@@ -20,7 +20,7 @@ Inserting `abcab`: the second `ab` matches the first `ab`. So we just record the
 
 ![Imgur](https://i.imgur.com/n7c2xx8.png)
 
-When we insert `x`, there is not matching letter, so we need to split
+When we insert `x`, there is no matching letter, so we need to split
 ![Imgur](https://i.imgur.com/BGIgKA5.png)
 
 We deal with `abx` already, it is the turn of `bx` and `x`.
