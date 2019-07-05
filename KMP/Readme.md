@@ -4,13 +4,15 @@ KMP checks if a `T` is a sub-string of `S` in **linear** time.
 
 The idea is that, if `T[:i]==S[j-i:j]` and `T[i]` fails to match `S[j]`, we do not need to re-start from matching the beginning of `T`, i.e. `T[0]` with `S[j-i+1]`. This is because we already have `T[:i] == S[j-i:j]`, we can preprocess `T[:i]` to know where to re-start then.
 
-* Preprocessing: Obtain the next matching point `b[i]` s.t. `T[:i]` is the longest "border" of T.
+* Preprocessing: obtain the next matching point `b[i]` so when the attempt of matching `T[i]` fails, we roll back to `T[b[i]]` to restart the matching.
 
 * Searching: When `T[i]` mis-matches, we roll back to `T[b[i]]` to restart.
 
+The most important note is that `T[:b[i]]` is the longest "border" of `T[:i]`. Here, "border" is defined as the string which is both a prefix and a suffix of a string.
+
 [Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
 
-The border `r` is both suffix and prefix of `x`, then `r+a` is a "border" of `x+a`.
+If border `r` is both suffix and prefix of `x`, then `r+a` is a "border" of `x+a`.
 
 ![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand2.gif)
 
