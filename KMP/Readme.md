@@ -2,7 +2,7 @@
 
 KMP checks if a `T` is a sub-string of `S` in **linear** time.
 
-The idea is that, when `T[i]` fails to match `S[j]`, we do not need to start from matching `T[0]` and `S[j-i+1]` because `T[:i] == S[j-i:j]`, we can preprocess `T[:i]` to know where to start then.
+The idea is that, if `T[:i]==S[j-i:j]` and `T[i]` fails to match `S[j]`, we do not need to re-start from matching the beginning of `T`, i.e. `T[0]` with `S[j-i+1]`. This is because we already have `T[:i] == S[j-i:j]`, we can preprocess `T[:i]` to know where to re-start then.
 
 * Preprocessing: Obtain the next matching point `b[i]` s.t. `T[:i]` is the longest "border" of T.
 
