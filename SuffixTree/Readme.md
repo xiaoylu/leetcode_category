@@ -6,7 +6,7 @@ A good post about suffix tree
 
 Suffix tree is a "trie" which stores all the suffices of a string.
 
-The Ukkonen's construction algorithm insert one character at a time.
+The Ukkonen's construction algorithm insert one character at a time (from left to right).
 
 Implicit Tree
 ---
@@ -16,7 +16,9 @@ Split
 ---
 Example: `A=abcabx`
 
-Inserting `abcab`: we insert letter one-by-one; the second `ab` matches the first `ab`. So we just move the active point to `ab|cab`.
+Inserting `abcab`: we insert first three letters `abc` one-by-one; the implicit tree automatically grows edges `abcab`, `bcab`, `cab`. 
+
+Note the second `ab` matches the first `ab`. So we just move the active point to `ab|cab`.
 
 ![Imgur](https://i.imgur.com/n7c2xx8.png)
 
