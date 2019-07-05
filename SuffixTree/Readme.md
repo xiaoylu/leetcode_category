@@ -16,7 +16,7 @@ Split
 ---
 Example: `A=abcabx`
 
-Inserting `abcab`: we insert first three letters `abc` one-by-one; the implicit tree automatically grows edges `abcab`, `bcab`, `cab`. 
+Inserting `abcab`: the implicit tree automatically grows the edges `abcab`, `bcab`, `cab` from root.
 
 Note the second `ab` matches the first `ab`. So we just move the active point to `ab|cab`.
 
