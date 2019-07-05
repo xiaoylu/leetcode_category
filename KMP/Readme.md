@@ -1,6 +1,6 @@
 # KMP algorithm
 
-KMP matches a short string `T` in a long string `S` in **linear** time.
+KMP matches a short string `T` inside a long string `S` in **linear** time.
 
 The idea is that, when `T[i]` fails to match `S[j]`, we do not need to start from matching `T[0]` and `S[j-i+1]` because `T[:i] == S[j-i:j]`, we can preprocess `T[:i]` to know where to start then.
 
