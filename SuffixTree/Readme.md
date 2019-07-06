@@ -29,14 +29,14 @@ We deal with `abx` already, it is the turn of `bx` and `x`.
 
 Suffix link
 ---
-To insert `bx`, we restart from the root, then a split at the `b` is needed. After the insertion, the first split at `b` points to second split point at the second `b`. This link is called suffix link.
+To insert `bx`, we restart from the root, then a split at the `b` is needed. After the insertion, the first split at active point `b` is linked to the second active point at the second `b`. This link is called suffix link.
 
 ![Imgur](https://i.imgur.com/EmRp5Rf.png)
 
 
 **Why suffix link?**
 
-Imagine building suffix tree for `abcabxaby`. The substring `aby` actually **shares** the prefix `ab` with `abx`; and the substring `by` **shares** the `b` with `bx`. 
+Consider building suffix tree for `abcabxaby`. The substring `aby` actually **shares** the prefix `ab` with the substring `abx`; and the substring `by` **shares** the `b` with `bx`. 
 
 So, we can follow the suffix link from `aby` to `by` directly. We do not need to restart from the root to match `by`. Because any suffix `ab..` would indicate that a suffix `b..` already exist in the tree.
 
