@@ -33,14 +33,14 @@ To insert `bx`, we restart from the root and move the active point to `b|cabx`.
 
 Suffix link
 ---
-Due to the `x`, a split at the active point `b` is needed. After the split, the previous active point is linked to the current active point at the second. This link illustrated by dashed line is called **suffix link**.
+Due to the `x`, a split at the active point `b` is needed. After the split, the previous active point is linked to the current active point at the second. This link illustrated by the dashed line is called **suffix link**.
 
 ![Imgur](https://i.imgur.com/EmRp5Rf.png)
 
 
 **Why suffix link?**
 
-Consider building suffix tree for `abXabY` where `ab` are letters and `X`, `Y` are different strings. The substring `abY` actually **shares** the prefix `ab` with the substring `abXabY`; the substring `bY` **shares** the `b` with `bXabY`.
+Consider building suffix tree for `abXabY` where `ab` are letters and `X`, `Y` are different strings. The suffix `abY` actually **shares** the prefix `ab` with the suffix `abXabY`; the suffix `bY` **shares** the `b` with the suffix `bXabY`.
 
 So, we create the suffix link dealing with `abXabY` and `bXabY`. 
 When working on `abY` and `bY`, instead of restarting from the root to match `b`, we can follow the suffix link.
