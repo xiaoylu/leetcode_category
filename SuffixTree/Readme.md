@@ -33,7 +33,7 @@ To insert `bx`, we restart from the root and move the active point to `b|cabx`.
 
 Suffix link
 ---
-Due to the `x`, a split at the active point `b` is needed. After the split, the previous active point is linked to the current active point at the second. This link illustrated by the dashed line is called **suffix link**.
+Due to the `x`, a split at the active point `b` is needed. After the split, the previous active point is linked to the current active point. The link illustrated by the dashed line below is called **suffix link**.
 
 ![Imgur](https://i.imgur.com/EmRp5Rf.png)
 
