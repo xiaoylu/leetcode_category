@@ -44,9 +44,9 @@ Due to the `x`, a split at the active point `b` is needed. After the split, the 
 
 Suffix links enable us to reset the active point so we can make the next remaining insert
 
-For example, when dealing with suffix `abc...` and `bc..`, we know that, if a split occurs at `ab|...`, then another split must be done at `b|...`.
+For example, when dealing with suffix `abc...` and `bc..`, we know that, if a split occurs at the active point at `ab|...`, then another split must be done at the active point `b|...`.
 
-Instead of restarting from the root to match the `b`, we can follow the suffix link.
+Instead of restarting from the root to match the `b`, we can follow the suffix link to get to the next active point.
 
 For example: insert the remaining `by` for `abcabxaby`.
 
@@ -55,10 +55,26 @@ we also have the suffix link
 ![Imgur](https://i.imgur.com/3OtL7xK.png)
 
 Follow the suffix link to insert `by`
-* set the node to which suffix link points as the active point
+* set the node to which suffix link points as the next active point
 * make a split there
 
 ![Imgur](https://i.imgur.com/nr6LGOa.png)
+
+Summarization
+---
+Variables:
+* active_node: the node where we start matching the letters
+* active_edge: the letter indicating which kid node to follow
+* active_length: the number of letters that are already matched
+* remainder: the number of remaining inserts
+
+We always seek to match as many new letters in the tree as possible utill a split is inevitable.
+In such case, we only change `active_node`, `active_edge`, `active_length` and increment `remainder`.
+
+When a split is needed, we add a new kid node to the current active node. Connect the previous active node to the current active node by a suffix link. (except when the previous active node is the root or leaf.)
+
+After the split at the active node, follow the suffix link of the current active node, if there is any. (`active_edge` and `active_length` stay unchanged.)
+Otherwise, if there is no suffix link from the current active node, restart from the root.
 
 Code
 ---
