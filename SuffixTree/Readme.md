@@ -40,12 +40,13 @@ Due to the `x`, a split at the active point `b` is needed. After the split, the 
 
 **Why suffix link?**
 
-Consider building suffix tree for `abXabY` where `ab` are letters and `X`, `Y` are different strings. The suffix `abY` actually **shares** the prefix `ab` with the suffix `abXabY`; the suffix `bY` **shares** the `b` with the suffix `bXabY`.
+Suffix links enable us to reset the active point so we can make the next remaining insert
 
-So, we create the suffix link when dealing with `abXabY` and `bXabY`. 
-Then, after we've done with the suffix `abY` and turn to work on `bY`, instead of restarting from the root to match `b`, we can follow the suffix link.
+For example, when dealing with suffix `abc...` and `bc..`, we know that, if a split occurs at `ab|...`, then another split must be done at `b|...`.
 
-Insert `aby`
+Instead of restarting from the root to match the `b`, we can follow the suffix link.
+
+Insert the remaining `by` for `abcabxaby`.
 
 ![Imgur](https://i.imgur.com/3OtL7xK.png)
 
