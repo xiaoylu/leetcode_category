@@ -42,8 +42,8 @@ Due to the `x`, a split at the active point `b` is needed. After the split, the 
 
 Consider building suffix tree for `abXabY` where `ab` are letters and `X`, `Y` are different strings. The suffix `abY` actually **shares** the prefix `ab` with the suffix `abXabY`; the suffix `bY` **shares** the `b` with the suffix `bXabY`.
 
-So, we create the suffix link dealing with `abXabY` and `bXabY`. 
-When working on `abY` and `bY`, instead of restarting from the root to match `b`, we can follow the suffix link.
+So, we create the suffix link when dealing with `abXabY` and `bXabY`. 
+Then, after we've done with the suffix `abY` and turn to work on `bY`, instead of restarting from the root to match `b`, we can follow the suffix link.
 
 Insert `aby`
 
