@@ -8,6 +8,8 @@ Suffix tree is a "trie" which stores all the suffices of a string.
 
 The Ukkonen's construction algorithm insert one character at a time (from left to right).
 
+Many thanks to the [visualization](http://brenden.github.io/ukkonen-animation/) tool by Brenden
+
 Implicit Tree
 ---
 Given a string `A`, each leaf edge of the implicit tree represents `A[i:#]`, where `#` indicates the current last char; when we insert a new char, the leaf edges **implicitly** extend, no operation is needed.
@@ -46,17 +48,22 @@ For example, when dealing with suffix `abc...` and `bc..`, we know that, if a sp
 
 Instead of restarting from the root to match the `b`, we can follow the suffix link.
 
-Insert the remaining `by` for `abcabxaby`.
+For example: insert the remaining `by` for `abcabxaby`.
+
+we also have the suffix link
 
 ![Imgur](https://i.imgur.com/3OtL7xK.png)
 
-then follow the suffix link to insert `by`
+Follow the suffix link to insert `by`
+* set the node to which suffix link points as the active point
+* make a split there
 
 ![Imgur](https://i.imgur.com/nr6LGOa.png)
-
-Many thanks to the [visualization](http://brenden.github.io/ukkonen-animation/) tool by Brenden
 
 Code
 ---
 C++ code can be found here.
 https://github.com/ADJA/algos/blob/master/Strings/UkkonenSuffixTree.cpp
+
+Java code
+https://gist.github.com/makagonov/22ab3675e3fc0031314e8535ffcbee2c
