@@ -22,10 +22,12 @@ Note the second `ab` matches the first `ab`. So we just move the active point to
 
 ![Imgur](https://i.imgur.com/n7c2xx8.png)
 
-Now, when we insert `x`, there is no matching letter, so we need to split
+Now, when we insert `x`, there is no matching letter, so we need to split at the current active point
 ![Imgur](https://i.imgur.com/BGIgKA5.png)
 
-We deal with `abx` already, it is the turn of `bx` and `x`.
+We maintain a variable `remainder` which tells us how many additional inserts we need to make.
+
+Case in point: we deal with `abx` already, so `remainder = 2` because it is the turn of `bx` and `x`.
 
 Suffix link
 ---
