@@ -69,11 +69,11 @@ Variables:
 * remainder: the number of remaining inserts
 
 We always seek to match as many new letters in the tree as possible utill a split is inevitable.
-In such case, we only change `active_node`, `active_edge`, `active_length` and increment `remainder`.
+In such case, we only change `active_node`, `active_edge`, `active_length` and increment `remainder`. The tree does not change.
 
-When a split is needed, we add a new kid node to the current active node. Connect the previous active node to the current active node by a suffix link. (except when the previous active node is the root or leaf.)
+When a split is needed, we add a new kid to the current active node, connect the previous active node to the current active node by a suffix link. (except when the previous active node is the root.)
 
-After the split at the active node, follow the suffix link of the current active node, if there is any. (`active_edge` and `active_length` stay unchanged.)
+After the split at the active node, follow the suffix link of the current active node, if there is any, to go to the next active node. (`active_edge` and `active_length` stay unchanged.)
 Otherwise, if there is no suffix link from the current active node, restart from the root.
 
 Code
