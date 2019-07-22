@@ -41,7 +41,7 @@ for (var prop in car) {
 Constructor Function
 ---
 * Constructor functions are capitalized by convention in JavaScript
-* Calling a constructor function without `new` is like calling an ordinary function.
+* Calling a constructor function without `new` is like calling an ordinary function. Doing this pollutes the global namespace!! 
 * With `new`, you create an object, so the keyword `this` in the constructor function refers to this newly created object. 
 
 ```
