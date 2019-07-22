@@ -70,7 +70,7 @@ var book = new Book("901-3865");
 `this` 
 ---
 
-Calling `this` would find the local object (go up until it hits the global object, just like finding the variables declared by the `var` keyword.)
+Calling `this` would find the local object (go up until it hits the global object, i.e. window, just like finding the variables declared by the `var` keyword.)
 
 ```
 var name = 'First';
