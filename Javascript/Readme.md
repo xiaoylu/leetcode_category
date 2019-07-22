@@ -68,8 +68,7 @@ var book = new Book("901-3865");
 `this` 
 ---
 
-JavaScript establishes an execution context for this function call.
-Calling `this` finds the local context (or hits the global object, same story for finding the variables declared by the `var` keyword.)
+Calling `this` would find the local context (go up until it hits the global object, just like finding the variables declared by the `var` keyword.)
 
 ```
 var name = 'First';
