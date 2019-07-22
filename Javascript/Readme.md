@@ -1,6 +1,6 @@
 Javascript Basics
 ===
-Summarized from this [tutorial](https://www.dofactory.com/tutorial/)
+Summarized from this [tutorial](https://www.dofactory.com/tutorial/javascript)
 
 Variables
 ---
