@@ -41,8 +41,8 @@ for (var prop in car) {
 Constructor Function
 ---
 * Constructor functions are capitalized by convention in JavaScript
-* Calling a constructor function without new is like calling an ordinary function.
-* 
+* Calling a constructor function without `new` is like calling an ordinary function.
+* With `new`, you create a object, so keyword `this` in the constructor function refers to this newly created object. 
 
 ```
 function Book(isbn) {
@@ -54,7 +54,9 @@ function Book(isbn) {
 var book = new Book("901-3865");
 ```
 
-The code above creates `getIsbn` function each time when `Book()` is called. We can use a single `getIsbn` function. See below.
+The code above creates `getIsbn` function each time when `Book()` is called. 
+We can use a single `getIsbn` function to skip the creation of function `getIsbn`. 
+See below.
 ```
 function Book(isbn) {
     this.isbn = isbn;
@@ -68,7 +70,7 @@ var book = new Book("901-3865");
 `this` 
 ---
 
-Calling `this` would find the local context (go up until it hits the global object, just like finding the variables declared by the `var` keyword.)
+Calling `this` would find the local object (go up until it hits the global object, just like finding the variables declared by the `var` keyword.)
 
 ```
 var name = 'First';
