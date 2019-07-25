@@ -90,12 +90,8 @@ student.detail.getName();    // => 'Last'  (detail scope)
 
 Prototypal inheritance
 ---
-Properties on prototype objects do not change or override properties in the parent object.
-
 Setting prototypes to an object is done by setting an object's prototype attribute to a prototype object.
-
 A prototype is just a single object and derived object instances hold only references to their prototype.
-
 ```
 var account = {
     bank: "Bank of America",   // just the default value
@@ -109,4 +105,13 @@ function createObject (p) {
     return new F();
 }
 var savings = createObject(account);
+
+alert(savings.getBank());                   // => Bank of America
+savings.bank = "JP Morgan Chase";
+alert(savings.getBank());                   // => JP Morgan Chase
 ```
+
+Namespaces
+---
+
+JavaScript does not support namespaces. 
