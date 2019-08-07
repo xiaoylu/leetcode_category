@@ -1,7 +1,7 @@
 Wavelet Tree
 ===
 
-What Wavelet Tree can do?
+What is Wavelet Tree capable of?
 ---
 
 For any given L and R, return the number of elements in subarray A[L:R] that
