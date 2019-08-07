@@ -3,14 +3,14 @@
 ## Discretization and Sorting
 Many problems involve intervals. **Discretization** is usually a good choice dealing with intervals. These problems are commonly asociated with **Greedy** algorithm and **Sorting**.
 
-The sorting can also be done for the upper bound. It is more convenient for the intersection problems.
+Usually, we can sort the lower or upper bounds of the intervals. It is common for the "intersection" problems.
 
 **452. Minimum Number of Arrows to Burst Balloons** 
 Find the min size of `S` such that each interval contains at least one element of `S`. Note you need to sort by upper bound, but not lower bound. Think about why?
 ```
     def findMinArrowShots(self, points):
         ret, end = 0, -float('inf')
-        for l, r in sorted(points, key = lambda x: x[1]):
+        for l, r in sorted(points, key = lambda x: x[1]): # sort by upper bound
             if l > end:
                 ret += 1
                 end = r
@@ -151,6 +151,8 @@ When you meet the lower boundary of a rectangle, you increment the count of its 
 ```
 
 ## Merging Intervals by BST
+
+Suppose a stream of intervals coming in.
 
 How to merge a new interval `[l, r)` with the previous ones in `O(log N)` time?
 
