@@ -1,10 +1,10 @@
 Javascript Basics
 ===
-Summarized from this [tutorial](https://www.dofactory.com/tutorial/javascript)
-
 AirBnB [Javascript Style Guide](https://github.com/airbnb/javascript)
 
 Google [Javascript Style Guide](https://google.github.io/styleguide/jsguide.html)
+
+and this [tutorial](https://www.dofactory.com/tutorial/javascript)
 
 Variables
 ---
@@ -14,7 +14,7 @@ Value types are copied, passed, and compared by value. Reference types, are copi
 
 JavaScript strings are immutable. Modifying the string actually generates a new string.
 
-Google Javascript style guide actually forbids the usage of `var` because `let` is block scoped.
+Google+AirBnB Javascript style guide actually forbids the usage of `var` because `let` is block scoped.
 
 > Declare all local variables with either const or let. Use const by default, unless a variable needs to be reassigned. The var keyword must not be used.
 
