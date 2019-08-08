@@ -14,9 +14,23 @@ Value types are copied, passed, and compared by value. Reference types, are copi
 
 JavaScript strings are immutable. Modifying the string actually generates a new string.
 
-Google+AirBnB Javascript style guide actually forbids the usage of `var` because `let` is block scoped.
+Google+AirBnB Javascript style guide actually forbids the usage of `var`.
 
 > Declare all local variables with either const or let. Use const by default, unless a variable needs to be reassigned. The var keyword must not be used.
+
+Both `let` and `const` are block-scoped. But `const` does not allow re-assignment and re-declaration. The `const` variable is a constant pointer.
+
+```
+// Wrong: `i` is redefined (not reassigned) on each loop step.
+for (let i in [1, 2, 3]) {
+    console.log(i);
+}
+
+// Correct: `i` gets a new binding each iteration
+for (const i in [1, 2, 3]) {
+  console.log(i);
+}
+```
 
 Objects
 ---
