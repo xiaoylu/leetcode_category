@@ -2,6 +2,10 @@ Javascript Basics
 ===
 Summarized from this [tutorial](https://www.dofactory.com/tutorial/javascript)
 
+AirBnB [Javascript Style Guide](https://github.com/airbnb/javascript)
+
+Google [Javascript Style Guide](https://google.github.io/styleguide/jsguide.html)
+
 Variables
 ---
 Boolean values and numbers are value-based types, whereas strings, objects, arrays, and functions are reference types.
@@ -114,4 +118,54 @@ alert(savings.getBank());                   // => JP Morgan Chase
 Namespaces
 ---
 
-JavaScript does not support namespaces. 
+JavaScript does not support namespaces. All the code shares a single global namespace which is the window object in the browser.
+Always be careful NOT to pollute the global namespace.
+
+Anonymous Immediate Function
+---
+The anonymous immediate function is the function wrapped in parentheses 
+```
+var module = (function() { 
+      … 
+      … 
+}())
+```
+
+* it has no function name
+* it gets executed immediately when JavaScript encounters it
+* Withint such function, variables declared with `var` are private (so this is one way for privacy of objects)
+
+Private member shared by prototype
+---
+```
+function Book(author) {
+   var author = author;          // private instance variable 
+   this.getAuthor = function () {
+      return author;             // privileged instance method
+   };
+}
+Book.prototype = (function () {
+   var label = "Author: ";       // private prototype variable
+   return {
+       getLabel: function () {   // privileged prototype method
+           return label;
+       }
+     };
+}());
+var book1 = new Book('James Joyce');
+alert(book1.getLabel() + book1.getAuthor()); // => Author: James Joyce
+var book2 = new Book('Virginia Woolf');
+alert(book2.getLabel() + book2.getAuthor()); // => Author: Virginia Woolf
+```
+
+Here both `book1` and `book2` adopts a prototype which has the same private variable `label`.
+
+
+
+
+
+
+
+
+
+
