@@ -18,7 +18,7 @@ Google+AirBnB Javascript style guide actually forbids the usage of `var`.
 
 > Declare all local variables with either const or let. Use const by default, unless a variable needs to be reassigned. The var keyword must not be used.
 
-Both `let` and `const` are block-scoped. But `const` does not allow re-assignment and re-declaration. The `const` variable is a constant pointer.
+Both `let` and `const` are block-scoped. But `const` does not allow re-assignment and re-declaration. The `const` variable is a constant pointer and it can be optimized by browser.
 
 ```
 // Wrong: `i` is redefined (not reassigned) on each loop step.
