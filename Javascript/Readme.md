@@ -121,6 +121,11 @@ Namespaces
 JavaScript does not support namespaces. All the code shares a single global namespace which is the window object in the browser.
 Always be careful NOT to pollute the global namespace.
 
+How to achieve namespaces in Javascript?
+
+* Use `var` to declare local variables inside functions
+* Declare objects which has `this` keyword
+
 Anonymous Immediate Function
 ---
 The anonymous immediate function is the function wrapped in parentheses 
@@ -159,6 +164,40 @@ alert(book2.getLabel() + book2.getAuthor()); // => Author: Virginia Woolf
 ```
 
 Here both `book1` and `book2` adopts a prototype which has the same private variable `label`.
+
+nested function closures
+---
+
+**All JavaScript functions are objects!!**
+
+When you hold a reference to a function with a variable by
+```
+function counter() {
+    var index = 0;
+    function increment() {
+       return ++index;
+    }
+    return increment;
+}
+var userIncrement = counter();    // a reference to inner increment()
+var adminIncrement = counter();   // a reference to inner increment()
+userIncrement();                  // => 1
+userIncrement();                  // => 2
+adminIncrement();                 // => 1
+adminIncrement();                 // => 2
+adminIncrement();                 // => 3
+```
+In such cases, Javascript will maintain a second, but hidden, reference to its closure which will NOT be destroyed after this function returns. (But every execution like will create its own copy of the closure, for example, `counter()` executes twice here.).
+
+Even after the function returns, these local `var` like `index` in the closure will NOT be destroyed.
+
+Because functions are objects, they are copied by reference.
+
+
+
+
+
+
 
 
 
