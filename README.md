@@ -51,3 +51,4 @@ Advanced:
 Others:
 * System Design
 * C++ basics
+* [Javascript basics](Javascript/Readme.md)
