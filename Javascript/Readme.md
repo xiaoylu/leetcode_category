@@ -200,8 +200,8 @@ var account = {
 };
 function createObject (p) {
     var F = function () {};    // Create a new and empty function
-    F.prototype = p;
-    return new F();
+    F.prototype = p;           // The function has a prototype property
+    return new F();            // new instantiate this object
 }
 var savings = createObject(account);
 
