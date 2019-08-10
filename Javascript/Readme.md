@@ -210,17 +210,6 @@ savings.bank = "JP Morgan Chase";
 alert(savings.getBank());                   // => JP Morgan Chase
 ```
 
-Namespaces
----
-
-JavaScript does not support namespaces. All the code shares a single global namespace which is the window object in the browser.
-Always be careful NOT to pollute the global namespace.
-
-How to achieve namespaces in Javascript?
-
-* Use `var` to declare local variables inside functions
-* Declare objects which has `this` keyword
-
 Anonymous Immediate Function
 ---
 The anonymous immediate function is the function wrapped in parentheses 
