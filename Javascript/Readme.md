@@ -18,7 +18,7 @@ Google+AirBnB Javascript style guide actually forbids the usage of `var`.
 
 > Declare all local variables with either const or let. Use const by default, unless a variable needs to be reassigned. The var keyword must not be used.
 
-Both `let` and `const` are block-scoped. But `const` does not allow re-assignment and re-declaration. The `const` variable is a constant pointer and it can be optimized by browser.
+Both `let` and `const` are block-scoped. The difference is `const` does not allow re-assignment and re-declaration. The `const` variable is a constant pointer and it can be optimized by browser. `const` is always preferred when appropriate.
 
 ```
 // Wrong: `i` is redefined (not reassigned) on each loop step.
@@ -30,6 +30,22 @@ for (let i in [1, 2, 3]) {
 for (const i in [1, 2, 3]) {
   console.log(i);
 }
+```
+
+Array
+---
+
+Destructuring
+
+```
+let [, b,, d] = someArray;
+function optionalDestructuring([a = 4, b = 2] = []) { … };
+
+const [a, b, c, ...rest] = generateResults();
+
+// Spread operator flatten the parameters
+[...foo]   // preferred over Array.prototype.slice.call(foo)
+[...foo, ...bar]   // preferred over foo.concat(bar)
 ```
 
 Objects
@@ -60,9 +76,36 @@ for (var prop in car) {
 }
 ```
 
+Methods
+---
+
+Shorthands
+
+```
+// class example
+class {
+  getObjectLiteral() {
+    this.stuff = 'fruit';
+    return {
+      stuff: 'candy',
+      method: () => this.stuff,  // Returns 'fruit'
+    };
+  }
+}
+
+// obj example
+const foo = 1;
+const bar = 2;
+const obj = {
+  foo,
+  bar,
+  method() { return this.foo + this.bar; },
+};
+```
+
 Constructor Function
 ---
-* Constructor functions are capitalized by convention in JavaScript
+* Constructor functions are capitalized by convention
 * Calling a constructor function without `new` is like calling an ordinary function. Doing this pollutes the global namespace!! 
 * With `new`, you create an object, so the keyword `this` in the constructor function refers to this newly created object. 
 
@@ -109,6 +152,40 @@ var result = student.detail.getName;
 result();                    // => 'First' (global scope)
 student.detail.getName();    // => 'Last'  (detail scope) 
 ```
+
+Class
+---
+[Understanding Classes in JavaScript By Tania Rascia](https://www.digitalocean.com/community/tutorials/understanding-classes-in-javascript)
+
+Extending a class: subclass constructors must call super() before setting any fields or otherwise accessing this.
+
+```
+// Initializing a class
+class Hero {
+    constructor(name, level) {
+        this.name = name;
+        this.level = level;
+    }
+
+    // Adding a method to the constructor
+    greet() {
+        return `${this.name} says hello.`;
+    }
+}
+
+// Creating a new class from the parent
+class Mage extends Hero {
+    constructor(name, level, spell) {
+        // Chain constructor with super
+        super(name, level);
+
+        // Add a new property
+        this.spell = spell;
+    }
+}
+```
+
+The class keyword allows clearer and more readable class definitions than defining `prototype` properties.
 
 Prototypal inheritance
 ---
