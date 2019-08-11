@@ -43,7 +43,7 @@ function optionalDestructuring([a = 4, b = 2] = []) { … };
 
 const [a, b, c, ...rest] = generateResults();
 
-// Spread operator flatten the parameters
+// Spread operator to flatten elements out of one or more other iterables
 [...foo]   // preferred over Array.prototype.slice.call(foo)
 [...foo, ...bar]   // preferred over foo.concat(bar)
 ```
@@ -157,7 +157,7 @@ Class
 ---
 [Understanding Classes in JavaScript By Tania Rascia](https://www.digitalocean.com/community/tutorials/understanding-classes-in-javascript)
 
-Extending a class: subclass constructors must call super() before setting any fields or otherwise accessing this.
+Extending a class: subclass constructors must call super() before setting any fields or otherwise accessing `this`.
 
 ```
 // Initializing a class
@@ -222,7 +222,7 @@ var module = (function() {
 
 * it has no function name
 * it gets executed immediately when JavaScript encounters it
-* Withint such function, variables declared with `var` are private (so this is one way for privacy of objects)
+* Withint such function, variables declared with `var` are private
 
 Private member shared by prototype
 ---
