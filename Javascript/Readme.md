@@ -80,7 +80,7 @@ for (var prop in car) {
 }
 ```
 
-Methods
+Class Methods
 ---
 
 Shorthands
@@ -140,6 +140,8 @@ var book = new Book("901-3865");
 ---
 
 Calling `this` would find the local object (go up until it hits the global object, i.e. the "window" object, which is just like finding the variables declared by the `var` keyword.)
+
+Only use this in class constructors and methods, or in arrow functions defined within class constructors and methods. You play with `this` to develop a framework but avoid it for development at the application level.
 
 ```
 var name = 'First';
@@ -204,7 +206,7 @@ var account = {
 };
 function createObject (p) {
     var F = function () {};    // Create a new and empty function
-    F.prototype = p;           // The function has a prototype property
+    F.prototype = p;           // The function has a prototype property (Yes, one can play with the prototype before actually `new function`)
     return new F();            // new instantiate this object
 }
 var savings = createObject(account);
@@ -253,10 +255,16 @@ alert(book2.getLabel() + book2.getAuthor()); // => Author: Virginia Woolf
 
 Here both `book1` and `book2` adopts a prototype which has the same private variable `label`.
 
+Functions
+---
+
+Functions are copied by reference.
+
+
 nested function closures
 ---
 
-**All JavaScript functions are objects!!**
+`typeof new function(){} => "object"`
 
 When you hold a reference to a function with a variable by
 ```
@@ -275,12 +283,9 @@ adminIncrement();                 // => 1
 adminIncrement();                 // => 2
 adminIncrement();                 // => 3
 ```
-In such cases, Javascript will maintain a second, but hidden, reference to its closure which will NOT be destroyed after this function returns. (But every execution like will create its own copy of the closure, for example, `counter()` executes twice here.).
+In such cases, Javascript will maintain a second, but hidden, reference to its closure which will NOT be destroyed after this function returns. (But every execution will create its own copy of the closure, for example, `counter()` executes twice here.).
 
 Even after the function returns, these local `var` like `index` in the closure will NOT be destroyed.
-
-Because functions are objects, they are copied by reference.
-
 
 
 
