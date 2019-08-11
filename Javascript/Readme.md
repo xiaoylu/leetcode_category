@@ -43,9 +43,13 @@ function optionalDestructuring([a = 4, b = 2] = []) { … };
 
 const [a, b, c, ...rest] = generateResults();
 
-// Spread operator to flatten elements out of one or more other iterables
+// Spread operator to FLATTEN elements out of one or more other iterables
 [...foo]   // preferred over Array.prototype.slice.call(foo)
 [...foo, ...bar]   // preferred over foo.concat(bar)
+
+// Example
+function myFunction(...elements) {}
+myFunction(...array, ...iterable, ...generator());
 ```
 
 Objects
