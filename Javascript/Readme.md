@@ -287,6 +287,15 @@ In such cases, Javascript will maintain a second, but hidden, reference to its c
 
 Even after the function returns, these local `var` like `index` in the closure will NOT be destroyed.
 
+For loop
+---
+
+Use `for (let i in x)` for dict `x` such as the object keys; Use `for (let i of y)` for iterable `y` such as `maps`, `sets`, `generators` and `array`.
+
+Prefer `for in` over `for of` whenever possible.
+
+`for-in` loops may only be used on dict-style objects and should not be used to iterate over an array.
+
 
 
 
