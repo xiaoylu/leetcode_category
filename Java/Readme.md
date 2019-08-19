@@ -1,12 +1,11 @@
 Java Basics
 ===
 
-Inheritance
----
-* Neither final methods nor private methods can be overridden in the subclass
-* Multiple inheritance is not allowed 
-* Type of inheritance (like protected, public or private in C++) can NOT be specified
-* A class can not access its grandparent's methods (`super()` can be called only once)
+* Inheritance
+ * Neither final methods nor private methods can be overridden in the subclass
+ * Multiple inheritance is not allowed 
+ * Type of inheritance (like protected, public or private in C++) can NOT be specified
+ * A class can not access its grandparent's methods (`super()` can be called only once)
 * super() vs. this():
   * call super() and this() only inside constructor 
   * call super() and this() only once
@@ -23,6 +22,15 @@ Inheritance
   * variable: const
   * method: can not be overidden
   * class: can not be inherited
+* static:
+  * variable: static variables at class-level only (no static variable in functions)
+  * method: share across all instances
+  * class: only applies to static nested classes
+  * block: execute only
+* Nested class: 
+  * it has access to the members of enclosing class, including its private members
+  * since it's a member of , a nested class can be declared private, public, protected, or package private(default)
+  * static nested class vs. inner class  
 * Interfaces
   * 
   *
