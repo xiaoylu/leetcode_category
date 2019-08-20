@@ -19,7 +19,7 @@ Java Basics
   * see [this table](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html)
   * all methods are virtual by default
 * final:
-  * variable: const, get assigned only once (not necessaryly at the beginning)
+  * variable: const, get assigned only once (not necessarily at the declaration)
   * method: can not be overidden
   * class: can not be inherited, all methods declared immediately within a final class (§8.1.1.2) behave as if they are final
 * static:
@@ -29,7 +29,7 @@ Java Basics
   * block: execute only
 * Nested class: 
   * it has access to the members of enclosing class, including its private members
-  * since it's a member of , a nested class can be declared private, public, protected, or package private(default)
+  * since it's a member of outer class, a nested/inner class can be declared private, public, protected, or package private (by default)
   * static nested class vs. inner class  
 * Interfaces
   * 
