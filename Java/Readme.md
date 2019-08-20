@@ -19,7 +19,7 @@ Java Basics
   * see [this table](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html)
   * all methods are virtual by default
 * final:
-  * variable: const
+  * variable: const, get assigned only once (not necessaryly at the beginning)
   * method: can not be overidden
   * class: can not be inherited, all methods declared immediately within a final class (§8.1.1.2) behave as if they are final
 * static:
