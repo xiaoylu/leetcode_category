@@ -2,10 +2,10 @@ Java Basics
 ===
 
 * Inheritance
- * Neither final methods nor private methods can be overridden in the subclass
- * Multiple inheritance is not allowed 
- * Type of inheritance (like protected, public or private in C++) can NOT be specified
- * A class can not access its grandparent's methods (`super()` can be called only once)
+  * Neither final methods nor private methods can be overridden in the subclass
+  * Multiple inheritance is not allowed 
+  * Type of inheritance (like protected, public or private in C++) can NOT be specified
+  * A class can not access its grandparent's methods (`super()` can be called only once)
 * super() vs. this():
   * call super() and this() only inside constructor 
   * call super() and this() only once
@@ -21,7 +21,7 @@ Java Basics
 * final:
   * variable: const
   * method: can not be overidden
-  * class: can not be inherited
+  * class: can not be inherited, all methods declared immediately within a final class (§8.1.1.2) behave as if they are final
 * static:
   * variable: static variables at class-level only (no static variable in functions)
   * method: share across all instances
