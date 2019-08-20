@@ -25,7 +25,7 @@ Java Basics
 * static:
   * variable: static variables at class-level only (no static variable in functions)
   * method: share across all instances
-  * class: only applies to static nested classes
+  * class: only applies to static nested classes (access to static members of outter class)
   * block: execute only
 * Nested class: 
   * it has access to the members of enclosing class, including its private members
