@@ -10,7 +10,7 @@ Java Basics
   * call super() and this() only inside constructor 
   * call super() and this() only once
   * super() is called by default in constructor without either this() or super()
-    * but parametrized constructor must be called implicitly 
+    * but parametrized constructor must be called via `super(arg1, arg2)` implicitly 
 * Access Levels:
   * use private unless you have a good reason not to
   * avoid public fields except for constants
