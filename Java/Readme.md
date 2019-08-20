@@ -47,4 +47,4 @@ Java Basics
   * abstract classes
     * good for extension
     * but restricted by hierarchy
-  * Abstract class can implements part of the methods of an Interface
+  * Abstract class can implements only part of the methods of an Interface (and its subclass implements the rest)
