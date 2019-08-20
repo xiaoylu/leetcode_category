@@ -3,7 +3,7 @@ Java Basics
 
 * Inheritance
   * Neither final methods nor private methods can be overridden in the subclass
-  * Multiple inheritance is not allowed, one class inherits one another
+  * Multiple inheritance is not allowed, subclass inherits at most one parent class
   * Type of inheritance (like protected, public or private in C++) can NOT be specified
   * A class can not access its grandparent's methods (`super()` can be called only once)
 * super() vs. this():
