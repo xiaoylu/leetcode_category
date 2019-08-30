@@ -53,3 +53,9 @@ Java Basics
     * good for extension
     * but restricted by hierarchy
   * Abstract class can implements only part of the methods of an Interface (and its subclass implements the rest)
+* Annotations
+  * @interface <annotation name>
+  * annotation applies to other annotations
+    * @Target, @Retention, @Documented, @Repeatable, @Inherited (Read [this](https://docs.oracle.com/javase/tutorial/java/annotations/predefined.html))
+  * For compilers to warn you: 
+    * @Deprecated, @Override,  
