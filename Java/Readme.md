@@ -29,9 +29,13 @@ Java Basics
   * class: only applies to static nested classes (access to static members of outter class)
   * block: static initialization block, anywhere in class, called by the order they appear
 * Nested class: 
+  * Reason
+    * if a class is useful to only one other class, then it is logical to embed it in that class
+    * hiding class B within class A, so A's members can be declared private and B can access them
   * it has access to the members of enclosing class, including its private members
   * since it's a member of outer class, a nested/inner class can be declared private, public, protected, or package private (by default)
   * static nested class vs. inner class
+  * Serialization of inner classes, including local and anonymous classes, is strongly discouraged
 * Abstract
   * if a class includes abstract methods, the class itself must be declared abstract
   * abstract class can not be instantiated
