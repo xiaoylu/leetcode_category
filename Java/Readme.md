@@ -21,7 +21,7 @@ Java Basics
 * final:
   * variable: const, get assigned only once (not necessarily at the declaration)
   * method: can not be overidden
-    * useful for initialization method when you don't want subclass override its parent's variable initialization
+    * useful for [initialization](https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html) method when you don't want subclass override its parent's variable initialization
   * class: can not be inherited, all methods declared immediately within a final class behave as if they are final
 * static:
   * variable: static variables at class-level only (no static variable in functions)
