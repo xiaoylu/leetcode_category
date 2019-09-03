@@ -61,10 +61,11 @@ Java Basics
     * @Deprecated vs. @SuppressWarnings, @Override 
 * Lambda expression
   * A functional interface is any interface that contains only one **abstract** method
-  * Use lambda expression to implement a functional interfac
+  * lambda expressions represents the instance of a functional interface
 ```java
- # Anonymous class
- # Check Person is a functional interface
+ / * Anonymous class
+   * Check Person is a functional interface
+   * /
  printPersons(
     roster,
     new CheckPerson() {
@@ -75,12 +76,20 @@ Java Basics
         }
     }
 );
-# Lambda Expression
+                                   
+/* Lambda Expression */
 printPersons(
     roster,
     (Person p) -> p.getGender() == Person.Sex.MALE
         && p.getAge() >= 18
         && p.getAge() <= 25
 );
-```                              
+```         
+  * Using Generic
+```java
+import java.util.function.Predicate; 
+                          
+Predicate<String> p = (s)->s.startsWith("G");
+```
+                          
   
