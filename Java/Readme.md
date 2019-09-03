@@ -3,7 +3,30 @@ Java Basics
 
 Inheritance
 ---
-* A subclass inherits all the public and protected members (fields, methods, and nested classes)
+* A subclass inherits all the public and protected members (fields, methods, and nested classes) from superclass
+  * private members are only accessible from the superclass
+  * function of same signature in subclass:
+    * it's not overriding!
+    * it's a just new member in the subclass
+```java
+class Base { 
+  private void fun() { 
+     System.out.println("Base fun");      
+  } 
+} 
+    
+class Derived extends Base { 
+  private void fun() { 
+     System.out.println("Derived fun");   
+  } 
+  public static void main(String[] args) { 
+      Base obj = new Derived(); 
+      obj.fun(); // compiler error, because fun() is not overridden in Derived.
+                 // and it's illegal to access fun() in Base
+                 // Polymorphism only works when the instance methods are overridden
+  }
+}
+```
 * Constructors are inherited because they are not members
   * superclass's constructor can be invoked by `super()`
   * A class can not access its grandparent's methods
