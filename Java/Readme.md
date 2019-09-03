@@ -14,6 +14,7 @@ super() vs. this():
   * call super() and this() only once
   * super() is called by default in constructor which doest not have this()
     * but parent's parametrized constructor must be called via `super(arg1, arg2)` implicitly 
+
 Access Levels:
 ---
 * use private unless you have a good reason not to
