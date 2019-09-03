@@ -66,9 +66,16 @@ Abstract
 Interface
 ---
 * cannot instantiate (no constructor)
-* all of the methods are abstract. all fields are both static and final
+* all of the methods are public and abstract by default
+  * need to explicitly declare default methods and static methods
+* all fields are both static and final by default
+* all constant values defined in an interface are implicitly public, static, and final
 * an interface can extend multiple interfaces
-* class must implement all methods in interface 
+* a class must implement all methods in interface 
+* a class can implement more than one interface
+
+* Interface == new reference data type
+
 
 Abstract classes vs. Interfaces
 ---
@@ -90,7 +97,7 @@ Annotations
 
 Lambda expression
 ---
-* A functional interface is any interface that contains only one **abstract** method, ex. Comparator<T>, Predicate<T>
+* A functional interface (annotated by @FunctionalInterface) is any interface that contains only one **abstract** method, ex. Comparator<T>, Predicate<T>, Function<T, R>
 * Use lambda expression to represent the instance of a functional interface
 ```java
  / * Anonymous class
