@@ -66,8 +66,16 @@ public class Cat extends Animal {
     }
 }
 ```
-* The access specifier for overriding method can allow more than the overridden method
-  * a protected instance method in the superclass can be made public in subclass
+
+* [Access Levels](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html):
+  * use private unless you have a good reason not to
+  * avoid public fields except for constants
+  * private methods can not be overridden
+    * private method are **private**
+  * protected methods are accessable by classes in the same package
+  * all methods are virtual by default
+  * The access specifier for overriding method can allow more than the overridden method
+    * a protected instance method in the superclass can be made public in subclass
 
 super() vs. this():
 ---
@@ -77,16 +85,6 @@ super() vs. this():
     * but parent's **parametrized constructor** must be called **implicitly** via `super(arguments)`  
   * constructor chaining
     * because every subclass constructor invokes a constructor of its superclass, either explicitly or implicitly
-
-Access Levels:
----
-* use private unless you have a good reason not to
-* avoid public fields except for constants
-* private methods can not be overridden
-  * private method are **private** to the superclass
-* protected methods are accessable by classes in the same package
-* see [this table](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html)
-* all methods are virtual by default
 
 final
 ---
@@ -117,7 +115,7 @@ Nested class:
 // static nested class
 OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
 
-// a inner class is associated with the specific instance
+// an inner class must be associated with the specific instance
 OuterClass outerObject = new OuterClass(); // you must instantiate the OuterClass first
 OuterClass.InnerClass innerObject = outerObject.new InnerClass();
 ```
@@ -132,15 +130,45 @@ Abstract
 Interface
 ---
 * does not have fields, so it cannot be instantiated (i.e. no constructor)
-* all of the methods are abstract by default
-  * except the default methods and static methods which are implemented explicitly
+* all of the methods are `public abstract` by default
+  * except the `public default` methods and `public static` methods which are implemented explicitly
     * default method
       * impacts all class implementing this interface
       * enable you to add new functionality to existing interfaces
       * ensure binary compatibility with code written for older versions of those interfaces
     * static method
       * every instance of the class implementing an interface shares its static methods
-      * suitable for helper method
+      * suitable for helper methods
+```java
+public interface CustomInterface {
+     
+    public abstract void method1();
+     
+    public default void method2() {
+        System.out.println("default method");
+    }
+     
+    public static void method3() {
+        System.out.println("static method");
+    }
+}
+ 
+public class CustomClass implements CustomInterface {
+ 
+    @Override
+    public void method1() {
+        System.out.println("abstract method");
+    }
+     
+    public static void main(String[] args){
+        CustomInterface instance = new CustomClass();
+        instance.method1(); // print "abstract method"
+        instance.method2(); // print "default method"
+        CustomInterface.method3(); // print "static method"
+    }
+}
+```
+
 * access level
   * all fields are both static and final by default
   * all constant values defined in an interface are implicitly public, static, and final
@@ -148,8 +176,8 @@ Interface
 * an interface can extend multiple interfaces
 * a class must implement all methods in interface 
 * a class can implement more than one interface
-
-* Interface == new reference data type
+* A functional interface (annotated by @FunctionalInterface) is any interface that contains only one **abstract** method
+* Interface is a reference data type
   * An interface name can be used anywhere a type can be used.
 
 Case Study of Interfaces `Comparator<T>`
@@ -188,8 +216,19 @@ Abstract classes vs. Interfaces
   * a class can implement multiple interface (can be a lifesaver)
 * abstract classes
   * good for extension
-  * but restricted by hierarchy
+  * but restricted by hierarchy structure
+* if all the subclasses will share the same **state**, abstract class is a better choice
+  * such **state** includes non-static or non-final fields
 * Abstract class can implements only part of the methods of an Interface (and its subclass implements the rest)
+```java
+abstract class X implements Y {
+  // implements all but one method of Y
+}
+
+class XX extends X {
+  // implements the remaining method in Y
+}
+```
 
 Annotations
 ---
