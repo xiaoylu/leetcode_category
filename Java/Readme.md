@@ -113,7 +113,7 @@ Nested class:
 // static nested class
 OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
 
-// inner class
+// a inner class is associated with the specific instance
 OuterClass outerObject = new OuterClass(); // you must instantiate the OuterClass first
 OuterClass.InnerClass innerObject = outerObject.new InnerClass();
 ```
