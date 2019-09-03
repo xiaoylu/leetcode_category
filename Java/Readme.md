@@ -59,4 +59,28 @@ Java Basics
     * @Target, @Retention, @Documented, @Repeatable, @Inherited (Read [this](https://docs.oracle.com/javase/tutorial/java/annotations/predefined.html))
   * For compilers to warn you: 
     * @Deprecated vs. @SuppressWarnings, @Override 
+* Lambda expression
+  * A functional interface is any interface that contains only one **abstract** method
+  * Use lambda expression to implement a functional interfac
+```java
+ # Anonymous class
+ # Check Person is a functional interface
+ printPersons(
+    roster,
+    new CheckPerson() {
+        public boolean test(Person p) {
+            return p.getGender() == Person.Sex.MALE
+                && p.getAge() >= 18
+                && p.getAge() <= 25;
+        }
+    }
+);
+# Lambda Expression
+printPersons(
+    roster,
+    (Person p) -> p.getGender() == Person.Sex.MALE
+        && p.getAge() >= 18
+        && p.getAge() <= 25
+);
+```                              
   
