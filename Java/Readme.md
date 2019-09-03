@@ -3,10 +3,14 @@ Java Basics
 
 Inheritance
 ---
-  * Neither final methods nor private methods can be overridden in the subclass
-  * Multiple inheritance is not allowed, subclass inherits at most one parent class
-  * Type of inheritance (like protected, public or private in C++) can NOT be specified
-  * A class can not access its grandparent's methods (`super()` can be called only once)
+* A subclass inherits all the public and protected members (fields, methods, and nested classes)
+* Constructors are inherited because they are not members
+  * superclass's constructor can be invoked by `super()`
+  * A class can not access its grandparent's methods
+  * `super()` can be called only once
+* Neither final methods nor private methods can be overridden in the subclass
+* Multiple inheritance is not allowed, subclass inherits at most one parent class
+* Type of inheritance (like protected, public or private in C++) can NOT be specified
 
 super() vs. this():
 ---
@@ -86,10 +90,33 @@ Interface
 * Interface == new reference data type
   * An interface name can be used anywhere a type can be used.
 
-Case Study of Interfaces
+Case Study of Interfaces `Comparator<T>`
 ```java
-// Comparator
 
+@FunctionalInterface
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+    
+    default Comparator<T> reversed() {
+        return Collections.reverseOrder(this);
+    }
+    
+    public static <T, U extends Comparable<? super U>> Comparator<T> comparing(
+            Function<? super T, ? extends U> keyExtractor)
+    {
+        Objects.requireNonNull(keyExtractor);
+        return (Comparator<T> & Serializable)
+            (c1, c2) -> keyExtractor.apply(c1).compareTo(keyExtractor.apply(c2));
+    }
+    
+    ...
+}
+
+//Card::getRank and Card::getSuit are the getter functions of the class Card
+myDeck.sort(
+    Comparator.comparing(Card::getRank)
+        .reversed()
+        .thenComparing(Comparator.comparing(Card::getSuit)));
 ``` 
 
 Abstract classes vs. Interfaces
