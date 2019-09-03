@@ -35,7 +35,16 @@ Java Basics
   * it has access to the members of enclosing class, including its private members
   * since it's a member of outer class, a nested/inner class can be declared private, public, protected, or package private (by default)
   * static nested class vs. inner class
-  * Serialization of inner classes, including local and anonymous classes, is strongly discouraged
+```java
+// to create an object for the static nested class
+OuterClass.StaticNestedClass nestedObject =
+     new OuterClass.StaticNestedClass();
+
+// to create an object for the inner class
+OuterClass outerObject = new OuterClass(); // you must instantiate the OuterClass first
+OuterClass.InnerClass innerObject = outerObject.new InnerClass();
+```
+  * Serialization of inner classes (local and anonymous classes) and lambda expression is strongly discouraged
 * Abstract
   * if a class includes abstract methods, the class itself must be declared abstract
   * abstract class can not be instantiated
@@ -60,8 +69,8 @@ Java Basics
   * For compilers to warn you: 
     * @Deprecated vs. @SuppressWarnings, @Override 
 * Lambda expression
-  * A functional interface is any interface that contains only one **abstract** method
-  * lambda expressions represents the instance of a functional interface
+  * A functional interface is any interface that contains only one **abstract** method, ex. Comparator<T>, Predicate<T>
+  * Use lambda expression to represent the instance of a functional interface
 ```java
  / * Anonymous class
    * Check Person is a functional interface
@@ -94,6 +103,7 @@ import java.util.function.Predicate;
 //}                          
 
 Predicate<String> p = (s)->s.startsWith("G");
+
+p.test("Facebook")  // returns false
+p.test("Google")  // returns true 
 ```
-                          
-  
