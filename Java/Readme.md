@@ -243,12 +243,10 @@ Lambda expression
 * A functional interface (annotated by @FunctionalInterface) is any interface that contains only one **abstract** method, ex. Comparator<T>, Predicate<T>, Function<T, R>
 * Use lambda expression to represent the instance of a functional interface
 ```java
- / * Anonymous class
-   * Check Person is a functional interface
-   * /
+ /* Anonymous class */
  printPersons(
     roster,
-    new CheckPerson() {
+    new CheckPerson() {    // CheckPerson is a functional interface 
         public boolean test(Person p) {
             return p.getGender() == Person.Sex.MALE
                 && p.getAge() >= 18
