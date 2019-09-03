@@ -9,9 +9,16 @@ Inheritance
   * A class can not access its grandparent's methods
   * `super()` can be called only once
 * Neither final methods nor private methods can be overridden in the subclass
-* Multiple inheritance is not allowed, subclass inherits at most one parent class
+* multiple inheritance of state (NO) vs. multiple inheritance of type (YES)
+  * A subclass inherits at most one superclass which avoids the diamond problem
+  * A class implements more than one interface:   
+    * `(MyInterface) myVariable` can reference any object of any class that implements the `MyInterface`
 * Type of inheritance (like protected, public or private in C++) can NOT be specified
-
+* hiding vs. overriding (same signature in superclass and subclass)
+  * static method: hiding, invoked by the type
+  * otherwise: overriding, invoked by the specific object
+  
+  
 super() vs. this():
 ---
   * call super() and this() only inside constructor 
@@ -69,7 +76,7 @@ Abstract
 
 Interface
 ---
-* cannot instantiate (no constructor)
+* does not have fields, so it cannot be instantiated (i.e. no constructor)
 * all of the methods are abstract by default
   * except the default methods and static methods which are implemented explicitly
     * default method
