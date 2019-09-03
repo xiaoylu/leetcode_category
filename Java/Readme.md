@@ -110,13 +110,12 @@ Nested class:
 * since it's a member of outer class, a nested/inner class can be declared private, public, protected, or package private (by default)
 * static nested class vs. inner class
 ```java
- to create an object for the static nested class
-terClass.StaticNestedClass nestedObject =
-   new OuterClass.StaticNestedClass();
+// static nested class
+OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
 
- to create an object for the inner class
-terClass outerObject = new OuterClass(); // you must instantiate the OuterClass first
-terClass.InnerClass innerObject = outerObject.new InnerClass();
+// inner class
+OuterClass outerObject = new OuterClass(); // you must instantiate the OuterClass first
+OuterClass.InnerClass innerObject = outerObject.new InnerClass();
 ```
 * Serialization of inner classes (local and anonymous classes) and lambda expression is strongly discouraged
 
