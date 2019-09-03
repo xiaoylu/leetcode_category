@@ -14,7 +14,7 @@ In general, the following "prototype" problems can be solved by monotonic queue:
 Sliding Max
 ---
 
-Any DP problem where `A[i] = max(A[j:k]) + C` where `j < k <= i`
+Any DP problem where `A[i] = max(A[j:k]) + C` where `j < k <= i` and `C` is a constant.
 
 The sliding max/min window problem belongs to this type.
 
