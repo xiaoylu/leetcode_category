@@ -66,16 +66,31 @@ Abstract
 Interface
 ---
 * cannot instantiate (no constructor)
-* all of the methods are public and abstract by default
-  * need to explicitly declare default methods and static methods
-* all fields are both static and final by default
-* all constant values defined in an interface are implicitly public, static, and final
+* all of the methods are abstract by default
+  * except the default methods and static methods which are implemented explicitly
+    * default method
+      * impacts all class implementing this interface
+      * enable you to add new functionality to existing interfaces
+      * ensure binary compatibility with code written for older versions of those interfaces
+    * static method
+      * every instance of the class implementing an interface shares its static methods
+      * suitable for helper method
+* access level
+  * all fields are both static and final by default
+  * all constant values defined in an interface are implicitly public, static, and final
+  * all of the methods are public and abstract by default
 * an interface can extend multiple interfaces
 * a class must implement all methods in interface 
 * a class can implement more than one interface
 
 * Interface == new reference data type
+  * An interface name can be used anywhere a type can be used.
 
+Case Study of Interfaces
+```java
+// Comparator
+
+``` 
 
 Abstract classes vs. Interfaces
 ---
