@@ -16,7 +16,7 @@ Inheritance
 * Type of inheritance (like protected, public or private in C++) can NOT be specified
 * hiding vs. overriding (same signature in superclass and subclass)
   * static method: hiding, invoked by the type
-  * otherwise: overriding, invoked by the specific object
+  * instance method: overriding, invoked by the specific object (Polymorphism, virtual method invocation)
 ```java
 public class Animal {
     public static void testClassMethod() {
@@ -43,13 +43,17 @@ public class Cat extends Animal {
     }
 }
 ```
-  
+* The access specifier for overriding method can allow more than the overridden method
+  * a protected instance method in the superclass can be made public in subclass
+
 super() vs. this():
 ---
   * call super() and this() only inside constructor 
   * call super() and this() only once
   * super() is called by default in constructor which doest not have this()
-    * but parent's parametrized constructor must be called via `super(arg1, arg2)` implicitly 
+    * but parent's **parametrized constructor** must be called **implicitly** via `super(arguments)`  
+  * constructor chaining
+    * because every subclass constructor invokes a constructor of its superclass, either explicitly or implicitly
 
 Access Levels:
 ---
