@@ -4,8 +4,8 @@ Java Basics
 Inheritance
 ---
 * A subclass inherits all the public and protected members (fields, methods, and nested classes) from superclass
-  * private members are only accessible from the superclass
-  * function of same signature in subclass:
+  * Superclass's private members are only accessible from the superclass
+  * a private function of same signature in subclass:
     * it's not overriding!
     * it's a just new member in the subclass
 ```java
@@ -83,6 +83,7 @@ Access Levels:
 * use private unless you have a good reason not to
 * avoid public fields except for constants
 * private methods can not be overridden
+  * private method are **private** to the superclass
 * protected methods are accessable by classes in the same package
 * see [this table](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html)
 * all methods are virtual by default
@@ -92,7 +93,10 @@ final
 * variable: const, get assigned only once (not necessarily at the declaration)
 * method: can not be overidden
   * useful for [initialization](https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html) method when you don't want subclass override its parent's variable initialization
+  * Methods called from constructors should generally be declared final
+    * because a subclass's constructor may call a non-final method overridden in the subclass
 * class: can not be inherited, all methods declared immediately within a final class behave as if they are final
+  * ex. immutable class like the String
 
 static:
 ---
