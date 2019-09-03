@@ -88,7 +88,11 @@ printPersons(
   * Using Generic
 ```java
 import java.util.function.Predicate; 
-                          
+
+//interface Predicate<Person> {
+//    boolean test(Person t);
+//}                          
+
 Predicate<String> p = (s)->s.startsWith("G");
 ```
                           
