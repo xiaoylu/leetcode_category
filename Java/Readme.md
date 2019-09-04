@@ -5,7 +5,7 @@ Inheritance
 ---
 * A subclass inherits all the public and protected members (fields, methods, and nested classes) from superclass
   * Superclass's private members are only accessible from the superclass
-  * a private function of same signature in subclass:
+  * a private function using same signature in subclass:
     * it's not overriding!
     * it's a just new member in the subclass
 ```java
@@ -27,19 +27,19 @@ class Derived extends Base {
   }
 }
 ```
-* Constructors are inherited because they are not members
+* Constructors are not inherited because they are not members
   * superclass's constructor can be invoked by `super()`
-  * A class can not access its grandparent's methods
-  * `super()` can be called only once
+  * `super()` can be called only once, implicitly or explicitly
+* A class can not access its grandparent's methods
 * Neither final methods nor private methods can be overridden in the subclass
-* multiple inheritance of state (NO) vs. multiple inheritance of type (YES)
-  * A subclass inherits at most one superclass which avoids the diamond problem
-  * A class implements more than one interface:   
-    * `(MyInterface) myVariable` can reference any object of any class that implements the `MyInterface`
+* Java support multiple inheritance of type but NOT multiple inheritance of state
+  * A class can implement multiple interfaces but extend at most one superclass
+  * Thus, it avoids the diamond problem in which superclasses share fields of same name
+  * `(MyInterface) myVariable` can reference any object which instantiates a class that implements the `MyInterface`
 * Type of inheritance (like protected, public or private in C++) can NOT be specified
-* hiding vs. overriding (same signature in superclass and subclass)
-  * static method: hiding, invoked by the type
-  * instance method: overriding, invoked by the specific object (Polymorphism, virtual method invocation)
+* hiding vs. overriding (methods with same signatures in superclass and subclass)
+  * static method: hiding, invoked by the class name
+  * instance method: overriding, invoked by the specific object (called Polymorphism, or virtual method invocation)
 ```java
 public class Animal {
     public static void testClassMethod() {
@@ -71,11 +71,10 @@ public class Cat extends Animal {
   * use private unless you have a good reason not to
   * avoid public fields except for constants
   * private methods can not be overridden
-    * private method are **private**
   * protected methods are accessable by classes in the same package
   * all methods are virtual by default
   * The access specifier for overriding method can allow more than the overridden method
-    * a protected instance method in the superclass can be made public in subclass
+    * ex. a protected instance method in the superclass can be made public in subclass
 
 super() vs. this():
 ---
@@ -84,13 +83,13 @@ super() vs. this():
   * super() is called by default in constructor which doest not have this()
     * but parent's **parametrized constructor** must be called **implicitly** via `super(arguments)`  
   * constructor chaining
-    * because every subclass constructor invokes a constructor of its superclass, either explicitly or implicitly
+    * because every subclass constructor must invoke a constructor of its superclass, either explicitly or implicitly
 
 final
 ---
 * variable: const, get assigned only once (not necessarily at the declaration)
-* method: can not be overidden
-  * useful for [initialization](https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html) method when you don't want subclass override its parent's variable initialization
+* method: can not be overidden (final == private, but Java does not complain redundancy)
+  * useful for variable [initialization](https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html) method when you don't want subclass override its parent's variable initialization
   * Methods called from constructors should generally be declared final
     * because a subclass's constructor may call a non-final method overridden in the subclass
 * class: can not be inherited, all methods declared immediately within a final class behave as if they are final
@@ -100,8 +99,8 @@ static:
 ---
 * variable: static variables at class-level only (no static variable in functions)
 * method: share across all instances
-* class: only applies to static nested classes (access to static members of outter class)
-* block: static initialization block, anywhere in class, called by the order they appear
+* class: only applies to static nested classes (to grant it access to static members of the outter class)
+* block: static initialization block, could be anywhere in a class declaration, called by the order they appear
 
 Nested class: 
 ---
@@ -140,10 +139,9 @@ Interface
       * every instance of the class implementing an interface shares its static methods
       * suitable for helper methods
 ```java
-public interface CustomInterface {
-     
+public interface CustomInterface {     
     public abstract void method1();
-     
+
     public default void method2() {
         System.out.println("default method");
     }
@@ -154,7 +152,6 @@ public interface CustomInterface {
 }
  
 public class CustomClass implements CustomInterface {
- 
     @Override
     public void method1() {
         System.out.println("abstract method");
@@ -170,15 +167,13 @@ public class CustomClass implements CustomInterface {
 ```
 
 * access level
-  * all fields are both static and final by default
-  * all constant values defined in an interface are implicitly public, static, and final
-  * all of the methods are public and abstract by default
+  * all fields are public, static and final by default
+  * all methods are public and abstract by default
 * an interface can extend multiple interfaces
-* a class must implement all methods in interface 
-* a class can implement more than one interface
-* A functional interface (annotated by @FunctionalInterface) is any interface that contains only one **abstract** method
-* Interface is a reference data type
-  * An interface name can be used anywhere a type can be used.
+* a class must implement all methods in interface
+* interface is also a reference data type
+  * therefore, an interface name can be used anywhere a type is used.
+* A **functional interface** (annotated by @FunctionalInterface) is any interface that contains only one **abstract** method
 
 Case Study of Interfaces `Comparator<T>`
 ```java
@@ -211,14 +206,14 @@ myDeck.sort(
 
 Abstract classes vs. Interfaces
 ---
-* interfaces
-  * all fields are automatically public, static, and final
-  * a class can implement multiple interface (can be a lifesaver)
 * abstract classes
   * good for extension
   * but restricted by hierarchy structure
+* interfaces
+  * all fields are automatically static, and final
+  * No **state** is involved
 * if all the subclasses will share the same **state**, abstract class is a better choice
-  * such **state** includes non-static or non-final fields
+  * **state** refers to non-static or non-final fields
 * Abstract class can implements only part of the methods of an Interface (and its subclass implements the rest)
 ```java
 abstract class X implements Y {
@@ -232,18 +227,20 @@ class XX extends X {
 
 Annotations
 ---
-* @interface <annotation name>
-* Annotations which apply to other annotations
+* Declared by `@interface MyAnnotations { String spec(); }`
+* Annotations can apply to other annotations
   * @Target, @Retention, @Documented, @Repeatable, @Inherited (Read [this](https://docs.oracle.com/javase/tutorial/java/annotations/predefined.html))
-* For compilers to warn you: 
+* The annotations can let compilers to warn you (or not to warn you): 
   * @Deprecated vs. @SuppressWarnings, @Override 
 
 Lambda expression
 ---
 * A functional interface (annotated by @FunctionalInterface) is any interface that contains only one **abstract** method, ex. Comparator<T>, Predicate<T>, Function<T, R>
+
 * Use lambda expression to represent the instance of a functional interface
+
 ```java
- /* Anonymous class */
+ /* Anonymous class implementation*/
  printPersons(
     roster,
     new CheckPerson() {    // CheckPerson is a functional interface 
@@ -255,7 +252,7 @@ Lambda expression
     }
 );
                                    
-/* Lambda Expression */
+/* Lambda expression implementation */
 printPersons(
     roster,
     (Person p) -> p.getGender() == Person.Sex.MALE
@@ -263,7 +260,7 @@ printPersons(
         && p.getAge() <= 25
 );
 ```         
-  * Using Generic
+  * Lambda expression + Generic
 ```java
 import java.util.function.Predicate; 
 
@@ -276,3 +273,55 @@ Predicate<String> p = (s)->s.startsWith("G");
 p.test("Facebook")  // returns false
 p.test("Google")  // returns true 
 ```
+
+Generic
+---
+
+* In theory, we can use `Object myStuff` everywhere to achieve Polymorphism
+  * but it provides no type checks at compile time
+  * we need to `(MyClass) myStuff` everywhere
+  * if we pass the wrong type, only runtime error is shown
+* Static generic methods
+  * the type parameter section must appear before the method's return type
+```java
+public class Util {
+  public static <K, V> boolean compare(Pair<K, V> p1, Pair<K, V> p2) {
+      return p1.getKey().equals(p2.getKey()) &&
+             p1.getValue().equals(p2.getValue());
+  }
+}
+boolean same = Util.<Integer, String>compare(p1, p2);
+```
+* Bounded Type Parameters restricts the types of the generics
+  * `extends` mean either "extends" (as in classes) or "implements" (as in interfaces).
+  * it ensures that you can call certain method of the generic type, like `t1.compareTo(t2)`
+```java
+Class A { /* ... */ }
+interface B { /* ... */ }
+interface C { /* ... */ }
+
+class D <T extends A & B & C> { /* ... */ }
+```
+  * Integer is a subtype of Number, but List<Integer> is NOT a subtype of List<Number>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
