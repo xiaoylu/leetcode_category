@@ -281,7 +281,7 @@ Generic
   * but it provides no type checks at compile time
   * we need to `(MyClass) myStuff` everywhere
   * if we pass the wrong type, only runtime error is shown
-* Static generic methods
+* Generic methods
   * the type parameter section must appear before the method's return type
 ```java
 public class Util {
@@ -303,6 +303,7 @@ interface C { /* ... */ }
 class D <T extends A & B & C> { /* ... */ }
 ```
   * Integer is a subtype of Number, but List<Integer> is NOT a subtype of List<Number>
+* 
   
 
 
