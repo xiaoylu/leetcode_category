@@ -302,9 +302,14 @@ interface C { /* ... */ }
 
 class D <T extends A & B & C> { /* ... */ }
 ```
-  * Integer is a subtype of Number, but List<Integer> is NOT a subtype of List<Number>
-* 
-  
+
+* `List<Integer>` is NOT a subtype of `List<Number>`!
+  * How to subtype in this case?
+  * Upper Bounded Wildcard matches the type Foo and any subtype of Foo
+   `public static void process(List<? extends Foo> list) { /* ... */ }`
+  * Unbounded wildcard matches any type 
+  `public static void printList(List<?> list) { ... }`
+  * lower bounded wildcard `List<? super Integer>`
 
 
 
