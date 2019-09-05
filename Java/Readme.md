@@ -110,6 +110,9 @@ Nested class:
 * it has access to the members of enclosing class, including its private members
 * since it's a member of outer class, a nested/inner class can be declared private, public, protected, or package private (by default)
 * static nested class vs. inner class
+  * static nested class is basically a top-level class definition embedded in another top-level definition
+  * inner class is bascially a member of its outter class
+    * instance of inner class lives within the instance of outter class (like your liver vs. your body)
 ```java
 // static nested class
 OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
