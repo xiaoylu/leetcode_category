@@ -338,7 +338,7 @@ public class SubFoo extends Foo<Integer> {
   * `class Foo<T> { void func() { new T(); } }` is illegal because `T`'s constructor is unknonw at compile time
   * `class Foo<T> { static T data; }` is illegal because all `Foo<Integer>`, `Foo<Double>` share the same static member `data` but what is the type of `data` then?
   * `List<Integer>[] arrayOfLists = new List<Integer>[2];` is illegal because you cannot create arrays of parameterized types
-  * two overloaded methods that will have the same signature after type erasure.
+  * illegal because methods that have the same name and the same arguments – stripped of generics, have the same signature.
 ```java
 public class Example {
     public void print(Set<String> strSet) { }
