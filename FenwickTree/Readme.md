@@ -12,7 +12,7 @@ The sum of these partial sums would be the sum of `A[0b1] + A[0b10] + ... + A[0b
 
 Since there are at most `O(log N)` such partial sums, each query takes `O(log N)` time.
 
-NOTE, the node `0` is a dummy node.
+NOTE, the node `0` is a dummy node and the tree is 1-indexed (instead of 0-indexed)
 
 ```
 // For each query of prefix sum, we sum up the 
