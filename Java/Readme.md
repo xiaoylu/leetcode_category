@@ -102,6 +102,27 @@ static:
 * class: only applies to static nested classes (to grant it access to static members of the outter class)
 * block: static initialization block, could be anywhere in a class declaration, called by the order they appear
 
+enum
+---
+* `for (val : MyEnumClass.values())` return all values present inside enum.
+* each enum constant index can be found by `val.ordinal()`
+* `MyEnumClass.valueOf(myString)` method returns the enum constant of the specified string value, if exists.
+* Internally `enum` is a class
+```java
+enum Color 
+{ 
+    RED, GREEN, BLUE; 
+} 
+
+/* internally above enum Color is converted to
+class Color
+{
+     public static final Color RED = new Color();
+     public static final Color BLUE = new Color();
+     public static final Color GREEN = new Color();
+}*/
+```
+
 Nested class: 
 ---
 * Motivation 
