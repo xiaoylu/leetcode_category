@@ -1,6 +1,6 @@
 ## Binary Indexed Trees (Fenwick Tree)
 
-Fenwick tree supports the query of array prefix sums in `O(log N)` time. Specifically, given an array `A` of length `N`, Fenwick tree returns the prefix sum of `A[:k]` for any `0<=k<=N` in `O(log N)` time, while the elements of `A` get updated dynamically.
+Fenwick tree supports the query of array prefix sums in `O(log N)` time. Specifically, given an array `A` of length `N`, Fenwick tree returns the prefix sum of `A[:k]` for any `0<=k<=N` in `O(log N)` time, while the elements of `A` can also be updated dynamically in `O(log N)` time. 
 
 The idea is to maintains the partial sums.
 
