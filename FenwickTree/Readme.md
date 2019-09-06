@@ -15,7 +15,8 @@ Since there are at most `O(log N)` such partial sums, each query takes `O(log N)
 NOTE, the node `0` is a dummy node.
 
 ```
-// For each query of prefix sum, we sum up the partial sums stored along the path from a given node to the root
+// For each query of prefix sum, we sum up the 
+// partial sums stored along the path from a given node to the root
 root      0
           |--------------------- ...
           |  |  |         |
