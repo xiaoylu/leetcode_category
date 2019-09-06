@@ -24,14 +24,14 @@ level1    1  10 100*      1000
              |  |----     |--------- ...
              |  |   |     |     |
 level2       11 101 110*  1001  1010   ...
-   		           |
+   		|          |
                     111*
 ```
 At `111` stores the partial sum at `111`.
 At `110` stores the partial sum at `110`, `101`.
 At `100` stores the partial sum at `100`, `11`, `10`, `1`.
 
-Sum up these partial sums, and we will obtain prefix sum `A[0b1]+A[0b10]+...+A[0b111]`.
+Sum up these partial sums (marked by `*`), and we will obtain prefix sum `A[0b1]+A[0b10]+...+A[0b111]`.
 
 Two Operations:
 
