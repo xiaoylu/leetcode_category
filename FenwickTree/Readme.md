@@ -24,8 +24,8 @@ In this way,
 ```
 root      0
 level1    1, 	10, 	100*,       1000          ...
-level2        11,   101, 110*,  1001, 1010,   ...
-   		                   111*
+level2         11,   101, 110*,  1001, 1010,   ...
+   		                 111*
 ```
 At `111` stores the partial sum at `111`.
 At `110` stores the partial sum at `110`, `101`.
