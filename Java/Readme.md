@@ -106,7 +106,7 @@ enum
 ---
 * `for (val : MyEnumClass.values())` return all values present inside enum.
 * each enum constant index can be found by `val.ordinal()`
-* `MyEnumClass.valueOf(myString)` method returns the enum constant of the specified string value, if exists.
+* `MyEnum.valueOf("abcd")` method returns the enum constant of the specified string value, if exists.
 * Internally `enum` is a class
 ```java
 enum Color 
@@ -122,6 +122,8 @@ class Color
      public static final Color GREEN = new Color();
 }*/
 ```
+* Java requires that the constants be defined first, prior to any fields or methods
+
 
 Nested class: 
 ---
