@@ -50,6 +50,7 @@ Advanced:
 
 Others:
 * System Design
-* C++ basics
-* [Javascript basics](Javascript/Readme.md)
-* [Java](Java/Readme.md)
+* [Javascript basics](language/Javascript/Readme.md)
+* [C++](language/Cplusplus/Readme.md)
+* [Java](language/Java/Readme.md)
+* [Go](language/Go/Readme.md)
