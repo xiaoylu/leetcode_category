@@ -113,7 +113,7 @@ if v := math.Pow(x, n); v < lim {
 ---
 * function executes after the current function returns 
 * `defer` functions are pushed to a stack
-  * their executions order is the opposite
+  * their executions order is the reversed push order
 
 Pointer
 ---
@@ -123,7 +123,7 @@ Pointer
 type Vertex struct {
   X, Y int
 }
-p := &Vertex{1, 2} // p is a pointer 
+p := &Vertex{1, 2} // p is a pointer which allows modification of the struct 
 p.X = 100 
 ```
 
