@@ -27,6 +27,7 @@ Function
   func needInt(x int) (x, y int) {
     x++
     y += x
+    return
   }
 ```
   * closure `adder` is bound to `own` variable
