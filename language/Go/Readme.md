@@ -55,7 +55,7 @@ func (v Vertex) Abs() float64 {
 } 
 ```
 * Use **pointer receiver** to support modification
-  * motivation? this is a way for access level (like private/public in C++)
+  * motivation? this is a way for access level (like pass-by-reference vs pass-by-value in C++)
 ```go
 func (v *Vertex) Scale(f float64) {
 	v.X = v.X * f
