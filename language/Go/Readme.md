@@ -30,7 +30,7 @@ Function
     return
   }
 ```
-  * closure `adder` is bound to `own` variable
+  * closure `adder` is bound to its own variable `sum`
 ```go
 func adder() func(int) int {
 	sum := 0
