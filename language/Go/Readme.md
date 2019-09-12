@@ -74,7 +74,7 @@ type I interface {
 	M()
 }
 
-// interface I holds the concrete type string 
+// interface `I` holds the concrete type string 
 func (s string) M() { /* whatever */ }
 
 // create interface value which holds type string 
@@ -86,7 +86,7 @@ i.M()
   * and `i` holds the concrete type string
 * `t, ok := i.(T)` checks if interface value `i` holds a `T`
   * `ok == true` if yes; otherwise, `ok == false` 
-  * `t` becomes the underlying value if yes
+  * `t` becomes the underlying value of  type `T` if yes
 * Polymorphism for an interface value `i`
 ```go
 switch v := i.(type) {
@@ -95,7 +95,7 @@ switch v := i.(type) {
 ```
   * for example, every type can have its own way to print if
     * interface `Stringer`'s method `String() string` holds this type
-    * `func (t SomeType) String() string { return <string of t> }`
+    * `func (t SomeType) String() string { return <string of t to display> }`
 
 Logic
 ---
