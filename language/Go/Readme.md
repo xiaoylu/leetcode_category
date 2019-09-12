@@ -66,7 +66,9 @@ func (v *Vertex) Scale(f float64) {
 Interface
 ---
 * interface is a set of methods 
-* a type implements an interface whose method uses it as the receiver   
+* a type implements an interface 
+  * `==` a method of this interface uses this type as the receiver   
+  * `==` this interface holds the concrete type
 ```go
 type I interface {
 	M()
