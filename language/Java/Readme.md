@@ -78,6 +78,7 @@ public class Cat extends Animal {
 
 super() vs. this():
 ---
+  * Motivation: constructor does not have a name
   * call super() and this() only inside constructor 
   * call super() and this() only once
   * super() is called by default in constructor which doest not have this()
