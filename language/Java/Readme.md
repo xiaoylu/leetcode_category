@@ -34,7 +34,7 @@ class Derived extends Base {
 * Neither final methods nor private methods can be overridden in the subclass
 * Java support multiple inheritance of type but NOT multiple inheritance of state
   * A class can implement multiple interfaces but extend at most one superclass
-  * Thus, it avoids the [diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem) in which superclasses share fields of same name
+  * Thus, it avoids the [diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem) in which superclasses share the fields using the same name
   * `(MyInterface) myVariable` can reference any object which instantiates a class that implements the `MyInterface`
 * Type of inheritance (like protected, public or private in C++) can NOT be specified
 * hiding vs. overriding (methods with same signatures in superclass and subclass)
