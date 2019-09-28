@@ -306,19 +306,20 @@ Generic
 ---
 
 * In theory, we can use `Object myStuff` everywhere to achieve Polymorphism
-  * but it provides no type checks at compile time
-  * we need to do cast `(SubClass) myStuff` everywhere
-  * if we pass the wrong type, only runtime error is shown
+  * because the Object class is the topmost class of java.
+  * but it provides no type checks at compile time -- if we pass the wrong type, only runtime error is shown
+  * we need to manually do cast `(SubClass) myStuff` everywhere
 * Generic methods
   * Class: `class Foo<T> { T data; ...} `
-  * otherwise, the type parameter section must appear before the method's return type
 ```java
 public class Util {
   public static <K, V> boolean compare(Pair<K, V> p1, Pair<K, V> p2) {
       return p1.getKey().equals(p2.getKey()) &&
              p1.getValue().equals(p2.getValue());
   }
-}
+}g
+// we can skip the type parameter section if compiler knows these types
+// otherwise, the type parameter section must appear before the method's return type
 boolean same = Util.<Integer, String>compare(p1, p2);
 ```
 
@@ -326,8 +327,8 @@ boolean same = Util.<Integer, String>compare(p1, p2);
   * How to define a subtype of `List<Number>`?
   * Upper Bounded Wildcard matches the type Foo and any subtype of Foo
    `public static void process(List<? extends Foo> list) { /* ... */ }`
-    * `extends` mean either "extends" (as in classes) or "implements" (as in interfaces)
-    * `class D <T extends A & B & C> { /* ... */ }`
+    * `extends` here mean either "extends" (as in classes) or "implements" (as in interfaces)
+    * mutiple interfaces: `class D <T extends A & B & C> { /* ... */ }`
   * Unbounded wildcard matches any type 
   `public static void printList(List<?> list) { ... }`
   * lower bounded wildcard `List<? super Integer>`
@@ -374,9 +375,12 @@ public class Example {
 }
 ```
 
-
-
-
+Object & Class
+---
+* The Object class is the topmost class in Java. All classes inherits Object directly or indirectly.
+* The Class class provides metadata about the current object's class
+  * `public final Class getClass()` declared in Object class	returns the Class class object of the current object. 
+  * The Class class can further be used to get the metadata of the class of the current object.
 
 
 
