@@ -46,7 +46,7 @@ x(2) // sum == 3 now
 
 Method
 ---
-* no class in Go ! 
+* there is no class in Go
 * a method is a function with a receiver
 ```go
 // Abs() has v as its receiver
@@ -54,8 +54,8 @@ func (v Vertex) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 } 
 ```
-* Use **pointer receiver** to support modification
-  * motivation? this is a way for access level (like pass-by-reference vs pass-by-value in C++)
+
+* Use **pointer receiver** to allow modification
 ```go
 func (v *Vertex) Scale(f float64) {
 	v.X = v.X * f
@@ -65,37 +65,64 @@ func (v *Vertex) Scale(f float64) {
 
 Interface
 ---
-* interface is a set of methods 
-* a type implements an interface 
-  * `==` a method of this interface uses this type as the receiver   
-  * `==` this interface holds the concrete type
+* interface is **a set of methods**
+* interface value == interface + value
+* when a type implements an interface 
+  * this interface value holds a value of this **type**
+  * `var i I interface{} = "hello"`
+
 ```go
 type I interface {
 	M()
 }
 
-// interface `I` holds the concrete type string 
+// we can say: interface `I` holds the concrete type string 
+// or: M() has a receiver of type string 
 func (s string) M() { /* whatever */ }
 
-// create interface value which holds type string 
+// create an interface value
 var i I = string("hello") 
+// we will be able to call the method
 i.M()
 ```
 * `var i I interface{} = "hello"`
-  * creates an interface value `i`
-  * and `i` holds the concrete type string
-* `t, ok := i.(T)` checks if interface value `i` holds a `T`
+  * it creates an interface value `i`
+  * and this `i` holds the concrete type string "hello"
+* an interface can hold many different types
+* `t, ok := i.(T)` checks if interface value `i` holds a type `T`
   * `ok == true` if yes; otherwise, `ok == false` 
-  * `t` becomes the underlying value of  type `T` if yes
-* Polymorphism for an interface value `i`
+  * `t` will be the underlying value if yes
+* an interface value `i` provides Polymorphism 
+  * an interface value can be associated with different types
+  * each type can implement the interface in different ways
+
 ```go
-switch v := i.(type) {
-  case T: ...
-  case S: ... 
+func do(i interface{}) {
+  switch v := i.(type) {
+    case T: ...
+    case S: ... 
+    default: ...
+  }
+}
 ```
-  * for example, every type can have its own way to print if
-    * interface `Stringer`'s method `String() string` holds this type
-    * `func (t SomeType) String() string { return <string of t to display> }`
+* for example, every type can have its own way to print if
+  * interface `Stringer`'s method `String() string` holds this type
+  * you implement `func (t SomeType) String() string { return <string of t> }`
+  * depending on the type it holds, an interface value prints differently
+* for example, every type can have its own way to `fmt.Printf()` if
+  * interface `Stringer`'s method `String() string` holds this type
+  * `func (t SomeType) String() string { return <string of t to display> }`
+
+Error
+---
+* built-in interface
+```go
+type error interface {
+  Error() string
+}
+```
+* the customized Error type implements an `error` interface
+  * `func (e MyError) Error() string { /* handle error */ }`
 
 Logic
 ---
