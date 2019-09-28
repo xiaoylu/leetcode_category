@@ -22,14 +22,14 @@ class Derived extends Base {
   public static void main(String[] args) { 
       Base obj = new Derived(); 
       obj.fun(); // compiler error, because fun() is not overridden in Derived.
-                 // and it's illegal to access fun() in Base
+                 // and it's illegal to access the private fun() in Base
                  // Polymorphism only works when the instance methods are overridden
   }
 }
 ```
 * Constructors are not inherited because they are not members
   * superclass's constructor can be invoked by `super()`
-  * `super()` can be called only once, implicitly or explicitly
+  * `super()` is called only once, implicitly or explicitly
 * A class can not access its grandparent's methods
 * Neither final methods nor private methods can be overridden in the subclass
 * Java support multiple inheritance of type but NOT multiple inheritance of state
