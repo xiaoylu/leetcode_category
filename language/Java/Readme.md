@@ -104,6 +104,7 @@ static:
 
 enum
 ---
+* An enum is a kind of class and an annotation is a kind of interface. (cited from [Class.java](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/lang/Class.java#l76))
 * `for (val : MyEnumClass.values())` return all values present inside enum.
 * each enum constant index can be found by `val.ordinal()`
 * `MyEnum.valueOf("abcd")` method returns the enum constant of the specified string value, if exists.
@@ -253,6 +254,7 @@ class XX extends X {
 
 Annotations
 ---
+* An enum is a kind of class and an annotation is a kind of interface.
 * Declared by `@interface MyAnnotations { String spec(); }`
 * Annotations can apply to other annotations
   * @Target, @Retention, @Documented, @Repeatable, @Inherited (Read [this](https://docs.oracle.com/javase/tutorial/java/annotations/predefined.html))
