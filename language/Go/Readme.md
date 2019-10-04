@@ -228,3 +228,5 @@ func testSumFunc(numbers []int, expected int) func(*testing.T) {
   }
 }
 ```
+
+[More](https://www.calhoun.io/how-to-test-with-go/)
