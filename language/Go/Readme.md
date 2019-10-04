@@ -185,3 +185,45 @@ Map
   * Check exist by `val, exit = m[key]`
   * `exit == false` if `key` is not in `m` 
 * Remove by `delete(m, key)`
+
+Closure
+---
+How to implement a local `static` variable inside a function? Use Closure
+
+```go
+func main() {
+  counter := newCounter()
+  counter()  // return 1
+  counter()  // return 2
+}
+
+// Here newCounter() returns an anonymous function
+// which has access to n even after it exists
+func newCounter() func() int {
+  n := 0
+  return func() int {
+    n += 1
+    return n
+  }
+}
+```
+[Common ways to use closure](https://www.calhoun.io/5-useful-ways-to-use-closures-in-go/)
+
+Test
+---
+Run `go test -v` at
+```
+func TestSum(t *testing.T) {
+  t.Run("[1,2,3,4,5]", testSumFunc([]int{1, 2, 3, 4, 5}, 15))
+  t.Run("[1,2,3,4,-5]", testSumFunc([]int{1, 2, 3, 4, -5}, 5))
+}
+
+func testSumFunc(numbers []int, expected int) func(*testing.T) {
+  return func(t *testing.T) {
+    actual := Sum(numbers)
+    if actual != expected {
+      t.Error(fmt.Sprintf("Expected the sum of %v to be %d but instead got %d!", numbers, expected, actual))
+    }
+  }
+}
+```
