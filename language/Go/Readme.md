@@ -211,7 +211,8 @@ func newCounter() func() int {
 
 Test
 ---
-Run `go test -v` at
+Run `go test -v` at the package where the test file has a filename ending with `_test.go`.
+
 ```
 func TestSum(t *testing.T) {
   t.Run("[1,2,3,4,5]", testSumFunc([]int{1, 2, 3, 4, 5}, 15))
