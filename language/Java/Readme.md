@@ -101,6 +101,7 @@ static:
 * variable: static variables at class-level only (no static variable in functions)
 * method: share across all instances
 * class: only applies to static nested classes (to grant it access to static members of the outter class)
+  * public static nested class can be understood as a "top-level" class declared within another class. It can be instantiated.
 * block: static initialization block, could be anywhere in a class declaration, called by the order they appear
 
 enum
