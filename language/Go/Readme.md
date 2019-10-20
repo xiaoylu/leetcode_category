@@ -7,6 +7,9 @@ Go does not have class implemenations.
 But class == struct types + methods
 * struct only holds the state, not the behavior
 * method changes the state of struct types
+Access level
+* capitalized fields, methods and functions are public; package private otherwise
+* 
 
 Type
 ---
@@ -22,6 +25,25 @@ type MyFloat float64
 type Person struct {
 	name string
 	age int
+}
+```
+* struct embedding
+  * Composition over inheritance
+```go
+// copied from https://flaviocopes.com/golang-is-go-object-oriented/
+type Dog struct {
+	Animal      // Composition by struct embedding 
+}
+type Animal struct {
+	Age int
+}
+func (a *Animal) Move() {
+	fmt.Println("Animal moved")
+}
+func main() {
+	d := Dog{}
+	d.Age = 3 // Age automatically becomes part of Dog
+	d.Move()  // call Animal's method directly
 }
 ```
 
