@@ -8,8 +8,11 @@ But class == struct types + methods
 * struct only holds the state, not the behavior
 * method changes the state of struct types
 Access level
-* capitalized fields, methods and functions are public; package private otherwise
-* 
+* capitalized fields, methods and functions are public
+* lower case fields, methods and functions are package private
+* Factory pattern
+  * declare lower case struct type
+  * and use a capitalized function `New` which return an object of this struct type
 
 Type
 ---
@@ -72,6 +75,10 @@ x = adder() // sum == 0 now
 x(1) // sum == 1 now
 x(2) // sum == 3 now 
 ```
+* functions can be 
+  * stored as struct fields
+  * passed as arguments to other functions
+  * returned from a function or methods
 
 Method
 ---
@@ -83,7 +90,7 @@ func (v Vertex) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 } 
 ```
-
+* methods can only be attached to a type in the same package where this type is defined
 * Use **pointer receiver** to allow modification
 ```go
 func (v *Vertex) Scale(f float64) {
