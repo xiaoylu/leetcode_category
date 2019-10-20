@@ -1,6 +1,13 @@
 Go
 ===
 
+Is Go Object-Oriented?
+---
+Go does not have class implemenations.
+But class == struct types + methods
+* struct only holds the state, not the behavior
+* method changes the state of struct types
+
 Type
 ---
 * golang is very serious about variable types
@@ -9,7 +16,7 @@ Type
     * which is the same as `x`'s
   * all cast must be explicit (unlike C++)
 * constant `const x = 1.1`
-* define your own `type` 
+* define your own `struct type` 
 ```
 type MyFloat float64
 type Person struct {
