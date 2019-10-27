@@ -3,7 +3,8 @@ C++
 
 Order of Construction and Destruction
 ---
-The default constructors are called in the order of inheritance, while the default destructors are called in the opposite order.
+* the default constructors are called in the order of inheritance (base first and derived next)
+* the default destructors are called in the opposite order.
 BUT you can only explicitly call the base class’s parameterised constructor in the derived class
 ```
 Child(int j): Parent(j) 
@@ -25,14 +26,14 @@ public:
 class Derived : public Base
 {
 public:
-    Derived(int i, int j):x(i), y(j) {}  // The base class members cannot be directly assigned
+    Derived(int i, int j):x(i), y(j) {}  // Error: the base class members cannot be directly assigned
     void print() {cout << x <<" "<< y; }
 };
 ```
 
 And objects are always destroyed in reverse order of their creation.
 
-We can not make constructor virtual, but we can make destructor virtual. In this way, the call of Derived's destructor will be called first, and then the Bases's destructor. Otherwise, without virtual keyword, only Derived's destructor gets called.
+We can not make constructor virtual, but we can make destructor virtual. In this way, the call of derived's destructor will be called first, and then the bases's destructor. Otherwise, without virtual keyword, only Derived's destructor gets called.
 
 ```
 #include<iostream>
@@ -112,18 +113,16 @@ class S
 
 Rule of Three
 ---
-If one of these had to be defined by the programmer, it means that the compiler-generated version does not fit the needs of the class in one case and it will probably not fit in the other cases either. So if a class defines one (or more) of the following it should probably explicitly define all three:
-
+If a class defines one of the following it should probably explicitly define all three:
 * Destructor
 * Copy constructor 
 > `Point(const Point &p) { x = p.x;}`
 * Copy assignment operator
-> `Point& operator=(const Point& p) { x = p.x; }`; Unlike copy constructor, it's okay (not recommended) to use `Point& operator=(Point p) { x = p.x; }`. (why?)
+> `Point& operator=(const Point& p) { x = p.x; }`
 
-Virtual Constructor == Factory Pattern
+Virtual Constructor for Factory Pattern
 ---
-The virtual keyword can not be put before constructor. But what if we need dynamic creation of Derived classes at Runtime? The Derived class delegates that responsibility to Base, and provides an input in the form of ID. Consumers of User need not recompile their code due to extension of Base.
-
+Dynamic creation of derived classes at Runtime 
 ```
 //// LIBRARY START 
 class Base 
@@ -184,12 +183,16 @@ ReturnReference() = 20.23; // we can do this
 
 Virtual Function
 ---
-They are always defined in base class and overridden in derived class with the EXACT same prototype, while the 'virtual' keyword is optional in the derived class.
+Member functions that are not declared as virtual are resolved at compile time, not run time.
 
-The resolving of virtual function call is done at Run-time. (Runtime polymorphism, or refered as Late Binding or Dynamic Binding by the vptr), instead of an Early binding (Compile time binding) for other overridings)
+The 'virtual' keywords are 
+* always defined in base class
+* but optional in the derived class
 
-In case of virtual function in base, the call is forwarded to the **most heavily derived** class.
+The resolving of virtual function call is done at run-time. 
+> Runtime polymorphism, or refered as Late Binding or Dynamic Binding by the vptr, instead of an Early binding (Compile time binding)
 
+In case of calling the virtual function in base, the call is **forwarded** to the **most heavily derived** class.
 ```
     base *p; 
     derived d; 
@@ -204,14 +207,14 @@ In case of virtual function in base, the call is forwarded to the **most heavily
     p->non_virtual_function();  
 ```
 
-A base class pointer can point to a derived class object. But we can only access 
+A base class pointer can point to a derived class object. But we can **only** access 
 * base class member 
 * virtual functions in base class
 using the base class pointer
 
 VTable & Vpointer
 ---
-In the heap, at the top of an object's memory, a virtual pointer points to the code stack of a class. Every class has a vtable. The vtable maps the child's overrided function to its own implementation, instead of its derived class's virtual function. However, if a class does not provide customized implementation, the vtable still maps this function to its derived class's virtual function. 
+In the heap, at the top of an object's memory, a virtual pointer points to the code stack of a class. Every class has a vtable. **The vtable maps the child's overrided function to its own implementation, instead of its derived class's virtual function.** However, if a class does not provide customized implementation, the vtable still maps this function to its derived class's virtual function. 
 
 ![Imgur](https://i.imgur.com/VdeRgz2.png)
 
@@ -219,12 +222,12 @@ In the heap, at the top of an object's memory, a virtual pointer points to the c
 
 Virtual Destructor
 ---
-If you do a "delete p" where p is a pointer to a base class, then that class needs have a virtual destructor.
+If you do a "delete p" where p is a pointer to a base class, then that class must have a virtual destructor.
 
 [Why?](https://blogs.msdn.microsoft.com/oldnewthing/20040507-00/?p=39443) 
 Because your "delete p" might be early binded to the base class's destructor at compile time, so memory leak happens for the derived class.
 
-"There’s rarely a reason NOT to make the destructor virtual if you already have a (public) virtual method in the base class." 
+> "There’s rarely a reason NOT to make the destructor virtual if you already have a (public) virtual method in the base class." 
 The vptr is already there in the base class anyway.
 
 Pure virtual destructor is used when you want to make a class abstract but no other functions should be pure virtual.
@@ -235,14 +238,14 @@ A class is abstract if it has at least one pure virtual function.
 ```
 virtual void func() = 0; 
 ```
-We cannot create objects of abstract classes. But we can **pointers to** and **references of** abstract classes, also an abstract class can have constructors. Note a pure virtual function can be actually be called as a static member. But no instance of the abstract class is allowed.
+We cannot instantiate abstract class. But we can **pointers to** and **references of** abstract classes, also an abstract class can have **constructors**.
 
-If we do not override the pure virtual function in derived class, then derived class also becomes abstract class. Also no instance allowed.
+If we do not override the pure virtual function in derived class, then derived class also becomes abstract class.
 
-When all functions are pure virtual, an abstract class is similar to the "interface" in Java.
+When all functions are pure virtual, an abstract class becomes an "interface" in Java.
 
-* = 0 means that a function is pure virtual and you cannot instantiate an object from this class. You need to derive from it and implement this method.
-* = delete means that the compiler will not generate those constructors for you. AFAIK this is only allowed on copy constructor and assignment operator.
+* `= 0` means that a function is pure virtual and you cannot instantiate an object from this class. You need to derive from it and implement this method
+* `= delete` means the compiler will not generate those constructors for you (so we can hide copy constructor and assignment operator)
 
 Friend Class & Functions
 ---
@@ -251,14 +254,18 @@ Friendship is not inherited.
 
 Lifetime of a data member (object)
 ---
-* Association: Foo has a pointer to Bar object as a data member, without managing the Bar object => Foo knows about Bar
-* Composition: Foo has a Bar object as data member => Foo contains a Bar. It can't exist without it.
-* Aggregation: Foo has a pointer to Bar object and manages the lifetime of that object => Foo contains a Bar, but can also exist without it.
+* Association: Foo has a **pointer** to Bar object as a data member, without managing the Bar object => **Foo knows about Bar**
+* Composition: Foo has a Bar object as data member => **Foo contains a Bar. It can't exist without it.**
+ * **Composition over Inheritance**
+* Aggregation: Foo has a pointer to Bar object and manages the lifetime of that object => **Foo contains a Bar, but can also exist without it.**
 
 Static Variable
 ---
-The lifetime of function static variables begins the first time the program flow encounters the declaration and it ends at program termination. So, you must "define" it after the class declaration.
+The lifetime of function static variables 
+* begins the first time the program touches the declaration 
+* ends at program termination. 
 
+So, you must "define" it after the class declaration.
 ```
 class B 
 { 
@@ -268,7 +275,8 @@ public:
     static A getA() { return a; } 
 }; 
   
-A B::a;  // definition of a, without this line, your program will have "Compiler Error: undefined reference to `B::a'" 
+A B::a;  // definition of a, it is when `a` gets created
+         // without this line, your program will have "Compiler Error: undefined reference to `B::a'" 
 
 int main() 
 { 
