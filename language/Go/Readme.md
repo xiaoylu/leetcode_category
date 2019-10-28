@@ -11,9 +11,11 @@ But class == struct types + methods in Go
 Access level in a package
 * capitalized fields, methods and functions are public
 * lower case fields, methods and functions are package private
-* Factory pattern
-  * declare lower case struct type
+
+"Constructors" in Go
+  * declare lower case struct type, thus making it private
   * and use a capitalized function `New` which return an object of this struct type
+  * (This is a default factory pattern)
 
 Composition over Inheritence
 * Go prefers embedding a struct inside the other
