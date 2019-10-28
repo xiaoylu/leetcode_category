@@ -15,6 +15,14 @@ Access level in a package
   * declare lower case struct type
   * and use a capitalized function `New` which return an object of this struct type
 
+Composition over Inheritence
+* Go prefers embedding a struct inside the other
+* Ask yourself what is inheritence?
+  * base class's data members are in the derived class ==> Go uses composition
+  * base class's non-private interfaces can be invoked inside derived class
+    * Go uses interface and package-level access level control
+  * polymorphism ===> Go uses interface values
+
 Type
 ---
 * golang is very serious about variable types
