@@ -7,6 +7,7 @@ Go does not have class implemenations.
 But class == struct types + methods
 * struct only holds the state, not the behavior
 * method changes the state of struct types
+
 Access level
 * capitalized fields, methods and functions are public
 * lower case fields, methods and functions are package private
