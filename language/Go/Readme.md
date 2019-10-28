@@ -8,7 +8,7 @@ But class == struct types + methods
 * struct only holds the state, not the behavior
 * method changes the state of struct types
 
-Access level
+Access level in a package
 * capitalized fields, methods and functions are public
 * lower case fields, methods and functions are package private
 * Factory pattern
