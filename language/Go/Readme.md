@@ -4,7 +4,7 @@ Go
 Is Go Object-Oriented?
 ---
 Go does not have class implemenations.
-But class == struct types + methods
+But class == struct types + methods in Go
 * struct only holds the state, not the behavior
 * method changes the state of struct types
 
