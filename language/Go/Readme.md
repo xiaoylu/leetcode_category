@@ -22,7 +22,7 @@ Composition over Inheritence
 * Ask yourself what is inheritence?
   * base class's data members are in the derived class ==> Go uses composition
   * base class's non-private interfaces can be invoked inside derived class
-    * Go uses interface and package-level access level control
+    * ===> Go uses interface and package-level access level control
   * polymorphism ===> Go uses interface values
 
 Type
