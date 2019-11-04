@@ -401,14 +401,21 @@ public:
 }; 
 ```
 
+Styles
+---
+Namespace are all lower cases
+* include both declaration (.h file) and definition (.cc file) in the same namespace 
+* be explicit: don't `using namespace std`; don't use inline namespace
+
+
+
 Further Reading
 ---
 Test yourself: https://www.geeksforgeeks.org/c-plus-plus-gq/
 
 STL: https://www.geeksforgeeks.org/the-c-standard-template-library-stl/
 
-
-
+Google C++ style guide: https://google.github.io/styleguide/cppguide.html#Namespaces
 
 
 
