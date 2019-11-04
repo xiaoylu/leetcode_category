@@ -144,6 +144,9 @@ int main() {
     return 0;
 }
 ```
+It is a often a good practice to declare constructor `explicit` to avoid the default type conversion.
+(Otherwise, the compiler may use the constructor for conversions.)
+Also C++11 allows `= delete` to get rid of certain functions.
 
 Virtual Constructor for Factory Pattern
 ---
