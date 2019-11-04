@@ -120,6 +120,31 @@ If a class defines one of the following it should probably explicitly define all
 * Copy assignment operator
 > `Point& operator=(const Point& p) { x = p.x; }`
 
+[Violation Example](https://lokiastari.com/blog/2014/12/30/c-plus-plus-by-example-smart-pointer/)
+If destructor is defined but copy constructor is missing,
+the default copy constructor may conduct a 'shallow' copy which make the new object points to the same memory
+of the original object. So, the same destructor gets called twice.
+```cpp
+template<typename T>
+class UP
+{
+    private:
+        T*   data;
+    public:
+        UP(T* data) : data(data) {}
+        ~UP() { delete data; }
+};
+int main() {
+    UP obj1<int>(new int(5));
+    UP obj2<int>(obj1);  
+            // the default copy constructor will assign
+            // the data member of obj1 to
+            // the data member of obj2, so the destructor
+            // will be called twice
+    return 0;
+}
+```
+
 Virtual Constructor for Factory Pattern
 ---
 Dynamic creation of derived classes at Runtime 
