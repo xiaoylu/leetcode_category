@@ -429,13 +429,47 @@ public:
 }; 
 ```
 
+rvalue and move semantics
+---
+The lvalue has a memory allocated so you can assign to lvalues.
+The rvalues, such as temporary values, can not be assigned to.
+
+When pass by value, C++ copies the object's memory to pass to the function invocation.
+But if a rvalue is passed as argument to a function, instead of copy and release the rvalue,
+we can directly transfer the ownership of this rvalue to this function.
+
+Note that, after the transition is done, the caller should not do anything with the rvalue.
+
+C++11 supports rvalue reference `T&& t`, allowing separate overloads for rvalues and lvalues.
+
+```
+// Move constructor
+Foo(Foo&& original) {
+//
+}
+
+// Move assignment
+Foo& operator=(Foo&& other)  
+{
+//
+}
+```
+
+For a lvalue `b`, `Foo a = std::move(b)` would cast `b` to rvalue first.
+If `Foo` has a move constructor, then the ownership of `b` is transfered to `a`;
+Otherwise, `b` would still be copied and the copy is passed to `a`'s constructor.
+
+unique_ptr
+---
+* sole owner of whatever it points to
+
+https://en.cppreference.com/w/cpp/memory/unique_ptr
+
 Styles
 ---
 Namespace are all lower cases
 * include both declaration (.h file) and definition (.cc file) in the same namespace 
 * be explicit: don't `using namespace std`; don't use inline namespace
-
-
 
 Further Reading
 ---
