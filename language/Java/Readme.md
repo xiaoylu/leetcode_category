@@ -108,9 +108,9 @@ enum
 ---
 * An enum is a kind of class and an annotation is a kind of interface. (cited from [Class.java](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/lang/Class.java#l76))
 * `for (val : MyEnumClass.values())` return all values present inside enum.
-* each enum constant index can be found by `val.ordinal()`
+* find the constant index: `val.ordinal()`
 * `MyEnum.valueOf("abcd")` method returns the enum constant of the specified string value, if exists.
-* Internally `enum` is a class
+* Internally `enum` is a final class which you can neither extend nor instantiate
 ```java
 enum Color 
 { 
@@ -118,15 +118,37 @@ enum Color
 } 
 
 /* internally above enum Color is converted to
-class Color
+final class Color
 {
      public static final Color RED = new Color();
      public static final Color BLUE = new Color();
      public static final Color GREEN = new Color();
+     
+     private Color() {};
 }*/
 ```
 * Java requires that the constants be defined first, prior to any fields or methods
-
+* write a rich enum
+  * declare instance fields
+  * write a constructor that takes the data and stores it in the fields
+```java
+enum Color
+{
+  RED(1, 'red');
+  GREEEN(2, 'green');
+  public final int id;  // all fields must be final in enum
+  public final String tag;
+  Color(int id, String tag) {
+    this.id = id;
+    this.tag = tag;
+  }
+  public int id() { return id; }
+  public String tag() { return tag; }
+  public int someOtherFunction() {
+    return id + 1; // or whatever
+  }
+}
+```
 
 Nested class: 
 ---
