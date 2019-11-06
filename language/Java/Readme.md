@@ -110,7 +110,7 @@ enum
 * `for (val : MyEnumClass.values())` return all values present inside enum.
 * find the constant index: `val.ordinal()`
 * `MyEnum.valueOf("abcd")` method returns the enum constant of the specified string value, if exists.
-* Internally `enum` is a final class which you can neither extend nor instantiate
+* Internally `enum` is a final class which you can neither extend nor instantiate from outside
 ```java
 enum Color 
 { 
@@ -129,13 +129,13 @@ final class Color
 ```
 * Java requires that the constants be defined first, prior to any fields or methods
 * write a rich enum
-  * declare instance fields
-  * write a constructor that takes the data and stores it in the fields
+  * declare instance fields and write a constructor that takes the data and stores it in the fields
+  * use abstract method and define them in each enum
 ```java
 enum Color
 {
-  RED(1, 'red');
-  GREEEN(2, 'green');
+  RED(1, 'red'){public String example() { return "Apple"; }};
+  GREEEN(2, 'green'){public String example() { return "Grass"; }};
   public final int id;  // all fields must be final in enum
   public final String tag;
   Color(int id, String tag) {
@@ -144,9 +144,7 @@ enum Color
   }
   public int id() { return id; }
   public String tag() { return tag; }
-  public int someOtherFunction() {
-    return id + 1; // or whatever
-  }
+  public abstract String example();
 }
 ```
 
