@@ -148,6 +148,15 @@ It is a often a good practice to declare constructor `explicit` to avoid the def
 (Otherwise, the compiler may use the constructor for conversions.)
 Also C++11 allows `= delete` to get rid of certain functions.
 
+Clockwise/Spiral Rule
+---
+http://c-faq.com/decl/spiral.anderson.html
+
+int* - pointer to int
+int const * - pointer to const int
+int * const - const pointer to int
+int const * const - const pointer to const int
+
 Virtual Constructor for Factory Pattern
 ---
 Dynamic creation of derived classes at Runtime 
