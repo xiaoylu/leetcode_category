@@ -70,10 +70,9 @@ In C++, a Copy Constructor may be called:
 > Note `MyClass a = b;` is equal to `MyClass a(b);` but `MyClass a, b; a = b;` calls the assignment function instead.
 3. When the compiler generates a temporary object. (depending on the compiler's optimization)
 
-Private copy constructor makes objects non-copyable. 
+Private copy constructor makes objects non-copyable. (Or simply mark it by `=delete`.)
 
 For singleton pattern, we intend to make it non-copyable. See below.
-
 ```
 class S
 {
@@ -98,7 +97,7 @@ class S
         // C++ 11
         // =======
         // We can use the better technique of deleting the methods
-        // we don't want.
+        // that we don't want.
     public:
         S(S const&)               = delete;
         void operator=(S const&)  = delete;
@@ -208,6 +207,10 @@ A base class pointer can point to a derived class object. But we can **only** ac
 * base class member 
 * virtual functions in base class
 using the base class pointer
+
+Pure virtual function (abstruct function) is a virtual function without implementation.
+A class with at least one pure virtual function is called abstract class.
+An abstract class cannot be instantiated.
 
 VTable & Vpointer
 ---
