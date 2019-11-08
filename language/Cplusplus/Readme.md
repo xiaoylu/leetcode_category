@@ -262,7 +262,7 @@ Lifetime of a data member (object)
 Static Variable
 ---
 The lifetime of function static variables 
-* begins the first time the program touches the declaration 
+* begins the first time the execution flow "touches" the declaration 
 * ends at program termination. 
 
 So, you must "define" it after the class declaration.
@@ -301,19 +301,23 @@ Modes of Inheritance
 
 When a class inherits another one, the members of the derived class can access the **protected** members inherited from the base class, **but not its PRIVATE members**. So, regardless of the inhertitance mode, private members are not accessable outside a base class, even for derived class, except declaring `friend` methods/class.
 
+Restrict yourself to "is-a-type-of" inheritance. Don' use private mode, inject the base class as an instance into the "derived" class.
+
 The Diamond Problem
 ---
 The diamond problem occurs when two superclasses of a class have a common base class. So the derived-class at very bottom gets two copies of all attributes of superclass at the very top. So the virtual mode is needed here.
 
-Smart Pointer
+Smart/Unique Pointer 
 ---
-The idea is to make a class with a pointer, destructor and overloaded operators like * and ->. Since destructor is automatically called when an object goes out of scope, the dynamically allocated memory would automatically deleted (or reference count can be decremented).
+Make a class with a pointer member, overload its operators like * and ->, and `delete` the pointer in destructor.
 
+When this object goes out of scope, the dynamically allocated memory would automatically be deleted.
 ```
 #include<iostream> 
 using namespace std; 
   
 // A generic smart pointer class 
+// (WARN: it has potential errors, use std::auto_ptr in practice)
 template <class T> 
 class SmartPtr 
 { 
@@ -342,7 +346,15 @@ int main()
     return 0; 
 } 
 ```
-A more advanced implementation: assignment to a smart pointers would triger the destruction of its previous value. This type of smart pointer is called `Holder`. One of the such smart-pointer type is `std::auto_ptr` (chapter 20.4.5 of C++ standard), which allows to deallocate memory automatically when it out of scope and which is more robust than simple pointer usage when exceptions are thrown, although less flexible. Another convenient type is `boost::shared_ptr` which implements reference counting and automatically deallocates memory when no references to object remains. This helps avoiding memory leaks and is easy to use to implement RAII.
+
+C++11 allows `unique_ptr` which is the sole owner of whatever it points to. 
+The object is disposed when either of the following happens:
+* the managing unique_ptr object is destroyed
+* the managing unique_ptr object is assigned another pointer via operator= or reset().
+
+Create a `unique_ptr` by `std::make_unique` or ` absl::make_unique`.
+
+Move a `unique_ptr` by `std::move` (so you can move resource more safely across API boundaries.)
 
 sizeof()
 ---
@@ -409,10 +421,17 @@ The rvalue does NOT persist beyond one single expression and you can not assign 
 C++11 supports rvalue reference `T&& t`, allowing separate overloads for rvalues and lvalues.
 
 `std::move(b)` does nothing but cast lvalue `b` to rvalue type.
-So calling `Foo a = std::move(b)` would call move constructor if exist; otherwise, the call would be degraded to normal constructor.
+So calling `Foo a = std::move(b)` would call move constructor if exist; otherwise, the call would be degraded to normal constructor. 
 
-The interface does not need to change. We just need to implement the move constructor:
+Again, the rvalue does NOT persist beyond one single expression, so after `std::move`, the caller can no longer access the object which gets casted to rvalue.
+
+The code which calls the constructor does not need to change. 
+We just need to implement overload the constructor (i.e. add the move constructor):
 ```cpp
+Foo(const Foo& original) {
+   // copy the resources held by 'original'
+}
+
 // Move constructor
 Foo(Foo&& original) {
    // "steal" the resources held by 'original' 
@@ -422,17 +441,13 @@ Foo(Foo&& original) {
 }
 ```
 
-unique_ptr
----
-* sole owner of whatever it points to
-
-https://en.cppreference.com/w/cpp/memory/unique_ptr
-
 Styles
 ---
 Namespace are all lower cases
 * include both declaration (.h file) and definition (.cc file) in the same namespace 
 * be explicit: don't `using namespace std`; don't use inline namespace
+
+(To be developed)
 
 Further Reading
 ---
