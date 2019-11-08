@@ -396,7 +396,17 @@ int max <int> (int &a, int &b)
 }
 ```
 
-When do we use Initializer List in C++?
+lambda expressions
+---
+Functor is a class/struct that defines the `operator()`. It can be called like a function (with access its internal variables).
+
+Lambda expression is the anonymous functors.
+
+> `[capture_variables] (function_arguments) -> return_type { function_logic }`
+
+The capture variable can be passed either by value or by reference (with a prefix &).
+ 
+Initializer List
 ---
 * The data members must be initialized at creation time
     * data member is const
