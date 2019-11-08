@@ -433,7 +433,7 @@ C++11 supports rvalue reference `T&& t`, allowing separate overloads for rvalues
 `std::move(b)` does nothing but cast lvalue `b` to rvalue type.
 So calling `Foo a = std::move(b)` would call move constructor if exist; otherwise, the call would be degraded to normal constructor. 
 
-Again, the rvalue does NOT persist beyond one single expression, so after `std::move`, the caller can no longer access the object which gets casted to rvalue.
+Again, the rvalue does NOT persist beyond one single expression, so after `std::move`, the caller can no longer access the object which gets casted to rvalue. 在這一行死亡，然後在新的scope重生!
 
 The code which calls the constructor does not need to change. 
 We just need to implement overload the constructor (i.e. add the move constructor):
