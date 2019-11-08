@@ -110,6 +110,17 @@ class S
         //       before deleted status
 };
 ```
+Special member functions
+---
+They will be defined by the compiler even if not defined by the user:
+* Default constructor
+* Copy constructor
+* Move constructor (since C++11)
+* Copy assignment operator
+* Move assignment operator (since C++11)
+* Destructor
+
+Mark them `delete` (or sometimes `explicit`) to avoid, `default` to enforce.
 
 Rule of Three
 ---
@@ -157,66 +168,15 @@ http://c-faq.com/decl/spiral.anderson.html
 * int * const - const pointer to int
 * int const * const - const pointer to const int
 
-Virtual Constructor for Factory Pattern
+Inheritance
 ---
-Dynamic creation of derived classes at Runtime 
-```
-//// LIBRARY START 
-class Base 
-{ 
-public: 
-  
-    // The "Virtual Constructor" 
-    static Base *Create(int id); 
-  
-    Base() { } 
-  
-    virtual // Ensures to invoke actual object destructor 
-    ~Base() { } 
-  
-    // An interface 
-    virtual void DisplayAction() = 0; 
-}; 
-
-// We can also declare "Create" outside Base. 
-// But is more relevant to limit it's scope to Base 
-Base *Base::Create(int id) 
-{ 
-    // Just expand the if-else ladder, if new Derived class is created 
-    // User need not be recompiled to create newly added class objects 
-  
-    if( id == 1 ) 
-    { 
-        return new Derived1; 
-    } 
-    else if( id == 2 ) 
-    { 
-        return new Derived2; 
-    } 
-    else
-    { 
-        return new Derived3; 
-    } 
-} 
-//// LIBRARY END 
-```
-Note that the function Create used to return different types of Base class objects at runtime. It acts like virtual constructor, also referred as Factory Method in pattern terminology.
-
-Return by reference
----
-```
-// function to return reference value 
-int global_var;
-
-int& ReturnReference() 
-{ 
-    return global_var; 
-}
-
-int *ptr_to_var = &ReturnReference(); // Note the usage of & symbol
-
-ReturnReference() = 20.23; // we can do this
-```
+* try to use `public` inheritance; do not use `private` inheritance, in this case, use composition instead
+  * inject an object of the base class into the new class
+* for base class:
+  * mark functions `virtual`
+  * mark API functions abstract to enforce subclass's implementation
+* for subclass:
+  * don't use `virtual`, mark `override` instead
 
 Virtual Function
 ---
@@ -441,32 +401,23 @@ public:
 rvalue and move semantics
 ---
 The lvalue has a memory allocated so you can assign to lvalues.
-The rvalues, such as temporary values, can not be assigned to.
-
-When pass by value, C++ copies the object's memory to pass to the function invocation.
-But if a rvalue is passed as argument to a function, instead of copy and release the rvalue,
-we can directly transfer the ownership of this rvalue to this function.
-
-Note that, after the transition is done, the caller should not do anything with the rvalue.
+The rvalue does NOT persist beyond one single expression and you can not assign to rvalues.
 
 C++11 supports rvalue reference `T&& t`, allowing separate overloads for rvalues and lvalues.
 
-```
+`std::move(b)` does nothing but cast lvalue `b` to rvalue type.
+So calling `Foo a = std::move(b)` would call move constructor if exist; otherwise, the call would be degraded to normal constructor.
+
+The interface does not need to change. We just need to implement the move constructor:
+```cpp
 // Move constructor
 Foo(Foo&& original) {
-//
-}
-
-// Move assignment
-Foo& operator=(Foo&& other)  
-{
-//
+   // "steal" the resources held by 'original' 
+   // (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.)        // rather than make copies of them
+   // because 'original' is a rvalue
+   // we know for sure that 'original' will no longer be used in other places
 }
 ```
-
-For a lvalue `b`, `Foo a = std::move(b)` would cast `b` to rvalue first.
-If `Foo` has a move constructor, then the ownership of `b` is transfered to `a`;
-Otherwise, `b` would still be copied and the copy is passed to `a`'s constructor.
 
 unique_ptr
 ---
