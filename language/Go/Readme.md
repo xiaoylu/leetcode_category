@@ -113,7 +113,7 @@ func (v *Vertex) Scale(f float64) {
 
 Interface
 ---
-See this [Post](https://jordanorelli.com/post/32665860244/how-to-use-interfaces-in-go)
+See this [Post](https://research.swtch.com/interfaces)
 
 * interface is **a set of methods**
 * interface type (`I interface{}`) is **a type**
@@ -126,7 +126,8 @@ func DoSomething(v interface{}) {
    // ...
 }
 ```
-will accept any parameter `v` whatsoever.
+will accept any parameter `v` whatsoever. But they will convert any type 
+to the interface type.
 
 * Example of a type `string` implementing an interface `I`
 ```go
