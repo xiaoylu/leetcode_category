@@ -15,7 +15,7 @@ Access level in a package
 "Constructors" in Go
   * declare lower case struct type, thus making it private
   * and use a capitalized function `New` which return an object of this struct type
-  * (This is a default factory pattern)
+  * This is a factory pattern by default
 
 Composition over Inheritence
 * Go prefers embedding a struct inside the other
@@ -113,12 +113,22 @@ func (v *Vertex) Scale(f float64) {
 
 Interface
 ---
+See this [Post](https://jordanorelli.com/post/32665860244/how-to-use-interfaces-in-go)
+
 * interface is **a set of methods**
-* interface value == interface + value
-* when a type implements an interface 
-  * this interface value holds a value of this **type**
+* interface type (`I interface{}`) is **a type**
   * `var i I interface{} = "hello"`
 
+* all types implement at least zero methods
+  * thus they are all of the empty interface type, i.e. `interface{}`
+```go
+func DoSomething(v interface{}) {
+   // ...
+}
+```
+will accept any parameter `v` whatsoever.
+
+* Example of a type `string` implementing an interface `I`
 ```go
 type I interface {
 	M()
@@ -133,17 +143,20 @@ var i I = string("hello")
 // we will be able to call the method
 i.M()
 ```
-* `var i I interface{} = "hello"`
-  * it creates an interface value `i`
-  * and this `i` holds the concrete type string "hello"
-* an interface can hold many different types
-* `t, ok := i.(T)` checks if interface value `i` holds a type `T`
-  * `ok == true` if yes; otherwise, `ok == false` 
-  * `t` will be the underlying value if yes
-* an interface value `i` provides Polymorphism 
-  * an interface value can be associated with different types
-  * each type can implement the interface in different ways
 
+* a type can implement different interfaces
+* an interface can hold many different types
+
+* `t, ok := i.(T)` checks if interface value `i` holds a type `T`
+  * `ok == true` if yes; otherwise, `ok == false`
+  * `t` will be the underlying value if yes
+
+* an interface value `i` provides Polymorphism 
+  * for example, every type can have its own way to `fmt.Printf()` if
+    * interface `Stringer`'s method `String() string` holds this type
+    * `func (t SomeType) String() string { return <string of t to display> }`
+   
+* Polymorphism
 ```go
 func do(i interface{}) {
   switch v := i.(type) {
@@ -153,13 +166,7 @@ func do(i interface{}) {
   }
 }
 ```
-* for example, every type can have its own way to print if
-  * interface `Stringer`'s method `String() string` holds this type
-  * you implement `func (t SomeType) String() string { return <string of t> }`
-  * depending on the type it holds, an interface value prints differently
-* for example, every type can have its own way to `fmt.Printf()` if
-  * interface `Stringer`'s method `String() string` holds this type
-  * `func (t SomeType) String() string { return <string of t to display> }`
+
 
 Error
 ---
