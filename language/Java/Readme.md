@@ -403,10 +403,35 @@ Object & Class
 * The Object class is the topmost class in Java. All classes inherits Object directly or indirectly.
 * The Class class provides metadata about the current object's class
   * `public final Class getClass()` declared in Object class	returns the Class class object of the current object. 
-  * The Class class can further be used to get the metadata of the class of the current object.
 
+Concurrent Programming
+---
 
+[Advanced Topics in Programming Languages: The Java Memory Model By Jeremy Manson](https://www.youtube.com/watch?v=WTVooKLLVT8)
 
+* Java language provides atomic access to variables (except long/double) but it's NOT enough
+  * compiler may reorder independent statements in one thread
+  * the memory model may delay the write to global memory
+  * so, in addition to atomic access:
+    * one must acquire/release the lock to create a happens-before relationship between threads!
+    
+* try to avoid concurrent design, when you have to, prefer `volatile` and `synchronized`
+  * volatile variables are atomic (long/double becomes atomic)
+  * **volatile read/write becomes lock acquire/release pairs**
+    * visibility: write on volatile variabless goes directly into global memory
+    * ordering: it creates a happens-before edge from write to read, which ensures ordering of two atomic blocks
+> For example:
+> Class: volatile bool `flag`
+> Thread1: synchronized block one { write data; assign `flag = true`; }
+> Thread2: synchronized block two { check if `flag==true`, if yes, read data, otherwise, wait indefinitely }
+
+In this way, thread2 will only obtain the data **after** Thread1 writes it.
+
+* `synchronized` keyword has two purposes:
+  * mutual exclusion ("all or nothing" guarantee)
+  * ordering/communication (which is often forgotten)
+    * use `synchronized` to ensure the visibility (aka the happens-before relationship)
+    
 
 
 
