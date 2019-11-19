@@ -409,7 +409,7 @@ Object & Class
 Concurrent Programming
 ---
 
-[Advanced Topics in Programming Languages: The Java Memory Model By Jeremy Manson](https://www.youtube.com/watch?v=WTVooKLLVT8)
+[Advanced Topics in Programming Languages: The Java Memory Model By Jeremy Manson](https://www.youtube.com/watch?v=WTVooKLLVT8) and his [blogs](http://jeremymanson.blogspot.com/2008/12/benign-data-races-in-java.html)
 
 * Java language provides atomic access to variables (except long/double) but it's NOT enough
   * compiler may reorder independent statements within one thread
