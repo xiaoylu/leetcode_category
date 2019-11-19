@@ -423,7 +423,7 @@ Concurrent Programming
 
 > For example:
 
-> Class: volatile bool `flag`
+> Class: volatile bool `flag = false`
 
 > Thread1: synchronized block one { write data; assign `flag = true`; }
 
