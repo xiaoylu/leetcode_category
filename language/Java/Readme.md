@@ -420,9 +420,13 @@ Concurrent Programming
   * **volatile read/write becomes lock acquire/release pairs**
     * visibility: write on volatile variabless goes directly into global memory
     * ordering: it creates a happens-before edge from write to read, which ensures ordering of two atomic blocks
+
 > For example:
+
 > Class: volatile bool `flag`
+
 > Thread1: synchronized block one { write data; assign `flag = true`; }
+
 > Thread2: synchronized block two { check if `flag==true`, if yes, read data, otherwise, wait indefinitely }
 
 In this way, thread2 will only obtain the data **after** Thread1 writes it.
