@@ -410,7 +410,7 @@ Concurrent Programming
 [Advanced Topics in Programming Languages: The Java Memory Model By Jeremy Manson](https://www.youtube.com/watch?v=WTVooKLLVT8)
 
 * Java language provides atomic access to variables (except long/double) but it's NOT enough
-  * compiler may reorder independent statements in one thread
+  * compiler may reorder independent statements within one thread
   * the memory model may delay the write to global memory
   * so, in addition to atomic access:
     * one must acquire/release the lock to create a happens-before relationship between threads!
@@ -435,6 +435,7 @@ In this way, thread2 will only obtain the data **after** Thread1 writes it.
   * mutual exclusion ("all or nothing" guarantee)
   * ordering/communication (which is often forgotten)
     * use `synchronized` to ensure the visibility (aka the happens-before relationship)
+    * both write and read should be `synchronized` (imagine read in the middle of write...)
     
 
 
