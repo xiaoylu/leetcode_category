@@ -423,6 +423,15 @@ Concurrent Programming
     * visibility: write on volatile variabless goes directly into global memory
     * ordering: it creates a happens-before edge from write to read, which ensures ordering of two atomic blocks
 
+* `synchronized` keyword has two purposes:
+  * mutual exclusion ("all or nothing" guarantee)
+  * ordering/communication (which is often forgotten)
+    * use `synchronized` to ensure the visibility (aka the happens-before relationship)
+    * both write and read should be `synchronized` (imagine read in the middle of write...)
+
+* `volatile` ensure ordering of **single** write and read of a variable
+  * it will be used alone with `synchronized` for the mutual exclusion across code blocks ("all or nothing" guarantee)
+    
 > For example:
 
 > Class: init volatile bool `flag = false`
@@ -431,13 +440,10 @@ Concurrent Programming
 
 > Thread2: synchronized block two { check if `flag==true`, if yes, read data, otherwise, wait indefinitely }
 
-In this way, thread2 will only obtain the data **after** Thread1 writes it.
+In this way, Thread2 will only obtain the data **after** Thread1 writes it.
 
-* `synchronized` keyword has two purposes:
-  * mutual exclusion ("all or nothing" guarantee)
-  * ordering/communication (which is often forgotten)
-    * use `synchronized` to ensure the visibility (aka the happens-before relationship)
-    * both write and read should be `synchronized` (imagine read in the middle of write...)
+  
+
     
 
 
