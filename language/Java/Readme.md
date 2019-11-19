@@ -88,7 +88,9 @@ super() vs. this():
 
 final
 ---
-* variable: const, get assigned only once (not necessarily at the declaration)
+* variable: 
+  * the **reference** gets assigned only once (not necessarily at the declaration)
+  * but you can mutate the state of the object it refers to
 * method: can not be overidden (final == private, but Java does not complain redundancy)
   * useful for variable [initialization](https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html) method when you don't want subclass override its parent's variable initialization
   * Methods called from constructors should generally be declared final
