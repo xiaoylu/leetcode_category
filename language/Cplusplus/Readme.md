@@ -406,6 +406,8 @@ Lambda expression is the anonymous functors.
 
 The capture variable can be passed either by value or by reference (with a prefix &).
  
+Lambda only exists in the source code, it's compiled into statement in C++; the distinction between a lambda and the corresponding closure is precisely equivalent to the distinction between a class and an instance of the class.
+ 
 Initializer List
 ---
 * The data members must be initialized at creation time
