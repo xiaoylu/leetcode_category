@@ -404,7 +404,16 @@ Object & Class
 ---
 * The Object class is the topmost class in Java. All classes inherits Object directly or indirectly.
 * The Class class provides metadata about the current object's class
-  * `public final Class getClass()` declared in Object class	returns the Class class object of the current object. 
+  * `public final Class getClass()` declared in the "Object" class	returns an object of the "Class" class.
+  * If `A a = new B();`, then `a.getClass()` returns `B` which is the runtime type of `a`
+* Use `<MyClass>.class` if you know `<MyClass>`.
+```java
+  // print all the public methods of 'MyClass'
+  Method[] methods = MyClass.class.getDeclaredMethods();
+  for (int i = 0; i < methods.length; i++) {
+    System.out.println(methods[i]);
+  }
+```
 
 Concurrent Programming
 ---
