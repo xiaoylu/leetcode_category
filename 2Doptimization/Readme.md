@@ -14,7 +14,7 @@ Each time, we use the new lowest-quality worker to replace the previous highest-
 
 **LC787. Cheapest Flights Within K Stops**
 
-This is Dijisktra with a K-stop constraint. It is not that straight because the optimization requires two tasks:
+This is Dijisktra with a K-stop constraint. It is not that straightforward because the optimization requires two tasks:
 
 `min(distance)` and `min(steps)`.
 
