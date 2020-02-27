@@ -15,8 +15,7 @@ Since there are at most `O(log N)` such partial sums, each query takes `O(log N)
 NOTE, the node `0` is a dummy node and the tree is 1-indexed (instead of 0-indexed)
 
 ```
-// For each query of prefix sum, we sum up the 
-// partial sums stored along the path from a given node to the root
+// marked (*) nodes stores the prefix sum for elements with index less than `0b111`
 root      0
           |--------------------- ...
           |  |  |         |
@@ -27,9 +26,9 @@ level2       11 101 110*  1001  1010   ...
                     |          |
                     111*
 ```
-At `111` stores the partial sum at `111`.
-At `110` stores the partial sum at `110`, `101`.
-At `100` stores the partial sum at `100`, `11`, `10`, `1`.
+At `111` stores the partial sum of `111`.
+At `110` stores the partial sum of `110`, `101`.
+At `100` stores the partial sum of `100`, `11`, `10`, `1`.
 
 Sum up these partial sums (marked by `*`), and we will obtain prefix sum `A[0b1]+A[0b10]+...+A[0b111]`.
 
