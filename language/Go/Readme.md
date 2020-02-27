@@ -200,8 +200,10 @@ if v := math.Pow(x, n); v < lim {
 
 Pointer
 ---
-* no pointer ops
-* 
+* No pointer operations!!  ==> We do not need the `->` like in C++, always use `.` to access fields.
+* No pointer operation does not imply no pointer
+  * there is [no pass-by-reference](https://dave.cheney.net/2017/04/29/there-is-no-pass-by-reference-in-go) in Go; one always pass by value (this can avoid many bugs)
+  * pointer saves the cost of copy in pass-by-value
 ``` 
 type Vertex struct {
   X, Y int
