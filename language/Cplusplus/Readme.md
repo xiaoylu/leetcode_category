@@ -425,10 +425,11 @@ public:
 }; 
 ```
 
-rvalue and move semantics
+rvalue and lvalue
 ---
 The lvalue has a memory allocated so you can assign to lvalues.
 The rvalue does NOT persist beyond one single expression and you can not assign to rvalues.
+For example, &++x is valid because ++x increments x by 1 and then returns itself as a lvalue. But &x++ is invalid because x++ returns a copy of x (before increment x itself by 1).
 
 C++11 supports rvalue reference `T&& t`, allowing separate overloads for rvalues and lvalues.
 
@@ -437,21 +438,30 @@ So calling `Foo a = std::move(b)` would call move constructor if exist; otherwis
 
 Again, the rvalue does NOT persist beyond one single expression, so after `std::move`, the caller can no longer access the object which gets casted to rvalue. 在這一行死亡，然後在新的scope重生!
 
-The code which calls the constructor does not need to change. 
-We just need to implement overload the constructor (i.e. add the move constructor):
+```
+A&  a_ref3 = A();  // Error!
+A&& a_ref4 = A();  // Ok
+```
+
+https://www.artima.com/cppsource/rvalue.html
+
+Move semantics
+---
+A move constructor and move assignment operator can eliminate extraneous copies.
 ```cpp
 Foo(const Foo& original) {
-   // copy the resources held by 'original'
+   // copy the resources held by 'original' here
 }
 
 // Move constructor
 Foo(Foo&& original) {
-   // "steal" the resources held by 'original' 
-   // (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.)        // rather than make copies of them
-   // because 'original' is a rvalue
+   // "steal" the resources held by 'original' here, rather than make copies of them
+   // (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.)     
    // we know for sure that 'original' will no longer be used in other places
 }
 ```
+The code which calls the constructor does not need to change. 
+We just need to implement overload the constructor (i.e. add the move constructor):
 
 Styles
 ---
