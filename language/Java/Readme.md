@@ -451,6 +451,8 @@ ListenableFuture
 Guava: https://github.com/google/guava/wiki/ListenableFutureExplained
 
 * Future **represents** the pending **result** of an asynchronous computation.
+  * `future.isDone()` is check if the computation is done.
+  * `future.get()` to get the result when done; wait otherwise.
 * The basic operation is `future.addListener(Runnable, Executor)`
   * `Runnable` will be run on the `Executor` when the `future` is completed.
 * `Futures.addCallback(ListenableFuture<V> future, FutureCallback<V> callback, Executor executor)`
