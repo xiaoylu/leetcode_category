@@ -439,22 +439,24 @@ Concurrent Programming
     * both write and read should be `synchronized` (imagine read in the middle of write...)
 
 * `volatile` ensure ordering of **single** write and read of a variable
-  * it will be used alone with `synchronized` for the mutual exclusion across code blocks ("all or nothing" guarantee)
-    
-> For example:
-
-> Class: init volatile bool `flag = false`
-
+  * it will be used together with `synchronized` for the mutual exclusion across code blocks ("all or nothing" guarantee)
+  * For example: In a class, we define `volatile bool flag = false;`. Thread2 will only obtain the data **after** Thread1 writes it.
 > Thread1: synchronized block one { write data; assign `flag = true`; }
-
 > Thread2: synchronized block two { check if `flag==true`, if yes, read data, otherwise, wait indefinitely }
-
-In this way, Thread2 will only obtain the data **after** Thread1 writes it.
-
   
+`volatile` ensures the ordering (read happens-after write.) and `synchronized` ensures the mutual exclusion (only one thread reads the data).
 
-    
+ListenableFuture
+---
+Guava: https://github.com/google/guava/wiki/ListenableFutureExplained
 
+* Future **represents** the pending **result** of an asynchronous computation.
+* The basic operation is `future.addListener(Runnable, Executor)`
+  * `Runnable` will be run on the `Executor` when the `future` is completed.
+* `Futures.addCallback(ListenableFuture<V> future, FutureCallback<V> callback, Executor executor)`
+  * it calls `addListener(Runnable runnable, Executor executor)`  
+    * the `runnable = new CallbackListener<V>(future, callback)` See [source code](https://guava.dev/releases/snapshot/api/docs/src-html/com/google/common/util/concurrent/Futures.html#line.1051).
+    * invoke `callback.onSuccess()` if `getDone(future)` succeed; otherwise, invoke `callback.onFailure()`.
 
 
 
