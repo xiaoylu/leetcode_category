@@ -454,9 +454,9 @@ Guava: https://github.com/google/guava/wiki/ListenableFutureExplained
 * The basic operation is `future.addListener(Runnable, Executor)`
   * `Runnable` will be run on the `Executor` when the `future` is completed.
 * `Futures.addCallback(ListenableFuture<V> future, FutureCallback<V> callback, Executor executor)`
-  * it calls `addListener(Runnable runnable, Executor executor)`  
+  * it calls `addListener(Runnable runnable, Executor executor)` where
     * the `runnable = new CallbackListener<V>(future, callback)` See [source code](https://guava.dev/releases/snapshot/api/docs/src-html/com/google/common/util/concurrent/Futures.html#line.1051).
-    * invoke `callback.onSuccess()` if `getDone(future)` succeed; otherwise, invoke `callback.onFailure()`.
+    * the `runnable`'s `run()` method invokes `callback.onSuccess()` if `getDone(future)` succeed; otherwise, invoke `callback.onFailure()`.
 
 
 
