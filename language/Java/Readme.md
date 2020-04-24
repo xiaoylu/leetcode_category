@@ -459,6 +459,9 @@ Guava: https://github.com/google/guava/wiki/ListenableFutureExplained
   * it calls `addListener(Runnable runnable, Executor executor)` where
     * the `runnable = new CallbackListener<V>(future, callback)` See [source code](https://guava.dev/releases/snapshot/api/docs/src-html/com/google/common/util/concurrent/Futures.html#line.1051).
     * the `runnable`'s `run()` method invokes `callback.onSuccess()` if `getDone(future)` succeed; otherwise, invoke `callback.onFailure()`.
+* chains of asynchronous operations：
+  * `transformAsync(ListenableFuture<A> future, AsyncFunction<A, B> asyncFunc, Executor executor)`
+  * `asyncFunc` will convert the `future`'s result `A` to `B` when `future` is done.
 
 
 
