@@ -462,6 +462,7 @@ Guava: https://github.com/google/guava/wiki/ListenableFutureExplained
 * chains of asynchronous operations：
   * `transformAsync(ListenableFuture<A> future, AsyncFunction<A, B> asyncFunc, Executor executor)`
   * `asyncFunc` will convert the `future`'s result `A` to `B` when `future` is done.
+* avoid `ListenableFuture<ListenableFuture<Result>>` because the cancel the outer future does not notify the inner future. The chain should be built by `transformAsync` alike.
 
 
 
