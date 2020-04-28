@@ -427,23 +427,24 @@ public:
 
 rvalue and lvalue
 ---
+https://www.artima.com/cppsource/rvalue.html
+https://stackoverflow.com/questions/5481539/what-does-t-double-ampersand-mean-in-c11
+
 The lvalue has a memory allocated so you can assign to lvalues.
-The rvalue does NOT persist beyond one single expression and you can not assign to rvalues.
+The rvalue does NOT persist beyond one single expression; you can neither reference or assign to rvalues.
+
 For example, &++x is valid because ++x increments x by 1 and then returns itself as a lvalue. But &x++ is invalid because x++ returns a copy of x (before increment x itself by 1).
-
-C++11 supports rvalue reference `T&& t`, allowing separate overloads for rvalues and lvalues.
-
-`std::move(b)` does nothing but cast lvalue `b` to rvalue type.
-So calling `Foo a = std::move(b)` would call move constructor if exist; otherwise, the call would be degraded to normal constructor. 
-
-Again, the rvalue does NOT persist beyond one single expression, so after `std::move`, the caller can no longer access the object which gets casted to rvalue. 在這一行死亡，然後在新的scope重生!
-
 ```
 A&  a_ref3 = A();  // Error!
 A&& a_ref4 = A();  // Ok
 ```
 
-https://www.artima.com/cppsource/rvalue.html
+C++11 supports rvalue reference `T&& t`, allowing separate overloads for rvalues and lvalues.
+
+`std::move(b)` does nothing but cast lvalue `b` to rvalue type.
+So calling `Foo a = std::move(b)` would call move constructor if exist; otherwise, the call would be degraded to normal constructor.
+
+Again, the rvalue does NOT persist beyond one single expression, so after `std::move`, the caller can no longer access the object which gets casted to rvalue. move is a potentially destructive read. 在這一行死亡，然後在新的scope重生!
 
 Move semantics
 ---
