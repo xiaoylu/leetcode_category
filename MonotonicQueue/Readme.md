@@ -268,9 +268,13 @@ We use `deque` to maintain a decreasing queue with `max(S[i-k:i])` at the head o
             S[i] = A[i] + (deque[0] if deque else 0)  
             while len(deque) and S[i] > deque[-1]:
                 deque.pop()
-            if S[i] > 0: # Note: S[i] == A[i] when max(S[i-k:i]) <= 0, so no need to enqueue non-positive S[i] into the deque
+            if S[i] > 0: 
+                # Note: S[i] == A[i] when max(S[i-k:i]) <= 0
+                # so no need to enqueue non-positive S[i] into the deque
                 deque.append(S[i])
-            if i >= k and deque and deque[0] == S[i - k]: # Note: elements in the deque are all unique, so this is a way to avoid checking the indices of elements which are k steps away.
+            if i >= k and deque and deque[0] == S[i - k]: 
+                # Note: elements in the deque are all unique
+                # so this is a way to avoid checking the indices of elements which are k steps away.
                 deque.popleft()
         return max(S)
  ```
