@@ -14,11 +14,11 @@ In general, the following "prototype" problems can be solved by monotonic queue:
 Sliding Max
 ---
 
-Any DP problem where `A[i] = max(A[j:k]) + C` where `j < k <= i` and `C` is a constant.
+Any DP problem where `S[i] = max(A[j:k]) + C` where `j < k <= i` and `C` is a constant.
 
 The sliding max/min window problem belongs to this type.
 
-Problem statement: return the max elements in a sliding window.
+Problem statement: return the max elements in a sliding window of certain length.
 
 Key observation: Given input array `A`, when `A[l] < A[r]` for `l < r`, then `A[l]` should never be retuned as the sliding max, if `A[r]` has entered the sliding window.
 
@@ -33,7 +33,7 @@ The head of the increasing queue is the sliding max!
 As simple as it is, we have a sliding window of elements, 
 the only unique thing here is that we can keep the elements in the window sorted. It brings great benefits because it takes O(1) to obtain the min/max element in the window.
 
-That's why any DP problem where `A[i] = max(A[j:k]) + C` for `j < k <= i` can be solved by Monotonic Queue.
+That's why any DP problem where `S[i] = max(A[j:k]) + C` for `j < k <= i` can be solved by Monotonic Queue.
 
 Given a element `A[i]`, find the nearest element larger/smaller than it
 ---
@@ -251,3 +251,26 @@ When `dp[l][k0-1] >= dp[k0+1][r]` for the first `k = k0`, we just need to compar
 As a sub-routine, we need to find `dp[k+1][r] + k` for `k < k0` here. This is what Monotonic Queue does in `O(1)` time.
 
 [O(1) time to find sliding minimum of the first `k0` elements!!](https://artofproblemsolving.com/community/c296841h1273742)
+
+LC 1425. Constrained Subsequence Sum
+---
+Maximum sum of a non-empty subsequence `A[i]`, every two consecutive element are **at most** `k` steps away.
+
+DP: the max sum of such subsequence ending with `A[i]` is `S[i] = max(S[i-k:i]) + A[i]`. Answer is `max(S)`.
+
+We use `deque` to maintain a decreasing queue with `max(S[i-k:i])` at the head of the queue.
+
+```
+    def constrainedSubsetSum(self, A, k):
+        deque = collections.deque()
+        S = [0] * len(A)
+        for i in xrange(len(A)):
+            S[i] = A[i] + (deque[0] if deque else 0)  
+            while len(deque) and S[i] > deque[-1]:
+                deque.pop()
+            if S[i] > 0: # Note: S[i] == A[i] when max(S[i-k:i]) <= 0, so no need to enqueue non-positive S[i] into the deque
+                deque.append(S[i])
+            if i >= k and deque and deque[0] == S[i - k]: # Note: elements in the deque are all unique, so this is a way to avoid checking the indices of elements which are k steps away.
+                deque.popleft()
+        return max(S)
+ ```
