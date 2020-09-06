@@ -21,6 +21,23 @@ To achieve the iterated `O(log* n)` time complexity, we need to
 The proof of time complexity is about showing there are at most `n/2^r` nodes with rank `r` 
 because the branch rooted by rank-r node has at most `2^r` nodes.
 
+A smarter way to do this (also see C++ practive below): 
+* `par[i] = j` if node j is the parent of node i;
+* `par[i] = -n` if node i is the root, and node i has a total of n descendents (including itself). 
+
+```python
+    def find(self, par, i):
+        if par[i] < 0: return i
+        par[i] = self.find(par, par[i])
+        return par[i]
+    
+    def union(self, par, i, j):
+        i, j = self.find(par, i), self.find(par, j)
+        if i == j: return
+        if par[j] < par[i]: i, j = j, i
+        par[i], par[j] = par[i] + par[j], i
+```
+
 To conduct `n` find operations:
 ---
 1. No optimization: `O(n^2)`
