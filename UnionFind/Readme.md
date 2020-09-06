@@ -25,13 +25,15 @@ A smarter way to do this (also see C++ practive below):
 * `par[i] = j` if node j is the parent of node i;
 * `par[i] = -n` if node i is the root, and node i has a total of n descendents (including itself). 
 
+Initially, `par = [-1 for _ in range(n)]` because each node is a root.
+
 ```python
-    def find(self, par, i):
+    def find(par, i):
         if par[i] < 0: return i
         par[i] = self.find(par, par[i])
         return par[i]
     
-    def union(self, par, i, j):
+    def union(par, i, j):
         i, j = self.find(par, i), self.find(par, j)
         if i == j: return
         if par[j] < par[i]: i, j = j, i
