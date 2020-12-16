@@ -7,14 +7,12 @@ Reduction rule
 ---
 If two players' optimization goal are "symmetrical", then only one reduction rule is needed.
 
-The remaining input range forms a valid DP state in such case.
+The input range forms a valid DP state. No need to prepare two dp table. One dp table can be used for both players because they are "symmetrical".
 
 For example, if `dp[i][j]` is the state from `i` to `j` (inclusive-inclusive), a player can only operate on `i` or `j`.
 ```
 dp[i][j] = max(<current gain of i> - dp[i+1][j],  <current gain of j> - dp[i][j-1])
 ```
-
-No need to prepare two dp table. One dp table can be used for both players because they are "symmetrical".
 
 LC 1690. Stone Game VII
 ---
