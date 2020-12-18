@@ -15,7 +15,7 @@ Return the least amount of money needed to form a paid group satisfying the abov
 
 We compute the ratio of money/quality for every worker. Given a group, the maximum money/quality ratio should be paid.
 
-So the least amount of money would be `max(r1, r2, .. rk) * sum(r1, r2, .. rk)`. Note that if we already have `K` workers with the smallest sum of quality, the only way to save money is to replace the worker with highest pay. 
+So the least amount of money would be `max(r1, r2, .. rk) * sum(q1, q2, .. qk)` where `ri` is the money/quality ratio and `qi` is the quality. Note that if we already have `K` workers with the smallest sum of quality, the only way to save money is to replace the worker with highest pay. 
 
 Dynamic Programming view:
 * Sort the works by their qualities
