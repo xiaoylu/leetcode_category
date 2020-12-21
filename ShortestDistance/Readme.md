@@ -31,7 +31,7 @@ void dijkstra(int v){
 	priority_queue<pair<int,int>,vector<pair<int,int> >, less<pair<int,int> > > pq;
 	pq.push({d[v], v});
 	while(!pq.empty()){
-		u = pq.top().second;
+		u = pq.top().second;  // the shortest distance to u
 		pq.pop();
 		if(mark[u])
 			continue;
