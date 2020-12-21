@@ -22,3 +22,8 @@ Time Complexity: O(V^3)
         for i, j in itertools.product(range(V), range(V)): 
             dist[i][j] = min(dist[i][j], dist[i][k]+ dist[k][j]) 
 ```
+
+
+LC1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance
+---
+Basically the solution is the code snippet above.
