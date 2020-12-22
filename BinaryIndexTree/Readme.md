@@ -25,7 +25,13 @@ Essentially, At `100` stores the sum of the left triangle
 1,  10, 	
     11,
 ```
-At `1000` stores the sum of left triangle ... so on so forth.
+At `1000` stores the sum of left triangle
+```
+    1, 	10, 	100*,          
+        11,     101^, 110*^,   
+                      111*
+```
+so on so forth.
 
 C++ code: leetcode 307. Range Sum Query - Mutable
 
