@@ -27,9 +27,9 @@ Essentially, At `100` stores the sum of the left triangle
 ```
 At `1000` stores the sum of left triangle
 ```
-    1, 	10, 	100*,          
-        11,     101^, 110*^,   
-                      111*
+    1, 	10, 	100,          
+        11,     101,  110,   
+                      111
 ```
 so on so forth.
 
