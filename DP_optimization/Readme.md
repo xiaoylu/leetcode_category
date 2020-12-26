@@ -93,9 +93,13 @@ The question asks how many ways one can jump to n-th steps from 0th step, assumi
 
 Suppose there are `x[i]` ways to reach i-th step. Then `x[i] = sum(x[j] for any j < i that j + n[j] >= i)`.
 
-If we use `x[i]` as the DP state directly, the time complexity would be `O(n^2)` because it involves a range operation - for each position `j`, we should add `x[j]` to all the `x[i]`s in the range `j+1 <= i <= j+n[j]`.
+If we use `x[i]` as the DP state directly, the time complexity would be `O(n^2)` because it involves a ***range operation*** - for each position `j`, we should add `x[j]` to all the `x[i]`s in the range `j+1 <= i <= j+n[j]`.
 
-But if we differentiate `x[i+1]` and `x[i]`, it is suprisingly simple that `x[i+1]-x[i]` is `x[i]` minus the sum of those `x[k]`s who can reach `i` but not `i+1`. So if we use `dp[i+1] = x[i+1] - x[i]`, we just need to add the current `x[i]` to `dp[i + 1]` and add `-x[i]` to some `i+n[i]+1` - the first position we can't reach from `i`.
+But if we differentiate `x[i+1]` and `x[i]`, it is suprisingly simple that `x[i+1]-x[i]` is equal to
+* `+x[i]` because pos i can always reach pos i + 1 ( `x[i+1] = x[i] + etc.`) 
+* `-x[k]` for any pos `k` that can reach `i` but not `i+1`
+
+So if we use `dp[i+1] = x[i+1] - x[i]`, we just need to add the current `x[i]` to `dp[i + 1]` and add `-x[k]` to some pos `k+n[k]+1` because this is the first position we can't reach from `k` (while pos `k` can reach ``k+n[k]`).
 
 Note that `x[i] = dp[i] + dp[i-1] + .. + dp[0]` can by maintained dynamically.
 
