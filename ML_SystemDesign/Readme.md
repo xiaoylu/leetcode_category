@@ -4,10 +4,10 @@ Note: the focus is the system design part, not ML.
 
 Ranking
 ---
-* Both youtube and google search rank items (i.e. video or urls), but they work on different modes.
-* Youtube: can rank items offline, then push the result to a user's queue, display after the user clicks youtube.com
+* Both youtube home page and google search rank items (i.e. video or urls), but they work on different modes.
+* Youtube home page (push): can rank items offline, then push the result to a user's queue, display after the user clicks youtube.com
   * recommendation quality improves as more candidates can be incorporated at offline mode
-* Search:
+* Search (pull):
   * instantly ranking, requires a small candidate set for each query
 
 Online vs Offline
@@ -19,12 +19,18 @@ Online vs Offline
   * offline: fast, can push data to a lookup table, can't handle out-of-scope input
   * online: slower, QA before each new model releasing
 
-Freshness
+Bonus
 ---
+
+Evaluation
+* user stickiness
+* retention
+* ads revenue etc.
+
+Freshness
 * data seasonality/skew
 
 Safety
----
 * filtering out sensitive input, output
 * fairness, bias
 * sometimes, false negative or positive can risk lives (driving, health care)
