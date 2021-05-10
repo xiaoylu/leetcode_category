@@ -29,6 +29,9 @@ Evaluation
 
 Freshness
 * data seasonality/skew
+  * testing set: the next day data
+  * keep training code and serving code as consistent as possible
+  * data regularization
 
 Safety
 * filtering out sensitive input, output
