@@ -6,10 +6,9 @@ Ranking
 ---
 * Both youtube and google search rank items (i.e. video or urls), but they work on different modes.
 * Youtube: can rank items offline, then push the result to a user's queue, display after the user clicks youtube.com
-  * recommendation quality suffers
-  * too many users
+  * recommendation quality improves as more candidates can be incorporated at offline mode
 * Search:
-  * instantly ranking, requires a small candidate set
+  * instantly ranking, requires a small candidate set for each query
 
 Online vs Offline
 ---
