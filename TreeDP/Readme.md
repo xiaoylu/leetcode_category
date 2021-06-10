@@ -6,6 +6,7 @@ Always think by rooting the sub-tree.
 Often DFS visit a tree -- at post order, update state `dp[v]` of the current node `v`, using its children `u`'s state `dp[u]`.
 
 LC543. Return the longest path between **any** two nodes in a binary tree.
+---
 
 At the post-order visit of the sub-root, return the longest path going through this sub-root.
 ```python
@@ -22,6 +23,7 @@ At the post-order visit of the sub-root, return the longest path going through t
 ```
 
 Problem: find number of different sub trees of size less than or equal to K.
+---
 
 Assume a subroot node `u` has children `v_1`, `v_2`, ... `v_n`:
 
