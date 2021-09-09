@@ -214,7 +214,7 @@ An abstract class cannot be instantiated.
 
 VTable & Vpointer
 ---
-In the heap, at the top of an object's memory, a virtual pointer points to the code stack of a class. Every class has a vtable. **The vtable maps the child's overrided function to its own implementation, instead of its derived class's virtual function.** However, if a class does not provide customized implementation, the vtable still maps this function to its derived class's virtual function. 
+In the heap, at the top of an object's memory, a virtual pointer points to the code stack of a class. Every class has a vtable. **The vtable maps the child's overrided function to its own implementation, instead of its derived class's virtual function.** However, if a child class does not provide customized implementation, the vtable still maps this function to its derived class's virtual function. See:
 
 ![Imgur](https://i.imgur.com/VdeRgz2.png)
 
@@ -230,7 +230,11 @@ Because your "delete p" might be early binded to the base class's destructor at 
 > "There’s rarely a reason NOT to make the destructor virtual if you already have a (public) virtual method in the base class." 
 The vptr is already there in the base class anyway.
 
-Pure virtual destructor is used when you want to make a class abstract but no other functions should be pure virtual.
+> C++ virtual functions are implemented in most compilers using a lookup table, known as a vtable. The vtable contains pointers to the virtual functions provided by a class, and each object of the class contains a pointer to its vtable (or vtables, in some multiple-inheritance situations). If the class declares any non-inline, non-pure virtual functions, **the first one** is chosen as the “key method” for the class, and the vtable is only emitted in the translation unit where the key method is defined.
+
+Key method: make the destructor the first virtual method of a class, so that it will be selected as the key method.
+
+Pure virtual destructor can also be used when you want to make a class abstract but no other functions should be pure virtual.
 
 Pure Virtual Function (Abstract Class)
 ---
