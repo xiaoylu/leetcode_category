@@ -230,6 +230,8 @@ Because your "delete p" might be early binded to the base class's destructor at 
 > "There’s rarely a reason NOT to make the destructor virtual if you already have a (public) virtual method in the base class." 
 The vptr is already there in the base class anyway.
 
+[cite](https://gcc.gnu.org/onlinedocs/gcc-4.8.5/gcc/Vague-Linkage.html#Vague-Linkage)
+
 > C++ virtual functions are implemented in most compilers using a lookup table, known as a vtable. The vtable contains pointers to the virtual functions provided by a class, and each object of the class contains a pointer to its vtable (or vtables, in some multiple-inheritance situations). If the class declares any non-inline, non-pure virtual functions, **the first one** is chosen as the “key method” for the class, and the vtable is only emitted in the translation unit where the key method is defined.
 
 Key method: make the destructor the first virtual method of a class, so that it will be selected as the key method.
