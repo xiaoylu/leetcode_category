@@ -460,15 +460,35 @@ Foo(const Foo& original) {
    // copy the resources held by 'original' here
 }
 
-// Move constructor
+// Move constructor with rvalue reference as the argument
 Foo(Foo&& original) {
    // "steal" the resources held by 'original' here, rather than make copies of them
    // (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.)     
    // we know for sure that 'original' will no longer be used in other places
 }
 ```
-The code which calls the constructor does not need to change. 
-We just need to implement overload the constructor (i.e. add the move constructor):
+
+Things to remember:
+* `std::move` does not compile into code, not a single bytes; it does nothing at runtime.
+* Unlike `func(Foo&& value)` usign a rvalue reference, `template<typename T> func(T&& value) { ... }` used a "universal reference" / "forwarding reference" which can deduce type to either lvalue or rvalue reference.
+  * `Foo& reference = foo; func(reference);` --> lvalue reference because T is `Foo&` so `T&&` becomes `Foo& &&` which is `Foo&`
+  * `Foo reference; func(std::move(reference));` --> rvalue reference because T is `Foo`
+  * You should use `std::forward` for universal reference to optionally convert to rvalue.
+    * `std::forward` check the argument's original type is rvalue, if so, it casts the argument from lvalue to rvalue (Clarification: the function argument itself is always a lvalue, but one can pass a rvalue reference to the argument into this function from outside.)
+    * Otherwise, imagine you convert the argument from a lvalue to rvalue.
+```cpp
+template<typename T> func(T&& value) { T x = std::move(value); }`
+Foo x;
+func(x);   // x passed as lvalue.
+// x's value unknown now. It was stolen.
+```
+* `std::move` still copy when passing a const, because move constructor can't 'steal' the member of that const object, so actually the copy constructor is called, rather than the move constructor being called.
+```cpp
+const Foo obj;
+Foo(std::move(obj));  // still call copy constructor!
+// also note that, obj is now a rvalue, so can' access it any more? TODO here
+```
+
 
 Styles
 ---
@@ -477,6 +497,75 @@ Namespace are all lower cases
 * be explicit: don't `using namespace std`; don't use inline namespace
 
 (To be developed)
+
+C++ Macro tips
+---
+
+```cpp
+#include<stdio.h>
+   
+int main(int argc, char* argv[]) {
+
+#define MYPRINT(templt,...) fprintf(stderr,templt,##__VA_ARGS__)
+
+ MYPRINT("%s, %s\n", "abc", "def");
+ // ##_VA_ARGS => ""
+ // MYPRINT("abc\n") => fprint(stderr, "abc\n", "");
+ MYPRINT("abc\n");
+
+#define F1(x) INT_##x 
+#define F2(x) #x 
+
+ int F1(x1) = 1;  // same as : int INT_x1 = 1;
+ MYPRINT("%d %s\n", F1(x1), F2(x2));
+
+#define PARAM(x) x
+#define ADDPARAM(x) INT_##x 
+
+ // Recursively expand.
+ // ADDPARAM(x1) => INT_x1
+ // PARAM(INT_x1) => INT_x1
+ MYPRINT("%d\n", PARAM(ADDPARAM(x1)));
+
+ // F2(x) does not expand x
+ // because x is next to #
+ MYPRINT("%s\n", F2(ADDPARAM(x1)));  // output: ADDPARAM(x1))
+
+#define TO_STRING(x) TO_STRING1(x)
+#define TO_STRING1(x) #x
+
+ // a middle layer idea:
+ // TO_STRING will expand x
+ MYPRINT("%s\n", TO_STRING(ADDPARAM(x1)));  // output: INT_x1
+
+#define MYPRINT_LOOP()  \
+ do{ MYPRINT("first line\n"); MYPRINT("second line\n"); } while(0)
+#define MYPRINT_LOOP_BAD() \
+     MYPRINT("first line\n"); MYPRINT("second line\n")
+
+ if (F1(x1) > 1) MYPRINT_LOOP();
+ if (F1(x1) > 1) { MYPRINT_LOOP_BAD(); }
+
+ // Still displayed the second line.
+ if (F1(x1) > 1) MYPRINT_LOOP_BAD();  // output: second line
+
+#define REGISTRATION(classname)                          \
+ struct __TempClass##classname {                      \
+     __TempClass##classname() {                       \
+         classname instance_##classname;              \
+     };                                               \
+ };                                                   \
+ static __TempClass##classname classname##_reg_obj    \
+
+ // Registration pattern helps with static initialization.
+ struct Widget {
+     Widget() { MYPRINT("Widget constructor called\n"); };
+ };
+ REGISTRATION(Widget);  // output: Widget constructor called
+
+ return 0;
+}
+```
 
 Further Reading
 ---
