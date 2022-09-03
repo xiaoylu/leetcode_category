@@ -10,15 +10,15 @@ The idea is that, if `T[:i]==S[j-i:j]` and `T[i]` fails to match `S[j]`, we do n
 
 The most important note is that `T[:b[i]]` is the longest "border" of `T[:i]`. Here, "border" is defined as the string which is both a prefix and a suffix of a string.
 
-[Why it works?](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
+[Why it works?](http://www.inf.hs-flensburg.de/lang/algorithmen/pattern/kmpen.htm)
 
 If border `r` is both suffix and prefix of `x`, then `r+a` is a "border" of `x+a`.
 
-![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand2.gif)
+![alt text](http://www.inf.hs-flensburg.de/lang/algorithmen/pattern/rand2.gif)
 
 Hence, the key is to find index `b[i]` for index `i` such that we can expand the matched string before them.
 
-![alt text](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/rand4.gif)
+![alt text](http://www.inf.hs-flensburg.de/lang/algorithmen/pattern/rand4.gif)
 
 where `b[i]` indicates the index of next potential match of char at `array[i]`.
 
@@ -28,7 +28,7 @@ A **C++** implementation of preprocessing:
 
 Note that the `b[0]=-1`. In the worst case, we starting matching from index `b[i]=0` - matching the first char.
 
-```
+```cpp
 void kmpPreprocess(vector<int>& array)
 {
     vector<int> b(array.size());
@@ -43,7 +43,8 @@ void kmpPreprocess(vector<int>& array)
 ```
 
 Given the preprocessed `b`, do searching:
-```
+
+```cpp
 void kmpSearch()
 {
     int i=0, j=0;
@@ -77,7 +78,7 @@ This question essentially asks for the longest palindrome prefix of a string. Wi
 
 If a proper prefix of `s` is also a suffix, it is a prefix palindrome of `g`. So we look for the **longest** proper prefix (LPP) of `s` which is also a suffix. Notice that `|` should not appear in `g` so the LPP must be inside the `g` part before `|`.
 
-```
+```python
     def shortestPalindrome(self, g):
         s = g + "|" + g[::-1]
         b = [0] * (len(s) + 1)
@@ -96,7 +97,7 @@ Find the longest palindromic substring in `s`.
 
 Test all the suffix of `s[:i]`, which is also a proper prefix of it. KMP linear time for each suffix and a total of  `O(N^2)` time.
 
-```
+```python
     def longestPalindrome(self, s):
         def LPS(s):
             lps = [0] * len(s)
@@ -133,7 +134,7 @@ Idea: input `abc abc abc` would have the longest proper prefix `abc abc` which i
 
 **C++** solution:
 
-```
+```cpp
     int minimumCycleSection(vector<int> &array) {
         int i = 0, j = -1, N = array.size();
         vector<int> b(N + 1, -1);
